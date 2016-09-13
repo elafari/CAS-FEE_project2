@@ -34,5 +34,5 @@ Hint: Watch out singular and plural
     * [HHE OK] GET /api/user/:id/: Return des Users
     * [HHE OK] POST /api/users/ : Payload {Payload (application/json) { userName: ccc, name:, firstname;, password: xxx } return: 201, mit user class
     * [HHE OK] PUT /api/user/:id/: Update vom User, return neuer user
-    * [HHE OK] DELETE /api/user/:id/: Löschen vom User (setzt active = false); gibt nichts zurück
+    * [HHE OK] DELETE /api/user/:id/: LÃ¶schen vom User (setzt active = false); gibt nichts zurÃ¼ck
     * [HHE OK] GET /api/users?username=xxx returns a list of matching user 
