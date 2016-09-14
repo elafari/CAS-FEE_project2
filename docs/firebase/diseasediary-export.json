@@ -1,0 +1,49 @@
+{
+  "cases" : {
+    "fbIdCase" : {
+      "events" : [ "fbIdEvent-1", "fbIdEvent-2" ],
+      "name" : "Sommergrippe",
+      "patientId" : "fbIdPatient"
+    }
+  },
+  "config" : {
+    "eventTypes" : [ "temperature", "medication" ],
+    "typeDefinitions" : [ {
+      "dateTime" : 20160913210000,
+      "location" : "oral",
+      "value" : 38.2
+    }, {
+      "dateTime" : 20160913210059,
+      "dose" : "500mg",
+      "drug" : "Paracetamol"
+    } ]
+  },
+  "events" : {
+    "fbIdEvent" : {
+      "caseId" : "fbIdCase",
+      "type" : 0
+    }
+  },
+  "patients" : {
+    "fbIdPatient" : {
+      "cases" : [ "fbIdCase-1", "fbIdCase-2" ],
+      "name" : "Max",
+      "uid" : "uid_1"
+    }
+  },
+  "users" : {
+    "uid_1" : {
+      "name" : "rafael",
+      "patients" : [ "fbIdPatient-1", "fbIdPatient-2" ],
+      "userRole" : 99
+    },
+    "uid_2" : {
+      "name" : "toni",
+      "userRole" : 99
+    },
+    "uid_generic" : {
+      "name" : "login@dummy.com",
+      "userRole" : 10
+    }
+  }
+}
