@@ -36,3 +36,39 @@ Hint: Watch out singular and plural
     * [HHE OK] PUT /api/user/:id/: Update vom User, return neuer user
     * [HHE OK] DELETE /api/user/:id/: Löschen vom User (setzt active = false); gibt nichts zurück
     * [HHE OK] GET /api/users?username=xxx returns a list of matching user 
+    
+    
+PUT /users/{uid}.json {name: email} - generate or update user meta data
+GET /users/{uid}.json - retrieve user meta data
+
+
+GET    /users    - Retrieves a list of users
+GET    /users/12 - Retrieves a specific user
+POST   /users    - Creates a new user
+PUT    /users/12 - Updates user #12
+PATCH  /users/12 - Partially updates user #12
+DELETE /users/12 - Deletes user #12
+
+GET    /users/12/patients    - Retrieves a list of patients of user #12
+GET    /users/12/patients/5  - Retrieves a patient #5 of user #12
+POST   /users/12/patients    - Creates a new patient for user #12
+PUT    /users/12/patients/3  - Updates patient #3 of user #12
+PATCH  /users/12/patients/3  - Partially updates patient #3 of user #12
+DELETE /users/12/patients/3  - Deletes patient #3 of user #12
+
+
+# http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api
+GET     /tickets               - Retrieves a list of tickets
+GET     /tickets/12            - Retrieves a specific ticket
+POST    /tickets               - Creates a new ticket
+PUT     /tickets/12            - Updates ticket #12
+PATCH   /tickets/12            - Partially updates ticket #12
+DELETE  /tickets/12            - Deletes ticket #12
+GET     /tickets/12/messages   - Retrieves list of messages for ticket #12
+GET     /tickets/12/messages/5 - Retrieves message #5 for ticket #12
+POST    /tickets/12/messages   - Creates a new message in ticket #12
+PUT     /tickets/12/messages/5 - Updates message #5 for ticket #12
+PATCH   /tickets/12/messages/5 - Partially updates message #5 for ticket #12
+DELETE  /tickets/12/messages/5 - Deletes message #5 for ticket #12
+
+- SSL always: One thing to watch out for is non-SSL access to API URLs. Do not redirect these to their SSL counterparts. Throw a hard error instead
