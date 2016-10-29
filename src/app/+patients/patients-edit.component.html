@@ -1,0 +1,19 @@
+<div class="pull-left">
+  <p>Patient of user: {{loggedInUserName}}</p>
+  <div class="well well-sm"><label>Edit patient: </label></div>
+  <table class="table">
+    <tr>
+      <td>name</td>
+      <td><input type="text" #updateName [value]="patientName" /></td>
+    </tr>
+    <tr>
+      <td>age</td>
+      <td><input type="text" #updateAge [value]="patientAge" /></td>
+    </tr>
+    <tr><button class="btn btn-success" (click)="updatePatient({age: updateAge.value,name: updateName.value})">update patient</button></tr>
+    <tr>&nbsp;</tr>
+    <tr><button class="btn cust-table-btn-delete" (click)="deletePatient({age: updateAge.value,name: updateName.value})">delete patient</button></tr>
+    <tr>&nbsp;</tr>
+    <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
+  </table>
+</div>

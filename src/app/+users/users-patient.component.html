@@ -1,0 +1,55 @@
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+  <!-- entweder beide mit der boolean - Prüfung -->
+  <!--div class="card list-card-width" [class.card-success]="isSuccessVisible" [class.card-warning]="isWarningVisible"-->
+  <!-- oder eine Klasse als "Standard" setzen und mit einer anderen überschreiben -->
+  <div class="cust-wrap-card">
+  <div class="card cust-list-card cust-card-patient" [ngClass]="{'card-warning': isWarningVisible}">
+    <div class="card-header cust-list-card-header">Patient {{patient.name}}</div>
+    <div class="card-block text-center">
+
+      <!-- some more information about patient -->
+      <!--p class="card-text">{{patient.$key}}</p-->
+
+      <!-- onEdit -> router-outlet
+      <!--button class="btn btn-secondary" (click)="onEdit()">Edit Patient</button-->
+    </div>
+    <div class="card-block cust-flex-btn">
+      <!--button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editPatientModal{{patientKey}}">Edit patient</button-->
+      <button type="button" class="btn btn-secondary cust-btn-edit cust-flex-btn-child" data-toggle="modal" [attr.data-target]="'#' + patientKey">Edit</button>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- modal dialog for editing patient -->
+
+<div class="modal fade" [attr.id]="'' + patientKey" tabindex="-1" role="dialog" aria-labelledby="editPatientModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header cust-table-modal-header-info">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="editPatientModalLabel">Edit patient {{patient.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="patient-name" class="form-control-label">Name:</label>
+            <input type="text" class="form-control" #updateName [value]="patient.name" />
+          </div>
+          <div class="form-group">
+            <label for="patient-age" class="form-control-label">Age:</label>
+            <input type="text" class="form-control" #updateAge [value]="patient.age" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn cust-btn-create" (click)="updatePatient({age: updateAge.value,name: updateName.value})" data-dismiss="modal">Update patient</button>
+        <button type="button" class="btn cust-btn-delete" (click)="deletePatient()" data-dismiss="modal">Delete patient</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="pull-left">
+  <p>Case of patient: {{patientName}}</p>
+  <div class="well well-sm"><label>Edit case: </label></div>
+  <table class="table">
+    <tr>
+      <td>name</td>
+      <td><input type="text" #updateName [value]="diseaseCaseName" /></td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td><input type="text" #updateType [value]="diseaseCaseType" /></td>
+    </tr>
+    <tr><button class="btn btn-success" (click)="updateDiseaseCase({type: updateType.value,name: updateName.value})">update case</button></tr>
+    <tr>&nbsp;</tr>
+    <tr><button class="btn cust-table-btn-delete" (click)="deleteDiseaseCase({type: updateType.value,name: updateName.value})">delete case</button></tr>
+    <tr>&nbsp;</tr>
+    <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
+  </table>
+</div>

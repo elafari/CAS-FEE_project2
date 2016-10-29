@@ -1,0 +1,45 @@
+
+<table class="table table-bordered table-hover">
+  <thead class="thead-inverse">
+    <tr>
+      <th>user id</th>
+      <th>user role admin</th>
+      <th>update</th>
+      <th>delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users | async">
+      <td>{{user.name}}</td>
+      <td><label><input type="checkbox" name={{user.$key}} value="admin" #updateAdmin [checked]="user.admin == true" [disabled]="user.name == userMainAdmin">&nbsp;&nbsp;yes</label></td>
+      <td><button class="cust-table-btn-update" (click)="updateUser(user.$key, updateAdmin.checked)" [hidden]="user.name == userMainAdmin">Update</button></td>
+      <td><button class="cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + user.$key" [hidden]="user.name == userMainAdmin">Delete</button></td>
+
+      <!-- toto: modal dialag as separate component  ->
+
+      <!-- modal dialog for deleting user -->
+
+      <div class="modal fade" [attr.id]="'' + user.$key" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header cust-table-modal-header-danger">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="editUserModalLabel">Delete: {{user.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure to delete this user?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn cust-table-btn-delete" (click)="deleteUser(user.$key)" data-dismiss="modal">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </tr>
+  </tbody>
+</table>

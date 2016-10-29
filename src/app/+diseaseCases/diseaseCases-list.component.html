@@ -1,0 +1,39 @@
+<ol class="breadcrumb">
+  <li><a routerLink="/">Home</a></li>
+  <li><a routerLink="/patients">Patients</a></li>
+  <li class="active">Cases</li>
+</ol>
+
+<div class="row cust-container-header">
+  <p>{{diseaseCasesCount}} Cases of Patient: {{patientName}}</p>
+</div>
+
+
+<div class="row col-sm-6 col-md-4 col-lg-3">
+  <div class="card-deck">
+
+    <!-- Card to add new item -->
+
+    <div class="cust-wrap-cards">
+      <div class="card cust-head-card-buttons cust-card-cases">
+
+        <div class="card-header cust-head-card-header">cases of {{patientName}}</div>
+
+        <div class="card-block text-center">
+          <!-- Inhalt -->
+        </div>
+
+        <div class="card-block cust-flex-btn cust-block-card-padding">
+          <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child" [routerLink]="['create']">Create</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- List all existing items as card -->
+
+    <div *ngFor="let diseaseCase of allDiseaseCases | async" class="card-deck-wrapper">
+          <div diseaseCases-item [diseaseCase]="diseaseCase" [patientKey]="patientKey"></div>
+    </div>
+
+  </div>
+</div>

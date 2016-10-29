@@ -1,0 +1,25 @@
+<ol class="breadcrumb">
+  <li><a routerLink="/">Home</a></li>
+  <li><a routerLink="/patients">Patients</a></li>
+  <li><a routerLink="/patients/{{patientKey}}">Cases</a></li>
+  <li><a routerLink="/patients/{{patientKey}}/diseaseCases/{{diseaseCaseKey}}">Events</a></li>
+  <li class="active">new</li>
+</ol>
+
+<div class="pull-left">
+  <p>Event of case: {{diseaseCaseName}}</p>
+  <div class="well well-sm"><label>New event</label></div>
+  <table class="table">
+    <tr>
+      <td>name</td>
+      <td><input type="text" #newName [value]="" /></td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td><input type="text" #newValue [value]="" /></td>
+    </tr>
+    <tr><button class="btn btn-success" (click)="createDiseaseEvent({value: newValue.value,name: newName.value, case: diseaseCaseKey})">create event</button></tr>
+    <tr>&nbsp;</tr>
+    <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
+  </table>
+</div>
