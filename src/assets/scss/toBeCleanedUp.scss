@@ -1,0 +1,242 @@
+body {
+  background: #e2e1e0;
+  margin: 50px 5px 5px 5px;
+}
+
+.breadcrumb > li + li:before {
+  color: #ccc;
+  content: "/ ";
+  padding: 0 5px;
+}
+
+table {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+tr {
+  background-color: white;
+}
+
+#navpadding {
+  padding-right: 20px;
+}
+
+.dropdown-menu[data-placement="left"] {
+  left: auto;
+  right: 0px;
+}
+
+.navbar .nav > li > .dropdown-menu[data-placement="left"]:before {
+  left: auto;
+  right: 9px;
+}
+
+.navbar .nav > li > .dropdown-menu[data-placement="left"]:after {
+  left: auto;
+  right: 10px;
+}
+
+.navbar-brand {
+  float: none;
+}
+
+.navbar-nav .nav-item {
+  float: none;
+}
+
+.navbar-divider,
+.navbar-nav .nav-item + .nav-item,
+.navbar-nav .nav-link + .nav-link {
+  margin-left: 0;
+}
+
+@media (min-width: 34em) {
+  .navbar-brand {
+    float: left;
+  }
+  .navbar-nav .nav-item {
+    float: left;
+  }
+  .navbar-divider,
+  .navbar-nav .nav-item + .nav-item,
+  .navbar-nav .nav-link + .nav-link {
+    margin-left: 1rem;
+  }
+}
+
+.cust-container-header {
+  background-color: #90A4AE;
+  font-family: 'Architects Daughter', cursive;
+  margin: 5px 0px;
+  border-radius: 5px;
+}
+
+.cust-head-card-buttons {
+  width: 100%;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 200px;
+  max-height: 200px;
+  margin: 0 auto 10px;
+  border: none;
+}
+
+.cust-head-card {
+  width: 100%;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 200px;
+  max-height: 200px;
+  margin: 0 auto 10px;
+  border: none;
+}
+
+.cust-list-card {
+  width: 100%;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 200px;
+  max-height: 200px;
+  margin: 0 auto 10px;
+  border: none;
+}
+
+.cust-head-card-header {
+  background-color: #E6EE9C;
+}
+
+.cust-list-card-header {
+  background-color: #CFD8DC;
+}
+
+*[class*='cust-card'] {
+  padding: 10px 10px 10px 10px;
+  box-shadow: inset 0px -15px 135px #555;
+  font-family: 'Architects Daughter', cursive;
+}
+
+/* !! Bereich ist nicht mit Card deckungsgleich !!
+.cust-wrap-cards {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: 5px;
+}
+*/
+.cust-wrap-card {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: 5px;
+}
+
+.cust-card-patients,
+.cust-card-cases,
+.cust-card-events {
+  background-color: #C0CA33;
+}
+
+.cust-card-patient,
+.cust-card-case,
+.cust-card-event {
+  background-color: #90A4AE;
+}
+
+*[class*='cust-card'] *[class*='cust-btn'] {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+  font-family: 'Architects Daughter', cursive, serif;
+  background-color: #C0CA33;
+  border: none;
+}
+
+*[class*='cust-card'] *[class*='cust-btn-all'] {
+  background-color: #FFEA00;
+}
+
+*[class*='cust-card'] *[class*='cust-btn-open'] {
+  background-color: #FFEA00;
+}
+
+*[class*='cust-card'] *[class*='cust-btn-new'] {
+  background-color: #C0CA33;
+}
+
+.cust-block-card-padding {
+  padding: 5px;
+}
+
+.cust-btn-create {
+  background-color: #DCE775;
+}
+
+.cust-btn-delete {
+  background-color: #FF8A80;
+}
+
+.cust-btn-create:hover,
+.cust-btn-edit:hover,
+.cust-btn-new:hover {
+  background-color: #C0CA33;
+}
+
+.cust-btn-open:hover,
+.cust-btn-all-open:hover {
+  background-color: #FFFF8D;
+}
+
+.cust-btn-delete:hover {
+  background-color: #FF5252;
+}
+
+.cust-flex-btn {
+  display: flex;
+}
+
+.cust-flex-btn-child {
+  flex: 1 1 auto;
+  margin-right: 10px
+}
+
+.cust-table-btn-update,
+.cust-table-btn-delete {
+  border-radius: 5px;
+  padding: 3px 20px;
+}
+
+.cust-table-btn-update {
+  background-color: #DCE775;
+}
+
+.cust-table-btn-update:hover {
+  background-color: #C0CA33;
+}
+
+.cust-table-btn-delete {
+  background-color: #FF8A80;
+}
+
+.cust-table-btn-delete:hover {
+  background-color: #FF5252;
+}
+
+.cust-table-modal-header-danger {
+  background-color: #FF5252;
+}
+
+.cust-table-modal-header-info {
+  background-color: #C0CA33;
+}
+
+.cust-welcome-p {
+  font-family: 'Architects Daughter', cursive, serif;
+}
+
+.cust-welcome-div {
+  text-align: center;
+}
+
+.cust-welcome-img {
+  max-width: 100%;
+  height: auto;
+}
+
+#loggedInName,
+.cust-error-message {
+  color: red;
+}
