@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { Observable } from "rxjs/Observable";
 
 import { ConfigService } from '../shared/config.service';
 import { DataService } from '../shared/data.service';
@@ -11,15 +11,14 @@ import { LogService } from '../shared/log.service';
 })
 export class UserAdminComponent {
 
-  users: FirebaseListObservable<any>;
+  users: Observable<any>;
   userMainAdmin: String;
 
-  constructor(private af: AngularFire,
-              private dataService: DataService,
+  constructor(private dataService: DataService,
               private logService: LogService
   ) {
     this.userMainAdmin = ConfigService.mainAdmin;
-    this.users = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users);
+    this.users = this.dataService.getUserList();
   };
 
   updateUser(userKey: string, role: boolean) {
