@@ -4,22 +4,32 @@ import { Router } from "@angular/router";
 
 import { AuthService } from "../shared/auth.service";
 import { ConfigService } from "../shared/config.service";
+import { LoggedInUserService } from "../shared/logged-in-user.service";
 
 @Component({
     templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
     myForm: FormGroup;
-    error = false;
-    errorMessage = '';
+
+    errorMessage: String;
 
     constructor(private fb: FormBuilder,
                 private authService: AuthService,
+                private loggedInUserService: LoggedInUserService,
                 private router: Router) {}
 
     onRegister() {
-      let resultRegister = this.authService.registerUser(this.myForm.value);
-      this.router.navigate(['/']);
+      this.authService.registerUser(this.myForm.value);
+
+      this.loggedInUserService.userData.subscribe((user) => {
+        if (user.error != "" ) {
+          this.errorMessage = user.error;
+        } else {
+          this.errorMessage = ConfigService.loginProcessMsg;
+          this.router.navigate(['/patients']);
+        }
+      });
     }
 
     ngOnInit(): any {
