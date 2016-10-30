@@ -12,32 +12,33 @@ import { LogService } from "../shared/log.service";
 @Component({
     selector: 'disease-diary-header',
     templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
-  loggedInUserName: String;
-  loggedInUserAdmin: String;
+    loggedInUserName: String;
+    loggedInUserAdmin: String;
 
-  constructor(private authService: AuthService,
-              private logService: LogService,
-              private af: AngularFire,
-              private router: Router
-  ) { };
+    constructor(private authService: AuthService,
+                private logService: LogService,
+                private af: AngularFire,
+                private router: Router) {
+    };
 
-  ngOnInit() {
-    this.af.auth.subscribe(auth => {
-      if (auth) {
-        this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-          this.loggedInUserName = user.name;
-          this.loggedInUserAdmin = user.admin;
-          this.logService.logConsole("patients-list", "ngOnInit - user", user.name + ' admin: ' + user.admin);
+    ngOnInit() {
+        this.af.auth.subscribe(auth => {
+            if (auth) {
+                this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+                    this.loggedInUserName = user.name;
+                    this.loggedInUserAdmin = user.admin;
+                    this.logService.logConsole("patients-list", "ngOnInit - user", user.name + ' admin: ' + user.admin);
+                });
+            }
         });
-      }
-    });
-  };
+    };
 
-  onLogout() {
-    this.authService.logout();
-    this.router.navigate(['']);
-  };
+    onLogout() {
+        this.authService.logout();
+        this.router.navigate(['']);
+    };
 }

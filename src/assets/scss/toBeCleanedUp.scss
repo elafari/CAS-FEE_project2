@@ -17,60 +17,6 @@ tr {
   background-color: white;
 }
 
-#navpadding {
-  padding-right: 20px;
-}
-
-.dropdown-menu[data-placement="left"] {
-  left: auto;
-  right: 0px;
-}
-
-.navbar .nav > li > .dropdown-menu[data-placement="left"]:before {
-  left: auto;
-  right: 9px;
-}
-
-.navbar .nav > li > .dropdown-menu[data-placement="left"]:after {
-  left: auto;
-  right: 10px;
-}
-
-.navbar-brand {
-  float: none;
-}
-
-.navbar-nav .nav-item {
-  float: none;
-}
-
-.navbar-divider,
-.navbar-nav .nav-item + .nav-item,
-.navbar-nav .nav-link + .nav-link {
-  margin-left: 0;
-}
-
-@media (min-width: 34em) {
-  .navbar-brand {
-    float: left;
-  }
-  .navbar-nav .nav-item {
-    float: left;
-  }
-  .navbar-divider,
-  .navbar-nav .nav-item + .nav-item,
-  .navbar-nav .nav-link + .nav-link {
-    margin-left: 1rem;
-  }
-}
-
-.cust-container-header {
-  background-color: #90A4AE;
-  font-family: 'Architects Daughter', cursive;
-  margin: 5px 0px;
-  border-radius: 5px;
-}
-
 .cust-head-card-buttons {
   width: 100%;
   min-width: 200px;
