@@ -55,6 +55,12 @@ export class DataService {
     users.remove(userKey);
   };
 
+  getUserList() {
+    let queryDefinition = {};
+    queryDefinition = {query: {orderByChild: 'name'}};
+    return this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users, queryDefinition);
+  };
+
   getAllUsersAndPatients() {
     let queryDefinitionUsers = {};
     queryDefinitionUsers = {query: {orderByKey: true}};
