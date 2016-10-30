@@ -26,7 +26,7 @@
 
             <!-- Authentication -->
 
-            <div class="nav navbar-nav pull-right">
+            <div class="nav navbar-nav float-xs-right">
               <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   My Diary
@@ -45,7 +45,7 @@
 
             <!-- Admin -->
 
-            <div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((loggedInUserAdmin == true))" routerLinkActive="active" id="navpadding">
+            <div class="nav navbar-nav float-xs-right" *ngIf="(af.auth | async) && ((loggedInUserAdmin == true))" routerLinkActive="active" id="navpadding">
               <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Admin
