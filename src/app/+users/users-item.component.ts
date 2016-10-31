@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'; //, AfterViewInit, ViewChild
-import { Router } from "@angular/router";
+import { Component, Input, OnInit } from '@angular/core';
 
 import {DataService} from "../shared/data.service";
 
@@ -12,8 +11,7 @@ export class UsersItemComponent implements OnInit {
 
   userKey: String;
 
-  constructor(private router: Router,
-              private dataService: DataService){
+  constructor(private dataService: DataService){
   };
 
   ngOnInit() {

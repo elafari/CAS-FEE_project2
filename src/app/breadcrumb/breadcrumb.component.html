@@ -1,0 +1,9 @@
+
+<div>
+  <ul class="breadcrumb">
+    <li *ngFor="let url of urls; let lastUrl = last" [ngClass]="{'active': lastUrl}">
+      <a role="button" *ngIf="!lastUrl" (click)="navigateTo(url)">{{getBreadcrumbName(url)}}</a>
+      <span *ngIf="lastUrl">{{getBreadcrumbName(url)}}</span>
+    </li>
+  </ul>
+</div>

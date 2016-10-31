@@ -69,7 +69,8 @@ export class DiseaseCasesEditComponent {
     this.goBack();
   };
   deleteDiseaseCase() {
-    this.dataService.deleteDiseaseCase(this.diseaseCaseKey);
+    // delete temporarily deactivated
+    //this.dataService.deleteDiseaseCase(this.diseaseCaseKey);
   };
 
   goBack() {

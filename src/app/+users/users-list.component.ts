@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
-import {DataService} from "../shared/data.service";
+import { DataService } from "../shared/data.service";
 
 @Component({
   templateUrl: './users-list.component.html',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
@@ -14,7 +14,6 @@ import { LogService } from "../shared/log.service";
 })
 export class DiseaseEventsListComponent {
 
-  loggedInUserKey: String;
   loggedInUserName: String;
 
   patientKey: String;
@@ -27,7 +26,6 @@ export class DiseaseEventsListComponent {
   diseaseEventsCount: Number;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
               private af: AngularFire,
               private dataService: DataService,
               private logService: LogService
@@ -45,13 +43,11 @@ export class DiseaseEventsListComponent {
         this.patientKey = this.route.parent.snapshot.params['patientKey'];
         this.logService.logConsole("diseaseEvents-list", "constructor - Router patientKey", this.patientKey);
 
-        this.logService.logConsole("diseaseEvents-list", "constructor - Router parent params: ", this.route.parent.snapshot.params);
-
         this.af.auth.subscribe(auth => {
           if (auth) {
             this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
               this.loggedInUserName = user.name;
-              this.logService.logConsole("diseaseEvents-list", "constructor - user", this.loggedInUserName); // + " - " + this.loggedInUserKey);
+              this.logService.logConsole("diseaseEvents-list", "constructor - user", this.loggedInUserName);
 
               this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                 this.patientName = patient.name;

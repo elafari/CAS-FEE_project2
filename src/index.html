@@ -186,7 +186,7 @@
     }
     .cust-btn-create:hover,
     .cust-btn-edit:hover,
-    .cust-btn-new:hover {
+    .cust-btn-create:hover {
       background-color: #C0CA33;
     }
     .cust-btn-open:hover,
@@ -244,6 +244,29 @@
     .cust-error-message {
       color: red;
     }
+
+    /* new after Rafaels branch */
+
+    .breadcrumb {
+      padding: 8px 15px;
+      margin-bottom: 20px;
+      list-style: none;
+      /*background-color: transparent;*/
+      background-color: #DCE775;
+      border-radius: 3px;
+    }
+    .breadcrumb > li {
+      display: inline-block;
+    }
+    .breadcrumb > li + li:before {
+      content: "/";
+      padding: 0 5px;
+      color: #C0CA33;
+    }
+    .breadcrumb > .active {
+      color: #FF5252;
+    }
+
 
   </style>
 

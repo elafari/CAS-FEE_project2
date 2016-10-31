@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from "./pages/header.component";
 
 import { AuthModule } from './auth/auth.module';
+import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { UserAdminModule } from './userAdmin/user-admin.module';
 
 import { ConfigService } from "./shared/config.service";
@@ -32,6 +33,7 @@ import { AuthMethods } from "angularfire2/index";
     FormsModule,
     AppRoutingModule,
     AuthModule,
+    BreadcrumbModule,
     UserAdminModule
   ],
   declarations: [

@@ -19,6 +19,7 @@ export class UsersPatientComponent implements OnInit {
   constructor(private router: Router,
               private dataService: DataService){
 
+    // todo:
     // card einfärben: patient with active cases, or closed cases
     // function for checking cases -> or feature stripping :)
     this.isSuccessVisible = true;

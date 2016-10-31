@@ -56,6 +56,7 @@ export class PatientsEditComponent {
     this.goBack();
   };
   deletePatient() {
+    // delete temporarily deactivated
     //this.dataService.deletePatient(this.patientKey);
   };
 

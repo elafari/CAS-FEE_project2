@@ -10,7 +10,7 @@ import { DiseaseCasesCreateComponent } from "./diseaseCases-create.component";
 export const diseaseCases_routes: Routes = [
   { path: '', component: DiseaseCasesComponent, children: [
     { path: '', component: DiseaseCasesListComponent },
-    { path: 'diseaseCases/:diseaseCaseKey/edit', component: DiseaseCasesEditComponent },
+    { path: ':diseaseCaseKey/edit', component: DiseaseCasesEditComponent },
     { path: 'create', component: DiseaseCasesCreateComponent },
 
     // parent.params werden nicht gefunden

@@ -8,13 +8,13 @@
       </div>
 
       <div class="card-block cust-flex-btn cust-block-card-padding">
-        <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child" data-toggle="modal" [routerLink]="['diseaseCases/' + diseaseCase.$key + '/edit']">Edit</button>
+        <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child" data-toggle="modal" [routerLink]="[diseaseCase.$key + '/edit']">Edit</button>
 
         <!-- # 1 -->
         <!--button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" [routerLink]="['diseaseCases/' + diseaseCase.$key]">Open all</button-->
 
         <!-- # 2 -->
-        <button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" [routerLink]="['/patients/' + patientKey + '/diseaseCases/' + diseaseCase.$key]">Open</button>
+        <button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" [routerLink]="['/patients/' + patientKey + '/diseaseCases/' + diseaseCase.$key + '/diseaseEvents']">Open</button>
       </div>
 
     </div>

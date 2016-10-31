@@ -3,7 +3,6 @@ import { Component} from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
-import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
 import { AngularFire } from 'angularfire2';
@@ -26,7 +25,6 @@ export class DiseaseCasesCreateComponent {
 
   diseaseCaseKey: String;
   diseaseCaseName: String;
-  diseaseCase: Observable<any>;
 
   constructor(private route: ActivatedRoute,
               private af: AngularFire,

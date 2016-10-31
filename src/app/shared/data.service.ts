@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 import { ConfigService } from "./config.service";
-import { LogService } from "./log.service";
 
 @Injectable()
 export class DataService {
@@ -17,8 +16,7 @@ export class DataService {
   DbCases: String;
   DbEvents: String;
 
-  constructor(private af: AngularFire,
-              private logService: LogService
+  constructor(private af: AngularFire
   ) {
     this.DbAdmins = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.admins;
     this.DbUsers = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users;
@@ -102,11 +100,9 @@ export class DataService {
 
     let queryDefinition = {};
     queryDefinition = {query: {orderByChild: 'user',equalTo: userKey}};
-    this.logService.logConsole("dataService", "getPatients - this.DbPatients", this.DbPatients);
 
     return this.af.database.list(String(this.DbPatients), queryDefinition)
         .map((allPatients) => {
-          this.logService.logConsole("dataService", "getPatients - allPatients", allPatients);
           return allPatients;
         });
    };
