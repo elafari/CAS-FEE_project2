@@ -1,67 +1,83 @@
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+
+    <button class="navbar-toggler hidden-sm-up"
+            type="button"
+            data-toggle="collapse"
+            data-target="#responsive-navbar"
+            aria-controls="responsive-navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        &#9776;
+    </button>
+
+    <div class="collapse navbar-toggleable-xs" id="responsive-navbar">
+
+        <!-- Brand -->
+        <a class="navbar-brand" [routerLink]="['/home']">Disease Diary</a>
+
+        <!-- Links -->
+        <div class="nav navbar-nav">
+            <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/patients']">
+                Patients
+            </a>
+        </div>
 
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-      <br />
+        <!-- ensure correct sequence of nav objects on the right -->
 
-      <nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
-
-        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavBar2" aria-expanded="false" aria-label="Toggle navigation">
-          &#9776;
-        </button>
-
-          <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-
-            <!-- Brand -->
-            <div class="nav navbar-nav">
-              <a class="navbar-brand" [routerLink]="['/home']">Disease Diary</a>
-            </div>
-
-            <!-- Links -->
-            <div class="nav navbar-nav">
-              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/patients']">Patients</a>
-            </div>
-
-            <!-- ensure correct sequenze of nav objects on the right -->
-
-            <!-- Authentication -->
-
-            <div class="nav navbar-nav pull-right">
-              <div class="nav-item dropdown">
-                <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  My Diary
+        <!-- Authentication -->
+        <div class="nav navbar-nav float-xs-right">
+            <div class="nav-item dropdown">
+                <a class="nav-item nav-link dropdown-toggle"
+                   data-toggle="dropdown"
+                   href="#"
+                   role="button"
+                   aria-haspopup="true"
+                   aria-expanded="false">
+                    My Diary
                 </a>
                 <div class="dropdown-menu" data-placement="left" aria-labelledby="Auth">
-                  <a class="dropdown-item" [routerLink]="['/register']">Register</a>
-                  <a class="dropdown-item" [routerLink]="['/login']">Login</a>
+                    <a class="dropdown-item" [routerLink]="['/register']">Register</a>
 
-                  <div *ngIf="af.auth | async" class="dropdown-divider"></div>
-                  <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout <span id="loggedInName">{{loggedInUserName}}</span></a>
-                  <div *ngIf="af.auth | async" class="dropdown-divider"></div>
-                  <a class="dropdown-item" *ngIf="af.auth | async" [routerLink]="['/loggedInData']">Display login data</a>
+                    <a class="dropdown-item" [routerLink]="['/login']">Login</a>
+
+                    <div *ngIf="af.auth | async" >
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" (click)="onLogout()">
+                            Logout <span id="loggedInName">{{loggedInUserName}}</span>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" [routerLink]="['/loggedInData']">
+                            Display login data
+                        </a>
+                    </div>
+
                 </div>
-              </div>
             </div>
+        </div>
 
-            <!-- Admin -->
+        <!-- Admin -->
+        <div class="nav navbar-nav float-xs-right"
+             *ngIf="(af.auth | async) && ((loggedInUserAdmin == true))"
+             routerLinkActive="active"
+             id="navpadding">
 
-            <div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((loggedInUserAdmin == true))" routerLinkActive="active" id="navpadding">
-              <div class="nav-item dropdown">
-                <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  Admin
+            <div class="nav-item dropdown">
+                <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                   aria-haspopup="true" aria-expanded="false">
+                    Admin
                 </a>
                 <div class="dropdown-menu" data-placement="left" aria-labelledby="Admin">
-                  <a class="dropdown-item" [routerLink]="['/userAdmin']">Edit user data</a>
-                  <a class="dropdown-item" [routerLink]="['/users']">All users + patients</a>
-                  <div *ngIf="af.auth | async" class="dropdown-divider"></div>
-                  <a class="dropdown-item" [routerLink]="['/linkList']">Project links</a>
+                    <a class="dropdown-item" [routerLink]="['/userAdmin']">Edit user data</a>
+                    <a class="dropdown-item" [routerLink]="['/users']">All users + patients</a>
+                    <div *ngIf="af.auth | async" class="dropdown-divider"></div>
+                    <a class="dropdown-item" [routerLink]="['/linkList']">Project links</a>
                 </div>
-              </div>
             </div>
-
-          </div>
-
-      </nav>
+        </div>
 
     </div>
-  </div>
+</nav>
