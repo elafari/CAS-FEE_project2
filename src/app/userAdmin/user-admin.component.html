@@ -30,7 +30,7 @@
               <p>Are you sure to delete this user?</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal" (click)="showDeleteDialog('')">Cancel</button>
               <button type="button" class="btn cust-table-btn-delete" (click)="deleteUser(user.$key)" data-dismiss="modal">Delete</button>
             </div>
           </div>

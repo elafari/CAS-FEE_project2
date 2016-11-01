@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
 
 import { DataService } from "../shared/data.service";
 
@@ -18,8 +17,7 @@ export class UsersPatientComponent implements OnInit {
 
   showModalDialogEdit: String;
 
-  constructor(private router: Router,
-              private dataService: DataService){
+  constructor(private dataService: DataService){
 
     // todo:
     // card einfärben: patient with active cases, or closed cases

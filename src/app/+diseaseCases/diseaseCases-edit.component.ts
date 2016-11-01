@@ -29,6 +29,8 @@ export class DiseaseCasesEditComponent {
   diseaseCaseName: String;
   diseaseCaseType: String;
 
+  showModalDialog: string;
+
   constructor(private route:ActivatedRoute,
               private af: AngularFire,
               private dataService: DataService,
@@ -65,16 +67,22 @@ export class DiseaseCasesEditComponent {
   };
 
   updateDiseaseCase(key_value) {
-     this.dataService.updateDiseaseCase(this.diseaseCaseKey, key_value)
+    this.showModalDialog = "";
+    this.dataService.updateDiseaseCase(this.diseaseCaseKey, key_value)
     this.goBack();
   };
   deleteDiseaseCase() {
+    this.showModalDialog = "";
     // delete temporarily deactivated
     //this.dataService.deleteDiseaseCase(this.diseaseCaseKey);
   };
 
   goBack() {
     this.location.back();
+  };
+
+  showDeleteDialog(dialogAttribute) {
+    this.showModalDialog = dialogAttribute;
   };
 
   ngOnDestroy() {

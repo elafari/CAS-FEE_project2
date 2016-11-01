@@ -24,6 +24,8 @@ export class DiseaseEventsEditComponent {
   diseaseEventName: String;
   diseaseEventValue: String;
 
+  showModalDialog: string;
+
   constructor(private route:ActivatedRoute,
               private dataService: DataService,
               private logService: LogService,
@@ -50,16 +52,22 @@ export class DiseaseEventsEditComponent {
   };
 
   updateDiseaseEvent(key_value) {
+    this.showModalDialog = "";
     this.dataService.updateDiseaseEvent(this.diseaseEventKey, key_value)
     this.goBack();
   };
   deleteDiseaseEvent() {
+    this.showModalDialog = "";
     // delete temporarily deactivated
     //this.dataService.deleteDiseaseEvent(this.diseaseEventKey);
   };
 
   goBack() {
     this.location.back();
+  };
+
+  showDeleteDialog(dialogAttribute) {
+    this.showModalDialog = dialogAttribute;
   };
 
   ngOnDestroy() {
