@@ -11,12 +11,9 @@
       <!-- some more information about patient -->
       <!--p class="card-text">{{patient.$key}}</p-->
 
-      <!-- onEdit -> router-outlet
-      <!--button class="btn btn-secondary" (click)="onEdit()">Edit Patient</button-->
     </div>
     <div class="card-block cust-flex-btn">
-      <!--button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editPatientModal{{patientKey}}">Edit patient</button-->
-      <button type="button" class="btn btn-secondary cust-btn-edit cust-flex-btn-child" data-toggle="modal" [attr.data-target]="'#' + patientKey">Edit</button>
+      <button type="button" class="btn btn-secondary cust-btn-edit cust-flex-btn-child" data-toggle="modal" [attr.data-target]="'#' + patientKey" (click)="showEditDialog(patientKey)">Edit</button>
     </div>
   </div>
   </div>
@@ -24,7 +21,7 @@
 
 <!-- modal dialog for editing patient -->
 
-<div class="modal fade" [attr.id]="'' + patientKey" tabindex="-1" role="dialog" aria-labelledby="editPatientModalLabel" aria-hidden="true">
+<div *ngIf="showModalDialogEdit == patientKey" class="modal fade" [attr.id]="'' + patientKey" tabindex="-1" role="dialog" aria-labelledby="editPatientModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header cust-table-modal-header-info">
@@ -46,7 +43,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal" (click)="showEditDialog('')">Cancel</button>
         <button type="button" class="btn cust-btn-create" (click)="updatePatient({age: updateAge.value,name: updateName.value})" data-dismiss="modal">Update patient</button>
         <button type="button" class="btn cust-btn-delete" (click)="deletePatient()" data-dismiss="modal">Delete patient</button>
       </div>

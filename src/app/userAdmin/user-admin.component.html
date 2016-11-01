@@ -13,13 +13,11 @@
       <td>{{user.name}}</td>
       <td><label><input type="checkbox" name={{user.$key}} value="admin" #updateAdmin [checked]="user.admin == true" [disabled]="user.name == userMainAdmin">&nbsp;&nbsp;yes</label></td>
       <td><button class="cust-table-btn-update" (click)="updateUser(user.$key, updateAdmin.checked)" [hidden]="user.name == userMainAdmin">Update</button></td>
-      <td><button class="cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + user.$key" [hidden]="user.name == userMainAdmin">Delete</button></td>
+      <td><button class="cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + user.$key" [hidden]="user.name == userMainAdmin" (click)="showDeleteDialog(user.$key)">Delete</button></td>
 
-      <!-- toto: modal dialag as separate component  ->
+      <!-- *ngIf - modal dialog for deleting user -->
 
-      <!-- modal dialog for deleting user -->
-
-      <div class="modal fade" [attr.id]="'' + user.$key" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+      <div *ngIf="showModalDialog == user.$key" class="modal fade" [attr.id]="'' + user.$key" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header cust-table-modal-header-danger">
@@ -38,7 +36,6 @@
           </div>
         </div>
       </div>
-
 
     </tr>
   </tbody>

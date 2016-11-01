@@ -14,6 +14,8 @@ export class UserAdminComponent {
   users: Observable<any>;
   userMainAdmin: String;
 
+  showModalDialog: string;
+
   constructor(private dataService: DataService,
               private logService: LogService
   ) {
@@ -22,6 +24,7 @@ export class UserAdminComponent {
   };
 
   updateUser(userKey: string, role: boolean) {
+    this.showModalDialog = "";
     let newRole = role;
     if (newRole ==  true){
       this.dataService.setUserAdminRole(userKey);
@@ -33,7 +36,12 @@ export class UserAdminComponent {
   }
 
   deleteUser(userKey: string) {
+    this.showModalDialog = "";
     alert("Delete temporarily deactivated!");
     //this.dataService.deleteUser(userKey);
+  };
+
+  showDeleteDialog(dialogAttribute) {
+      this.showModalDialog = dialogAttribute;
   };
 }

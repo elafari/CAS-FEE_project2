@@ -16,6 +16,8 @@ export class UsersPatientComponent implements OnInit {
 
   patientKey: String;
 
+  showModalDialogEdit: String;
+
   constructor(private router: Router,
               private dataService: DataService){
 
@@ -33,17 +35,23 @@ export class UsersPatientComponent implements OnInit {
   }
 
   updatePatient(key_value) {
+    this.showModalDialogEdit = "";
     this.dataService.updatePatient(this.patient.$key, key_value);
   };
 
   deletePatient() {
+    this.showModalDialogEdit = "";
     //this.dataService.deletePatient(this.patient.$key);
   };
 
   checkPatientStatus() {
     // checking case status of patient
     return false;
-  }
+  };
+
+  showEditDialog(dialogAttribute) {
+    this.showModalDialogEdit = dialogAttribute;
+  };
 
 }
 

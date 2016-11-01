@@ -11,6 +11,8 @@ export class UsersItemComponent implements OnInit {
 
   userKey: String;
 
+  showModalDialogCreate: String;
+
   constructor(private dataService: DataService){
   };
 
@@ -19,7 +21,12 @@ export class UsersItemComponent implements OnInit {
   }
 
   createPatient(key_value) {
+    this.showModalDialogCreate = "";
     this.dataService.createPatient(key_value)
+  };
+
+  showCreateDialog(dialogAttribute) {
+    this.showModalDialogCreate = dialogAttribute;
   };
 }
 
