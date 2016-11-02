@@ -1,4 +1,3 @@
-
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
@@ -14,7 +13,7 @@ import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 
 @Component({
-  templateUrl: './patients-create.component.html'
+    templateUrl: './patients-create.component.html'
 })
 export class PatientsCreateComponent implements OnInit, OnDestroy{
 
@@ -74,3 +73,7 @@ export class PatientsCreateComponent implements OnInit, OnDestroy{
 
 }
 
+    onSubmit(form: NgForm) {
+        console.log('it works', form);
+    }
+}
