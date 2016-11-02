@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
     this.loggedInUserService.userData.subscribe((user) => {
       if (user.error != "" ) {
         this.errorMessage = user.error;
-        this.loggedInUserService.setUserData({key: "", email: "", error: ConfigService.loginProcessMsg});
       } else {
         this.errorMessage = ConfigService.loginProcessMsg;
         this.router.navigate(['/patients']);
