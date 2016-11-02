@@ -6,13 +6,13 @@ import { Observable } from "rxjs";
 import { AngularFire } from 'angularfire2';
 
 import { AuthService } from "../auth/auth.service";
-import { ConfigService } from "../shared/config.service";
-import { LogService } from "../shared/log.service";
+import { ConfigService } from "./config.service";
+import { LogService } from "./log.service";
 
 @Component({
     selector: 'disease-diary-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+    templateUrl: 'header.component.html',
+    styleUrls: ['header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
