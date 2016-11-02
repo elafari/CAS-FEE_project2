@@ -7,21 +7,9 @@
   </tr>
   </thead>
   <tbody>
-
-  <tr>
-    <td>Logged in user key</td>
-    <td>{{loggedInUserKey}}</td>
+  <tr *ngFor="let item of loggedInUserData">
+    <td>{{item.key}}</td>
+    <td>{{item.value}}</td>
   </tr>
-
-  <tr>
-    <td>Logged in user name (email)</td>
-    <td>{{loggedInUserName}}</td>
-  </tr>
-
-  <tr>
-    <td>Logged in user role admin</td>
-    <td>{{loggedInUserRole}}</td>
-  </tr>
-
   </tbody>
 </table>

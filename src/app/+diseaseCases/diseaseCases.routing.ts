@@ -17,7 +17,7 @@ export const diseaseCases_routes: Routes = [
     // # 1 { path: 'diseaseCases/:diseaseCaseKey', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
 
     // parent.params werden gefunden -> aber nur wenn diese Route im Basis-Routing Modul ist -> siehe dort..
-    // # 2 { path: '/patients/:patientKey/diseaseCases/:diseaseCaseKey', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
+    // # 2 { path: '/patients/:patientKey/diseaseCases/:diseaseCaseKey/diseaseEvents', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
   ]}
 ];
 

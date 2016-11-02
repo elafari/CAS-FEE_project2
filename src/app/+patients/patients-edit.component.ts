@@ -25,6 +25,8 @@ export class PatientsEditComponent {
   patientName: String;
   patientAge: String;
 
+  showModalDialog: string;
+
   constructor(private route:ActivatedRoute,
               private af: AngularFire,
               private dataService: DataService,
@@ -52,16 +54,22 @@ export class PatientsEditComponent {
   };
 
   updatePatient(key_value) {
+    this.showModalDialog = "";
     this.dataService.updatePatient(this.patientKey, key_value)
     this.goBack();
   };
   deletePatient() {
+    this.showModalDialog = "";
     // delete temporarily deactivated
     //this.dataService.deletePatient(this.patientKey);
   };
 
   goBack() {
     this.location.back();
+  };
+
+  showDeleteDialog(dialogAttribute) {
+    this.showModalDialog = dialogAttribute;
   };
 
   ngOnDestroy() {

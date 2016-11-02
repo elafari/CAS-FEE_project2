@@ -13,8 +13,30 @@
     </tr>
     <tr><button class="btn btn-success" (click)="updatePatient({age: updateAge.value,name: updateName.value})">update patient</button></tr>
     <tr>&nbsp;</tr>
-    <tr><button class="btn cust-table-btn-delete" (click)="deletePatient({age: updateAge.value,name: updateName.value})">delete patient</button></tr>
+    <tr><button class="btn cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + patientKey" (click)="showDeleteDialog(patientKey)">Delete</button></tr>
     <tr>&nbsp;</tr>
     <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
   </table>
+</div>
+
+<!-- *ngIf - modal dialog for deleting patient -->
+
+<div *ngIf="showModalDialog == patientKey" class="modal fade" [attr.id]="'' + patientKey" tabindex="-1" role="dialog" aria-labelledby="editPatientModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header cust-table-modal-header-danger">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="editPatientModalLabel">Delete: {{patientName}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to delete this patient?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal" (click)="showDeleteDialog('')">Cancel</button>
+        <button type="button" class="btn cust-table-btn-delete" (click)="deletePatient({age: updateAge.value,name: updateName.value})" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
 </div>

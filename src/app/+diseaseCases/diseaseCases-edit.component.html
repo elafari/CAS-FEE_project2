@@ -1,5 +1,5 @@
 
-<div class="float-xs-left">
+<div class="pull-left">
   <p>Case of patient: {{patientName}}</p>
   <div class="well well-sm"><label>Edit case: </label></div>
   <table class="table">
@@ -13,8 +13,30 @@
     </tr>
     <tr><button class="btn btn-success" (click)="updateDiseaseCase({type: updateType.value,name: updateName.value})">update case</button></tr>
     <tr>&nbsp;</tr>
-    <tr><button class="btn cust-table-btn-delete" (click)="deleteDiseaseCase({type: updateType.value,name: updateName.value})">delete case</button></tr>
+    <td><button class="btn cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + diseaseCaseKey" (click)="showDeleteDialog(diseaseCaseKey)">Delete</button></td>
     <tr>&nbsp;</tr>
     <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
   </table>
+</div>
+
+<!-- *ngIf - modal dialog for deleting diseaseCase -->
+
+<div *ngIf="showModalDialog == diseaseCaseKey" class="modal fade" [attr.id]="'' + diseaseCaseKey" tabindex="-1" role="dialog" aria-labelledby="editCaseModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header cust-table-modal-header-danger">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="editCaseModalLabel">Delete: {{diseaseCaseName}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to delete this case?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal" (click)="showDeleteDialog('')">Cancel</button>
+        <button type="button" class="btn cust-table-btn-delete" (click)="deleteDiseaseCase({type: updateType.value,name: updateName.value})" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
 </div>
