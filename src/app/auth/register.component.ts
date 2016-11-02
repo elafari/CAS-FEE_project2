@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { AuthService } from "../shared/auth.service";
+import { AuthService } from "./auth.service";
 import { ConfigService } from "../shared/config.service";
-import { LoggedInUserService } from "../shared/logged-in-user.service";
+import { LoggedInUserService } from "./logged-in-user.service";
 
 @Component({
     templateUrl: './register.component.html'

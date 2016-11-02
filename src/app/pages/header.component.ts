@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 
 import { AngularFire } from 'angularfire2';
 
-import { AuthService } from "../shared/auth.service";
+import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
 import { LogService } from "../shared/log.service";
 

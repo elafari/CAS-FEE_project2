@@ -12,7 +12,7 @@ import { UserAdminModule } from './userAdmin/user-admin.module';
 
 import { ConfigService } from "./shared/config.service";
 import { DataService } from './shared/data.service';
-import { LoggedInUserService } from "./shared/logged-in-user.service";
+import { LoggedInUserService } from "./auth/logged-in-user.service";
 import { ErrorHandlerService } from "./shared/error-handler.service";
 import { ErrorLoggerService } from "./shared/error-logger.service";
 import { LogService } from "./shared/log.service";

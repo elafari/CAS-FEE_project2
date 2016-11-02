@@ -7,10 +7,10 @@ import { FirebaseAuthState } from "angularfire2/index";
 
 import { UserLogin } from "./user-login.interface";
 
-import { ConfigService } from "./config.service";
+import { ConfigService } from "../shared/config.service";
 import { LoggedInUserService } from "./logged-in-user.service";
 //import { ErrorHandlerService } from "./error-handler.service";
-import { LogService } from "./log.service";
+import { LogService } from "../shared/log.service";
 
 @Injectable()
 export class AuthService {
