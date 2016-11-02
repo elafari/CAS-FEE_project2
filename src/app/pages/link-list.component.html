@@ -7,21 +7,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td><a href="https://github.com/tonikam/fbe14" target="_blank">Github</a></td>
-    <td>github repository of this project</td>
+  <tr *ngFor="let item of linkList">
+    <td><a href={{item.linkURL}} target="_blank">{{item.linkDisplay}}</a></td>
+    <td>{{item.linkDescription}}</td>
   </tr>
-
-  <tr>
-    <td><a href="https://angular.io/docs/ts/latest/" target="_blank">Angular 2</a></td>
-    <td>Angular 2 - latest documentation</td>
-  </tr>
-
-  <tr>
-    <td><a href="https://v4-alpha.getbootstrap.com/getting-started/introduction/" target="_blank">Bootstrap 4 alpha</a></td>
-    <td>Bootstrap 4 alpha - documentation</td>
-  </tr>
-
   </tbody>
 </table>
 

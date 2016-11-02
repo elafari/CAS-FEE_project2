@@ -11,6 +11,11 @@ export class ConfigService {
   public static mainAdmin = "admin@p2.ch";
   public static loginProcessMsg = "..login process";
 
+  public static linkList = [
+    {linkDisplay: "Github", linkURL: "https://github.com/tonikam/fbe14", linkDescription: "Github repository of this project"},
+    {linkDisplay: "Prezi", linkURL: "https://prezi.com/hnrfd-o1veb3/disease-diary/", linkDescription: "Project presentation"}
+  ];
+
   public static firebaseConfig = {
     // fbe5
     apiKey: "AIzaSyAMQA61KfzbKBSxVRYJtch1LPzcC-VFblk",
