@@ -1,6 +1,6 @@
-
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from "@angular/common";
+import { NgForm } from "@angular/forms";
 
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
@@ -12,35 +12,37 @@ import { DataService } from "../shared/data.service";
 import { LogService } from "../shared/log.service";
 
 @Component({
-  templateUrl: './patients-create.component.html'
+    templateUrl: './patients-create.component.html'
 })
 export class PatientsCreateComponent {
 
-  loggedInUserName: String;
+    loggedInUserName: String;
 
-  constructor(private af: AngularFire,
-              private location: Location,
-              private dataService: DataService,
-              private logService: LogService
-  ){
+    constructor(private af: AngularFire,
+                private location: Location,
+                private dataService: DataService,
+                private logService: LogService) {
 
-    this.af.auth.subscribe(auth => {
-      if (auth) {
-        this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-          this.loggedInUserName = user.name;
+        this.af.auth.subscribe(auth => {
+            if (auth) {
+                this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+                    this.loggedInUserName = user.name;
+                });
+            }
         });
-      }
-    });
-  };
+    };
 
-  createPatient(key_value) {
-    this.logService.logConsole("patients-create","createPatient",key_value);
-    this.dataService.createPatient(key_value);
-    this.goBack();
-  };
+    createPatient(key_value) {
+        this.logService.logConsole("patients-create", "createPatient", key_value);
+        this.dataService.createPatient(key_value);
+        this.goBack();
+    };
 
-  goBack() {
-    this.location.back();
-  };
+    goBack() {
+        this.location.back();
+    };
+
+    onSubmit(form: NgForm) {
+        console.log('it works', form);
+    }
 }
-
