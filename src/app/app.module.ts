@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./shared/header.component";
 
+import { LoggerModule } from "./log/logger.module";
 import { AuthModule } from './auth/auth.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { UserAdminModule } from './userAdmin/user-admin.module';
@@ -32,6 +33,7 @@ import { AuthMethods } from "angularfire2/index";
     CommonModule,
     FormsModule,
     AppRoutingModule,
+    LoggerModule,
     AuthModule,
     BreadcrumbModule,
     UserAdminModule
