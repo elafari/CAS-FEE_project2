@@ -43,17 +43,18 @@ export class AuthService {
       .then((auth) => {
         this.loggedInUserService.setUserData({key: auth.uid, email: auth.auth.providerData[0].uid, error: ""});
 
-        this.logService.logConsole("auth service","logged in user ",auth.auth.providerData[0].uid + " - " + auth.uid);
+        this.logService.logConsole("auth service", "logged in user", auth.auth.providerData[0].uid + " - " + auth.uid);
       })
       .catch((error) => {
         this.loggedInUserService.setUserData({key: "", email: "", error: error.message});
 
-        this.logService.logConsole("auth service","login error",error.message);
+        this.logService.logConsole("auth service", "login error", error.message);
         //this.errorHandler.handleError(error);
       });
    };
 
   logout() {
     this.af.auth.logout();
+    this.logService.logConsole("auth service", "logged out user", "");
   };
 }

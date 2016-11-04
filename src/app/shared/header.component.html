@@ -7,76 +7,53 @@
             aria-controls="responsive-navbar"
             aria-expanded="false"
             aria-label="Toggle navigation">
-        &#9776;
     </button>
 
     <div class="collapse navbar-toggleable-xs" id="responsive-navbar">
 
         <!-- Brand -->
-        <a class="navbar-brand" [routerLink]="['/home']">Disease Diary</a>
+        <a class="navbar-brand" [routerLink]="['/']">Disease Diary</a>
 
         <!-- Links -->
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/patients']">
-                Patients
-            </a>
-        </div>
-
-
-        <!-- ensure correct sequence of nav objects on the right -->
-
-        <!-- Authentication -->
-        <div class="nav navbar-nav float-xs-right">
-            <div class="nav-item dropdown">
-                <a class="nav-item nav-link dropdown-toggle"
-                   data-toggle="dropdown"
-                   href="#"
-                   role="button"
-                   aria-haspopup="true"
-                   aria-expanded="false">
-                    My Diary
-                </a>
-                <div class="dropdown-menu" data-placement="left" aria-labelledby="Auth">
-                    <a class="dropdown-item" [routerLink]="['/register']">Register</a>
-
-                    <a class="dropdown-item" [routerLink]="['/login']">Login</a>
-
-                    <div *ngIf="af.auth | async" >
-                        <div class="dropdown-divider"></div>
-
-                        <a class="dropdown-item" (click)="onLogout()">
-                            Logout <span id="loggedInName">{{loggedInUserName}}</span>
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-
-                        <a class="dropdown-item" [routerLink]="['/loggedInData']">
-                            Display login data
-                        </a>
-                    </div>
-
-                </div>
-            </div>
+            <a class="nav-item nav-link" *ngIf="af.auth | async" [routerLink]="['/patients']" routerLinkActive="active">Patients</a>
         </div>
 
         <!-- Admin -->
-        <div class="nav navbar-nav float-xs-right"
-             *ngIf="(af.auth | async) && ((loggedInUserAdmin == true))"
-             routerLinkActive="active"
-             id="navpadding">
+        <div class="nav navbar-nav navbar-nav-admin float-sm-right"
+             *ngIf="(af.auth | async) && ((loggedInUserAdmin === true))"
+             routerLinkActive="active">
 
             <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                    aria-haspopup="true" aria-expanded="false">
                     Admin
                 </a>
-                <div class="dropdown-menu" data-placement="left" aria-labelledby="Admin">
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="Admin">
                     <a class="dropdown-item" [routerLink]="['/userAdmin']">Edit user data</a>
                     <a class="dropdown-item" [routerLink]="['/users']">All users + patients</a>
                     <div *ngIf="af.auth | async" class="dropdown-divider"></div>
                     <a class="dropdown-item" [routerLink]="['/linkList']">Project links</a>
                 </div>
             </div>
+        </div>
+
+        <!-- Authentication -->
+        <div class="nav navbar-nav float-sm-right">
+            <a class="nav-item nav-link" *ngIf="af.auth | async" [routerLink]="['/loggedInData']"
+               routerLinkActive="active">
+                {{loggedInUserName}}
+            </a>
+            <a class="nav-item nav-link" *ngIf="af.auth | async" [routerLink]="['/']"
+               (click)="onLogout()">
+                Logout
+            </a>
+            <a class="nav-item nav-link" [routerLink]="['/login']" routerLinkActive="active">
+                Login
+            </a>
+            <a class="nav-item nav-link" [routerLink]="['/register']" routerLinkActive="active">
+                Register
+            </a>
         </div>
 
     </div>
