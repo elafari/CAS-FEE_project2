@@ -9,7 +9,6 @@ import { UserLogin } from "./user-login.interface";
 
 import { ConfigService } from "../shared/config.service";
 import { LoggedInUserService } from "./logged-in-user.service";
-//import { ErrorHandlerService } from "./error-handler.service";
 import { LogService } from "../shared/log.service";
 
 @Injectable()
@@ -17,7 +16,6 @@ export class AuthService {
 
   constructor(public af:AngularFire,
               private loggedInUserService: LoggedInUserService,
-              //private errorHandler:ErrorHandlerService,
               private logService: LogService
   ) {}
 
@@ -34,11 +32,11 @@ export class AuthService {
         this.loggedInUserService.setUserData({key: "", email: "", error: error.message});
 
         this.logService.logConsole("auth service","register error",error.message);
-        //this.errorHandler.handleError(error);
       });
   };
 
   loginUser(user:UserLogin) {
+    this.loggedInUserService.setUserData({key: "", email: "", error: ConfigService.loginProcessMsg});
     this.af.auth.login({email: user.email, password: user.password})
       .then((auth) => {
         this.loggedInUserService.setUserData({key: auth.uid, email: auth.auth.providerData[0].uid, error: ""});
@@ -49,7 +47,6 @@ export class AuthService {
         this.loggedInUserService.setUserData({key: "", email: "", error: error.message});
 
         this.logService.logConsole("auth service", "login error", error.message);
-        //this.errorHandler.handleError(error);
       });
    };
 
