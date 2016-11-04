@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from "rxjs/Rx";
 import { BehaviorSubject } from "rxjs/Rx";
 
-import { ConfigService } from "./config.service";
+import { ConfigService } from "../shared/config.service";
 import { LoggedInUser } from "./logged-in-user.interface";
 
 @Injectable()

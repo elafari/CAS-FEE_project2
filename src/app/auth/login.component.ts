@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { AuthService } from "../shared/auth.service";
+import { AuthService } from "./auth.service";
 import { ConfigService } from "../shared/config.service";
-import { LoggedInUserService } from "../shared/logged-in-user.service";
+import { LoggedInUserService } from "./logged-in-user.service";
 
 @Component({
   templateUrl: './login.component.html'
@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
     this.loggedInUserService.userData.subscribe((user) => {
       if (user.error != "" ) {
         this.errorMessage = user.error;
-        this.loggedInUserService.setUserData({key: "", email: "", error: ConfigService.loginProcessMsg});
       } else {
         this.errorMessage = ConfigService.loginProcessMsg;
         this.router.navigate(['/patients']);

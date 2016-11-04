@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from "./pages/header.component";
+import { HeaderComponent } from "./shared/header.component";
 
 import { AuthModule } from './auth/auth.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
@@ -12,7 +12,7 @@ import { UserAdminModule } from './userAdmin/user-admin.module';
 
 import { ConfigService } from "./shared/config.service";
 import { DataService } from './shared/data.service';
-import { LoggedInUserService } from "./shared/logged-in-user.service";
+import { LoggedInUserService } from "./auth/logged-in-user.service";
 import { ErrorHandlerService } from "./shared/error-handler.service";
 import { ErrorLoggerService } from "./shared/error-logger.service";
 import { LogService } from "./shared/log.service";

@@ -7,10 +7,10 @@ import { FirebaseAuthState } from "angularfire2/index";
 
 import { UserLogin } from "./user-login.interface";
 
-import { ConfigService } from "./config.service";
+import { ConfigService } from "../shared/config.service";
 import { LoggedInUserService } from "./logged-in-user.service";
 //import { ErrorHandlerService } from "./error-handler.service";
-import { LogService } from "./log.service";
+import { LogService } from "../shared/log.service";
 
 @Injectable()
 export class AuthService {
@@ -43,17 +43,18 @@ export class AuthService {
       .then((auth) => {
         this.loggedInUserService.setUserData({key: auth.uid, email: auth.auth.providerData[0].uid, error: ""});
 
-        this.logService.logConsole("auth service","logged in user ",auth.auth.providerData[0].uid + " - " + auth.uid);
+        this.logService.logConsole("auth service", "logged in user", auth.auth.providerData[0].uid + " - " + auth.uid);
       })
       .catch((error) => {
         this.loggedInUserService.setUserData({key: "", email: "", error: error.message});
 
-        this.logService.logConsole("auth service","login error",error.message);
+        this.logService.logConsole("auth service", "login error", error.message);
         //this.errorHandler.handleError(error);
       });
    };
 
   logout() {
     this.af.auth.logout();
+    this.logService.logConsole("auth service", "logged out user", "");
   };
 }

@@ -1,0 +1,12 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap-flex.scss";
+
+@include media-breakpoint-up(sm) {
+  .navbar-nav-admin {
+    margin-left: 1rem;
+  }
+}
+
+.dropdown-menu-left {
+  left: auto;
+  right: 0;
+}
