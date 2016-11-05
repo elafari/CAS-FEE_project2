@@ -5,6 +5,8 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
+import logWrap from "../log/logWrap.decorator";
+
 import { ConfigService } from "./config.service";
 
 @Injectable()
@@ -43,6 +45,7 @@ export class DataService {
     return this.af.database.object(String(this.DbUsers) + '/' + userKey);
   };
 
+  @logWrap
   updateUser(userKey, key_value) {
     let user = this.getUser(userKey);
     user.update(key_value);
@@ -82,6 +85,7 @@ export class DataService {
     return this.af.database.object(String(this.DbPatients) + '/' + patientKey);
   };
 
+  @logWrap
   updatePatient(patientKey,key_value) {
     let patient = this.getPatient(patientKey);
     patient.update(key_value);
@@ -115,6 +119,7 @@ export class DataService {
     return this.af.database.object(String(this.DbCases) + '/' + diseaseCaseKey);
   };
 
+  @logWrap
   updateDiseaseCase(diseaseCaseKey,key_value) {
     let diseaseCase = this.getDiseaseCase(diseaseCaseKey);
     diseaseCase.update(key_value);
@@ -145,6 +150,7 @@ export class DataService {
     return this.af.database.object(String(this.DbEvents) + '/' + diseaseEventKey);
   };
 
+  @logWrap
   updateDiseaseEvent(diseaseEventKey,key_value) {
     let diseaseEvent = this.getDiseaseEvent(diseaseEventKey);
     diseaseEvent.update(key_value);
