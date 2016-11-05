@@ -28,12 +28,6 @@ export const app_routes: Routes = [
 
   {path: 'users', loadChildren: 'app/+users/users.module#UsersModule'},
   {path: 'patients', loadChildren: 'app/+patients/patients.module#PatientsModule'},
-
-  // Route gehört eigentlich in diseaseCases - Router - Modul
-  // -> aber dort werden die parent.params nicht aufgelöst !?!
-  // # 2
-  { path: 'patients/:patientKey/diseaseCases/:diseaseCaseKey/diseaseEvents', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
-
   {path: '**', component: NotFoundComponent}
 ];
 

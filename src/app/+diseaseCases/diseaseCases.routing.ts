@@ -12,12 +12,7 @@ export const diseaseCases_routes: Routes = [
     { path: '', component: DiseaseCasesListComponent },
     { path: ':diseaseCaseKey/edit', component: DiseaseCasesEditComponent },
     { path: 'create', component: DiseaseCasesCreateComponent },
-
-    // parent.params werden nicht gefunden
-    // # 1 { path: 'diseaseCases/:diseaseCaseKey', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
-
-    // parent.params werden gefunden -> aber nur wenn diese Route im Basis-Routing Modul ist -> siehe dort..
-    // # 2 { path: '/patients/:patientKey/diseaseCases/:diseaseCaseKey/diseaseEvents', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
+    { path: ':diseaseCaseKey/diseaseEvents', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'}
   ]}
 ];
 
