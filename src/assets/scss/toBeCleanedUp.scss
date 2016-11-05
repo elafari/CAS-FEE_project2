@@ -1,12 +1,6 @@
 body {
   background: #e2e1e0;
-  margin: 50px 5px 5px 5px;
-}
-
-.breadcrumb > li + li:before {
-  color: #ccc;
-  content: "/ ";
-  padding: 0 5px;
+  margin-top: 56px;
 }
 
 table {
@@ -169,7 +163,6 @@ tr {
   background-color: #C0CA33;
 }
 
-#loggedInName,
 .cust-error-message {
   color: red;
 }
