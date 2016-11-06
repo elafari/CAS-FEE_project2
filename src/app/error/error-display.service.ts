@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class ErrorLoggerService {
+export class ErrorDisplayService {
 
   constructor() {};
 
-  public log(message: string): void {
+  public displayError(message: string): void {
     window.alert("Disease Diary Error: \n" + message);
   }
 }

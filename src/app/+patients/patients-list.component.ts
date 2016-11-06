@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
@@ -6,6 +7,7 @@ import { AngularFire } from 'angularfire2';
 
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
+import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 
 @Component({
@@ -18,8 +20,10 @@ export class PatientsListComponent implements OnInit{
   allPatients: Observable<any[]>;
   patientsCount: Number;
 
-  constructor(private af: AngularFire,
+  constructor(private router: Router,
+              private af: AngularFire,
               private dataService: DataService,
+              private errorHandler: ErrorHandlerService,
               private logger: LoggerService){
   };
 
@@ -40,10 +44,11 @@ export class PatientsListComponent implements OnInit{
           });
         } else {
           this.logger.warn("[patients-list] - ngOnInit - user: no logged in user");
+          this.router.navigate(['/']);
         }
       });
     } catch(e) {
-      this.logger.error("[patients-list] - ngOnInit - error: " + e);
+      this.errorHandler.traceError("[patients-list] - ngOnInit - error", e, true);
     }
   };
 }
