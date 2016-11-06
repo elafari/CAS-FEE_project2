@@ -7,7 +7,8 @@ import { AngularFire } from 'angularfire2';
 
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "./config.service";
-import { LoggerService } from "../log/logger.service";
+import { ErrorHandlerService } from "../error/error-handler.service";
+import { LoggerService } from "../log/logger.service"
 
 declare var jQuery: any;
 
@@ -22,9 +23,10 @@ export class HeaderComponent implements OnInit {
     loggedInUserAdmin: String;
 
     constructor(private authService: AuthService,
-                private logger: LoggerService,
                 private af: AngularFire,
-                private router: Router) {
+                private router: Router,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
@@ -39,7 +41,7 @@ export class HeaderComponent implements OnInit {
                 }
             });
         } catch (e) {
-            this.logger.error("[header] - ngOnInit - error: " + e);
+          this.errorHandler.traceError("[header] - ngOnInit - error", e, true);
         }
     };
 
@@ -50,7 +52,7 @@ export class HeaderComponent implements OnInit {
             this.logger.info("[header] - onLogout: logged out");
             this.router.navigate(['']);
         } catch (e) {
-            this.logger.error("[header] - onLogout - error: " + e);
+          this.errorHandler.traceError("[header] - onLogout - error", e, true);
         }
     };
 

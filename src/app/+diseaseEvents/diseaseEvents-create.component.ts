@@ -1,22 +1,25 @@
 
-import { Component} from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
+import { AngularFire } from 'angularfire2';
+
 import { DataService } from "../shared/data.service";
-import { LogService } from "../shared/log.service";
+import { ErrorHandlerService } from "../error/error-handler.service";
+import { LoggerService } from "../log/logger.service";
 
 @Component({
   templateUrl: './diseaseEvents-create.component.html'
 })
-export class DiseaseEventsCreateComponent {
+export class DiseaseEventsCreateComponent implements OnInit{
 
   private subscription: Subscription;
 
-  patientKey: String;
+  //patientKey: String;
 
   diseaseCaseKey: String;
   diseaseCaseName: String;
@@ -24,38 +27,51 @@ export class DiseaseEventsCreateComponent {
   diseaseEventKey: String;
   diseaseEventName: String;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private location: Location,
+              private af: AngularFire,
               private dataService: DataService,
-              private logService: LogService
-  ){
+              private errorHandler: ErrorHandlerService,
+              private logger: LoggerService) {
+  };
 
-    this.subscription = this.route.params.subscribe(
-      (params:any) => {
-        this.diseaseEventKey = params['diseaseEventKey'];
-        this.logService.logConsole("diseaseEvents-create", "constructor - diseaseEventKey: ", this.diseaseEventKey);
+  ngOnInit() {
+    try {
+      this.af.auth.subscribe(auth => {
+        if (auth) {
+          this.subscription = this.route.params.subscribe(
+            (params:any) => {
+              this.diseaseEventKey = params['diseaseEventKey'];
+              //this.patientKey = this.route.parent.snapshot.params['patientKey'];
+              this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
 
-        this.patientKey = this.route.parent.snapshot.params['patientKey'];
-        console.log("diseaseCases new - patientKey: " + this.patientKey);
-        this.logService.logConsole("diseaseEvents-create", "constructor - patientKey: ", this.patientKey);
+              this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
+                this.diseaseCaseName = diseaseCase.name;
 
-        this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
-        this.logService.logConsole("diseaseEvents-create", "constructor - diseaseCaseKey: ", this.diseaseCaseKey);
+                this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvemt) => {
+                  this.diseaseEventName = diseaseEvemt.name;
 
-        this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
-          this.diseaseCaseName = diseaseCase.name;
-
-          this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvemt) => {
-            this.diseaseEventName = diseaseEvemt.name;
-
-          });
-        });
+                });
+              });
+            });
+        } else {
+          this.logger.warn("[diseaseEvents-create] - ngOnInit - user: no logged in user");
+          this.router.navigate(['/']);
+        }
       });
+    } catch(e) {
+      this.errorHandler.traceError("[diseaseEvents-create] - ngOnInit - error", e, true);
+    }
   };
 
   createDiseaseEvent(key_value) {
-    this.dataService.createDiseaseEvent(key_value);
-    this.goBack();
+    try {
+      this.dataService.createDiseaseEvent(key_value);
+      this.goBack();
+    } catch(e) {
+      this.errorHandler.traceError("[diseaseEvents-create] - createDiseaseEvent - error", e, true);
+    }
   };
 
   goBack() {
@@ -63,7 +79,9 @@ export class DiseaseEventsCreateComponent {
   };
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   };
 }
 

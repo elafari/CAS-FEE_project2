@@ -5,6 +5,8 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
+import { ErrorHandlerService } from "../error/error-handler.service";
+import { LoggerService } from "../log/logger.service";
 import logWrap from "../log/logWrap.decorator";
 
 import { ConfigService } from "./config.service";
@@ -18,7 +20,9 @@ export class DataService {
   DbCases: String;
   DbEvents: String;
 
-  constructor(private af: AngularFire
+  constructor(private af: AngularFire,
+              private errorHandler: ErrorHandlerService,
+              private logger: LoggerService
   ) {
     this.DbAdmins = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.admins;
     this.DbUsers = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users;

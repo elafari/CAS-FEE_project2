@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
@@ -7,14 +7,13 @@ import { AngularFire } from 'angularfire2';
 
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
-import { LogService } from "../shared/log.service";
+import { ErrorHandlerService } from "../error/error-handler.service";
+import { LoggerService } from "../log/logger.service";
 
 @Component({
   templateUrl: './diseaseCases-list.component.html'
 })
-export class DiseaseCasesListComponent {
-
-  loggedInUserName: String;
+export class DiseaseCasesListComponent implements OnInit{
 
   patientKey: String;
   patientName: String;
@@ -22,27 +21,23 @@ export class DiseaseCasesListComponent {
   allDiseaseCases: Observable<any[]>;
   diseaseCasesCount: Number;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private af: AngularFire,
               private dataService: DataService,
-              private logService: LogService
-  ){
+              private errorHandler: ErrorHandlerService,
+              private logger: LoggerService) {
+  };
 
-    this.route.params.subscribe(
-      (params:any) => {
-        this.patientKey = params['patientKey'];
-        this.logService.logConsole("diseaseCases-list", "constructor - Router patientKey", this.patientKey);
-
-        this.af.auth.subscribe(auth => {
-          if (auth) {
-            this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-              this.loggedInUserName = user.name;
-              this.logService.logConsole("diseaseCases-list", "constructor - user", this.loggedInUserName );
-
-               this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+  ngOnInit() {
+    try {
+      this.af.auth.subscribe(auth => {
+        if (auth) {
+          this.route.params.subscribe(
+            (params:any) => {
+              this.patientKey = params['patientKey'];
+              this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                 this.patientName = patient.name;
-                this.logService.logConsole("diseaseCases-list", "constructor - patient", patient.name);
-
                 this.allDiseaseCases = this.dataService.getDiseaseCases(this.patientKey);
                 if (this.allDiseaseCases) {
                   this.allDiseaseCases.subscribe((queriedItems) => {
@@ -51,8 +46,13 @@ export class DiseaseCasesListComponent {
                 }
               });
             });
-          }
-        });
+        } else {
+          this.logger.warn("[diseaseCases-list] - ngOnInit - user: no logged in user");
+          this.router.navigate(['/']);
+        }
       });
+    } catch(e) {
+      this.errorHandler.traceError("[diseaseCases-list] - ngOnInit - error", e, true);
+    }
   };
 }

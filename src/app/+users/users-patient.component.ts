@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { DataService } from "../shared/data.service";
+import { ErrorHandlerService } from "../error/error-handler.service";
+import { LoggerService } from "../log/logger.service";
 
 @Component({
   selector: '[users-patient]',
@@ -17,29 +19,44 @@ export class UsersPatientComponent implements OnInit {
 
   showModalDialogEdit: String;
 
-  constructor(private dataService: DataService){
-
-    // todo:
-    // card einfärben: patient with active cases, or closed cases
-    // function for checking cases -> or feature stripping :)
-    this.isSuccessVisible = true;
-
-    this.isWarningVisible = this.checkPatientStatus();
-
+  constructor(private dataService: DataService,
+              private errorHandler: ErrorHandlerService,
+              private logger: LoggerService){
   };
 
   ngOnInit(){
-    this.patientKey = this.patient.$key;
+    try {
+      // todo:
+      // card einfärben: patient with active cases, or closed cases
+      // function for checking cases -> or feature stripping :)
+      this.isSuccessVisible = true;
+
+      this.isWarningVisible = this.checkPatientStatus();
+
+      this.patientKey = this.patient.$key;
+    } catch(e) {
+      this.errorHandler.traceError("[users-patient] - ngOnInit - error", e, true);
+    }
   }
 
   updatePatient(key_value) {
-    this.showModalDialogEdit = "";
-    this.dataService.updatePatient(this.patient.$key, key_value);
+    try {
+      this.showModalDialogEdit = "";
+      this.dataService.updatePatient(this.patient.$key, key_value);
+    } catch(e) {
+      this.errorHandler.traceError("[users-patient] - updatePatient - error", e, true);
+    }
   };
 
   deletePatient() {
-    this.showModalDialogEdit = "";
-    //this.dataService.deletePatient(this.patient.$key);
+    try {
+      this.showModalDialogEdit = "";
+
+      //this.dataService.deletePatient(this.patient.$key);
+
+    } catch(e) {
+      this.errorHandler.traceError("[users-patient] - deletePatient - error", e, true);
+    }
   };
 
   checkPatientStatus() {
@@ -50,6 +67,5 @@ export class UsersPatientComponent implements OnInit {
   showEditDialog(dialogAttribute) {
     this.showModalDialogEdit = dialogAttribute;
   };
-
 }
 

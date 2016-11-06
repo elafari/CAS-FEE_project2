@@ -1,6 +1,6 @@
 
-import { Component} from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { Observable } from 'rxjs';
@@ -10,17 +10,15 @@ import { AngularFire } from 'angularfire2';
 
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
-import { LogService } from "../shared/log.service";
+import { ErrorHandlerService } from "../error/error-handler.service";
+import { LoggerService } from "../log/logger.service";
 
 @Component({
   templateUrl: './diseaseCases-edit.component.html'
 })
-export class DiseaseCasesEditComponent {
+export class DiseaseCasesEditComponent implements OnInit{
 
   subscription:Subscription;
-
-  loggedInUserKey: String;
-  loggedInUserName: String;
 
   patientKey: String;
   patientName: String;
@@ -31,50 +29,60 @@ export class DiseaseCasesEditComponent {
 
   showModalDialog: string;
 
-  constructor(private route:ActivatedRoute,
+  constructor(private router: Router,
+              private route:ActivatedRoute,
               private af: AngularFire,
               private dataService: DataService,
               private location: Location,
-              private logService: LogService
-  ) {
+              private errorHandler: ErrorHandlerService,
+              private logger: LoggerService) {
+  };
 
-    this.subscription = this.route.params.subscribe(
-      (params:any) => {
-        this.diseaseCaseKey = params['diseaseCaseKey'];
-
-        this.patientKey = this.route.parent.snapshot.params['patientKey'];
-
-        this.af.auth.subscribe(auth => {
-           if (auth) {
-             this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-               this.loggedInUserKey = user.$key;
-               this.loggedInUserName = user.name;
-               this.logService.logConsole("diseaseCases-list", "constructor - user", this.loggedInUserName + " - " + this.loggedInUserKey);
-
-               this.dataService.getPatient(this.patientKey).subscribe((patient) => {
-                 this.patientName = patient.name;
-                 this.logService.logConsole("diseaseCases-list", "constructor - patient", patient.name);
-
-                 this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
-                   this.diseaseCaseName = diseaseCase.name;
-                   this.diseaseCaseType = diseaseCase.type;
-                 });
-               });
-             });
-           }
-        });
-    });
+  ngOnInit() {
+    try {
+      this.af.auth.subscribe(auth => {
+        if (auth) {
+          this.subscription = this.route.params.subscribe(
+            (params:any) => {
+              this.diseaseCaseKey = params['diseaseCaseKey'];
+              this.patientKey = this.route.parent.snapshot.params['patientKey'];
+              this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+                this.patientName = patient.name;
+                this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
+                  this.diseaseCaseName = diseaseCase.name;
+                  this.diseaseCaseType = diseaseCase.type;
+                });
+              });
+            });
+        } else {
+          this.logger.warn("[diseaseCases-edit] - ngOnInit - user: no logged in user");
+          this.router.navigate(['/']);
+        }
+      });
+    } catch(e) {
+      this.errorHandler.traceError("[diseaseCases-edit] - ngOnInit - error", e, true);
+    }
   };
 
   updateDiseaseCase(key_value) {
-    this.showModalDialog = "";
-    this.dataService.updateDiseaseCase(this.diseaseCaseKey, key_value)
-    this.goBack();
+    try {
+      this.showModalDialog = "";
+      this.dataService.updateDiseaseCase(this.diseaseCaseKey, key_value)
+      this.goBack();
+    } catch(e) {
+      this.errorHandler.traceError("[diseaseCases-edit] - updateDiseaseCase - error", e, true);
+    }
   };
   deleteDiseaseCase() {
-    this.showModalDialog = "";
-    // delete temporarily deactivated
-    //this.dataService.deleteDiseaseCase(this.diseaseCaseKey);
+    try {
+      this.showModalDialog = "";
+
+      // delete temporarily deactivated
+      //this.dataService.deleteDiseaseCase(this.diseaseCaseKey);
+
+    } catch(e) {
+      this.errorHandler.traceError("[diseaseCases-edit] - deleteDiseaseCase - error", e, true);
+    }
   };
 
   goBack() {
@@ -86,7 +94,9 @@ export class DiseaseCasesEditComponent {
   };
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
 

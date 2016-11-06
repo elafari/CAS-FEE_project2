@@ -1,27 +1,37 @@
+import { Injectable } from "@angular/core";
+import { ErrorHandlerService } from "../error/error-handler.service";
+
+@Injectable()
 export class BreadcrumbService {
+
+  constructor(private errorHandler: ErrorHandlerService){};
 
   private routeBreadcrumbNames = {};
 
   createBreadcrumb(urlNav: string){
-    let urls = new Array();
-    urls.length = 0; //clear out array
-    for (var item of this.breadcrumbDefinitions) {
-      let regexPattern = new RegExp(item.pattern,"g");
-      let regexResult = regexPattern.test(urlNav);
-      if (regexResult) {
-        urls.push("/");
-        for (var param of item.params) {
-          urls.push(urlNav.substr(1,(urlNav.indexOf(param) + param.length -1)));
+    try {
+      let urls = new Array();
+      urls.length = 0; //clear out array
+      for (var item of this.breadcrumbDefinitions) {
+        let regexPattern = new RegExp(item.pattern, "g");
+        let regexResult = regexPattern.test(urlNav);
+        if (regexResult) {
+          urls.push("/");
+          for (var param of item.params) {
+            urls.push(urlNav.substr(1, (urlNav.indexOf(param) + param.length - 1)));
+          }
+          let counter = 0;
+          for (var displayLink of item.display) {
+            this.addDisplayNameForRoute(urls[counter], displayLink);
+            counter++
+          }
+          break;
         }
-        let counter = 0;
-        for (var displayLink of item.display) {
-          this.addDisplayNameForRoute(urls[counter],displayLink);
-          counter++
-        }
-        break;
       }
+      return urls;
+    } catch(e) {
+      this.errorHandler.traceError("[breadcrumb-service] - createBreadcrumb - error", e, true);
     }
-    return urls;
   };
 
   addDisplayNameForRoute(route: string, name: string): void {

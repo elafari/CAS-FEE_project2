@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {DataService} from "../shared/data.service";
+import { DataService } from "../shared/data.service";
+import { ErrorHandlerService } from "../error/error-handler.service";
+import { LoggerService } from "../log/logger.service";
 
 @Component({
   selector: '[users-item]',
@@ -13,7 +15,9 @@ export class UsersItemComponent implements OnInit {
 
   showModalDialogCreate: String;
 
-  constructor(private dataService: DataService){
+  constructor(private dataService: DataService,
+              private errorHandler: ErrorHandlerService,
+              private logger: LoggerService){
   };
 
   ngOnInit() {
@@ -21,8 +25,12 @@ export class UsersItemComponent implements OnInit {
   }
 
   createPatient(key_value) {
-    this.showModalDialogCreate = "";
-    this.dataService.createPatient(key_value)
+    try {
+      this.showModalDialogCreate = "";
+      this.dataService.createPatient(key_value)
+    } catch(e) {
+      this.errorHandler.traceError("[users-item] - createPatient - error", e, true);
+    }
   };
 
   showCreateDialog(dialogAttribute) {

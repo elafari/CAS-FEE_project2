@@ -20,7 +20,6 @@ export class DiseaseEventsEditComponent implements OnInit{
 
   subscription:Subscription;
 
-  patientKey: String;
   diseaseCaseKey: String;
   diseaseCaseName: String;
   diseaseEventKey: String;
@@ -45,13 +44,9 @@ export class DiseaseEventsEditComponent implements OnInit{
           this.subscription = this.route.params.subscribe(
             (params:any) => {
               this.diseaseEventKey = params['diseaseEventKey'];
-
               this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
-
               this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
-                this.patientKey = diseaseCase.patient;
                 this.diseaseCaseName = diseaseCase.name;
-
                 this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseCase) => {
                   this.diseaseEventName = diseaseCase.name;
                   this.diseaseEventValue = diseaseCase.value;

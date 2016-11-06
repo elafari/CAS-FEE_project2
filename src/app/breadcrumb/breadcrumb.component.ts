@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { Router, NavigationEnd } from "@angular/router";
 
+import { ErrorHandlerService } from "../error/error-handler.service";
+
 import { BreadcrumbService } from "./breadcrumb.service";
 
 @Component({
@@ -13,14 +15,19 @@ export class BreadcrumbComponent {
   urls: string[];
 
   constructor(private router:Router,
-              private breadcrumbService: BreadcrumbService
-  ) {
-    this.urls = new Array();
-    this.urls.length = 0; //clear out array
-    this.router.events.subscribe((navigationEnd:NavigationEnd) => {
-      let urlNav = navigationEnd.urlAfterRedirects ? navigationEnd.urlAfterRedirects : navigationEnd.url;
-      this.urls = this.breadcrumbService.createBreadcrumb(urlNav);
-    });
+              private errorHandler: ErrorHandlerService,
+              private breadcrumbService: BreadcrumbService) {
+
+    try {
+      this.urls = new Array();
+      this.urls.length = 0; //clear out array
+      this.router.events.subscribe((navigationEnd:NavigationEnd) => {
+        let urlNav = navigationEnd.urlAfterRedirects ? navigationEnd.urlAfterRedirects : navigationEnd.url;
+        this.urls = this.breadcrumbService.createBreadcrumb(urlNav);
+      });
+    } catch(e) {
+      this.errorHandler.traceError("[breadcrumb] - constructor - error", e, true);
+    }
   };
 
   navigateTo(url: string): void {
