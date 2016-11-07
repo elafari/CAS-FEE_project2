@@ -19,6 +19,7 @@ import { LoggerService } from "../log/logger.service";
 export class PatientsCreateComponent implements OnInit{
 
   loggedInUserName: String;
+  loggedInUserKey: String;
 
   constructor(private router: Router,
               private location: Location,
@@ -34,6 +35,7 @@ export class PatientsCreateComponent implements OnInit{
         if (auth) {
           this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
             this.loggedInUserName = user.name;
+            this.loggedInUserKey = user.$key;
           });
         } else {
           this.logger.warn("[patients-create] - ngOnInit - user: no logged in user");

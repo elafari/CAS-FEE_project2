@@ -17,12 +17,19 @@ export class ConfigService {
   ];
 
   public static firebaseConfig = {
-    // fbe5
+    // database: diseaseDiary
+    apiKey: "AIzaSyCL6uu79mCavxxu7LlJMUDat5L9e1VcloM",
+    authDomain: "diseasediary-99d4e.firebaseapp.com",
+    databaseURL: "https://diseasediary-99d4e.firebaseio.com",
+    storageBucket: "diseasediary-99d4e.appspot.com",
+    messagingSenderId: "413669303856"
+    /* fb5
     apiKey: "AIzaSyAMQA61KfzbKBSxVRYJtch1LPzcC-VFblk",
     authDomain: "fbe5-17455.firebaseapp.com",
     databaseURL: "https://fbe5-17455.firebaseio.com",
     storageBucket: "fbe5-17455.appspot.com",
     messagingSenderId: "811840885015"
+    */
   };
 
   public static firebaseAuthConfig = {
@@ -31,7 +38,8 @@ export class ConfigService {
   };
 
   public static firebaseDbConfig = {
-    db: "/_db4",
+    db: "",
+    //db: "/_db4",
     admins: "/admins",
     users: "/users",
     patients: "/patients",
