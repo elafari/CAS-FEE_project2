@@ -49,6 +49,11 @@ export class PatientsCreateComponent implements OnInit{
 
   createPatient(key_value) {
     try {
+
+      // temporarily set params to create new patient in new database
+      key_value.sex = "unbekannt";
+      key_value.birthdate = "20000908";
+
       this.dataService.createPatient(key_value);
       this.goBack();
     } catch(e) {
