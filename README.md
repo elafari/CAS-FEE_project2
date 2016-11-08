@@ -3,16 +3,15 @@
 A Web Application to track disease related events like fever and medication.
 
 Current Version is deployed at .. ?
-Project presentation: [DiseaseDiary](https://prezi.com").
+Project presentation: [DiseaseDiary](https://prezi.com/hnrfd-o1veb3/disease-diary/).
 
 ## About
-When babies or infants contract a desease, they can quickly develop very high temperature. I case of emergency it's important to be able to provide the attending doctor with precise information about the development of the fever and the type and amount of possibliy dispensed medicine. This app lets you track this kind of disease related informations.
+When babies or infants contract a disease, they can quickly develop very high temperature. I case of emergency it's important to be able to provide the attending doctor with precise information about the development of the fever and the type and amount of possibliy dispensed medicine. This app lets you track this kind of disease related informations.
 
 ## Installation
 ### Prerequisits
-- Node.js v6.0.0 (http://nodejs.org/)
-- npm v3.8.6 (https://www.npmjs.com/)
-- ? Firebase account or use the freely available demo account
+- Node.js v6.6.0 (http://nodejs.org/)
+- npm v3.10.7 (https://www.npmjs.com/)
 
 ### <i class="icon-download"></i> Checkout from GitHub
 - `git clone https://github.com/elafari/DiseaseDiary.git`
@@ -20,15 +19,10 @@ When babies or infants contract a desease, they can quickly develop very high te
 - (`git checkout [branchName]` where the current stable branch is **milestone0??**.)
 
 ### Install and run
-(all commands have to be executed in the folder `src`)
 
-- `bower install`
 - `npm install`
-- ? `node server.js` or `ng serve` the server is up and running on localhost:4200
+- `ng serve` the server is up and running on localhost:4200
 - Open a browser and navigate to `http://localhost:4200`
-- ? Firebase config
-	- own account
-	- demo account (copy db for temporary use)
 
 #### Troubleshooting
 - Port already in use?
@@ -55,7 +49,7 @@ none
 
 ## Technology stack
 
-### Backend
+### Backend (has to be revised)
 * RESTful HATEOAS driven node.js web-server using web-sockets for price-change propagation
 * Event-Sourcing (MongoDB) and CQRS-designed domain-model
 * role-based user-model using basic-authentication middleware
@@ -72,15 +66,14 @@ so it's just a show-case)
 * [**halson**](https://github.com/seznam/halson) hateoas
 * [**log4js**](https://github.com/nomiddlename/log4js-node) logging
 
-###Frontend
-* AngularJS / Bootstrap
-* heavily using flexbox
-* Typescript
-* everything with the keyboard can be operated
-* (transparently supports https, however, different browsers might notify the user due to a "not trusted" server cert 
-being used)
 
-- [**boostrap**](http://getbootstrap.com/ "http://getbootstrap.com/") for layout and parts of grid functionality
+
+###Frontend (has to be revised)
+* AngularJS / Bootstrap 4 alpha
+* flexbox
+* Typescript
+
+- [**boostrap**](https://v4-alpha.getbootstrap.com/ "https://v4-alpha.getbootstrap.com/") for layout and parts of grid functionality
 - [**jQuery**](http://jquery.com "http://jquery.com/") for dom manipulations
 - [**toaster**](https://github.com/jirikavi/AngularJS-Toaster "https://github.com/jirikavi/AngularJS-Toaster") for notifications.
 - [**ngAnimate**](https://docs.angularjs.org/api/ngAnimate "https://docs.angularjs.org/api/ngAnimate") for animations.
@@ -88,26 +81,23 @@ being used)
 - [**less**](http://lesscss.org/ "http://lesscss.org/") for styling.
 - and some others...
 
-### Tools
+### Tools (has to be revised)
 * [**npm**](https://www.npmjs.org/ "https://www.npmjs.org/") as taskrunner.
-* [**bower**](http://bower.io/ "http://bower.io/") dependency management
+* [**angular-cli**](https://cli.angular.io/ "https://cli.angular.io/") command line interface for Angular
 * unit tests:
     * [**mocha**](http://mochajs.org/ "http://mochajs.org/") testrunner
     * [**chai**](http://chaijs.com/) with bdd style [expect](http://chaijs.com/api/bdd/) assertion library
     * [**sinon**](http://sinonjs.org/) mocking / spies
     * [**istanbul**](https://github.com/gotwarlost/istanbul) coverage reporting
 
-##How to set up the dev environment
-(all commands have to be executed in the folder `src`)
+##How to set up the dev environment (has to be revised)
 
 ###Install dependencies & build:
 * `npm install` (this will install and build the system )
 
 ###Start server
-#### dev server
-* `npm start` to start the server
-* `npm run start-dev` to start the server with a default set of data
-* open localhost:3000
+* `ng serve` to start the server
+* open localhost:4200
 
 #### Build server
 * `npm start-build` to start the server
@@ -138,7 +128,7 @@ this will run all midway tests for the front-end based on mocha and karma as tes
 
 end-to-end testing with protractor
 
-### ...gulp
+### ...gulp (has to be revised)
 
 *   dev.appOpen        --> open the browser with the start page of the app
 *   dev.inject.index   --> inject the dependencies into the index.html
@@ -173,7 +163,7 @@ end-to-end testing with protractor
 ##License and author info
 tdb
 
-Anton Kammermeier - [GitHub](https://github.com/tonikam)
+Toni Kammermeier - [GitHub](https://github.com/tonikam)
 Rafael Bamert - [GitHub](https://github.com/elafari)
 
 ## Project Management

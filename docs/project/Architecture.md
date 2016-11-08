@@ -1,4 +1,31 @@
 ## Application architecture and design
+
+* Angular 2 Features
+	* router lazyloading (e.g. app.routing.ts, patients.routing.ts)
+	* observables and subscriptions (see also angularfire2)
+	* observable subjects (e.g. logged-in-user.service.ts with BehaviorSubject)
+	* use service in service: @Injectable decorator (e.g. data.service.ts)
+	* use own decorators (e.g. log decorator logWrap in data.service.ts)
+
+* Database Firebase
+	* angularfire2 library
+	* email authentication
+	* observables (FirebaseListObservable, FirebaseObjectObservable)
+
+* Application
+	* modularization (e.g. error, log, auth, userAdmin, breadcrumb)
+	* router lazyloading (e.g. +users, +patients, +diseaseCases)
+	* sub-routing (e.g. app.routing.ts, patients.routing.ts)
+
+* Source Documentation
+    * npm install -g typedoc@0.5.1
+    * cd  <project directory>\src
+    * typedoc --excludeExternals --moduleResolution node --ignoreCompilerErrors --out c:\_cas\typedoc .\app
+
+
+
+
+## Application architecture and design
 The .lnk web application consists of two functional areas:
 * the user interface (or front end as we might say)
 * the restful data transfer and handling

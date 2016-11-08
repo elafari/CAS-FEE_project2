@@ -1,4 +1,15 @@
 ## API ##
+
+* Angularfire2
+    * auth
+    * list
+    * object
+
+
+
+
+
+## API ##
 Hint: Watch out singular and plural
 * GET /articles: Returns a list of articles
     * [HHE OK] Query-Parameter "anywhere=": Searches (caseinsensitive) the given string in the title and the description (not the tags or comments)

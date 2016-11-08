@@ -1,3 +1,41 @@
+## Entities / resource types ##
+### The following entities are used:
+* user
+* patient
+* disease case
+* disease event
+
+### User
+* id: Generated ID of the firebase user
+* name:
+* admin: user type
+
+### Patient
+* id: Generated ID of the firebase patients table item
+* name: user email address
+* sex: weiblich/männlich
+* birthdate:
+* [age]:
+
+### Disease Case
+* id: Generated ID of the firebase cases table item
+* patient: patient id
+* name:
+* type:
+
+### Disease Event
+* id: Generated ID of the firebase events table item
+* case: case id
+* name:
+* value:
+
+### Admins
+* id: user id
+* admin-role: true
+
+
+
+
 ## Entities / documents / resource types ##
 ### The following entities are needed:
 * article: the article / link submitted, references user, votes, comments and tags
