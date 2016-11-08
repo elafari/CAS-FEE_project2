@@ -36,6 +36,13 @@
 
 
 
+
+===========
+
+end
+
+
+
 ## Entities / documents / resource types ##
 ### The following entities are needed:
 * article: the article / link submitted, references user, votes, comments and tags

@@ -2,7 +2,6 @@
 
 A Web Application to track disease related events like fever and medication.
 
-Current Version is deployed at .. ?
 Project presentation: [DiseaseDiary](https://prezi.com/hnrfd-o1veb3/disease-diary/).
 
 ## About
@@ -13,7 +12,7 @@ When babies or infants contract a disease, they can quickly develop very high te
 - Node.js v6.6.0 (http://nodejs.org/)
 - npm v3.10.7 (https://www.npmjs.com/)
 
-### <i class="icon-download"></i> Checkout from GitHub
+### Checkout from GitHub
 - `git clone https://github.com/elafari/DiseaseDiary.git`
 - move into project folder `cd ./DiseaseDiary`
 - (`git checkout [branchName]` where the current stable branch is **milestone0??**.)
@@ -28,6 +27,29 @@ When babies or infants contract a disease, they can quickly develop very high te
 - Port already in use?
 - Clear npm cache
 
+## Change log
+- version 0.1
+
+## License and author info
+
+Rafael Bamert - [GitHub](https://github.com/elafari)
+
+Toni Kammermeier - [GitHub](https://github.com/tonikam)
+
+## Project Management
+See separate files:
+
+- docs/project/Architecture.md
+- docs/project/Entities.md
+- docs/project/API.md
+- docs/project/Features.md
+- docs/project/ToDo.md
+- docs/diagrams/*
+
+
+===========
+
+end
 
 ## (Example) Usage
 - On the very right on the yellow navigation bar you have the two options to login or create a new user account.
@@ -161,10 +183,10 @@ end-to-end testing with protractor
 * currently credentials are stored in LocalStore und are not timedout -> should switch to cookies or something similar
 
 ##License and author info
-tdb
+
+Rafael Bamert - [GitHub](https://github.com/elafari)
 
 Toni Kammermeier - [GitHub](https://github.com/tonikam)
-Rafael Bamert - [GitHub](https://github.com/elafari)
 
 ## Project Management
 See separate files:
