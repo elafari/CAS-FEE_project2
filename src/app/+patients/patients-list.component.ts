@@ -11,7 +11,8 @@ import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 
 @Component({
-  templateUrl: './patients-list.component.html'
+  templateUrl: './patients-list.component.html',
+  styleUrls: ['../../assets/scss/cards.scss']
 })
 export class PatientsListComponent implements OnInit{
 

@@ -1,16 +1,18 @@
-
-<div class="cust-wrap-cards">
-  <div class="card cust-head-card-buttons cust-card-case">
-
-    <div class="card-header cust-head-card-header">Patient {{patient.name}}</div>
-    <div class="card-block text-center">
-      <!-- Inhalt -->
-    </div>
-
-    <div class="card-block cust-flex-btn cust-block-card-padding">
-      <button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" [routerLink]="[patient.$key + '/edit']">Edit</button>
-      <button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" [routerLink]="[patient.$key + '/diseaseCases']">Open</button>
-    </div>
-  </div>
+<div class="card-header card-header-custom">
+    <h2>{{patient.name}}</h2>
 </div>
 
+<div class="card-block">
+    <button type="button" class="btn btn-secondary btn-block"
+            [routerLink]="[patient.$key + '/edit']">Edit
+    </button>
+    <button type="button" class="btn btn-secondary btn-block"
+            [routerLink]="[patient.$key + '/diseaseCases']">Cases
+    </button>
+</div>
+
+<div class="card-footer">
+    <div class="card-text">
+        text - tbd
+    </div>
+</div>

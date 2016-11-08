@@ -1,34 +1,57 @@
-
-<div class="row cust-container-header">
-  <p>{{patientsCount}} Patients of: {{loggedInUserName}}</p>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Patients Overview</h1>
+        <p>{{patientsCount}} patients of: {{loggedInUserName}}</p>
+    </div>
 </div>
 
-<div class="row col-sm-6 col-md-4 col-lg-3">
-  <div class="card-deck">
+<div class="row">
+    <!-- Card to add new item -->
+    <div class="col-xs-8 offset-xs-2 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards">
+        <div class="card cust-head-card-buttons cust-card-patients">
 
-<!-- Card to add new item -->
+            <div class="card-header cust-head-card-header">Patients of {{loggedInUserName}}</div>
 
-    <div class="cust-wrap-cards">
-      <div class="card cust-head-card-buttons cust-card-patients">
+            <div class="card-block text-center">
+                <!-- Inhalt -->
+            </div>
 
-        <div class="card-header cust-head-card-header">Patients of {{loggedInUserName}}</div>
+            <div class="card-block cust-flex-btn cust-block-card-padding">
+                <button type="button" class="btn btn-secondary cust-btn-new cust-flex-btn-child"
+                        [routerLink]="['create']">Create
+                </button>
+            </div>
 
-        <div class="card-block text-center">
-          <!-- Inhalt -->
         </div>
-
-        <div class="card-block cust-flex-btn cust-block-card-padding">
-          <button type="button" class="btn btn-secondary cust-btn-new cust-flex-btn-child" [routerLink]="['create']">Create</button>
-        </div>
-
-      </div>
     </div>
 
-<!-- List all existing items as card -->
+    <div class="col-xs-8 offset-xs-2 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards">
+        <div class="card card-full-height card-custom text-xs-center">
 
-    <div *ngFor="let patient of allPatients | async" class="card-deck-wrapper">
-      <div patients-item [patient]="patient"></div>
+            <div class="card-header card-header-custom">
+                <h2>Add patient</h2>
+            </div>
+
+            <div class="card-block">
+                <button type="button" class="btn btn-secondary btn-block"
+                        [routerLink]="['create']">Create
+                </button>
+            </div>
+
+            <div class="card-footer">
+                <div class="card-text">
+                    {{patientsCount}} patients of: {{loggedInUserName}}
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
-  </div>
+    <!-- List all existing items as card -->
+    <div *ngFor="let patient of allPatients | async"
+         class="col-xs-8 offset-xs-2 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards">
+
+        <div patients-item [patient]="patient" class="card card-full-height card-custom text-xs-center"></div>
+    </div>
 </div>
