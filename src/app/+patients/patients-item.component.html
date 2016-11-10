@@ -1,18 +1,21 @@
-<div class="card-header card-header-custom">
-    <h2>{{patient.name}}</h2>
-</div>
-
-<div class="card-block">
-    <button type="button" class="btn btn-secondary btn-block"
-            [routerLink]="[patient.$key + '/edit']">Edit
-    </button>
-    <button type="button" class="btn btn-secondary btn-block"
-            [routerLink]="[patient.$key + '/diseaseCases']">Cases
-    </button>
-</div>
-
-<div class="card-footer">
-    <div class="card-text">
-        text - tbd
+<div class="card card-square text-xs-center">
+    <div class="card-header card-header-custom">
+        <h4>{{patient.name}}</h4>
     </div>
+
+    <div class="card-block">
+        <button type="button" class="btn btn-secondary btn-block"
+                [routerLink]="[patient.$key + '/edit']">Edit
+        </button>
+        <button type="button" class="btn btn-secondary btn-block"
+                [routerLink]="[patient.$key + '/diseaseCases']">Cases
+        </button>
+    </div>
+<!--
+    <div class="card-footer card-footer-bottom">
+        <div class="card-text">
+            text - tbd
+        </div>
+    </div>
+-->
 </div>
