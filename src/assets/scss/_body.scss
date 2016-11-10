@@ -1,0 +1,8 @@
+body {
+  background: $body-bg-color;
+  margin-top: 56px;
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 54px;
+  }
+}
