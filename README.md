@@ -2,7 +2,7 @@
 
 A Web Application to track disease related events like fever and medication.
 
-Project presentation: [DiseaseDiary](https://prezi.com/hnrfd-o1veb3/disease-diary/).
+Project prezi presentation: [DiseaseDiary](https://prezi.com/hnrfd-o1veb3/disease-diary/).
 
 ## About
 When babies or infants contract a disease, they can quickly develop very high temperature. I case of emergency it's important to be able to provide the attending doctor with precise information about the development of the fever and the type and amount of possibliy dispensed medicine. This app lets you track this kind of disease related informations.
