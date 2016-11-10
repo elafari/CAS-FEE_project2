@@ -22,6 +22,7 @@
 * patient: patient id
 * name:
 * type:
+* active: true/false
 
 ### Disease Event
 * id: Generated ID of the firebase events table item
