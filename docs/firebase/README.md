@@ -2,8 +2,8 @@
 
 Database for this application:  [firebase.google.com](https://firebase.google.com/)
 
-Authentication for database administrator
-* credentials will be provided by email for the examiner
+Credentials for database administrator
+* login credentials will be provided by email for the examiner
 
 Authentication for application users
 * email and password
