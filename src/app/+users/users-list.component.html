@@ -1,16 +1,15 @@
-
-<div class="container-fluid cust-container-header">
-  <p>{{allUsersCount}} Users</p>
-</div>
-<div *ngFor="let user of allUsers | async" class="card-deck-wrapper">
-  <div class="container-fluid">
-      <div class="row flex-items-xs-center">
-        <div users-item [user]="user"></div>
-      </div>
-
-      <div class="row flex-items-xs-center">
-        <div users-patient *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient" class="card-group"></div>
-      </div>
-
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Users and Patients</h1>
+    <p>{{allUsersCount}} Users</p>
   </div>
+</div>
+
+<div *ngFor="let user of allUsers | async">
+  <div class="row">
+    <div class="col-xs-12"><h4>Patients of {{user.name}}</h4></div>
+    <div users-patient *ngFor="let patient of user.patients | async"
+         class="col-xs-10 offset-xs-1 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards"
+         [user]="user" [patient]="patient"></div>
+    </div>
 </div>

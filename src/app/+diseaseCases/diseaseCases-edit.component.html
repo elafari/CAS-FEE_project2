@@ -11,7 +11,11 @@
       <td>type</td>
       <td><input type="text" #updateType [value]="diseaseCaseType" /></td>
     </tr>
-    <tr><button class="btn btn-success" (click)="updateDiseaseCase({type: updateType.value,name: updateName.value})">update case</button></tr>
+    <tr>
+      <td>active</td>
+      <td><label><input type="checkbox" name={{diseaseCaseKey}} value="active" #updateActive [checked]="diseaseCaseActive == true">&nbsp;&nbsp;yes</label></td>
+    </tr>
+    <tr><button class="btn btn-success" (click)="updateDiseaseCase({type: updateType.value,name: updateName.value, active: updateActive.checked})">update case</button></tr>
     <tr>&nbsp;</tr>
     <td><button class="btn cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + diseaseCaseKey" (click)="showDeleteDialog(diseaseCaseKey)">Delete</button></td>
     <tr>&nbsp;</tr>
