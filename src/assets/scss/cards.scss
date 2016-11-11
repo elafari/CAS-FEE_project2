@@ -1,0 +1,59 @@
+@import "~bootstrap/scss/bootstrap-grid.scss";
+
+/* colors */
+$card-bg-color: #90A4AE;
+$header-bg-color: #E6EE9C;
+
+.col-cards {
+  padding-bottom: .9rem;
+}
+
+/*
+// Option 1: Cards have equal heights
+.card-equal-height {
+  height: 100%;
+  margin-bottom: 0;
+}
+*/
+
+/*
+  Hack to set aspect ratio of cards: http://www.w3schools.com/howto/howto_css_aspect_ratio.asp
+  Important: too much content in height gets cropped away
+*/
+@include media-breakpoint-up(sm) {
+  .card-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* 1:1 Aspect Ratio */
+  }
+
+  .card-square {
+    /* parent needs be a .card-container */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+}
+
+/*
+.card-footer-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+*/
+
+.card-custom {
+  //background-color: $card-bg-color;
+}
+
+.card-header-custom {
+  //background-color: transparent;
+  //background-color: $header-bg-color;
+  //opacity: .5;
+}

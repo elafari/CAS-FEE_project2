@@ -7,10 +7,12 @@ import { AngularFire } from 'angularfire2';
 
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
-import { LogService } from "../shared/log.service";
+import { ErrorHandlerService } from "../error/error-handler.service";
+import { LoggerService } from "../log/logger.service";
 
 @Component({
-  templateUrl: './patients-list.component.html'
+  templateUrl: './patients-list.component.html',
+  styleUrls: ['../../assets/scss/cards.scss']
 })
 export class PatientsListComponent implements OnInit{
 
@@ -22,19 +24,17 @@ export class PatientsListComponent implements OnInit{
   constructor(private router: Router,
               private af: AngularFire,
               private dataService: DataService,
-              private logService: LogService
-  ){
-    this.logService.logConsole("patients-list","constructor","start");
+              private errorHandler: ErrorHandlerService,
+              private logger: LoggerService){
   };
 
   ngOnInit() {
-    this.logService.logConsole("patients-list","ngOnInit","start");
-
-    this.af.auth.subscribe(auth => {
-      if (auth) {
-        this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+    try {
+      this.af.auth.subscribe(auth => {
+        if (auth) {
+          this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
             this.loggedInUserName = user.name;
-            this.logService.logConsole("patients-list", "ngOnInit - user", user.name);
+            this.logger.info("[patients-list] - ngOnInit - user: " + user.name);
 
             this.allPatients = this.dataService.getPatients(user.$key);
             if (this.allPatients) {
@@ -42,10 +42,14 @@ export class PatientsListComponent implements OnInit{
                 this.patientsCount = queriedItems.length;
               });
             }
-        });
-      } else {
-        this.logService.logConsole("patients-list", "ngOnInit - user", "no logged in user");
-      }
-    });
+          });
+        } else {
+          this.logger.warn("[patients-list] - ngOnInit - user: no logged in user");
+          this.router.navigate(['/']);
+        }
+      });
+    } catch(e) {
+      this.errorHandler.traceError("[patients-list] - ngOnInit - error", e, true);
+    }
   };
 }

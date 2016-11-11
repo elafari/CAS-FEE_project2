@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from "./shared/header.component";
-
+import { LoggerModule } from "./log/logger.module";
+import { ErrorModule } from "./error/error.module";
 import { AuthModule } from './auth/auth.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { UserAdminModule } from './userAdmin/user-admin.module';
@@ -13,9 +12,10 @@ import { UserAdminModule } from './userAdmin/user-admin.module';
 import { ConfigService } from "./shared/config.service";
 import { DataService } from './shared/data.service';
 import { LoggedInUserService } from "./auth/logged-in-user.service";
-import { ErrorHandlerService } from "./shared/error-handler.service";
-import { ErrorLoggerService } from "./shared/error-logger.service";
 import { LogService } from "./shared/log.service";
+
+import { AppComponent } from './app.component';
+import { HeaderComponent } from "./shared/header.component";
 
 import { AppRoutingModule, routingComponents } from "./app.routing";
 
@@ -32,6 +32,8 @@ import { AuthMethods } from "angularfire2/index";
     CommonModule,
     FormsModule,
     AppRoutingModule,
+    LoggerModule,
+    ErrorModule,
     AuthModule,
     BreadcrumbModule,
     UserAdminModule
@@ -45,14 +47,10 @@ import { AuthMethods } from "angularfire2/index";
     ConfigService,
     DataService,
     LoggedInUserService,
-    ErrorHandlerService,
-    ErrorLoggerService,
     LogService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
 
-export class AppModule {
-
-}
+export class AppModule {}
