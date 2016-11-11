@@ -12,7 +12,7 @@ export class ConfigService {
   public static loginProcessMsg = "..login process";
 
   public static linkList = [
-    {linkDisplay: "Github", linkURL: "https://github.com/tonikam/fbe14", linkDescription: "Github repository of this project"},
+    {linkDisplay: "Github", linkURL: "https://github.com/elafari/CAS-FEE_project2", linkDescription: "Github repository of this project"},
     {linkDisplay: "Prezi", linkURL: "https://prezi.com/hnrfd-o1veb3/disease-diary/", linkDescription: "Project presentation"}
   ];
 
