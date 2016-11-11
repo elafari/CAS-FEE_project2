@@ -3,7 +3,7 @@
     <div class="card cust-list-card cust-card-event">
 
       <div class="card-header cust-head-card-header">Case {{diseaseCase.name}}</div>
-      <div class="card-block text-center">
+      <div class="card-block text-center" [ngClass]="{'card-warning': diseaseCase.active == true}">
         <!-- Inhalt -->
       </div>
 

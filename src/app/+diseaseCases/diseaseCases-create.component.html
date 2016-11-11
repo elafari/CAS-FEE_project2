@@ -11,7 +11,7 @@
       <td>type</td>
       <td><input type="text" #newType [value]="" /></td>
     </tr>
-    <tr><button class="btn btn-success" (click)="createDiseaseCase({type: newType.value,name: newName.value, patient: patientKey})">create case</button></tr>
+    <tr><button class="btn btn-success" (click)="createDiseaseCase({type: newType.value,name: newName.value, patient: patientKey, active: true})">create case</button></tr>
     <tr>&nbsp;</tr>
     <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
   </table>

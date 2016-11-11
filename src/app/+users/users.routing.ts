@@ -4,7 +4,6 @@ import { RouterModule, Routes } from "@angular/router";
 import {UsersComponent} from "./users.component";
 import {UsersListComponent} from "./users-list.component";
 import { UsersPatientComponent } from './users-patient.component';
-import { UsersItemComponent } from './users-item.component';
 
 export const users_routes: Routes = [
   { path: '', component: UsersComponent, children: [
@@ -22,7 +21,6 @@ export class UsersRoutingModule{}
 export const routingComponents = [
   UsersComponent,
   UsersListComponent,
-  UsersPatientComponent,
-  UsersItemComponent
+  UsersPatientComponent
 ];
 

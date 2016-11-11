@@ -26,6 +26,7 @@ export class DiseaseCasesEditComponent implements OnInit{
   diseaseCaseKey: String;
   diseaseCaseName: String;
   diseaseCaseType: String;
+  diseaseCaseActive: boolean;
 
   showModalDialog: string;
 
@@ -51,6 +52,7 @@ export class DiseaseCasesEditComponent implements OnInit{
                 this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                   this.diseaseCaseName = diseaseCase.name;
                   this.diseaseCaseType = diseaseCase.type;
+                  this.diseaseCaseActive = diseaseCase.active;
                 });
               });
             });

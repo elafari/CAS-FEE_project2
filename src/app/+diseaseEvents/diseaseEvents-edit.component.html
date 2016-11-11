@@ -11,6 +11,10 @@
       <td>value</td>
       <td><input type="text" #updateValue [value]="diseaseEventValue" /></td>
     </tr>
+    <tr>
+      <td>active</td>
+      <td><input type="text" #updateValue [value]="diseaseEventValue" /></td>
+    </tr>
     <tr><button class="btn btn-success" (click)="updateDiseaseEvent({value: updateValue.value,name: updateName.value})">update event</button></tr>
     <tr>&nbsp;</tr>
     <td><button class="btn cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + diseaseEventKey" (click)="showDeleteDialog(diseaseEventKey)">Delete</button></td>

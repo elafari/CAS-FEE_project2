@@ -14,11 +14,14 @@ import { ConfigService } from "./config.service";
 @Injectable()
 export class DataService {
 
-  DbAdmins: String;
-  DbUsers: String;
-  DbPatients: String;
-  DbCases: String;
-  DbEvents: String;
+  DbAdmins: string;
+  DbUsers: string;
+  DbPatients: string;
+  DbCases: string;
+  DbEvents: string;
+
+  diseaseCases: any;
+  allCasesObj: Observable<any>;
 
   constructor(private af: AngularFire,
               private errorHandler: ErrorHandlerService,
@@ -101,7 +104,67 @@ export class DataService {
 
   deletePatient(patientKey) {
     let patients = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.patients);
-    patients.remove(patientKey);
+    //patients.remove(patientKey);
+    console.log("Lösche Patient: " + patientKey);
+
+    let queryDefinition = {};
+    queryDefinition = {query: {orderByChild: 'patient',equalTo: patientKey}};
+
+    this.allCasesObj = this.af.database.list(String(this.DbCases), queryDefinition)
+      .map((allCases) => {
+        for (let item of allCases){
+          console.log("item: " + item)
+        }
+        return allCases;
+      });
+
+
+    /*
+    // delete patients diseaseCases and their diseaseEvents
+    this.diseaseCases = this.getAllCasesAndEvents(patientKey);
+    console.log("cases: " +  this.diseaseCases);
+    for (let itemCase of this.diseaseCases) {
+      console.log("case: " + itemCase.name);
+      for (let itemEvent of itemCase.diseaseEvents) {
+        console.log("event: " + itemEvent.name);
+      }
+    }
+
+    */
+
+    //this.diseaseCases.map((diseaseCase) => {
+
+      //console.log("diseaseCase: " + diseaseCase);
+      //let allDiseaseCases = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.diseaseCases);
+
+      //console.log("remove diseaseCase: " + diseaseCase);
+      //allDiseaseCases.remove(diseaseCase.$key);
+
+      /*
+        console.log("itemCase.name: " + itemCase.name + " - " + itemCase.$key);
+        this.allDiseaseEvents = this.af.database.list(String(this.DbEvents));
+        for (let itemEvent of itemCase.diseaseEvents) {
+          console.log("itemEvent.name: " + itemEvent.name + " - " + itemEvent.$key);
+          //allDiseaseEvents.remove(itemEvent.$key);
+        }
+        //allDiseaseCases.remove(itemCase.$key);
+      */
+
+    //});
+  };
+
+  getAllCasesAndEvents(patientKey) {
+    let queryDefinitionCases = {};
+    queryDefinitionCases = {query: {orderByChild: 'patient',equalTo: patientKey}};
+    return this.af.database.list(String(this.DbCases), queryDefinitionCases)
+      .map((allCases) => {
+        return allCases.map((diseaseCase) => {
+          let queryDefinitionEvents = {};
+          queryDefinitionEvents = {query: {orderByChild: 'user',equalTo: diseaseCase.$key}};
+          diseaseCase.diseaseEvents = this.af.database.list(String(this.DbPatients), queryDefinitionEvents)
+          return diseaseCase;
+        });
+      });
   };
 
   getPatients(userKey) {
