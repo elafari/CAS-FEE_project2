@@ -60,14 +60,16 @@
             <td><input type="text" #newAge [value]=""/></td>
         </tr>
         <tr>
-            <button class="btn btn-success"
-                    (click)="createPatient({age: newAge.value,name: newName.value, user: loggedInUserKey})">create
-                patient
-            </button>
-        </tr>
-        <tr>&nbsp;</tr>
-        <tr>
-            <button class="btn btn-success" (click)="goBack()">back</button>
+            <td></td>
+            <td>
+                <button class="btn btn-success" (click)="goBack()">
+                    back
+                </button>
+                <button class="btn btn-success"
+                        (click)="createPatient({age: newAge.value,name: newName.value, user: loggedInUserKey})">create
+                    patient
+                </button>
+            </td>
         </tr>
     </table>
 </div>

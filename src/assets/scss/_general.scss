@@ -1,0 +1,17 @@
+body {
+  background: $body-bg-color;
+  margin-top: 56px;
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 54px;
+  }
+}
+
+h1 {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+
+  font-variant: small-caps;
+  font-style: italic;
+}
