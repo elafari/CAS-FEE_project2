@@ -40,12 +40,12 @@ Toni Kammermeier - [GitHub](https://github.com/tonikam)
 See separate files:
 
 - [docs/project/Architecture.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/Architecture.md)
-- docs/project/Entities.md
-- docs/project/API.md
-- docs/project/Features.md
-- docs/project/ToDo.md
-- docs/diagrams/*
-
+- [docs/project/Entities.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/Entities.md)
+- [docs/project/API.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/API.md)
+- [docs/project/Features.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/Features.md)
+- [docs/project/ToDo.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/ToDo.md)
+- [docs/diagrams/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/diagrams/)
+- [docs/firebase/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/firebase/)
 
 ===========
 
