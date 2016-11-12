@@ -11,6 +11,7 @@ import { LoggerService } from "../log/logger.service";
 
 @Component({
   templateUrl: './users-list.component.html',
+  styleUrls: ['../../assets/scss/cards.scss']
 })
 export class UsersListComponent implements OnInit{
 

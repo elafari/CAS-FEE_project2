@@ -79,7 +79,8 @@ export class PatientsEditComponent implements OnInit, OnDestroy{
   deletePatient(simulate) {
     try {
       this.showModalDialog = "";
-      this.dataService.deletePatient(this.patientKey, this.simulateDeletion);
+      this.logger.info("[patients-edit] - deletePatient - patient: " + this.patientKey + " - simulation: " + simulate);
+      this.dataService.deletePatient(this.patientKey, simulate);
     } catch(e) {
       this.errorHandler.traceError("[patients-edit] - deletePatient - error", e, true);
     }
