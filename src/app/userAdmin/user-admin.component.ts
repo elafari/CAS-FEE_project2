@@ -50,8 +50,8 @@ export class UserAdminComponent implements OnInit{
     try {
       this.showModalDialog = "";
 
-      alert("Delete temporarily deactivated!");
-      //this.dataService.deleteUser(userKey);
+      //alert("Delete temporarily deactivated!");
+      this.dataService.deleteUser(userKey);
 
     } catch(e) {
       this.errorHandler.traceError("[user-admin] - deleteUser - error", e, true);

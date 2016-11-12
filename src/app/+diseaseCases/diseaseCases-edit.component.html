@@ -36,10 +36,12 @@
       </div>
       <div class="modal-body">
         <p>Are you sure to delete this case?</p>
+        <p>All events of this case are also deleted!</p>
+        <td><label><input type="checkbox" name='Simulation' value="simulate" #updateSimulation [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete information)</label>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal" (click)="showDeleteDialog('')">Cancel</button>
-        <button type="button" class="btn cust-table-btn-delete" (click)="deleteDiseaseCase({type: updateType.value,name: updateName.value})" data-dismiss="modal">Delete</button>
+        <button type="button" class="btn cust-table-btn-delete" (click)="deleteDiseaseCase(updateSimulation.checked)" data-dismiss="modal">Delete</button>
       </div>
     </div>
   </div>
