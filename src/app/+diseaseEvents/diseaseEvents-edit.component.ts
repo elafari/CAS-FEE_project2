@@ -27,6 +27,7 @@ export class DiseaseEventsEditComponent implements OnInit{
   diseaseEventValue: String;
 
   showModalDialog: string;
+  simulateDeletion: boolean;
 
   constructor(private router: Router,
               private route:ActivatedRoute,
@@ -39,6 +40,7 @@ export class DiseaseEventsEditComponent implements OnInit{
 
   ngOnInit() {
     try {
+      this.simulateDeletion = true;
       this.af.auth.subscribe(auth => {
         if (auth) {
           this.subscription = this.route.params.subscribe(
@@ -72,28 +74,30 @@ export class DiseaseEventsEditComponent implements OnInit{
       this.errorHandler.traceError("[diseaseEvents-edit] - updateDiseaseEvent - error", e, true);
     }
   };
-  deleteDiseaseEvent() {
+  deleteDiseaseEvent(simulate) {
     try {
       this.showModalDialog = "";
-
-      // delete temporarily deactivated
-      //this.dataService.deleteDiseaseEvent(this.diseaseEventKey);
-
+      this.logger.info("[diseaseEvents-edit] - deleteDiseaseEvent - diseaseEvent: " + this.diseaseEventKey + " - simulation: " + simulate);
+      this.dataService.deleteDiseaseEvent(this.diseaseEventKey, simulate);
     } catch(e) {
       this.errorHandler.traceError("[diseaseEvents-edit] - deleteDiseaseEvent - error", e, true);
     }
   };
 
   goBack() {
+    this.simulateDeletion = true;
     this.location.back();
   };
 
   showDeleteDialog(dialogAttribute) {
+    this.simulateDeletion = true;
     this.showModalDialog = dialogAttribute;
   };
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
 

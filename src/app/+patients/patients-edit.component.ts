@@ -27,6 +27,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy{
   patientAge: String;
 
   showModalDialog: string;
+  simulateDeletion: boolean;
 
   constructor(private router: Router,
               private route:ActivatedRoute,
@@ -39,6 +40,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     try {
+      this.simulateDeletion = true;
       this.af.auth.subscribe(auth => {
         if (auth) {
           this.subscription = this.route.params.subscribe(
@@ -74,23 +76,23 @@ export class PatientsEditComponent implements OnInit, OnDestroy{
       this.errorHandler.traceError("[patients-edit] - updatePatient - error", e, true);
     }
   };
-  deletePatient() {
+  deletePatient(simulate) {
     try {
       this.showModalDialog = "";
-
-      // delete temporarily deactivated
-      //this.dataService.deletePatient(this.patientKey);
-
+      this.logger.info("[patients-edit] - deletePatient - patient: " + this.patientKey + " - simulation: " + simulate);
+      this.dataService.deletePatient(this.patientKey, simulate);
     } catch(e) {
       this.errorHandler.traceError("[patients-edit] - deletePatient - error", e, true);
     }
   };
 
   goBack() {
+    this.simulateDeletion = true;
     this.location.back();
   };
 
   showDeleteDialog(dialogAttribute) {
+    this.simulateDeletion = true;
     this.showModalDialog = dialogAttribute;
   };
 

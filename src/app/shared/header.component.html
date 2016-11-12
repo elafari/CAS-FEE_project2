@@ -12,12 +12,18 @@
     <div class="collapse navbar-toggleable-xs" id="responsive-navbar" #collapsibleNav>
 
         <!-- Brand -->
-        <a class="navbar-brand" [routerLink]="['/']">Disease Diary</a>
+        <a class="navbar-brand" [routerLink]="['/']"
+           data-toggle="tooltip" data-placement="bottom" title="Home">
+            Disease Diary
+        </a>
 
         <!-- Links -->
         <div class="nav navbar-nav">
             <a class="nav-item nav-link" *ngIf="af.auth | async" [routerLink]="['/patients']" routerLinkActive="active"
-               (click)="collapseNav(collapsibleNav)">Patients</a>
+               (click)="collapseNav(collapsibleNav)"
+               data-toggle="tooltip" data-placement="bottom" title="Your patient list">
+                Patients
+            </a>
         </div>
 
         <!-- Admin -->
@@ -34,13 +40,13 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="Admin">
-                    <a class="dropdown-item" [routerLink]="['/userAdmin']" (click)="collapseNav(collapsibleNav)">Edit
-                        user data</a>
-                    <a class="dropdown-item" [routerLink]="['/users']" (click)="collapseNav(collapsibleNav)">All users +
-                        patients</a>
+                    <a class="dropdown-item" [routerLink]="['/userAdmin']" (click)="collapseNav(collapsibleNav)">
+                      Administrate users</a>
+                    <a class="dropdown-item" [routerLink]="['/users']" (click)="collapseNav(collapsibleNav)">
+                      List users & patients</a>
                     <div *ngIf="af.auth | async" class="dropdown-divider"></div>
-                    <a class="dropdown-item" [routerLink]="['/linkList']" (click)="collapseNav(collapsibleNav)">Project
-                        links</a>
+                    <a class="dropdown-item" [routerLink]="['/linkList']" (click)="collapseNav(collapsibleNav)">
+                      CAS FEE Project links</a>
                 </div>
             </div>
         </div>
@@ -50,19 +56,23 @@
             <hr class="nav-divider hidden-sm-up">
 
             <a class="nav-item nav-link" *ngIf="af.auth | async" [routerLink]="['/loggedInData']"
-               routerLinkActive="active" (click)="collapseNav(collapsibleNav)">
+               routerLinkActive="active" (click)="collapseNav(collapsibleNav)"
+               data-toggle="tooltip" data-placement="bottom" title="List your user data">
                 {{loggedInUserName}}
             </a>
             <a class="nav-item nav-link" *ngIf="af.auth | async" [routerLink]="['/']"
-               (click)="onLogout(collapsibleNav)">
+               (click)="onLogout(collapsibleNav)"
+               data-toggle="tooltip" data-placement="bottom" title="Logout user">
                 Logout
             </a>
             <a class="nav-item nav-link" [routerLink]="['/login']" routerLinkActive="active"
-               (click)="collapseNav(collapsibleNav)">
+               (click)="collapseNav(collapsibleNav)"
+               data-toggle="tooltip" data-placement="bottom" title="Show login form">
                 Login
             </a>
             <a class="nav-item nav-link" [routerLink]="['/register']" routerLinkActive="active"
-               (click)="collapseNav(collapsibleNav)">
+               (click)="collapseNav(collapsibleNav)"
+               data-toggle="tooltip" data-placement="bottom" title="Show registration form">
                 Register
             </a>
         </div>
