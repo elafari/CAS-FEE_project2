@@ -39,7 +39,7 @@ Toni Kammermeier - [GitHub](https://github.com/tonikam)
 ## Project Management
 See separate files:
 
-- docs/project/Architecture.md
+- [docs/project/Architecture.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/Architecture.md)
 - docs/project/Entities.md
 - docs/project/API.md
 - docs/project/Features.md
