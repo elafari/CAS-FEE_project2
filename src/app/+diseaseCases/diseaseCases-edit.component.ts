@@ -82,6 +82,7 @@ export class DiseaseCasesEditComponent implements OnInit{
       this.showModalDialog = "";
       this.logger.info("[diseaseCases-edit] - deleteDiseaseCase - diseaseCase: " + this.diseaseCaseKey + " - simulation: " + simulate);
       this.dataService.deleteDiseaseCase(this.diseaseCaseKey, simulate);
+      this.goBack();
     } catch(e) {
       this.errorHandler.traceError("[diseaseCases-edit] - deleteDiseaseCase - error", e, true);
     }

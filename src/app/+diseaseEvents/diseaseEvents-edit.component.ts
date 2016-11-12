@@ -79,6 +79,7 @@ export class DiseaseEventsEditComponent implements OnInit{
       this.showModalDialog = "";
       this.logger.info("[diseaseEvents-edit] - deleteDiseaseEvent - diseaseEvent: " + this.diseaseEventKey + " - simulation: " + simulate);
       this.dataService.deleteDiseaseEvent(this.diseaseEventKey, simulate);
+      this.goBack();
     } catch(e) {
       this.errorHandler.traceError("[diseaseEvents-edit] - deleteDiseaseEvent - error", e, true);
     }
