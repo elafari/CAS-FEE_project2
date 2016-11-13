@@ -3,7 +3,7 @@
     <h4>{{diseaseCase.name}}</h4>
   </div>
 
-  <div class="card-block">
+  <div class="card-block"  [ngClass]="{'card-warning': diseaseCase.active == true}">
     <button type="button" class="btn btn-secondary btn-block"
             [routerLink]="[diseaseCase.$key + '/edit']">Edit
     </button>
