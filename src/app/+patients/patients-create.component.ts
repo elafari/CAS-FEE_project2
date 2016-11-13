@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
-import { NgForm } from "@angular/forms";
-
-import { Observable } from 'rxjs';
-import { Subscription } from "rxjs/Rx";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AngularFire } from 'angularfire2';
 
@@ -12,11 +9,14 @@ import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
+import { Patient } from './patients.interface';
 
 @Component({
-    templateUrl: './patients-create.component.html'
+    templateUrl: './patients-create.component.html',
+    styleUrls: ['../../assets/scss/forms.scss']
 })
 export class PatientsCreateComponent implements OnInit {
+    patient: FormGroup;
 
     loggedInUserName: String;
     loggedInUserKey: String;
@@ -36,6 +36,13 @@ export class PatientsCreateComponent implements OnInit {
                     this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
                         this.loggedInUserName = user.name;
                         this.loggedInUserKey = user.$key;
+
+                        this.patient = new FormGroup({
+                            name     : new FormControl('', [Validators.required, Validators.minLength(2)]),
+                            sex      : new FormControl('', Validators.required),
+                            birthdate: new FormControl('', Validators.required),
+                            age      : new FormControl('', Validators.required)
+                        });
                     });
                 } else {
                     this.logger.warn("[patients-create] - ngOnInit - user: no logged in user");
@@ -49,7 +56,6 @@ export class PatientsCreateComponent implements OnInit {
 
     createPatient(key_value) {
         try {
-
             // temporarily set params to create new patient in new database
             key_value.sex = "unbekannt";
             key_value.birthdate = "20000908";
@@ -65,7 +71,16 @@ export class PatientsCreateComponent implements OnInit {
         this.location.back();
     };
 
-    onSubmit(form: NgForm) {
-        console.log('it works', form);
+    onSubmit({value, valid}: { value: Patient, valid: boolean }) {
+        console.log(value, valid);
+        debugger;
     };
+
+    /*
+     onSubmit(form: NgForm) {
+     console.log('it works', form);
+     };
+     */
 }
+
+

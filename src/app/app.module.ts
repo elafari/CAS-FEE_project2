@@ -26,31 +26,32 @@ import { AuthProviders } from "angularfire2/index";
 import { AuthMethods } from "angularfire2/index";
 
 @NgModule({
-  imports: [
-    AngularFireModule.initializeApp(ConfigService.firebaseConfig, ConfigService.firebaseAuthConfig),
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    AppRoutingModule,
-    LoggerModule,
-    ErrorModule,
-    AuthModule,
-    BreadcrumbModule,
-    UserAdminModule
-  ],
-  declarations: [
-    AppComponent,
-    routingComponents,
-    HeaderComponent,
-  ],
-  providers: [
-    ConfigService,
-    DataService,
-    LoggedInUserService,
-    LogService
-  ],
-  entryComponents: [AppComponent],
-  bootstrap: [AppComponent]
+    imports: [
+        AngularFireModule.initializeApp(ConfigService.firebaseConfig, ConfigService.firebaseAuthConfig),
+        BrowserModule,
+        CommonModule,
+        FormsModule,
+        AppRoutingModule,
+        LoggerModule,
+        ErrorModule,
+        AuthModule,
+        BreadcrumbModule,
+        UserAdminModule
+    ],
+    declarations: [
+        AppComponent,
+        routingComponents,
+        HeaderComponent,
+    ],
+    providers: [
+        ConfigService,
+        DataService,
+        LoggedInUserService,
+        LogService
+    ],
+    entryComponents: [AppComponent],
+    bootstrap: [AppComponent]
 })
 
-export class AppModule {}
+export class AppModule {
+}
