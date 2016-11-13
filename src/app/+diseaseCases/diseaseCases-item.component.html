@@ -1,17 +1,22 @@
+<div class="card card-square text-xs-center">
+  <div class="card-header card-header-custom">
+    <h4>{{diseaseCase.name}}</h4>
+  </div>
 
-<div class="cust-wrap-cards">
-    <div class="card cust-list-card cust-card-event">
-
-      <div class="card-header cust-head-card-header">Case {{diseaseCase.name}}</div>
-      <div class="card-block text-center" [ngClass]="{'card-warning': diseaseCase.active == true}">
-        <!-- Inhalt -->
+  <div class="card-block">
+    <button type="button" class="btn btn-secondary btn-block"
+            [routerLink]="[diseaseCase.$key + '/edit']">Edit
+    </button>
+    <button type="button" class="btn btn-secondary btn-block"
+            [routerLink]="[diseaseCase.$key + '/diseaseEvents']">Cases
+    </button>
+  </div>
+  <!--
+      <div class="card-footer card-footer-bottom">
+          <div class="card-text">
+              text - tbd
+          </div>
       </div>
-
-      <div class="card-block cust-flex-btn cust-block-card-padding">
-        <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child" data-toggle="modal" [routerLink]="[diseaseCase.$key + '/edit']">Edit</button>
-        <button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" [routerLink]="[diseaseCase.$key + '/diseaseEvents']">Open</button>
-       </div>
-
-    </div>
+  -->
 </div>
 

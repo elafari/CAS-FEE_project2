@@ -1,16 +1,18 @@
-
-<div class="cust-wrap-cards">
-  <div class="card cust-head-card cust-card-event">
-
-    <div class="card-header cust-head-card-header">Event {{diseaseEvent.name}}</div>
-
-    <div class="card-block text-center">
-      <!-- Inhalt -->
-    </div>
-
-    <div class="card-block cust-flex-btn cust-block-card-padding">
-      <button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" [routerLink]="[diseaseEvent.$key + '/edit']">Edit</button>
-    </div>
-
+<div class="card card-square text-xs-center">
+  <div class="card-header card-header-custom">
+    <h4>{{diseaseEvent.name}}</h4>
   </div>
+
+  <div class="card-block">
+    <button type="button" class="btn btn-secondary btn-block"
+            [routerLink]="[diseaseEvent.$key + '/edit']">Edit
+    </button>
+  </div>
+  <!--
+      <div class="card-footer card-footer-bottom">
+          <div class="card-text">
+              text - tbd
+          </div>
+      </div>
+  -->
 </div>
