@@ -51,4 +51,5 @@ import { AuthMethods } from "angularfire2/index";
   bootstrap: [AppComponent]
 })
 
-export class AppModule {}
+export class AppModule {
+}
