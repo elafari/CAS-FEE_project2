@@ -7,7 +7,7 @@ import { PatientsItemComponent } from "./patients-item.component";
 import { PatientsEditComponent } from "./patients-edit.component";
 import { PatientsCreateComponent } from "./patients-create.component";
 
-export const patients_routes: Routes = [
+export const patients_routes: Routes = <Routes>[
   { path: '', component: PatientsComponent, children: [
     { path: '', component: PatientsListComponent },
     { path: ':patientKey/edit', component: PatientsEditComponent },

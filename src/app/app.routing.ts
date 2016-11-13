@@ -10,7 +10,7 @@ import { LinkListComponent } from "./pages/link-list.component";
 import { UserAdminComponent } from "./userAdmin/user-admin.component";
 import { NotFoundComponent } from "./pages/not-found.component";
 
-export const app_routes: Routes = [
+export const app_routes: Routes = <Routes>[
   {path: '', component: HomeComponent},
   //{path: '', pathMatch: 'full', redirectTo: '/home'},
 

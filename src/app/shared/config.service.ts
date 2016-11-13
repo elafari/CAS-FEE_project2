@@ -12,24 +12,29 @@ export class ConfigService {
   public static loginProcessMsg = "..login process";
 
   public static linkList = [
-    {linkDisplay: "Github", linkURL: "https://github.com/tonikam/fbe14", linkDescription: "Github repository of this project"},
+    {linkDisplay: "Github", linkURL: "https://github.com/elafari/CAS-FEE_project2", linkDescription: "Github repository of this project"},
     {linkDisplay: "Prezi", linkURL: "https://prezi.com/hnrfd-o1veb3/disease-diary/", linkDescription: "Project presentation"}
   ];
 
   public static firebaseConfig = {
-    // database: diseaseDiary
+
+    // database: diseaseDiary - production database
+    /*
     apiKey: "AIzaSyCL6uu79mCavxxu7LlJMUDat5L9e1VcloM",
     authDomain: "diseasediary-99d4e.firebaseapp.com",
     databaseURL: "https://diseasediary-99d4e.firebaseio.com",
     storageBucket: "diseasediary-99d4e.appspot.com",
     messagingSenderId: "413669303856"
-    /* fb5
-    apiKey: "AIzaSyAMQA61KfzbKBSxVRYJtch1LPzcC-VFblk",
-    authDomain: "fbe5-17455.firebaseapp.com",
-    databaseURL: "https://fbe5-17455.firebaseio.com",
-    storageBucket: "fbe5-17455.appspot.com",
-    messagingSenderId: "811840885015"
     */
+
+    // database: dd01 - test database with new structure and deletion tests
+
+    apiKey: "AIzaSyB19VDJA7O6NNpOhKWvOP4cZ4xQ9o9L6cc",
+    authDomain: "dd01-8992e.firebaseapp.com",
+    databaseURL: "https://dd01-8992e.firebaseio.com",
+    storageBucket: "dd01-8992e.appspot.com",
+    messagingSenderId: "144059495802"
+
   };
 
   public static firebaseAuthConfig = {
@@ -39,7 +44,6 @@ export class ConfigService {
 
   public static firebaseDbConfig = {
     db: "",
-    //db: "/_db4",
     admins: "/admins",
     users: "/users",
     patients: "/patients",

@@ -6,7 +6,8 @@ import { LoggerService } from "../log/logger.service";
 
 @Component({
   selector: '[users-patient]',
-  templateUrl: 'users-patient.component.html'
+  templateUrl: 'users-patient.component.html',
+  styleUrls: ['../../assets/scss/cards.scss']
 })
 export class UsersPatientComponent implements OnInit {
   @Input() user: any;
@@ -15,6 +16,7 @@ export class UsersPatientComponent implements OnInit {
   patientKey: String;
 
   showModalDialogDelete: String;
+  simulateDeletion: boolean;
 
   constructor(private dataService: DataService,
               private errorHandler: ErrorHandlerService,
@@ -23,25 +25,25 @@ export class UsersPatientComponent implements OnInit {
 
   ngOnInit(){
     try {
+      this.simulateDeletion = true;
       this.patientKey = this.patient.$key;
     } catch(e) {
       this.errorHandler.traceError("[users-patient] - ngOnInit - error", e, true);
     }
   }
 
-  deletePatient() {
+  deletePatient(simulate) {
     try {
       this.showModalDialogDelete = "";
-
-      //alert("Delete temporarily deactivated!");
-      this.dataService.deletePatient(this.patient.$key);
-
+      this.logger.info("[user-patient] - deletePatient - patient: " + this.patient.$key + " - simulation: " + simulate);
+      this.dataService.deletePatient(this.patient.$key, simulate);
     } catch(e) {
       this.errorHandler.traceError("[users-patient] - deletePatient - error", e, true);
     }
   };
 
   showDeleteDialog(dialogAttribute) {
+    this.simulateDeletion = true;
     this.showModalDialogDelete = dialogAttribute;
   };
 }

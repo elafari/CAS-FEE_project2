@@ -1,34 +1,39 @@
-
-<div class="row cust-container-header">
-  <p>{{diseaseEventsCount}} Events of Case: {{diseaseCaseName}}</p>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Events of {{diseaseCaseName}}</h1>
+    <p>{{diseaseEventsCount}} Events of Case: {{diseaseCaseName}}</p>
+  </div>
 </div>
 
-<div class="row col-sm-6 col-md-4 col-lg-3">
-  <div class="card-deck">
+<div class="row">
+  <!-- Card to add new item -->
+  <div class="col-xs-10 offset-xs-1 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards">
+    <div class="card-container">
+      <div class="card card-square text-xs-center">
 
-    <!-- Card to add new item -->
-
-    <div class="cust-wrap-cards">
-      <div class="card cust-head-card-buttons cust-card-events">
-
-        <div class="card-header cust-head-card-header">events of {{diseaseCaseName}}</div>
-
-        <div class="card-block text-center">
-          <!-- Inhalt -->
+        <div class="card-header card-header-custom">
+          <h4>Add event</h4>
         </div>
 
-        <div class="card-block cust-flex-btn cust-block-card-padding">
-          <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child" [routerLink]="['create']">Create</button>
+        <div class="card-block">
+          <button type="button" class="btn btn-secondary btn-block"
+                  [routerLink]="['create']">Create
+          </button>
         </div>
-
+        <!--
+                        <div class="card-footer card-footer-bottom">
+                            <div class="card-text">
+                                {{diseaseEventsCount}} cases of: {{diseaseCaseName}}
+                            </div>
+                        </div>
+        -->
       </div>
     </div>
+  </div>
 
-    <!-- List all existing items as card -->
-
-    <div *ngFor="let diseaseEvent of allDiseaseEvents | async" class="card-deck-wrapper">
-          <div diseaseEvents-item [diseaseEvent]="diseaseEvent"></div>
-    </div>
-
+  <!-- List all existing items as a card -->
+  <div *ngFor="let diseaseEvent of allDiseaseEvents | async"
+       class="col-xs-10 offset-xs-1 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards">
+    <div diseaseEvents-item [diseaseEvent]="diseaseEvent" class="card-container"></div>
   </div>
 </div>

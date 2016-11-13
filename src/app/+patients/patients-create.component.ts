@@ -15,44 +15,47 @@ import { Patient } from './patients.interface';
     templateUrl: './patients-create.component.html',
     styleUrls: ['../../assets/scss/forms.scss']
 })
-export class PatientsCreateComponent implements OnInit {
+export class PatientsCreateComponent implements OnInit, OnDestroy {
     patient: FormGroup;
 
     loggedInUserName: String;
     loggedInUserKey: String;
 
-    constructor(private router: Router,
-                private location: Location,
-                private af: AngularFire,
-                private dataService: DataService,
-                private errorHandler: ErrorHandlerService,
-                private logger: LoggerService) {
-    };
+  subscrUser: Subscription;
 
-    ngOnInit() {
-        try {
-            this.af.auth.subscribe(auth => {
-                if (auth) {
-                    this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-                        this.loggedInUserName = user.name;
-                        this.loggedInUserKey = user.$key;
+  constructor(private router: Router,
+              private location: Location,
+              private af: AngularFire,
+              private dataService: DataService,
+              private errorHandler: ErrorHandlerService,
+              private logger: LoggerService){
+  };
 
-                        this.patient = new FormGroup({
-                            name     : new FormControl('', Validators.required),
-                            sex      : new FormControl('', Validators.required),
-                            birthdate: new FormControl('', Validators.required),
-                            age      : new FormControl('')
-                        });
-                    });
-                } else {
-                    this.logger.warn("[patients-create] - ngOnInit - user: no logged in user");
-                    this.router.navigate(['/']);
-                }
-            });
-        } catch (e) {
-            this.errorHandler.traceError("[patients-create] - ngOnInit - error", e, true);
+  ngOnInit() {
+    try {
+      this.af.auth.subscribe(auth => {
+        if (auth) {
+          this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+            this.loggedInUserName = user.name;
+            this.loggedInUserKey = user.$key;
+
+              this.patient = new FormGroup({
+                  name     : new FormControl('', Validators.required),
+                  sex      : new FormControl('', Validators.required),
+                  birthdate: new FormControl('', Validators.required),
+                  age      : new FormControl('')
+              });
+          });
+          this.dataService.addSubscripton(this.subscrUser);
+        } else {
+          this.logger.warn("[patients-create] - ngOnInit - user: no logged in user");
+          this.router.navigate(['/login']);
         }
-    };
+      });
+    } catch(e) {
+      this.errorHandler.traceError("[patients-create] - ngOnInit - error", e, true);
+    }
+  };
 
     createPatient(key_value) {
         try {
@@ -67,10 +70,9 @@ export class PatientsCreateComponent implements OnInit {
         }
     };
 
-    goBack() {
-        this.location.back();
-    };
-
+  goBack() {
+    this.location.back();
+  };
     onSubmit({value, valid}: { value: Patient, valid: boolean }) {
         console.log(value, valid);
         debugger;
@@ -81,6 +83,10 @@ export class PatientsCreateComponent implements OnInit {
      console.log('it works', form);
      };
      */
+  ngOnDestroy() {
+    if (this.subscrUser) {this.subscrUser.unsubscribe();}
+  };
+
 }
 
 

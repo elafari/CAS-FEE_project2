@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { Observable } from "rxjs/Observable";
+
+import { AngularFire } from 'angularfire2';
 
 import { ConfigService } from '../shared/config.service';
 import { DataService } from '../shared/data.service';
@@ -16,16 +19,27 @@ export class UserAdminComponent implements OnInit{
   userMainAdmin: String;
 
   showModalDialog: string;
+  simulateDeletion: boolean;
 
-  constructor(private dataService: DataService,
+  constructor(private router: Router,
+              private af: AngularFire,
+              private dataService: DataService,
               private errorHandler: ErrorHandlerService,
               private logger: LoggerService) {
   };
 
   ngOnInit() {
     try {
-      this.userMainAdmin = ConfigService.mainAdmin;
-      this.users = this.dataService.getUserList();
+      this.af.auth.subscribe(auth => {
+        if (auth) {
+          this.simulateDeletion = true;
+          this.userMainAdmin = ConfigService.mainAdmin;
+          this.users = this.dataService.getUserList();
+        } else {
+          this.logger.warn("[user-admin] - ngOnInit - user: no logged in user");
+          this.router.navigate(['/login']);
+        }
+      });
     } catch(e) {
       this.errorHandler.traceError("[user-admin] - ngOnInit - error", e, true);
     }
@@ -46,19 +60,18 @@ export class UserAdminComponent implements OnInit{
     }
   }
 
-  deleteUser(userKey: string) {
+  deleteUser(userKey: string, simulate: boolean) {
     try {
       this.showModalDialog = "";
-
-      alert("Delete temporarily deactivated!");
-      //this.dataService.deleteUser(userKey);
-
+      this.logger.info("[user-admin] - deleteUser - user: " + userKey + " - simulation: " + simulate);
+      this.dataService.deleteUser(userKey, simulate);
     } catch(e) {
       this.errorHandler.traceError("[user-admin] - deleteUser - error", e, true);
     }
   };
 
   showDeleteDialog(dialogAttribute) {
-      this.showModalDialog = dialogAttribute;
+    this.simulateDeletion = true;
+    this.showModalDialog = dialogAttribute;
   };
 }
