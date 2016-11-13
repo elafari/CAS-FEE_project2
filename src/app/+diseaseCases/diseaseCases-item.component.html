@@ -1,9 +1,9 @@
-<div class="card card-square text-xs-center">
+<div class="card card-square text-xs-center" [ngClass]="{'card-outline-danger': diseaseCase.active == true}">
   <div class="card-header card-header-custom">
     <h4>{{diseaseCase.name}}</h4>
   </div>
 
-  <div class="card-block"  [ngClass]="{'card-warning': diseaseCase.active == true}">
+  <div class="card-block">
     <button type="button" class="btn btn-secondary btn-block"
             [routerLink]="[diseaseCase.$key + '/edit']">Edit
     </button>
