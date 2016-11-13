@@ -1,22 +1,16 @@
-<div class="card card-square text-xs-center">
-  <div class="card-header card-header-custom">
-    <h4>{{diseaseCase.name}}</h4>
-  </div>
+<div class="card card-square text-xs-center" [ngClass]="{'card-active-case': diseaseCase.active === true}">
 
-  <div class="card-block"  [ngClass]="{'card-warning': diseaseCase.active == true}">
-    <button type="button" class="btn btn-secondary btn-block"
-            [routerLink]="[diseaseCase.$key + '/edit']">Edit
-    </button>
-    <button type="button" class="btn btn-secondary btn-block"
-            [routerLink]="[diseaseCase.$key + '/diseaseEvents']">Cases
-    </button>
-  </div>
-  <!--
-      <div class="card-footer card-footer-bottom">
-          <div class="card-text">
-              text - tbd
-          </div>
-      </div>
-  -->
+    <div class="card-header card-header-custom">
+        <h4>{{diseaseCase.name}}</h4>
+    </div>
+
+    <div class="card-block">
+        <button type="button" class="btn btn-secondary btn-block"
+                [routerLink]="[diseaseCase.$key + '/edit']">Edit
+        </button>
+        <button type="button" class="btn btn-secondary btn-block"
+                [routerLink]="[diseaseCase.$key + '/diseaseEvents']">Cases
+        </button>
+    </div>
+
 </div>
-
