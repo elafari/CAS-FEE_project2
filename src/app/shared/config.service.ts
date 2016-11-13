@@ -54,4 +54,10 @@ export class ConfigService {
   public static getEmailRegex() {
     return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|bla|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
   };
+
+  public static colorList = {
+    "warn": "color: green; background-color:yellow",
+    "error": "color: white; background-color:red",
+    "info": "color: white; background-color:blue"
+  }
 }
