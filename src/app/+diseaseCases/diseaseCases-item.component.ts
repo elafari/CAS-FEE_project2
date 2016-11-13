@@ -11,7 +11,7 @@ import { DataService } from "../shared/data.service";
 })
 export class DiseaseCasesItemComponent {
   @Input() diseaseCase: any;
-  @Input() patientKey: String;
+  @Input() patientKey: string;
 
   constructor(private dataService: DataService) {
   };

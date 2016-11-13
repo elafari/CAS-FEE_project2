@@ -18,12 +18,12 @@ import { LoggerService } from "../log/logger.service";
 })
 export class DiseaseCasesEditComponent implements OnInit, OnDestroy{
 
-  patientKey: String;
-  patientName: String;
+  patientKey: string;
+  patientName: string;
 
-  diseaseCaseKey: String;
-  diseaseCaseName: String;
-  diseaseCaseType: String;
+  diseaseCaseKey: string;
+  diseaseCaseName: string;
+  diseaseCaseType: string;
   diseaseCaseActive: boolean;
 
   showModalDialog: string;

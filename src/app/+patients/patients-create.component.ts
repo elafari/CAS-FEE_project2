@@ -18,8 +18,8 @@ import { LoggerService } from "../log/logger.service";
 })
 export class PatientsCreateComponent implements OnInit, OnDestroy{
 
-  loggedInUserName: String;
-  loggedInUserKey: String;
+  loggedInUserName: string;
+  loggedInUserKey: string;
 
   subscrUser: Subscription;
 

@@ -17,7 +17,7 @@ import { LoggerService } from "../log/logger.service";
 })
 export class PatientsListComponent implements OnInit, OnDestroy{
 
-  loggedInUserName: String;
+  loggedInUserName: string;
 
   allPatients: Observable<any[]>;
   patientsCount: Number;

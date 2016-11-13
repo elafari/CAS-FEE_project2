@@ -13,9 +13,9 @@ export class UsersPatientComponent implements OnInit {
   @Input() user: any;
   @Input() patient: any;
 
-  patientKey: String;
+  patientKey: string;
 
-  showModalDialogDelete: String;
+  showModalDialogDelete: string;
   simulateDeletion: boolean;
 
   constructor(private dataService: DataService,

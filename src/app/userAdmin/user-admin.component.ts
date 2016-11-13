@@ -16,7 +16,7 @@ import { LoggerService } from "../log/logger.service";
 export class UserAdminComponent implements OnInit{
 
   users: Observable<any>;
-  userMainAdmin: String;
+  userMainAdmin: string;
 
   showModalDialog: string;
   simulateDeletion: boolean;

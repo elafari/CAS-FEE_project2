@@ -14,7 +14,7 @@ import { LoggerService } from "../log/logger.service";
 export class RegisterComponent implements OnInit {
     myForm: FormGroup;
 
-    errorMessage: String;
+    errorMessage: string;
 
     constructor(private fb: FormBuilder,
                 private authService: AuthService,

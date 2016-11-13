@@ -21,8 +21,8 @@ declare var jQuery:any;
 })
 export class HeaderComponent implements OnInit, OnDestroy{
 
-  loggedInUserName:String;
-  loggedInUserAdmin:String;
+  loggedInUserName: string;
+  loggedInUserAdmin: string;
 
   subscrUser : Subscription;
 

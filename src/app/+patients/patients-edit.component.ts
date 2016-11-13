@@ -18,11 +18,11 @@ import { LoggerService } from "../log/logger.service";
 })
 export class PatientsEditComponent implements OnInit, OnDestroy{
 
-  loggedInUserName: String;
+  loggedInUserName: string;
 
-  patientKey: String;
-  patientName: String;
-  patientAge: String;
+  patientKey: string;
+  patientName: string;
+  patientAge: string;
 
   showModalDialog: string;
   simulateDeletion: boolean;

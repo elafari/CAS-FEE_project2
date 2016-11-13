@@ -17,7 +17,7 @@ import { LoggerService } from "../log/logger.service";
 export class UsersListComponent implements OnInit, OnDestroy {
 
   allUsers: Observable<any[]>;
-  allUsersCount: Number;
+  allUsersCount: number;
   subscrUsers : Subscription;
 
   constructor(private router: Router,

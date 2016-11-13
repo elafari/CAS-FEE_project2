@@ -17,11 +17,11 @@ import { LoggerService } from "../log/logger.service";
 })
 export class DiseaseCasesCreateComponent implements OnInit, OnDestroy{
 
-  patientKey: String;
-  patientName: String;
+  patientKey: string;
+  patientName: string;
 
-  diseaseCaseKey: String;
-  diseaseCaseName: String;
+  diseaseCaseKey: string;
+  diseaseCaseName: string;
 
   subscrRoute: Subscription;
   subscrPatient: Subscription;

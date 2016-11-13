@@ -17,11 +17,11 @@ import { LoggerService } from "../log/logger.service";
 })
 export class DiseaseCasesListComponent implements OnInit, OnDestroy{
 
-  patientKey: String;
-  patientName: String;
+  patientKey: string;
+  patientName: string;
 
   allDiseaseCases: Observable<any[]>;
-  diseaseCasesCount: Number;
+  diseaseCasesCount: number;
 
   subscrRoute: Subscription;
   subscrPatient: Subscription;
