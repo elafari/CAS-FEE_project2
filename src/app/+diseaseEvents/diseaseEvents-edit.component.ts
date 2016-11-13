@@ -1,5 +1,5 @@
 
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
@@ -16,9 +16,7 @@ import { LoggerService } from "../log/logger.service";
 @Component({
   templateUrl: './diseaseEvents-edit.component.html'
 })
-export class DiseaseEventsEditComponent implements OnInit{
-
-  subscription:Subscription;
+export class DiseaseEventsEditComponent implements OnInit, OnDestroy{
 
   diseaseCaseKey: String;
   diseaseCaseName: String;
@@ -28,6 +26,10 @@ export class DiseaseEventsEditComponent implements OnInit{
 
   showModalDialog: string;
   simulateDeletion: boolean;
+
+  subscrRoute: Subscription;
+  subscrDiseaseCase: Subscription;
+  subscrDiseaseEvent: Subscription;
 
   constructor(private router: Router,
               private route:ActivatedRoute,
@@ -43,21 +45,23 @@ export class DiseaseEventsEditComponent implements OnInit{
       this.simulateDeletion = true;
       this.af.auth.subscribe(auth => {
         if (auth) {
-          this.subscription = this.route.params.subscribe(
+          this.subscrRoute = this.route.params.subscribe(
             (params:any) => {
               this.diseaseEventKey = params['diseaseEventKey'];
               this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
-              this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
+              this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                 this.diseaseCaseName = diseaseCase.name;
-                this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseCase) => {
+                this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseCase) => {
                   this.diseaseEventName = diseaseCase.name;
                   this.diseaseEventValue = diseaseCase.value;
                 });
+                this.dataService.addSubscripton(this.subscrDiseaseEvent);
               });
+              this.dataService.addSubscripton(this.subscrDiseaseCase);
             });
         } else {
           this.logger.warn("[diseaseEvents-edit] - ngOnInit - user: no logged in user");
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         }
       });
     } catch(e) {
@@ -68,7 +72,7 @@ export class DiseaseEventsEditComponent implements OnInit{
   updateDiseaseEvent(key_value) {
     try {
       this.showModalDialog = "";
-      this.dataService.updateDiseaseEvent(this.diseaseEventKey, key_value)
+      this.dataService.updateDiseaseEvent(this.diseaseEventKey, key_value);
       this.goBack();
     } catch(e) {
       this.errorHandler.traceError("[diseaseEvents-edit] - updateDiseaseEvent - error", e, true);
@@ -96,9 +100,9 @@ export class DiseaseEventsEditComponent implements OnInit{
   };
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    if (this.subscrDiseaseEvent) {this.subscrDiseaseEvent.unsubscribe();}
+    if (this.subscrDiseaseCase) {this.subscrDiseaseCase.unsubscribe();}
+    if (this.subscrRoute) {this.subscrRoute.unsubscribe();}
   }
 }
 

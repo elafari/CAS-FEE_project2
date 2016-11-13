@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { Observable } from 'rxjs';
+import { Subscription } from "rxjs/Subscription";
 
 import { AngularFire } from 'angularfire2';
 
@@ -13,10 +14,11 @@ import { LoggerService } from "../log/logger.service";
   templateUrl: './users-list.component.html',
   styleUrls: ['../../assets/scss/cards.scss']
 })
-export class UsersListComponent implements OnInit{
+export class UsersListComponent implements OnInit, OnDestroy {
 
   allUsers: Observable<any[]>;
   allUsersCount: Number;
+  subscrUsers : Subscription;
 
   constructor(private router: Router,
               private af: AngularFire,
@@ -30,17 +32,22 @@ export class UsersListComponent implements OnInit{
       this.af.auth.subscribe(auth => {
         if (auth) {
           this.allUsers = this.dataService.getAllUsersAndPatients();
-          this.allUsers.subscribe((queriedItems) => {
+          this.subscrUsers = this.allUsers.subscribe((queriedItems) => {
             this.allUsersCount = queriedItems.length
           });
+          this.dataService.addSubscripton(this.subscrUsers);
         } else {
           this.logger.warn("[users-list] - ngOnInit - user: no logged in user");
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         }
       });
     } catch(e) {
       this.errorHandler.traceError("[users-list] - ngOnInit - error", e, true);
     }
-  }
+  };
+
+  ngOnDestroy() {
+    if (this.subscrUsers) {this.subscrUsers.unsubscribe();}
+  };
 }
 

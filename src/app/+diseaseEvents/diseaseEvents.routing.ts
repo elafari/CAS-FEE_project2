@@ -7,7 +7,7 @@ import { DiseaseEventsItemComponent } from "./diseaseEvents-item.component";
 import { DiseaseEventsEditComponent } from "./diseaseEvents-edit.component";
 import { DiseaseEventsCreateComponent } from "./diseaseEvents-create.component";
 
-export const diseaseEvents_routes: Routes = [
+export const diseaseEvents_routes: Routes = <Routes>[
   { path: '', component: DiseaseEventsComponent, children: [
     { path: '', component: DiseaseEventsListComponent },
     { path: ':diseaseEventKey/edit', component: DiseaseEventsEditComponent },

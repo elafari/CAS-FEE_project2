@@ -5,7 +5,7 @@ import {UsersComponent} from "./users.component";
 import {UsersListComponent} from "./users-list.component";
 import { UsersPatientComponent } from './users-patient.component';
 
-export const users_routes: Routes = [
+export const users_routes: Routes = <Routes>[
   { path: '', component: UsersComponent, children: [
     { path: '', component: UsersListComponent }
   ]}

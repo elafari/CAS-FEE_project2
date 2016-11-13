@@ -7,7 +7,7 @@ import { DiseaseCasesItemComponent } from "./diseaseCases-item.component";
 import { DiseaseCasesEditComponent } from "./diseaseCases-edit.component";
 import { DiseaseCasesCreateComponent } from "./diseaseCases-create.component";
 
-export const diseaseCases_routes: Routes = [
+export const diseaseCases_routes: Routes = <Routes>[
   { path: '', component: DiseaseCasesComponent, children: [
     { path: '', component: DiseaseCasesListComponent },
     { path: ':diseaseCaseKey/edit', component: DiseaseCasesEditComponent },

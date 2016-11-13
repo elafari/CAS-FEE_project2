@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
+import { Subscription } from "rxjs/Rx";
 
 import { AngularFire } from 'angularfire2';
 
@@ -14,13 +15,17 @@ import { LoggerService } from "../log/logger.service";
   templateUrl: './diseaseCases-list.component.html',
   styleUrls: ['../../assets/scss/cards.scss']
 })
-export class DiseaseCasesListComponent implements OnInit{
+export class DiseaseCasesListComponent implements OnInit, OnDestroy{
 
   patientKey: String;
   patientName: String;
 
   allDiseaseCases: Observable<any[]>;
   diseaseCasesCount: Number;
+
+  subscrRoute: Subscription;
+  subscrPatient: Subscription;
+  subscrDiseaseCases: Subscription;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -34,26 +39,34 @@ export class DiseaseCasesListComponent implements OnInit{
     try {
       this.af.auth.subscribe(auth => {
         if (auth) {
-          this.route.params.subscribe(
+          this.subscrRoute = this.route.params.subscribe(
             (params:any) => {
               this.patientKey = params['patientKey'];
-              this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+              this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                 this.patientName = patient.name;
                 this.allDiseaseCases = this.dataService.getDiseaseCases(this.patientKey);
                 if (this.allDiseaseCases) {
-                  this.allDiseaseCases.subscribe((queriedItems) => {
+                  this.subscrDiseaseCases = this.allDiseaseCases.subscribe((queriedItems) => {
                     this.diseaseCasesCount = queriedItems.length;
                   });
+                  this.dataService.addSubscripton(this.subscrDiseaseCases);
                 }
               });
+              this.dataService.addSubscripton(this.subscrPatient);
             });
         } else {
           this.logger.warn("[diseaseCases-list] - ngOnInit - user: no logged in user");
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         }
       });
     } catch(e) {
       this.errorHandler.traceError("[diseaseCases-list] - ngOnInit - error", e, true);
     }
+  };
+
+  ngOnDestroy() {
+    if (this.subscrDiseaseCases) {this.subscrDiseaseCases.unsubscribe();}
+    if (this.subscrPatient) {this.subscrPatient.unsubscribe();}
+    if (this.subscrRoute) {this.subscrRoute.unsubscribe();}
   };
 }

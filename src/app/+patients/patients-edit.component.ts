@@ -18,8 +18,6 @@ import { LoggerService } from "../log/logger.service";
 })
 export class PatientsEditComponent implements OnInit, OnDestroy{
 
-  subscription:Subscription;
-
   loggedInUserName: String;
 
   patientKey: String;
@@ -28,6 +26,10 @@ export class PatientsEditComponent implements OnInit, OnDestroy{
 
   showModalDialog: string;
   simulateDeletion: boolean;
+
+  subscrRoute: Subscription;
+  subscrUser: Subscription;
+  subscrPatient: Subscription;
 
   constructor(private router: Router,
               private route:ActivatedRoute,
@@ -43,23 +45,24 @@ export class PatientsEditComponent implements OnInit, OnDestroy{
       this.simulateDeletion = true;
       this.af.auth.subscribe(auth => {
         if (auth) {
-          this.subscription = this.route.params.subscribe(
+          this.subscrRoute = this.route.params.subscribe(
             (params:any) => {
               this.patientKey = params['patientKey'];
-              this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+              this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
                 this.loggedInUserName = user.name;
-                this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+                this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                   this.patientName = patient.name;
                   this.patientAge = patient.age;
 
                   this.logger.info("[patients-edit] - ngOnInit - data : " + user.name + ' patient: ' + patient.name);
                 });
+                this.dataService.addSubscripton(this.subscrPatient);
               });
-
+              this.dataService.addSubscripton(this.subscrUser);
             });
         } else {
           this.logger.warn("[patients-edit] - ngOnInit - user: no logged in user");
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         }
       });
     } catch(e) {
@@ -70,7 +73,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy{
   updatePatient(key_value) {
     try {
       this.showModalDialog = "";
-      this.dataService.updatePatient(this.patientKey, key_value)
+      this.dataService.updatePatient(this.patientKey, key_value);
       this.goBack();
     } catch(e) {
       this.errorHandler.traceError("[patients-edit] - updatePatient - error", e, true);
@@ -98,9 +101,9 @@ export class PatientsEditComponent implements OnInit, OnDestroy{
   };
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    if (this.subscrPatient) {this.subscrPatient.unsubscribe();}
+    if (this.subscrUser) {this.subscrUser.unsubscribe();}
+    if (this.subscrRoute) {this.subscrRoute.unsubscribe();}
   }
 }
 

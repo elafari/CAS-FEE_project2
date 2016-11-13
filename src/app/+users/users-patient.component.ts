@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Location } from "@angular/common";
 
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
@@ -21,8 +20,7 @@ export class UsersPatientComponent implements OnInit {
 
   constructor(private dataService: DataService,
               private errorHandler: ErrorHandlerService,
-              private logger: LoggerService,
-              private location: Location){
+              private logger: LoggerService){
   };
 
   ngOnInit(){

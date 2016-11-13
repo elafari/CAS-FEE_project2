@@ -3,7 +3,9 @@ import { Injectable } from "@angular/core";
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 import { Observable } from 'rxjs';
+import { Subscription } from "rxjs/Subscription";
 import 'rxjs/add/operator/map';
+
 
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
@@ -20,6 +22,10 @@ export class DataService {
   DbCases:string;
   DbEvents:string;
 
+  userSubscription: Subscription;
+
+  subscriptionList: Array<any>;
+
   constructor(private af:AngularFire,
               private errorHandler:ErrorHandlerService,
               private logger:LoggerService) {
@@ -28,6 +34,8 @@ export class DataService {
     this.DbPatients = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.patients;
     this.DbCases = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.diseaseCases;
     this.DbEvents = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.diseaseEvents;
+
+    this.subscriptionList = new Array;
   };
 
   // Users + + + + + + + + + + + + + + +
@@ -119,9 +127,7 @@ export class DataService {
     }
   };
 
-
   // Patients + + + + + + + + + + + + + + +
-
 
   getPatient(patientKey) {
     try {
@@ -185,9 +191,7 @@ export class DataService {
     }
   };
 
-
   // Disease Cases + + + + + + + + + + + + + + +
-
 
   getDiseaseCase(diseaseCaseKey) {
     try {
@@ -302,6 +306,21 @@ export class DataService {
         });
     } catch (e) {
       this.errorHandler.traceError("[dataService] - getDiseaseEvents - error", e, true);
+    }
+  };
+
+  // Subscriptions + + + + + + + + + + + + + + +
+
+  addSubscripton(subscrObj) {
+    this.subscriptionList.push({"subObj": subscrObj});
+  };
+  removeSubscriptions() {
+    if (this.subscriptionList) {
+      for (let item of this.subscriptionList) {
+        if (item.subObj) {
+          item.subObj.unsubscribe();
+        }
+      }
     }
   };
 }
