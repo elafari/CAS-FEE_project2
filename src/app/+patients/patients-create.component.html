@@ -45,8 +45,10 @@
                     </div>
                 </div>
 
-                <button class="btn btn-success" (click)="goBack()">Cancel</button>
-                <button class="btn btn-success" type="submit" [disabled]="patient.invalid">Add Patient</button>
+                <div class="text-sm-right">
+                    <button class="btn btn-secondary" (click)="goBack()">Cancel</button>
+                    <button class="btn btn-primary" type="submit" [disabled]="patient.invalid">Add Patient</button>
+                </div>
             </div>
         </form>
     </div>

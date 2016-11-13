@@ -40,10 +40,10 @@ export class PatientsCreateComponent implements OnInit, OnDestroy{
                         this.loggedInUserKey = user.$key;
 
                         this.patient = new FormGroup({
-                            name     : new FormControl('', [Validators.required, Validators.minLength(2)]),
+                            name     : new FormControl('', Validators.required),
                             sex      : new FormControl('', Validators.required),
                             birthdate: new FormControl('', Validators.required),
-                            age      : new FormControl('', Validators.required)
+                            age      : new FormControl('')
                         });
                     });
                     this.dataService.addSubscripton(this.subscrUser);
