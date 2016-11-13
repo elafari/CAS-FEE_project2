@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from "rxjs";
 
 import { AngularFire } from 'angularfire2';
 
@@ -13,7 +14,7 @@ import { Patient } from './patients.interface';
 
 @Component({
     templateUrl: './patients-create.component.html',
-    styleUrls: ['../../assets/scss/forms.scss']
+    styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class PatientsCreateComponent implements OnInit, OnDestroy{
     patient: FormGroup;
@@ -24,18 +25,18 @@ export class PatientsCreateComponent implements OnInit, OnDestroy{
     subscrUser: Subscription;
 
     constructor(private router: Router,
-              private location: Location,
-              private af: AngularFire,
-              private dataService: DataService,
-              private errorHandler: ErrorHandlerService,
-              private logger: LoggerService){
+                private location: Location,
+                private af: AngularFire,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
         try {
             this.af.auth.subscribe(auth => {
                 if (auth) {
-                    this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+                    this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
                         this.loggedInUserName = user.name;
                         this.loggedInUserKey = user.$key;
 
@@ -49,7 +50,7 @@ export class PatientsCreateComponent implements OnInit, OnDestroy{
                     this.dataService.addSubscripton(this.subscrUser);
                 } else {
                     this.logger.warn("[patients-create] - ngOnInit - user: no logged in user");
-                    this.router.navigate(['/']);
+                    this.router.navigate(['/login']);
                 }
             });
         } catch (e) {
@@ -78,18 +79,19 @@ export class PatientsCreateComponent implements OnInit, OnDestroy{
         if (this.subscrUser) {this.subscrUser.unsubscribe();}
     };
 
-}
-
     onSubmit({value, valid}: { value: Patient, valid: boolean }) {
         console.log(value, valid);
         debugger;
     };
 
     /*
-    onSubmit(form: NgForm) {
-        console.log('it works', form);
+     onSubmit(form: NgForm) {
+     console.log('it works', form);
+     };
+     */
+    ngOnDestroy() {
+        if (this.subscrUser) {
+            this.subscrUser.unsubscribe();
+        }
     };
-    */
 }
-
-
