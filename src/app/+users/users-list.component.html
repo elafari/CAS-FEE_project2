@@ -1,16 +1,14 @@
-<div class="row">
-  <div class="col-xs-12">
-    <h1>Users and Patients</h1>
-    <p>{{allUsersCount}} Users</p>
-  </div>
-</div>
+<h1>Users and Patients</h1>
 
-<div *ngFor="let user of allUsers | async">
-  <div class="row">
-    <div class="col-xs-12"><h4>Patients of {{user.name}}</h4></div>
+<div class="row" *ngFor="let user of allUsers | async">
+
+    <div class="col-xs-12">
+        <h2>Patients of {{user.name}}</h2>
+    </div>
+
     <div users-patient *ngFor="let patient of user.patients | async"
          class="col-xs-10 offset-xs-1 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards"
          [user]="user" [patient]="patient">
     </div>
-  </div>
+
 </div>
