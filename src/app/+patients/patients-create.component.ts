@@ -17,6 +17,7 @@ import { Patient } from './patients.interface';
     styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class PatientsCreateComponent implements OnInit, OnDestroy {
+    isDevMode: boolean = ConfigService.devMode;
     patient: FormGroup;
 
     loggedInUserName: String;
