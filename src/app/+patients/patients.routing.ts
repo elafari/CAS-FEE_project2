@@ -8,26 +8,29 @@ import { PatientsEditComponent } from "./patients-edit.component";
 import { PatientsCreateComponent } from "./patients-create.component";
 
 export const patients_routes: Routes = <Routes>[
-  { path: '', component: PatientsComponent, children: [
-    { path: '', component: PatientsListComponent },
-    { path: ':patientKey/edit', component: PatientsEditComponent },
-    { path: 'create', component: PatientsCreateComponent },
-    { path: ':patientKey/diseaseCases', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
-  ]}
+    {
+        path: '', component: PatientsComponent, children: [
+        {path: '', component: PatientsListComponent},
+        {path: ':patientKey/edit', component: PatientsEditComponent},
+        {path: 'create', component: PatientsCreateComponent},
+        {path: ':patientKey/diseaseCases', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
+    ]
+    }
 ];
 
-@NgModule ({
-  imports: [RouterModule.forChild(patients_routes)],
-  exports: [RouterModule]
+@NgModule({
+    imports: [RouterModule.forChild(patients_routes)],
+    exports: [RouterModule]
 })
 
-export class PatientsRoutingModule{}
+export class PatientsRoutingModule {
+}
 
 export const routingComponents = [
-  PatientsComponent,
-  PatientsListComponent,
-  PatientsItemComponent,
-  PatientsEditComponent,
-  PatientsCreateComponent
+    PatientsComponent,
+    PatientsListComponent,
+    PatientsItemComponent,
+    PatientsEditComponent,
+    PatientsCreateComponent
 ];
 

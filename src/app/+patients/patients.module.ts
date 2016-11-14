@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PatientsRoutingModule, routingComponents } from "./patients.routing";
 
 @NgModule({
-    imports: [
+    imports     : [
         CommonModule,
         ReactiveFormsModule,
         PatientsRoutingModule

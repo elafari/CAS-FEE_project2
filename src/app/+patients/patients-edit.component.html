@@ -1,44 +1,60 @@
-
 <div class="float-xs-left">
-  <p>Patient of user: {{loggedInUserName}}</p>
-  <div class="well well-sm"><label>Edit patient: </label></div>
-  <table class="table">
-    <tr>
-      <td>name</td>
-      <td><input type="text" #updateName [value]="patientName" /></td>
-    </tr>
-    <tr>
-      <td>age</td>
-      <td><input type="text" #updateAge [value]="patientAge" /></td>
-    </tr>
-    <tr><button class="btn btn-success" (click)="updatePatient({age: updateAge.value,name: updateName.value})">update patient</button></tr>
-    <tr>&nbsp;</tr>
-    <tr><button class="btn cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + patientKey" (click)="showDeleteDialog(patientKey)">Delete</button></tr>
-    <tr>&nbsp;</tr>
-    <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
-  </table>
+    <p>Patient of user: {{loggedInUserName}}</p>
+    <div class="well well-sm"><label>Edit patient: </label></div>
+    <table class="table">
+        <tr>
+            <td>name</td>
+            <td><input type="text" #updateName [value]="patientName"/></td>
+        </tr>
+        <tr>
+            <td>age</td>
+            <td><input type="text" #updateAge [value]="patientAge"/></td>
+        </tr>
+        <tr>
+            <button class="btn btn-success" (click)="updatePatient({age: updateAge.value,name: updateName.value})">
+                update patient
+            </button>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr>
+            <button class="btn cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + patientKey"
+                    (click)="showDeleteDialog(patientKey)">Delete
+            </button>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr>
+            <button class="btn btn-success" (click)="goBack()">back</button>
+        </tr>
+    </table>
 </div>
 
 <!-- *ngIf - modal dialog for deleting patient -->
 
-<div *ngIf="showModalDialog == patientKey" class="modal fade" [attr.id]="'' + patientKey" tabindex="-1" role="dialog" aria-labelledby="editPatientModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header cust-table-modal-header-danger">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="editPatientModalLabel">Delete: {{patientName}}</h4>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure to delete this patient?</p>
-        <p>All cases and events of this patient are also deleted!</p>
-        <td><label><input type="checkbox" name='Simulation' value="simulate" #updateSimulation [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete information)</label>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal" (click)="showDeleteDialog('')">Cancel</button>
-        <button type="button" class="btn cust-table-btn-delete" (click)="deletePatient(updateSimulation.checked)" data-dismiss="modal">Delete</button>
-      </div>
+<div *ngIf="showModalDialog == patientKey" class="modal fade" [attr.id]="'' + patientKey" tabindex="-1" role="dialog"
+     aria-labelledby="editPatientModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header cust-table-modal-header-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editPatientModalLabel">Delete: {{patientName}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to delete this patient?</p>
+                <p>All cases and events of this patient are also deleted!</p>
+                <td><label><input type="checkbox" name='Simulation' value="simulate" #updateSimulation
+                                  [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete
+                    information)</label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal"
+                        (click)="showDeleteDialog('')">Cancel
+                </button>
+                <button type="button" class="btn cust-table-btn-delete"
+                        (click)="deletePatient(updateSimulation.checked)" data-dismiss="modal">Delete
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
