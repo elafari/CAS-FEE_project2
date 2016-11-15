@@ -20,8 +20,8 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
     patient: FormGroup;
 
-    loggedInUserName: String;
-    loggedInUserKey: String;
+    loggedInUserName: string;
+    loggedInUserKey: string;
 
     subscrUser: Subscription;
 
@@ -44,8 +44,7 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
                         this.patient = new FormGroup({
                             name     : new FormControl('', Validators.required),
                             sex      : new FormControl('', Validators.required),
-                            birthdate: new FormControl('', Validators.required),
-                            age      : new FormControl('')
+                            birthdate: new FormControl('', Validators.required)
                         });
                     });
                     this.dataService.addSubscripton(this.subscrUser);
@@ -59,12 +58,9 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
         }
     };
 
-    createPatient(key_value) {
+    createPatient(key_value: Patient) {
         try {
-            // temporarily set params to create new patient in new database
-            key_value.sex = "unbekannt";
-            key_value.birthdate = "20000908";
-
+            key_value.user = this.loggedInUserKey;
             this.dataService.createPatient(key_value);
             this.goBack();
         } catch (e) {
@@ -76,16 +72,10 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
         this.location.back();
     };
 
-    onSubmit({value, valid}: { value: Patient, valid: boolean }) {
-        console.log(value, valid);
-        debugger;
+    onSubmit() {
+        this.createPatient(this.patient.value);
     };
 
-    /*
-     onSubmit(form: NgForm) {
-     console.log('it works', form);
-     };
-     */
     ngOnDestroy() {
         if (this.subscrUser) {
             this.subscrUser.unsubscribe();

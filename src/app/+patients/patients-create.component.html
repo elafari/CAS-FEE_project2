@@ -1,60 +1,64 @@
-<h1>[icon] Add Patient</h1>
+<h1 class="text-xs-center">[icon] Add Patient</h1>
 
 <div class="row flex-items-xs-center">
     <div class="col-xs-12 col-md-8 col-lg-6">
-        <form novalidate (ngSubmit)="onSubmit(patient)" [formGroup]="patient">
-            <div>
 
-                <div class="form-group">
-                    <label for="name" class="col-xs-12 col-sm-4">
-                        Name
-                    </label><!--
+        <form novalidate (ngSubmit)="onSubmit()" [formGroup]="patient">
+
+            <div class="form-group">
+                <label for="name" class="col-xs-12 col-sm-4">
+                    Name
+                </label><!--
                  --><input type="text" placeholder="Choose a name" formControlName="name" id="name"
                            class="col-xs-12 col-sm-8">
-                    <div class="alert alert-danger alert-danger-form"
-                         *ngIf="patient.get('name').touched && patient.get('name').hasError('required')">
-                        Name is required
-                    </div>
+                <div class="alert alert-danger alert-danger-form"
+                     *ngIf="patient.get('name').touched && patient.get('name').hasError('required')">
+                    Name is required
                 </div>
+            </div>
 
 
-                <div class="form-group">
-                    <label for="date-of-birth" class="col-xs-12 col-sm-4">
-                        Date of Birth
-                    </label><!--
+            <div class="form-group">
+                <label for="date-of-birth" class="col-xs-12 col-sm-4">
+                    Date of Birth
+                </label><!--
                  --><input type="date" formControlName="birthdate" id="date-of-birth"
                            class="col-xs-12 col-sm-8">
-                    <div class="alert alert-danger alert-danger-form"
-                         *ngIf="patient.get('birthdate').touched && patient.get('birthdate').hasError('required')">
-                        Date of birth is required
-                    </div>
+                <div class="alert alert-danger alert-danger-form"
+                     *ngIf="patient.get('birthdate').touched && patient.get('birthdate').hasError('required')">
+                    Date of birth is required
                 </div>
+            </div>
 
 
-                <div class="form-group">
-                    <label for="sex" class="col-xs-12 col-sm-4">
-                        Sex
-                    </label><!--
+            <div class="form-group">
+                <label for="sex" class="col-xs-12 col-sm-4">
+                    Sex
+                </label><!--
                  --><select formControlName="sex" id="sex" class="col-xs-12 col-sm-8">
                     <option value="m">Boy</option>
                     <option value="f">Girl</option>
                 </select>
-                    <div class="alert alert-danger alert-danger-form"
-                         *ngIf="patient.get('sex').touched && patient.get('sex').hasError('required')">
-                        Sex is required
-                    </div>
-                </div>
-
-                <div class="text-sm-right">
-                    <button class="btn btn-secondary" (click)="goBack()">Cancel</button>
-                    <button class="btn btn-primary" type="submit" [disabled]="patient.invalid">Add Patient</button>
+                <div class="alert alert-danger alert-danger-form"
+                     *ngIf="patient.get('sex').touched && patient.get('sex').hasError('required')">
+                    Sex is required
                 </div>
             </div>
+
+            <div class="text-sm-right">
+                <button class="btn btn-secondary" (click)="goBack()">Cancel</button>
+                <button class="btn btn-primary" type="submit" [disabled]="patient.invalid">Add Patient</button>
+            </div>
+
         </form>
+
     </div>
 </div>
 
-<div class="debug" *ngIf="isDevMode">{{patient.value | json}}</div>
+<div class="debug" *ngIf="isDevMode">
+    <p>Value: {{patient.value | json}}</p>
+    <p>Valid: {{patient.valid | json}}</p>
+</div>
 
 <!--
 <div class="row">
