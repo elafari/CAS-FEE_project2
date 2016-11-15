@@ -34,18 +34,18 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
     };
 
     ngOnInit() {
+        this.patient = new FormGroup({
+            name     : new FormControl('', Validators.required),
+            sex      : new FormControl('', Validators.required),
+            birthdate: new FormControl('', Validators.required)
+        });
+
         try {
             this.af.auth.subscribe(auth => {
                 if (auth) {
                     this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
                         this.loggedInUserName = user.name;
                         this.loggedInUserKey = user.$key;
-
-                        this.patient = new FormGroup({
-                            name     : new FormControl('', Validators.required),
-                            sex      : new FormControl('', Validators.required),
-                            birthdate: new FormControl('', Validators.required)
-                        });
                     });
                     this.dataService.addSubscripton(this.subscrUser);
                 } else {

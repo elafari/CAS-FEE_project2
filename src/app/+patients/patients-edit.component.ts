@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
-
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
@@ -11,11 +11,15 @@ import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
+import { Patient } from "./patients.interface";
 
 @Component({
-    templateUrl: './patients-edit.component.html'
+    templateUrl: './patients-edit.component.html',
+    styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class PatientsEditComponent implements OnInit, OnDestroy {
+    isDevMode: boolean = ConfigService.devMode;
+    patient: FormGroup;
 
     loggedInUserName: String;
 
@@ -40,6 +44,12 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     };
 
     ngOnInit() {
+        this.patient = new FormGroup({
+            name     : new FormControl('', Validators.required),
+            sex      : new FormControl('', Validators.required),
+            birthdate: new FormControl('', Validators.required)
+        });
+
         try {
             this.simulateDeletion = true;
             this.af.auth.subscribe(auth => {
@@ -52,6 +62,12 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
                                 this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                                     this.patientName = patient.name;
                                     this.patientAge = patient.age;
+
+                                    this.patient.setValue({
+                                        name     : patient.name,
+                                        sex      : patient.sex,
+                                        birthdate: patient.birthdate
+                                    });
 
                                     this.logger.info("[patients-edit] - ngOnInit - data : " + user.name + ' patient: ' + patient.name);
                                 });
@@ -69,7 +85,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
         }
     };
 
-    updatePatient(key_value) {
+    updatePatient(key_value: Patient) {
         try {
             this.showModalDialog = "";
             this.dataService.updatePatient(this.patientKey, key_value);
