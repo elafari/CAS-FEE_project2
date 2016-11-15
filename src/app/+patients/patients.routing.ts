@@ -9,12 +9,26 @@ import { PatientsCreateComponent } from "./patients-create.component";
 
 export const patients_routes: Routes = <Routes>[
     {
-        path: '', component: PatientsComponent, children: [
-        {path: '', component: PatientsListComponent},
-        {path: ':patientKey/edit', component: PatientsEditComponent},
-        {path: 'create', component: PatientsCreateComponent},
-        {path: ':patientKey/diseaseCases', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
-    ]
+        path     : '',
+        component: PatientsComponent,
+        children : [
+            {
+                path     : '',
+                component: PatientsListComponent
+            },
+            {
+                path     : ':patientKey/edit',
+                component: PatientsEditComponent
+            },
+            {
+                path     : 'create',
+                component: PatientsCreateComponent
+            },
+            {
+                path        : ':patientKey/diseaseCases',
+                loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'
+            },
+        ]
     }
 ];
 
@@ -33,4 +47,3 @@ export const routingComponents = [
     PatientsEditComponent,
     PatientsCreateComponent
 ];
-
