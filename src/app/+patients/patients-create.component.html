@@ -9,8 +9,8 @@
                 <label for="name" class="col-xs-12 col-sm-4">
                     Name
                 </label><!--
-                 --><input type="text" placeholder="Choose a name" formControlName="name" id="name"
-                           class="col-xs-12 col-sm-8">
+             --><input type="text" placeholder="Choose a name" formControlName="name" id="name"
+                       class="col-xs-12 col-sm-8">
                 <div class="alert alert-danger alert-danger-form"
                      *ngIf="patient.get('name').touched && patient.get('name').hasError('required')">
                     Name is required
@@ -22,8 +22,8 @@
                 <label for="date-of-birth" class="col-xs-12 col-sm-4">
                     Date of Birth
                 </label><!--
-                 --><input type="date" formControlName="birthdate" id="date-of-birth"
-                           class="col-xs-12 col-sm-8">
+             --><input type="date" formControlName="birthdate" id="date-of-birth"
+                       class="col-xs-12 col-sm-8">
                 <div class="alert alert-danger alert-danger-form"
                      *ngIf="patient.get('birthdate').touched && patient.get('birthdate').hasError('required')">
                     Date of birth is required
@@ -35,7 +35,7 @@
                 <label for="sex" class="col-xs-12 col-sm-4">
                     Sex
                 </label><!--
-                 --><select formControlName="sex" id="sex" class="col-xs-12 col-sm-8">
+             --><select formControlName="sex" id="sex" class="col-xs-12 col-sm-8">
                     <option value="m">Boy</option>
                     <option value="f">Girl</option>
                 </select>
@@ -46,8 +46,15 @@
             </div>
 
             <div class="text-sm-right">
-                <button class="btn btn-secondary" (click)="goBack()">Cancel</button>
-                <button class="btn btn-primary" type="submit" [disabled]="patient.invalid">Add Patient</button>
+                <button class="btn btn-secondary"
+                        (click)="goBack()">
+                    Cancel
+                </button>
+                <button class="btn btn-primary"
+                        type="submit"
+                        [disabled]="patient.invalid">
+                    Add Patient
+                </button>
             </div>
 
         </form>
@@ -59,32 +66,3 @@
     <p>Value: {{patient.value | json}}</p>
     <p>Valid: {{patient.valid | json}}</p>
 </div>
-
-<!--
-<div class="row">
-    <p>Patient of user: {{loggedInUserName}}</p>
-    <div class="well well-sm"><label>New patient</label></div>
-    <table class="table">
-        <tr>
-            <td>name</td>
-            <td><input type="text" #newName [value]=""/></td>
-        </tr>
-        <tr>
-            <td>age</td>
-            <td><input type="text" #newAge [value]=""/></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <button class="btn btn-success" (click)="goBack()">
-                    back
-                </button>
-                <button class="btn btn-success"
-                        (click)="createPatient({age: newAge.value,name: newName.value, user: loggedInUserKey})">create
-                    patient
-                </button>
-            </td>
-        </tr>
-    </table>
-</div>
--->
