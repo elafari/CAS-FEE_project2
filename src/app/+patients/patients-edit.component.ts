@@ -19,13 +19,9 @@ import { Patient } from "./patients.interface";
 })
 export class PatientsEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
+    loggedInUserName: string;
     patient: FormGroup;
-
-    loggedInUserName: String;
-
-    patientKey: String;
-    patientName: String;
-    patientAge: String;
+    patientKey: string;
 
     showModalDialog: string;
     simulateDeletion: boolean;
@@ -60,9 +56,6 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
                             this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
                                 this.loggedInUserName = user.name;
                                 this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
-                                    this.patientName = patient.name;
-                                    this.patientAge = patient.age;
-
                                     this.patient.setValue({
                                         name     : patient.name,
                                         sex      : patient.sex,
@@ -109,6 +102,10 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     goBack() {
         this.simulateDeletion = true;
         this.location.back();
+    };
+
+    onSubmit() {
+        this.updatePatient(this.patient.value);
     };
 
     showDeleteDialog(dialogAttribute) {
