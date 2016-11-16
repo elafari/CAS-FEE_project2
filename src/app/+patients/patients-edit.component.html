@@ -47,11 +47,12 @@
 
             <div class="text-sm-right">
                 <button class="btn btn-secondary"
+                        type="button"
                         (click)="goBack()">
                     Cancel
                 </button>
                 <button class="btn btn-danger"
-                        type="submit"
+                        type="button"
                         data-toggle="modal"
                         [attr.data-target]="'#' + patientKey"
                         [disabled]="patient.invalid"
@@ -59,6 +60,7 @@
                     Delete
                 </button>
                 <button class="btn btn-primary"
+                        type="submit"
                         (click)="updatePatient({age: updateAge.value,name: updateName.value})">
                     Update
                 </button>
