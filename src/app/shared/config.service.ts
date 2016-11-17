@@ -76,7 +76,7 @@ export class ConfigService {
             text: 'Boy'
         },
         {
-            key : 'w',
+            key : 'f',
             text: 'Girl'
         }
     ];

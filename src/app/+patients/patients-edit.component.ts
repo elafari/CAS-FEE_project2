@@ -19,6 +19,7 @@ import { Patient } from "./patients.interface";
 })
 export class PatientsEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
+    sexConfig: any[] = ConfigService.getSex();
     loggedInUserName: string;
     patient: FormGroup;
     patientKey: string;
