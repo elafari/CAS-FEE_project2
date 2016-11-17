@@ -65,8 +65,23 @@ export class ConfigService {
     };
 
     public static colorList = {
-        "warn": "color: green; background-color:yellow",
+        "warn" : "color: green; background-color:yellow",
         "error": "color: white; background-color:red",
-        "info": "color: white; background-color:blue"
-    }
+        "info" : "color: white; background-color:blue"
+    };
+
+    private static _sex = [
+        {
+            key : 'm',
+            text: 'Boy'
+        },
+        {
+            key : 'w',
+            text: 'Girl'
+        }
+    ];
+
+    public static getSex() {
+        return this._sex;
+    };
 }

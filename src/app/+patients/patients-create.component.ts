@@ -18,6 +18,7 @@ import { Patient } from './patients.interface';
 })
 export class PatientsCreateComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
+    sexConfig: any[] = ConfigService.getSex();
     patient: FormGroup;
 
     loggedInUserName: string;
@@ -63,7 +64,7 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
             key_value.user = this.loggedInUserKey;
             this.dataService.createPatient(key_value);
             this.goBack();
-        } catch(e) {
+        } catch (e) {
             this.errorHandler.traceError("[patients-create] - createPatient - error", e, true);
         }
     };

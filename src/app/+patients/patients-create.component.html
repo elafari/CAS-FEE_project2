@@ -36,8 +36,7 @@
                     Sex
                 </label><!--
              --><select formControlName="sex" id="sex" class="col-xs-12 col-sm-8">
-                    <option value="m">Boy</option>
-                    <option value="f">Girl</option>
+                    <option *ngFor="let item of sexConfig" value={{item.key}}>{{item.text}}</option>
                 </select>
                 <div class="alert alert-danger alert-danger-form"
                      *ngIf="patient.get('sex').touched && patient.get('sex').hasError('required')">
