@@ -5,10 +5,14 @@ import { LoggerService } from "./logger.service";
 
 @NgModule({
     declarations: [],
-    imports: [],
-    exports: [],
-  providers: [
-      { provide: LoggerService, useClass: LoggerConsoleService }
+    imports     : [],
+    exports     : [],
+    providers   : [
+        {
+            provide : LoggerService,
+            useClass: LoggerConsoleService
+        }
     ]
 })
-export class LoggerModule {}
+export class LoggerModule {
+}
