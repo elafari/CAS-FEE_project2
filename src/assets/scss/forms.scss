@@ -1,9 +1,17 @@
+@import "~bootstrap/scss/bootstrap-grid.scss";
 @import "../../assets/scss/_colors.scss";
 
 form {
   padding          : 1rem;
   background-color : $form-bg-color;
   box-shadow       : 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+@include media-breakpoint-only(xs) {
+  .col-form-label {
+    padding-left: 1.75rem;
+    font-weight: bolder;
+  }
 }
 
 .alert-danger-form {

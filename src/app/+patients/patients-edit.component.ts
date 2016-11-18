@@ -21,7 +21,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
     sexConfig: any[] = ConfigService.getSex();
     loggedInUserName: string;
-    patient: FormGroup;
+    patientForm: FormGroup;
     patientKey: string;
 
     showModalDialog: string;
@@ -41,7 +41,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     };
 
     ngOnInit() {
-        this.patient = new FormGroup({
+        this.patientForm = new FormGroup({
             name     : new FormControl('', Validators.required),
             sex      : new FormControl('', Validators.required),
             birthdate: new FormControl('', Validators.required)
@@ -57,7 +57,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
                             this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
                                 this.loggedInUserName = user.name;
                                 this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
-                                    this.patient.setValue({
+                                    this.patientForm.setValue({
                                         name     : patient.name,
                                         sex      : patient.sex,
                                         birthdate: patient.birthdate
@@ -106,7 +106,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     };
 
     onSubmit() {
-        this.updatePatient(this.patient.value);
+        this.updatePatient(this.patientForm.value);
     };
 
     showDeleteDialog(dialogAttribute) {

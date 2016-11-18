@@ -3,54 +3,57 @@
 <div class="row flex-items-xs-center">
     <div class="col-xs-12 col-md-8 col-lg-6">
 
-        <form novalidate (ngSubmit)="onSubmit()" [formGroup]="patient">
+        <form novalidate [formGroup]="patientForm" (ngSubmit)="onSubmit()">
 
-            <div class="form-group">
-                <label for="name" class="col-xs-12 col-sm-4">
+            <div class="form-group row">
+                <label for="name" class="col-form-label col-xs-12 col-sm-4">
                     Name
-                </label><!--
-             --><input type="text" placeholder="Choose a name" formControlName="name" id="name"
-                       class="col-xs-12 col-sm-8">
-                <div class="alert alert-danger alert-danger-form col-xs-12 offset-sm-4 col-sm-8"
-                     *ngIf="patient.get('name').touched && patient.get('name').hasError('required')">
-                    Name is required
+                </label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" placeholder="Enter a name" formControlName="name" id="name"
+                           class="form-control">
+                    <div class="alert alert-danger alert-danger-form"
+                         *ngIf="patientForm.get('name').touched && patientForm.get('name').hasError('required')">
+                        Name is required
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="date-of-birth" class="col-xs-12 col-sm-4">
+            <div class="form-group row">
+                <label for="date-of-birth" class="col-form-label col-xs-12 col-sm-4">
                     Date of Birth
-                </label><!--
-             --><input type="date" formControlName="birthdate" id="date-of-birth"
-                       class="col-xs-12 col-sm-8">
-                <div class="alert alert-danger alert-danger-form col-xs-12 offset-sm-4 col-sm-8"
-                     *ngIf="patient.get('birthdate').touched && patient.get('birthdate').hasError('required')">
-                    Date of birth is required
+                </label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="date" placeholder="2016-12-05" formControlName="birthdate" id="date-of-birth"
+                           class="form-control">
+                    <div class="alert alert-danger alert-danger-form"
+                         *ngIf="patientForm.get('birthdate').touched && patientForm.get('birthdate').hasError('required')">
+                        Date of birth is required
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="sex" class="col-xs-12 col-sm-4">
+            <div class="form-group row">
+                <label for="sex" class="col-form-label col-xs-12 col-sm-4">
                     Sex
-                </label><!--
-             --><select formControlName="sex" id="sex" class="col-xs-12 col-sm-8">
-                    <option *ngFor="let item of sexConfig" value={{item.key}}>{{item.text}}</option>
-                </select>
-                <div class="alert alert-danger alert-danger-form col-xs-12 offset-sm-4 col-sm-8"
-                     *ngIf="patient.get('sex').touched && patient.get('sex').hasError('required')">
-                    Sex is required
+                </label>
+                <div class="col-xs-12 col-sm-8">
+                    <select formControlName="sex" id="sex" class="form-control">
+                        <option value="">Select..</option>
+                        <option *ngFor="let item of sexConfig" value={{item.key}}>{{item.text}}</option>
+                    </select>
+                    <div class="alert alert-danger alert-danger-form"
+                         *ngIf="patientForm.get('sex').touched && patientForm.get('sex').hasError('required')">
+                        Sex is required
+                    </div>
                 </div>
             </div>
 
             <div class="text-sm-right">
-                <button class="btn btn-secondary"
-                        type="button"
-                        (click)="goBack()">
+                <button class="btn btn-secondary" type="button" (click)="goBack()">
                     Cancel
                 </button>
-                <button class="btn btn-primary"
-                        type="submit"
-                        [disabled]="patient.invalid">
+                <button class="btn btn-primary" type="submit" [disabled]="patientForm.invalid">
                     Add Patient
                 </button>
             </div>
@@ -61,6 +64,7 @@
 </div>
 
 <div class="debug" *ngIf="isDevMode">
-    <p>Value: {{patient.value | json}}</p>
-    <p>Valid: {{patient.valid | json}}</p>
+    <p>Value:</p>
+    <pre>{{patientForm.value | json}}</pre>
+    <p>Valid: {{patientForm.valid | json}}</p>
 </div>
