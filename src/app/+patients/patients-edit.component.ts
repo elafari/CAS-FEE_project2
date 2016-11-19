@@ -23,6 +23,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     loggedInUserName: string;
     patientForm: FormGroup;
     patientKey: string;
+    patientName: string;
 
     showModalDialog: string;
     simulateDeletion: boolean;
@@ -57,6 +58,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
                             this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
                                 this.loggedInUserName = user.name;
                                 this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+                                    this.patientName = patient.name;
                                     this.patientForm.setValue({
                                         name     : patient.name,
                                         gender   : patient.gender,

@@ -1,44 +1,81 @@
-
 <table class="table table-bordered table-hover">
-  <thead class="thead-inverse">
+    <thead class="thead-inverse">
     <tr>
-      <th>user id</th>
-      <th>user role admin</th>
-      <th>update</th>
-      <th>delete</th>
+        <th>user id</th>
+        <th>user role admin</th>
+        <th>update</th>
+        <th>delete</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr *ngFor="let user of users | async">
-      <td>{{user.name}}</td>
-      <td><label><input type="checkbox" name={{user.$key}} value="admin" #updateAdmin [checked]="user.admin == true" [disabled]="user.name == userMainAdmin">&nbsp;&nbsp;yes</label></td>
-      <td><button class="cust-table-btn-update" (click)="updateUser(user.$key, updateAdmin.checked)" [hidden]="user.name == userMainAdmin">Update</button></td>
-      <td><button class="cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + user.$key" [hidden]="user.name == userMainAdmin" (click)="showDeleteDialog(user.$key)">Delete</button></td>
+        <td>{{user.name}}</td>
+        <td><label><input type="checkbox"
+                          name={{user.$key}}
+                          value="admin"
+                          #updateAdmin [checked]="user.admin == true"
+                          [disabled]="user.name == userMainAdmin">&nbsp;&nbsp;yes
+            </label>
+        </td>
+        <td>
+            <button type="button"
+                    class="btn btn-primary"
+                    (click)="updateUser(user.$key, updateAdmin.checked)"
+                    [hidden]="user.name == userMainAdmin">
+                Update
+            </button>
+        </td>
+        <td>
+            <button type="button"
+                    class="btn btn-danger"
+                    data-toggle="modal"
+                    [attr.data-target]="'#' + user.$key"
+                    [hidden]="user.name == userMainAdmin"
+                    (click)="showDeleteDialog(user.$key)">
+                Delete
+            </button>
+        </td>
 
-      <!-- *ngIf - modal dialog for deleting user -->
+        <!-- *ngIf - modal dialog for deleting user -->
 
-      <div *ngIf="showModalDialog == user.$key" class="modal fade" [attr.id]="'' + user.$key" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header cust-table-modal-header-danger">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 class="modal-title" id="editUserModalLabel">Delete: {{user.name}}</h4>
+        <div *ngIf="showModalDialog == user.$key" class="modal fade" [attr.id]="'' + user.$key" tabindex="-1"
+             role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header cust-table-modal-header-danger">
+                        <button type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="editUserModalLabel">Delete: {{user.name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure to delete this user?</p>
+                        <p>All patients, cases and events of this user are also deleted!</p>
+                        <label><input type="checkbox" name='Simulation' value="simulate" #updateSimulation
+                                      [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete
+                            information)</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                (click)="showDeleteDialog('')">
+                            Cancel
+                        </button>
+                        <button type="button"
+                                class="btn btn-danger"
+                                (click)="deleteUser(user.$key, updateSimulation.checked)"
+                                data-dismiss="modal">
+                            Delete
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-              <p>Are you sure to delete this user?</p>
-              <p>All patients, cases and events of this user are also deleted!</p>
-              <label><input type="checkbox" name='Simulation' value="simulate" #updateSimulation [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete information)</label>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal" (click)="showDeleteDialog('')">Cancel</button>
-              <button type="button" class="btn cust-table-btn-delete" (click)="deleteUser(user.$key, updateSimulation.checked)" data-dismiss="modal">Delete</button>
-            </div>
-          </div>
         </div>
-      </div>
 
     </tr>
-  </tbody>
+    </tbody>
 </table>

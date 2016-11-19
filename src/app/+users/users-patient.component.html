@@ -4,14 +4,15 @@
             <h4>{{patient.name}}</h4>
         </div>
         <div class="card-block">
-            <button type="button" class="btn btn-secondary btn-block"
-                    data-toggle="modal" [attr.data-target]="'#' + patientKey"
+            <button type="button"
+                    class="btn btn-secondary btn-block"
+                    data-toggle="modal"
+                    [attr.data-target]="'#' + patientKey"
                     (click)="showDeleteDialog(patientKey)">Delete
             </button>
         </div>
     </div>
 </div>
-
 
 <!-- modal dialog for deleting a patient -->
 
@@ -22,8 +23,11 @@
         <div class="modal-content">
 
             <div class="modal-header cust-table-modal-header-danger">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="deletePatientModalLabel">Delete: {{patient.name}}</h4>
             </div>
@@ -31,21 +35,27 @@
             <div class="modal-body">
                 <p>Are you sure to delete this patient?</p>
                 <p>All cases and events of this patient are also deleted!</p>
-                <td><label><input type="checkbox" name='Simulation' value="simulate" #updateSimulation
-                                  [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete
-                    information)</label>
+                <label><input type="checkbox"
+                                  name='Simulation'
+                                  value="simulate" #updateSimulation
+                                  [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete information)
+                </label>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal"
-                        (click)="showDeleteDialog('')">Cancel
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        (click)="showDeleteDialog('')">
+                    Cancel
                 </button>
-                <button type="button" class="btn cust-btn-delete" (click)="deletePatient(updateSimulation.checked)"
-                        data-dismiss="modal">Delete patient
+                <button type="button"
+                        class="btn btn-danger"
+                        (click)="deletePatient(updateSimulation.checked)"
+                        data-dismiss="modal">
+                    Delete patient
                 </button>
             </div>
-
         </div>
-
     </div>
 </div>

@@ -1,47 +1,111 @@
+<h1 class="text-xs-center">Edit event <i class="fa fa-pencil" aria-hidden="true"></i></h1>
 
-<div class="pull-left">
-  <p>Event of case: {{diseaseCaseName}}</p>
-  <div class="well well-sm"><label>Edit Event: </label></div>
-  <table class="table">
-    <tr>
-      <td>name</td>
-      <td><input type="text" #updateName [value]="diseaseEventName" /></td>
-    </tr>
-    <tr>
-      <td>value</td>
-      <td><input type="text" #updateValue [value]="diseaseEventValue" /></td>
-    </tr>
-    <tr>
-      <td>active</td>
-      <td><input type="text" #updateValue [value]="diseaseEventValue" /></td>
-    </tr>
-    <tr><button class="btn btn-success" (click)="updateDiseaseEvent({value: updateValue.value,name: updateName.value})">update event</button></tr>
-    <tr>&nbsp;</tr>
-    <td><button class="btn cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + diseaseEventKey" (click)="showDeleteDialog(diseaseEventKey)">Delete</button></td>
-    <tr>&nbsp;</tr>
-    <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
-  </table>
+<div class="row flex-items-xs-center">
+    <div class="col-xs-12 col-md-8 col-lg-6">
+
+        <form novalidate [formGroup]="diseaseEventForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group row">
+                <label for="name" class="col-form-label col-xs-12 col-sm-4">
+                    Name
+                </label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" placeholder="Enter a name" formControlName="name" id="name"
+                           class="form-control">
+                    <div class="alert alert-danger alert-danger-form"
+                         *ngIf="diseaseEventForm.get('name').touched && diseaseEventForm.get('name').hasError('required')">
+                        Name is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="value" class="col-form-label col-xs-12 col-sm-4">
+                    Value
+                </label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" placeholder="Enter a value" formControlName="value" id="value"
+                           class="form-control">
+                    <div class="alert alert-danger alert-danger-form"
+                         *ngIf="diseaseEventForm.get('value').touched && diseaseEventForm.get('value').hasError('required')">
+                        Type is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-sm-right">
+                <button class="btn btn-secondary" type="button" (click)="goBack()">
+                    Cancel
+                </button>
+                <button class="btn btn-danger" type="button"
+                        data-toggle="modal"
+                        [attr.data-target]="'#' + diseaseEventKey"
+                        [disabled]="diseaseEventForm.invalid"
+                        (click)="showDeleteDialog(diseaseEventKey)">
+                    Delete
+                </button>
+                <button class="btn btn-primary" type="submit" (click)="onSubmit()">
+                    Update
+                </button>
+            </div>
+
+        </form>
+
+    </div>
 </div>
 
-<!-- *ngIf - modal dialog for deleting diseaseEvent -->
 
-<div *ngIf="showModalDialog == diseaseEventKey" class="modal fade" [attr.id]="'' + diseaseEventKey" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header cust-table-modal-header-danger">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="editEventModalLabel">Delete: {{diseaseEventName}}</h4>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure to delete this event?</p>
-        <td><label><input type="checkbox" name='Simulation' value="simulate" #updateSimulation [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete information)</label>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal" (click)="showDeleteDialog('')">Cancel</button>
-        <button type="button" class="btn cust-table-btn-delete" (click)="deleteDiseaseEvent(updateSimulation.checked)" data-dismiss="modal">Delete</button>
-      </div>
+<!-- modal dialog for deleting disease event -->
+<div *ngIf="showModalDialog === diseaseEventKey"
+     class="modal fade"
+     [attr.id]="'' + diseaseEventKey"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="editDiseaseEventModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header cust-table-modal-header-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editDiseaseEventModalLabel">Delete: {{diseaseEventName}}</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure to delete this event?</p>
+                <label>
+                    <input type="checkbox" name='Simulation' value="simulate"
+                           #updateSimulation
+                           [checked]="simulateDeletion === true">
+                    Simulation (only log delete information)
+                </label>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        (click)="showDeleteDialog('')">
+                    Cancel
+                </button>
+                <button type="button"
+                        class="btn btn-danger"
+                        (click)="deleteDiseaseEvent(updateSimulation.checked)"
+                        data-dismiss="modal">
+                    Delete
+                </button>
+            </div>
+
+        </div>
     </div>
-  </div>
+</div>
+
+
+<div class="debug" *ngIf="isDevMode">
+    <p>Value:</p>
+    <pre>{{diseaseEventForm.value | json}}</pre>
+    <p>Valid: {{diseaseEventForm.valid | json}}</p>
 </div>
