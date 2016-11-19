@@ -13,17 +13,18 @@ import { RegisterComponent } from "./register.component";
         LoginComponent,
         RegisterComponent
     ],
-    imports: [
-      FormsModule,
-      ReactiveFormsModule,
-      CommonModule
+    imports     : [
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule
     ],
-    exports: [
-      LoginComponent,
-      RegisterComponent
+    exports     : [
+        LoginComponent,
+        RegisterComponent
     ],
-  providers: [
-    AuthService
+    providers   : [
+        AuthService
     ]
 })
-export class AuthModule {}
+export class AuthModule {
+}

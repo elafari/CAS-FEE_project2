@@ -1,21 +1,92 @@
-<h3>Please register to use all features</h3>
-<form [formGroup]="myForm" (ngSubmit)="onRegister()">
-    <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input formControlName="email" type="email" id="email" #email class="form-control">
-        <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Invalid mail address</span>
+<h1 class="register text-xs-center">Sign Up</h1>
+
+<div class="row flex-items-xs-center">
+    <div class="col-xs-12 col-md-8 col-lg-6">
+
+        <form novalidate [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label for="email" class="register">E-Mail</label>
+                <input type="email"
+                       placeholder="Enter e-mail address"
+                       formControlName="email"
+                       id="email"
+                       class="form-control">
+
+                <div *ngIf="registerForm.get('email').touched && !registerForm.get('email').valid"
+                     class="alert alert-danger alert-danger-form">
+                    <div *ngIf="registerForm.get('email').hasError('required')">
+                        E-mail address is required.
+                    </div>
+                    <div
+                        *ngIf="registerForm.get('email').hasError('noValidEmail')">
+                        E-mail address is invalid.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="register">Password</label>
+                <input type="password"
+                       placeholder="Enter password"
+                       formControlName="password"
+                       id="password"
+                       class="form-control">
+
+                <div *ngIf="registerForm.get('password').touched && !registerForm.get('password').valid"
+                     class="alert alert-danger alert-danger-form">
+                    <div
+                        *ngIf="registerForm.get('password').hasError('required')">
+                        Password is required.
+                    </div>
+                    <div
+                        *ngIf="registerForm.get('password').hasError('noValidPassword')">
+                        Password should be at least 6 characters.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password" class="register">
+                    Confirm Password
+                </label>
+                <input type="password"
+                       placeholder="Confirm password"
+                       formControlName="confirmPassword"
+                       id="confirm-password"
+                       class="form-control">
+
+                <div *ngIf="registerForm.get('confirmPassword').touched && !registerForm.get('confirmPassword').valid"
+                     class="alert alert-danger alert-danger-form">
+                    <div
+                        *ngIf="registerForm.get('confirmPassword').hasError('required') || registerForm.get('confirmPassword').hasError('noMatchingPassword')">
+                        Passwords do not match.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="cust-error-message">{{errorMessage}}</span>
+            </div>
+
+            <div class="text-sm-right">
+                <button class="btn btn-primary" type="submit" [disabled]="registerForm.invalid">
+                    Register
+                </button>
+            </div>
+
+        </form>
+
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input formControlName="password" type="password" id="password" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input formControlName="confirmPassword" type="password" id="confirm-password" #confirmPassword class="form-control">
-        <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Passwords do not match</span>
-    </div>
-  <div class="form-group">
-    <span class="cust-error-message">{{errorMessage}}</span>
-  </div>
-    <button type="submit" class="btn cust-btn-create" [disabled]="!myForm.valid">Register</button>
-</form>
+</div>
+
+
+<div class="debug" *ngIf="isDevMode">
+    <p>Value:</p>
+    <pre>{{registerForm.value | json}}</pre>
+    <p>Valid: {{registerForm.valid | json}}</p>
+
+    <h6>passwordConfim</h6>
+    <p>Touched: {{registerForm.get('confirmPassword').touched | json}}</p>
+    <p>Valid: {{registerForm.get('confirmPassword').valid | json}}</p>
+</div>

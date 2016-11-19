@@ -1,15 +1,74 @@
-<h3>Please login to use all features</h3>
-<form [formGroup]="myForm" (ngSubmit)="onLogin()">
-    <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input formControlName="email" type="email" id="email" class="form-control">
+<h1 class="login text-xs-center">Sign In</h1>
+
+<div class="row flex-items-xs-center">
+    <div class="col-xs-12 col-md-8 col-lg-6">
+
+        <form novalidate [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label for="email" class="login">E-Mail</label>
+                <input type="email"
+                       placeholder="Enter e-mail address"
+                       formControlName="email"
+                       id="email"
+                       class="form-control">
+
+                <div *ngIf="loginForm.get('email').touched && !loginForm.get('email').valid"
+                     class="alert alert-danger alert-danger-form">
+                    <div *ngIf="loginForm.get('email').hasError('required')">
+                        E-mail address is required.
+                    </div>
+                    <div
+                        *ngIf="loginForm.get('email').hasError('noValidEmail')">
+                        E-mail address is invalid.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="login">Password</label>
+                <input type="password"
+                       placeholder="Enter password"
+                       formControlName="password"
+                       id="password"
+                       class="form-control">
+
+                <div *ngIf="loginForm.get('password').touched && !loginForm.get('password').valid"
+                     class="alert alert-danger alert-danger-form">
+                    <div
+                        *ngIf="loginForm.get('password').hasError('required')">
+                        Password is required.
+                    </div>
+                    <div
+                        *ngIf="loginForm.get('password').hasError('noValidPassword')">
+                        Password should be at least 6 characters.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="cust-error-message">{{errorMessage}}</span>
+            </div>
+
+            <div class="text-sm-right">
+                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">
+                    Login
+                </button>
+            </div>
+        </form>
+
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input formControlName="password" type="password" id="password" class="form-control">
-    </div>
-    <div class="form-group">
-      <span class="cust-error-message">{{errorMessage}}</span>
-    </div>
-    <button type="submit" class="btn cust-btn-create" [disabled]="!myForm.valid">Login</button>
-</form>
+</div>
+
+
+<div class="debug" *ngIf="isDevMode">
+    <p>Value:</p>
+    <pre>{{loginForm.value | json}}</pre>
+    <p>Valid: {{loginForm.valid | json}}</p>
+
+    <h6>password</h6>
+    <p>Touched: {{loginForm.get('password').touched | json}}</p>
+    <p>Valid: {{loginForm.get('password').valid | json}}</p>
+    <p>requiredError: {{loginForm.get('password').hasError('required') | json}}</p>
+    <p>noValidPasswordError: {{loginForm.get('password').hasError('noValidPassword') | json}}</p>
+</div>

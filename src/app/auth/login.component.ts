@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { AuthService } from "./auth.service";
@@ -7,49 +7,74 @@ import { ConfigService } from "../shared/config.service";
 import { LoggedInUserService } from "./logged-in-user.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
+import { Login } from "./login.interface";
 
 @Component({
-  templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class LoginComponent implements OnInit {
+    isDevMode: boolean = ConfigService.devMode;
+    loginForm: FormGroup;
 
-  myForm:FormGroup;
-  errorMessage: string;
+    errorMessage: string;
 
-  constructor(private fb:FormBuilder,
-              private router:Router,
-              private authService:AuthService,
-              private loggedInUserService: LoggedInUserService,
-              private errorHandler: ErrorHandlerService,
-              private logger: LoggerService) {
+    constructor(private fb: FormBuilder,
+                private authService: AuthService,
+                private loggedInUserService: LoggedInUserService,
+                private router: Router,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
 
-  };
+    };
 
-  ngOnInit():any {
-    try {
-      this.myForm = this.fb.group({
-        email: ['', Validators.required],
-        password: ['', Validators.required],
-      });
-    } catch(e) {
-      this.errorHandler.traceError("[login] - ngOnInit - error", e, true);
-    }
-  };
-
-  onLogin() {
-    try {
-      this.authService.loginUser(this.myForm.value);
-
-      this.loggedInUserService.userData.subscribe((user) => {
-        if (user.error != "") {
-          this.errorMessage = user.error;
-        } else {
-          this.errorMessage = ConfigService.loginProcessMsg;
-          this.router.navigate(['/patients']);
+    ngOnInit(): any {
+        try {
+            this.loginForm = this.fb.group({
+                email   : ['', Validators.compose([
+                    Validators.required,
+                    this.isValidEmail
+                ])],
+                password: ['', Validators.compose([
+                    Validators.required,
+                    this.isValidPassword
+                ])]
+            });
+        } catch (e) {
+            this.errorHandler.traceError("[login] - ngOnInit - error", e, true);
         }
-      });
-    } catch(e) {
-      this.errorHandler.traceError("[login] - onLogin - error", e, true);
-    }
-  };
+    };
+
+    onSubmit() {
+        this.onLogin(this.loginForm.value);
+    };
+
+    onLogin(key_value: Login) {
+        try {
+            this.authService.loginUser(key_value);
+
+            this.loggedInUserService.userData.subscribe((user) => {
+                if (user.error != "") {
+                    this.errorMessage = user.error;
+                } else {
+                    this.errorMessage = ConfigService.loginProcessMsg;
+                    this.router.navigate(['/patients']);
+                }
+            });
+        } catch (e) {
+            this.errorHandler.traceError("[login] - onLogin - error", e, true);
+        }
+    };
+
+    isValidEmail(control: FormControl): {[s: string]: boolean} {
+        if (!control.value.match(ConfigService.getEmailRegex())) {
+            return {noValidEmail: true};
+        }
+    };
+
+    isValidPassword(control: FormControl): {[s: string]: boolean} {
+        if (control.value.length < 6) {
+            return {noValidPassword: true};
+        }
+    };
 }

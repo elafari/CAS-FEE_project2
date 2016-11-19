@@ -9,10 +9,14 @@ import { LoggedInUser } from "./logged-in-user.interface";
 @Injectable()
 export class LoggedInUserService {
 
-  public userData: Subject<LoggedInUser> = new BehaviorSubject<LoggedInUser>({key: "", email: "", error: ConfigService.loginProcessMsg});
+    public userData: Subject<LoggedInUser> = new BehaviorSubject<LoggedInUser>({
+        key  : "",
+        email: "",
+        error: ConfigService.loginProcessMsg
+    });
 
-  setUserData(user:LoggedInUser) {
-    this.userData.next(user);
-  }
+    setUserData(user: LoggedInUser) {
+        this.userData.next(user);
+    }
 
 }

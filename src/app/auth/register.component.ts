@@ -3,16 +3,19 @@ import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 import { Router } from "@angular/router";
 
 import { AuthService } from "./auth.service";
-import { ConfigService } from "../shared/config.service";
 import { LoggedInUserService } from "./logged-in-user.service";
+import { ConfigService } from "../shared/config.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
+import { Registration } from "./register.interface";
 
 @Component({
-    templateUrl: './register.component.html'
+    templateUrl: './register.component.html',
+    styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class RegisterComponent implements OnInit {
-    myForm: FormGroup;
+    isDevMode: boolean = ConfigService.devMode;
+    registerForm: FormGroup;
 
     errorMessage: string;
 
@@ -25,52 +28,66 @@ export class RegisterComponent implements OnInit {
     };
 
     ngOnInit(): any {
-      try {
-        this.myForm = this.fb.group({
-          email: ['', Validators.compose([
-            Validators.required,
-            this.isEmail
-          ])],
-          password: ['', Validators.required],
-          confirmPassword: ['', Validators.compose([
-            Validators.required,
-            this.isEqualPassword.bind(this)
-          ])],
-        });
-      } catch(e) {
-        this.errorHandler.traceError("[register] - ngOnInit - error", e, true);
-      }
+        try {
+            this.registerForm = this.fb.group({
+                email          : ['', Validators.compose([
+                    Validators.required,
+                    this.isValidEmail
+                ])],
+                password       : ['', Validators.compose([
+                    Validators.required,
+                    this.isValidPassword
+                ])],
+                confirmPassword: ['', Validators.compose([
+                    Validators.required,
+                    this.isEqualPassword.bind(this)
+                ])]
+            });
+        } catch (e) {
+            this.errorHandler.traceError("[register] - ngOnInit - error", e, true);
+        }
     };
 
-    onRegister() {
-      try {
-        this.authService.registerUser(this.myForm.value);
-
-        this.loggedInUserService.userData.subscribe((user) => {
-          if (user.error != "") {
-            this.errorMessage = user.error;
-          } else {
-            this.errorMessage = ConfigService.loginProcessMsg;
-            this.router.navigate(['/patients']);
-          }
-        });
-      } catch(e) {
-        this.errorHandler.traceError("[register] - onRegister - error", e, true);
-      }
+    onSubmit() {
+        this.onRegister(this.registerForm.value);
     };
 
-    isEmail(control: FormControl): {[s: string]: boolean} {
+    onRegister(key_value: Registration) {
+        try {
+            this.authService.registerUser(key_value);
+
+            this.loggedInUserService.userData.subscribe((user) => {
+                if (user.error != "") {
+                    this.errorMessage = user.error;
+                } else {
+                    this.errorMessage = ConfigService.loginProcessMsg;
+                    this.router.navigate(['/patients']);
+                }
+            });
+        } catch (e) {
+            this.errorHandler.traceError("[register] - onRegister - error", e, true);
+        }
+    };
+
+    isValidEmail(control: FormControl): {[s: string]: boolean} {
         if (!control.value.match(ConfigService.getEmailRegex())) {
-            return {noEmail: true};
+            return {noValidEmail: true};
+        }
+    };
+
+    isValidPassword(control: FormControl): {[s: string]: boolean} {
+        if (control.value.length < 6) {
+            return {noValidPassword: true};
         }
     };
 
     isEqualPassword(control: FormControl): {[s: string]: boolean} {
-        if (!this.myForm) {
-            return {passwordsNotMatch: true};
+        if (!this.registerForm) {
+            return {noMatchingPassword: true};
         }
-        if (control.value !== this.myForm.controls['password'].value) {
-            return {passwordsNotMatch: true};
+        if (control.value !== this.registerForm.controls['password'].value) {
+            return {noMatchingPassword: true};
         }
     };
+
 }
