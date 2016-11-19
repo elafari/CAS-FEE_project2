@@ -18,7 +18,7 @@ import { Patient } from './patients.interface';
 })
 export class PatientsCreateComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
-    sexConfig: any[] = ConfigService.getSex();
+    genderConfig: any[] = ConfigService.getGender();
     patientForm: FormGroup;
 
     loggedInUserName: string;
@@ -37,7 +37,7 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.patientForm = new FormGroup({
             name     : new FormControl('', Validators.required),
-            sex      : new FormControl('', Validators.required),
+            gender   : new FormControl('', Validators.required),
             birthdate: new FormControl('', Validators.required)
         });
 

@@ -19,7 +19,7 @@ import { Patient } from "./patients.interface";
 })
 export class PatientsEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
-    sexConfig: any[] = ConfigService.getSex();
+    genderConfig: any[] = ConfigService.getGender();
     loggedInUserName: string;
     patientForm: FormGroup;
     patientKey: string;
@@ -43,7 +43,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.patientForm = new FormGroup({
             name     : new FormControl('', Validators.required),
-            sex      : new FormControl('', Validators.required),
+            gender   : new FormControl('', Validators.required),
             birthdate: new FormControl('', Validators.required)
         });
 
@@ -59,7 +59,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
                                 this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                                     this.patientForm.setValue({
                                         name     : patient.name,
-                                        sex      : patient.sex,
+                                        gender   : patient.gender,
                                         birthdate: patient.birthdate
                                     });
 

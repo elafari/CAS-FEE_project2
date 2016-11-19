@@ -70,7 +70,7 @@ export class ConfigService {
         "info" : "color: white; background-color:blue"
     };
 
-    private static _sex = [
+    private static _gender = [
         {
             key : 'm',
             text: 'Boy'
@@ -81,7 +81,7 @@ export class ConfigService {
         }
     ];
 
-    public static getSex() {
-        return this._sex;
+    public static getGender() {
+        return this._gender;
     };
 }
