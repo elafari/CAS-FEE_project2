@@ -40,8 +40,26 @@ h4 {
   }
 }
 
+
+@include media-breakpoint-up(sm) {
+  .card-full-size {
+    position : absolute;
+    top      : 0;
+    left     : 0;
+    bottom   : 0;
+    right    : 0;
+  }
+}
+
+.btn-full-size {
+  border : none;
+  height : 100%;
+  width  : 100%
+}
+
+
 .card-active-case {
-  border: 1px solid $card-active-case-color;
+  border     : 1px solid $card-active-case-color;
   box-shadow : inset 0 0 50px 0 $card-active-case-color,
   0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 
@@ -49,6 +67,8 @@ h4 {
     background-color : transparent;
   }
 }
+
+
 
 /*
 .card-footer-bottom {
