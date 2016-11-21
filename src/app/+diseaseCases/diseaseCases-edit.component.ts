@@ -104,10 +104,7 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
 
     goBack() {
         this.simulateDeletion = true;
-        this.location.back(); // goes *two* steps back!?!
-        //this.location.replaceState("/patients/" + this.patientKey + "/diseaseCases"); // only replace url in browser address bar
-        //this.router.navigateByUrl("/patients/" + this.patientKey + "/diseaseCases"); // reload whole date :(
-        //window.history.back();    // same as this.location.back()
+        this.location.back();
     };
 
     onSubmit() {
