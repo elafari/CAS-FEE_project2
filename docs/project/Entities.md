@@ -13,9 +13,8 @@
 ### Patient
 * id: Generated ID of the firebase patients table item
 * name: user email address
-* sex: weiblich/männlich
-* birthdate:
-* [age]:
+* gender: f(emale)/m(ale)
+* birthdate: date of birth
 
 ### Disease Case
 * id: Generated ID of the firebase cases table item
