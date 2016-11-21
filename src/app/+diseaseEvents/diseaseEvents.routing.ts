@@ -8,25 +8,38 @@ import { DiseaseEventsEditComponent } from "./diseaseEvents-edit.component";
 import { DiseaseEventsCreateComponent } from "./diseaseEvents-create.component";
 
 export const diseaseEvents_routes: Routes = <Routes>[
-  { path: '', component: DiseaseEventsComponent, children: [
-    { path: '', component: DiseaseEventsListComponent },
-    { path: ':diseaseEventKey/edit', component: DiseaseEventsEditComponent },
-    { path: 'create', component: DiseaseEventsCreateComponent }
-  ]}
+    {
+        path     : '',
+        component: DiseaseEventsComponent,
+        children : [
+            {
+                path     : '',
+                component: DiseaseEventsListComponent
+            },
+            {
+                path     : ':diseaseEventKey/edit',
+                component: DiseaseEventsEditComponent
+            },
+            {
+                path     : 'create',
+                component: DiseaseEventsCreateComponent
+            }
+        ]
+    }
 ];
 
-@NgModule ({
-  imports: [RouterModule.forChild(diseaseEvents_routes)],
-  exports: [RouterModule]
+@NgModule({
+    imports: [RouterModule.forChild(diseaseEvents_routes)],
+    exports: [RouterModule]
 })
 
-export class DiseaseEventsRoutingModule{}
+export class DiseaseEventsRoutingModule {
+}
 
 export const routingComponents = [
-  DiseaseEventsComponent,
-  DiseaseEventsListComponent,
-  DiseaseEventsItemComponent,
-  DiseaseEventsEditComponent,
-  DiseaseEventsCreateComponent
+    DiseaseEventsComponent,
+    DiseaseEventsListComponent,
+    DiseaseEventsItemComponent,
+    DiseaseEventsEditComponent,
+    DiseaseEventsCreateComponent
 ];
-

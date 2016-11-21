@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import {DiseaseEventsRoutingModule, routingComponents} from "./diseaseEvents.routing";
+import { DiseaseEventsRoutingModule, routingComponents } from "./diseaseEvents.routing";
 
 @NgModule({
-    imports: [
-      CommonModule,
-      ReactiveFormsModule,
-      DiseaseEventsRoutingModule
+    imports     : [
+        CommonModule,
+        ReactiveFormsModule,
+        DiseaseEventsRoutingModule
     ],
     declarations: [
-      routingComponents
+        routingComponents
     ]
 })
-export class DiseaseEventsModule {}
+export class DiseaseEventsModule {
+}

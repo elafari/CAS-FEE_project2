@@ -8,26 +8,42 @@ import { DiseaseCasesEditComponent } from "./diseaseCases-edit.component";
 import { DiseaseCasesCreateComponent } from "./diseaseCases-create.component";
 
 export const diseaseCases_routes: Routes = <Routes>[
-  { path: '', component: DiseaseCasesComponent, children: [
-    { path: '', component: DiseaseCasesListComponent },
-    { path: ':diseaseCaseKey/edit', component: DiseaseCasesEditComponent },
-    { path: 'create', component: DiseaseCasesCreateComponent },
-    { path: ':diseaseCaseKey/diseaseEvents', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'}
-  ]}
+    {
+        path     : '',
+        component: DiseaseCasesComponent,
+        children : [
+            {
+                path     : '',
+                component: DiseaseCasesListComponent
+            },
+            {
+                path     : ':diseaseCaseKey/edit',
+                component: DiseaseCasesEditComponent
+            },
+            {
+                path     : 'create',
+                component: DiseaseCasesCreateComponent
+            },
+            {
+                path        : ':diseaseCaseKey/diseaseEvents',
+                loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'
+            }
+        ]
+    }
 ];
 
-@NgModule ({
-  imports: [RouterModule.forChild(diseaseCases_routes)],
-  exports: [RouterModule]
+@NgModule({
+    imports: [RouterModule.forChild(diseaseCases_routes)],
+    exports: [RouterModule]
 })
 
-export class DiseaseCasesRoutingModule{}
+export class DiseaseCasesRoutingModule {
+}
 
 export const routingComponents = [
-  DiseaseCasesComponent,
-  DiseaseCasesListComponent,
-  DiseaseCasesItemComponent,
-  DiseaseCasesEditComponent,
-  DiseaseCasesCreateComponent
+    DiseaseCasesComponent,
+    DiseaseCasesListComponent,
+    DiseaseCasesItemComponent,
+    DiseaseCasesEditComponent,
+    DiseaseCasesCreateComponent
 ];
-

@@ -16,7 +16,7 @@
                 <div *ngIf="loginForm.get('email').touched && !loginForm.get('email').valid"
                      class="alert alert-danger alert-danger-form">
                     <div *ngIf="loginForm.get('email').hasError('required')">
-                        E-mail address is required.
+                        E-mail address is required
                     </div>
                     <div
                         *ngIf="loginForm.get('email').hasError('noValidEmail')">
@@ -37,7 +37,7 @@
                      class="alert alert-danger alert-danger-form">
                     <div
                         *ngIf="loginForm.get('password').hasError('required')">
-                        Password is required.
+                        Password is required
                     </div>
                     <div
                         *ngIf="loginForm.get('password').hasError('noValidPassword')">

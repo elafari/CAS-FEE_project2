@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
@@ -18,30 +18,30 @@ import { DiseaseEvent } from './diseaseEvents.interface';
     styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
-    isDevMode:boolean = ConfigService.devMode;
-    diseaseEventForm:FormGroup;
-    diseaseCaseKey:string;
-    diseaseCaseName:string;
+    isDevMode: boolean = ConfigService.devMode;
+    diseaseEventForm: FormGroup;
+    diseaseCaseKey: string;
+    diseaseCaseName: string;
 
-    diseaseEventKey:string;
-    diseaseEventName:string;
+    diseaseEventKey: string;
+    diseaseEventName: string;
 
-    subscrRoute:Subscription;
-    subscrDiseaseCase:Subscription;
-    subscrDiseaseEvent:Subscription;
+    subscrRoute: Subscription;
+    subscrDiseaseCase: Subscription;
+    subscrDiseaseEvent: Subscription;
 
-    constructor(private router:Router,
-                private route:ActivatedRoute,
-                private location:Location,
-                private af:AngularFire,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private location: Location,
+                private af: AngularFire,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
         this.diseaseEventForm = new FormGroup({
-            name: new FormControl('', Validators.required),
+            name : new FormControl('', Validators.required),
             value: new FormControl('', Validators.required),
         });
 
@@ -49,7 +49,7 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
             this.af.auth.subscribe(auth => {
                 if (auth) {
                     this.subscrRoute = this.route.params.subscribe(
-                        (params:any) => {
+                        (params: any) => {
                             this.diseaseEventKey = params['diseaseEventKey'];
                             this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
                             this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
@@ -71,6 +71,10 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
         }
     };
 
+    onSubmit() {
+        this.createDiseaseEvent(this.diseaseEventForm.value);
+    };
+
     createDiseaseEvent(key_value: DiseaseEvent) {
         try {
             key_value.case = this.diseaseCaseKey;
@@ -85,10 +89,6 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
         this.location.back();
     };
 
-    onSubmit() {
-        this.createDiseaseEvent(this.diseaseEventForm.value);
-    };
-
     ngOnDestroy() {
         if (this.subscrDiseaseEvent) {
             this.subscrDiseaseEvent.unsubscribe();
@@ -101,4 +101,3 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
         }
     };
 }
-

@@ -24,11 +24,11 @@
                     Value
                 </label>
                 <div class="col-xs-12 col-sm-8">
-                    <input type="text" placeholder="Enter a type" formControlName="value" id="value"
+                    <input type="text" placeholder="Enter a value" formControlName="value" id="value"
                            class="form-control">
                     <div class="alert alert-danger alert-danger-form"
                          *ngIf="diseaseEventForm.get('value').touched && diseaseEventForm.get('value').hasError('required')">
-                        Name is required
+                        Value is required
                     </div>
                 </div>
             </div>
@@ -46,6 +46,7 @@
 
     </div>
 </div>
+
 
 <div class="debug" *ngIf="isDevMode">
     <p>Value:</p>

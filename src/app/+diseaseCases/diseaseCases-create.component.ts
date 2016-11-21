@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
 
@@ -17,25 +17,25 @@ import { DiseaseCase } from './diseaseCases.interface';
     styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
-    isDevMode:boolean = ConfigService.devMode;
-    diseaseCaseForm:FormGroup;
-    patientKey:string;
-    patientName:string;
+    isDevMode: boolean = ConfigService.devMode;
+    diseaseCaseForm: FormGroup;
+    patientKey: string;
+    patientName: string;
 
-    diseaseCaseKey:string;
-    diseaseCaseName:string;
+    diseaseCaseKey: string;
+    diseaseCaseName: string;
 
-    subscrRoute:Subscription;
-    subscrPatient:Subscription;
-    subscrDiseaseCase:Subscription;
+    subscrRoute: Subscription;
+    subscrPatient: Subscription;
+    subscrDiseaseCase: Subscription;
 
-    constructor(private router:Router,
-                private route:ActivatedRoute,
-                private af:AngularFire,
-                private location:Location,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private af: AngularFire,
+                private location: Location,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
@@ -48,7 +48,7 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
             this.af.auth.subscribe(auth => {
                 if (auth) {
                     this.subscrRoute = this.route.params.subscribe(
-                        (params:any) => {
+                        (params: any) => {
                             this.diseaseCaseKey = params['diseaseCaseKey'];
                             this.patientKey = this.route.parent.snapshot.params['patientKey'];
                             this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
@@ -70,6 +70,10 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
         }
     };
 
+    onSubmit() {
+        this.createDiseaseCase(this.diseaseCaseForm.value);
+    };
+
     createDiseaseCase(key_value: DiseaseCase) {
         try {
             key_value.patient = this.patientKey;
@@ -85,10 +89,6 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
         this.location.back();
     };
 
-    onSubmit() {
-        this.createDiseaseCase(this.diseaseCaseForm.value);
-    };
-
     ngOnDestroy() {
         if (this.subscrDiseaseCase) {
             this.subscrDiseaseCase.unsubscribe();
@@ -101,4 +101,3 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
         }
     };
 }
-

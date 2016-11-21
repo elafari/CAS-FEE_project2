@@ -16,7 +16,7 @@
                 <div *ngIf="registerForm.get('email').touched && !registerForm.get('email').valid"
                      class="alert alert-danger alert-danger-form">
                     <div *ngIf="registerForm.get('email').hasError('required')">
-                        E-mail address is required.
+                        E-mail address is required
                     </div>
                     <div
                         *ngIf="registerForm.get('email').hasError('noValidEmail')">
@@ -37,7 +37,7 @@
                      class="alert alert-danger alert-danger-form">
                     <div
                         *ngIf="registerForm.get('password').hasError('required')">
-                        Password is required.
+                        Password is required
                     </div>
                     <div
                         *ngIf="registerForm.get('password').hasError('noValidPassword')">
@@ -60,7 +60,7 @@
                      class="alert alert-danger alert-danger-form">
                     <div
                         *ngIf="registerForm.get('confirmPassword').hasError('required') || registerForm.get('confirmPassword').hasError('noMatchingPassword')">
-                        Passwords do not match.
+                        Passwords do not match
                     </div>
                 </div>
             </div>
