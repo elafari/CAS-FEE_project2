@@ -11,37 +11,38 @@ import { UserAdminComponent } from "./userAdmin/user-admin.component";
 import { NotFoundComponent } from "./pages/not-found.component";
 
 export const app_routes: Routes = <Routes>[
-  {path: '', component: HomeComponent},
-  //{path: '', pathMatch: 'full', redirectTo: '/home'},
+    {path: '', component: HomeComponent},
+    //{path: '', pathMatch: 'full', redirectTo: '/home'},
 
-  {path: 'home', component: HomeComponent},
+    {path: 'home', component: HomeComponent},
 
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'register', component: RegisterComponent},
 
-  {path: 'error', component: ErrorComponent},
+    {path: 'error', component: ErrorComponent},
 
-  {path: 'loggedInData', component: LoggedInDataComponent},
-  {path: 'linkList', component: LinkListComponent},
+    {path: 'loggedInData', component: LoggedInDataComponent},
+    {path: 'linkList', component: LinkListComponent},
 
-  {path: 'userAdmin', component: UserAdminComponent},
+    {path: 'userAdmin', component: UserAdminComponent},
 
-  {path: 'users', loadChildren: 'app/+users/users.module#UsersModule'},
-  {path: 'patients', loadChildren: 'app/+patients/patients.module#PatientsModule'},
-  {path: '**', component: NotFoundComponent}
+    {path: 'users', loadChildren: 'app/+users/users.module#UsersModule'},
+    {path: 'patients', loadChildren: 'app/+patients/patients.module#PatientsModule'},
+    {path: '**', component: NotFoundComponent}
 ];
 
-@NgModule ({
-  imports: [RouterModule.forRoot(app_routes)],
-  exports: [RouterModule]
+@NgModule({
+    imports: [RouterModule.forRoot(app_routes)],
+    exports: [RouterModule]
 })
 
-export class AppRoutingModule{}
+export class AppRoutingModule {
+}
 
 export const routingComponents = [
-  HomeComponent,
-  ErrorComponent,
-  LoggedInDataComponent,
-  LinkListComponent,
-  NotFoundComponent
+    HomeComponent,
+    ErrorComponent,
+    LoggedInDataComponent,
+    LinkListComponent,
+    NotFoundComponent
 ];

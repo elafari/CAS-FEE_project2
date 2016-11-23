@@ -6,9 +6,9 @@ import { ErrorHandlerService } from "../error/error-handler.service";
 import { BreadcrumbService } from "./breadcrumb.service";
 
 @Component({
-    selector: 'breadcrumb',
+    selector   : 'breadcrumb',
     templateUrl: './breadcrumb.component.html',
-    styleUrls: ['./breadcrump.component.scss']
+    styleUrls  : ['./breadcrump.component.scss']
 })
 export class BreadcrumbComponent {
 

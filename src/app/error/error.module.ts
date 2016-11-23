@@ -5,11 +5,12 @@ import { ErrorDisplayService } from "./error-display.service";
 
 @NgModule({
     declarations: [],
-    imports: [],
-    exports: [],
-  providers: [
-      ErrorHandlerService,
-      ErrorDisplayService
+    imports     : [],
+    exports     : [],
+    providers   : [
+        ErrorHandlerService,
+        ErrorDisplayService
     ]
 })
-export class ErrorModule {}
+export class ErrorModule {
+}

@@ -41,12 +41,12 @@
 
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="Admin">
                     <a class="dropdown-item" [routerLink]="['/userAdmin']" (click)="collapseNav(collapsibleNav)">
-                      Administrate users</a>
+                        Administrate users</a>
                     <a class="dropdown-item" [routerLink]="['/users']" (click)="collapseNav(collapsibleNav)">
-                      List users & patients</a>
+                        List users & patients</a>
                     <div *ngIf="af.auth | async" class="dropdown-divider"></div>
                     <a class="dropdown-item" [routerLink]="['/linkList']" (click)="collapseNav(collapsibleNav)">
-                      CAS FEE Project links</a>
+                        CAS FEE Project links</a>
                 </div>
             </div>
         </div>

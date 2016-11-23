@@ -7,9 +7,14 @@ import { UsersPatientComponent } from './users-patient.component';
 
 export const users_routes: Routes = <Routes>[
     {
-        path: '', component: UsersComponent, children: [
-        {path: '', component: UsersListComponent}
-    ]
+        path     : '',
+        component: UsersComponent,
+        children : [
+            {
+                path     : '',
+                component: UsersListComponent
+            }
+        ]
     }
 ];
 

@@ -2,15 +2,15 @@
 
 @include media-breakpoint-up(sm) {
   .navbar-nav-admin {
-    margin-left: 1rem;
+    margin-left : 1rem;
   }
 }
 
 .dropdown-menu-left {
-  left: auto;
-  right: 0;
+  left  : auto;
+  right : 0;
 }
 
 .nav-divider {
-  background-color: $navbar-dark-color;
+  background-color : $navbar-dark-color;
 }

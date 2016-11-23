@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { ConfigService } from "../shared/config.service";
 
 @Component({
-  templateUrl: './link-list.component.html'
+    templateUrl: './link-list.component.html'
 })
 
-export class LinkListComponent{
-  linkList: any[];
-  constructor() {
-    this.linkList = ConfigService.linkList;
-  }
+export class LinkListComponent {
+    linkList: any[];
+
+    constructor() {
+        this.linkList = ConfigService.linkList;
+    }
 }

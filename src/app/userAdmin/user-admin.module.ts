@@ -5,9 +5,10 @@ import { UserAdminComponent } from "./user-admin.component";
 
 @NgModule({
     declarations: [
-      UserAdminComponent
+        UserAdminComponent
     ],
-    imports: [
-      CommonModule]
+    imports     : [
+        CommonModule]
 })
-export class UserAdminModule {}
+export class UserAdminModule {
+}

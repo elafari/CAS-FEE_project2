@@ -51,92 +51,92 @@ export class BreadcrumbService {
         // take care of the order: the longest match first
         {
             pattern: "^(?=.*patients)(?=.*diseaseCases)(?=.*diseaseEvents)(?=.*create).*$",
-            params: ["patients", "diseaseCases", "diseaseEvents", "create"],
+            params : ["patients", "diseaseCases", "diseaseEvents", "create"],
             display: ["Home", "Patients", "Cases", "Events", "create"]
         },
         {
             pattern: "^(?=.*patients)(?=.*diseaseCases)(?=.*diseaseEvents)(?=.*edit).*$",
-            params: ["patients", "diseaseCases", "diseaseEvents", "edit"],
+            params : ["patients", "diseaseCases", "diseaseEvents", "edit"],
             display: ["Home", "Patients", "Cases", "Events", "edit"]
         },
         {
             pattern: "^(?=.*patients)(?=.*diseaseCases)(?=.*diseaseEvents).*$",
-            params: ["patients", "diseaseCases", "diseaseEvents"],
+            params : ["patients", "diseaseCases", "diseaseEvents"],
             display: ["Home", "Patients", "Cases", "Events"]
         },
         {
             pattern: "^(?=.*patients)(?=.*diseaseCases)(?=.*create).*$",
-            params: ["patients", "diseaseCases", "create"],
+            params : ["patients", "diseaseCases", "create"],
             display: ["Home", "Patients", "Cases", "create"]
         },
         {
             pattern: "^(?=.*patients)(?=.*diseaseCases)(?=.*edit).*$",
-            params: ["patients", "diseaseCases", "edit"],
+            params : ["patients", "diseaseCases", "edit"],
             display: ["Home", "Patients", "Cases", "edit"]
         },
         {
             pattern: "^(?=.*patients)(?=.*diseaseCases).*$",
-            params: ["patients", "diseaseCases"],
+            params : ["patients", "diseaseCases"],
             display: ["Home", "Patients", "Cases"]
         },
         {
             pattern: "^(?=.*patients)(?=.*create).*$",
-            params: ["patients", "create"],
+            params : ["patients", "create"],
             display: ["Home", "Patients", "create"]
         },
         {
             pattern: "^(?=.*patients)(?=.*edit).*$",
-            params: ["patients", "edit"],
+            params : ["patients", "edit"],
             display: ["Home", "Patients", "edit"]
         },
         {
             pattern: "^(?=.*patients).*$",
-            params: ["patients"],
+            params : ["patients"],
             display: ["Home", "Patients"]
         },
         {
             pattern: "^(?=.*login).*$",
-            params: ["login"],
+            params : ["login"],
             display: ["Home", "Login"]
         },
         {
             pattern: "^(?=.*register).*$",
-            params: ["register"],
+            params : ["register"],
             display: ["Home", "Register"]
         },
         {
             pattern: "^(?=.*error).*$",
-            params: ["error"],
+            params : ["error"],
             display: ["Home", "Error"]
         },
         {
             pattern: "^(?=.*loggedInData).*$",
-            params: ["loggedInData"],
+            params : ["loggedInData"],
             display: ["Home", "Display login data"]
         },
         {
             pattern: "^(?=.*linkList).*$",
-            params: ["linkList"],
+            params : ["linkList"],
             display: ["Home", "Project links"]
         },
         {
             pattern: "^(?=.*userAdmin).*$",
-            params: ["userAdmin"],
+            params : ["userAdmin"],
             display: ["Home", "Edit user data"]
         },
         {
             pattern: "^(?=.*users).*$",
-            params: ["users"],
+            params : ["users"],
             display: ["Home", "Users"]
         },
         {
             pattern: "\/home",
-            params: [],
+            params : [],
             display: []
         },
         {
             pattern: "\/",
-            params: [],
+            params : [],
             display: []
         }
     ];

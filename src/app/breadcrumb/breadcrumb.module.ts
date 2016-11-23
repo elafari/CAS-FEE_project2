@@ -9,13 +9,13 @@ import { BreadcrumbComponent } from "./breadcrumb.component";
     declarations: [
         BreadcrumbComponent
     ],
-    imports: [
+    imports     : [
         CommonModule
     ],
-    exports: [
+    exports     : [
         BreadcrumbComponent
     ],
-    providers: [
+    providers   : [
         BreadcrumbService
     ]
 })

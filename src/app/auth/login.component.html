@@ -18,8 +18,7 @@
                     <div *ngIf="loginForm.get('email').hasError('required')">
                         E-mail address is required
                     </div>
-                    <div
-                        *ngIf="loginForm.get('email').hasError('noValidEmail')">
+                    <div *ngIf="loginForm.get('email').hasError('noValidEmail')">
                         E-mail address is invalid.
                     </div>
                 </div>
@@ -35,12 +34,10 @@
 
                 <div *ngIf="loginForm.get('password').touched && !loginForm.get('password').valid"
                      class="alert alert-danger alert-danger-form">
-                    <div
-                        *ngIf="loginForm.get('password').hasError('required')">
+                    <div *ngIf="loginForm.get('password').hasError('required')">
                         Password is required
                     </div>
-                    <div
-                        *ngIf="loginForm.get('password').hasError('noValidPassword')">
+                    <div *ngIf="loginForm.get('password').hasError('noValidPassword')">
                         Password should be at least 6 characters.
                     </div>
                 </div>
