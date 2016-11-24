@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
-import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
 import { AngularFire } from 'angularfire2';
@@ -32,7 +31,8 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     subscrUser: Subscription;
     subscrPatient: Subscription;
 
-    constructor(private router: Router,
+    constructor(private fb: FormBuilder,
+                private router: Router,
                 private route: ActivatedRoute,
                 private location: Location,
                 private af: AngularFire,
@@ -42,10 +42,10 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     };
 
     ngOnInit() {
-        this.patientForm = new FormGroup({
-            name     : new FormControl('', Validators.required),
-            gender   : new FormControl('', Validators.required),
-            birthdate: new FormControl('', Validators.required)
+        this.patientForm = this.fb.group({
+            name     : ['', Validators.required],
+            gender   : ['', Validators.required],
+            birthdate: ['', Validators.required]
         });
 
         try {
