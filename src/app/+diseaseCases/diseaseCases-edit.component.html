@@ -38,11 +38,22 @@
                     Case active
                 </label>
                 <div class="col-xs-12 col-sm-8">
+                    <!--
                     <input type="checkbox" formControlName="active"
                            id="active"
                            value="active" #updateActive
                            [checked]="diseaseCaseActive == true"
                            class="form-control">
+                     -->
+
+                    <label class="switch" id="active">
+                        <input type="checkbox"
+                               [checked]="diseaseCaseActive == true"
+                               formControlName="active"
+                               class="form-control">
+                        <div class="slider round"></div>
+                    </label>
+
                 </div>
             </div>
 

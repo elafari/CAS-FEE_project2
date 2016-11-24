@@ -14,7 +14,7 @@ import { DiseaseCase } from './diseaseCases.interface';
 
 @Component({
     templateUrl: './diseaseCases-edit.component.html',
-    styleUrls  : ['../../assets/scss/forms.scss']
+    styleUrls  : ['../../assets/scss/forms.scss','../../assets/scss/toggler.scss']
 })
 export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;

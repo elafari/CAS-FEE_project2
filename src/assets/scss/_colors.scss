@@ -6,11 +6,17 @@ $breadcrumb-bg-color : #f5f5f5;
 $form-bg-color : white;
 
 $card-bg-color : #90A4AE;
-/* some colors */
+/* some colors for active cards*/
 $card-active-case-color : orange;
 $card-active-case-color : #FF8A65;  /* rötlich dunkler */
 $card-active-case-color : #EEFF41;  /* gelb-grün */
 $card-active-case-color : #FFFF8D;  /* gelb-hell */
 $card-active-case-color : #FFAB91;  /* rötlich heller */
+$card-active-case-color : #ff7133; /* rot orange */
 /* +++++++++++ */
 $card-header-bg-color : #E6EE9C;
+
+$toggle-bg-color: #ccc;
+$toggle-bg-before-color: white;
+$toggle-bg-checked-color: #ff7133;
+$toggle-input-focus-color: #2196F3;
