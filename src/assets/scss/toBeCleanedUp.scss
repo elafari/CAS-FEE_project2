@@ -6,6 +6,7 @@
 - Logged in user data
 - Modal window
 */
+/*
 table {
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
@@ -15,23 +16,30 @@ tr {
 td {
   vertical-align : middle;
 }
+*/
 
 /* Modal header color */
+/*
 .cust-table-modal-header-danger {
   background-color: #FF5252;
 }
+*/
 
 /* Error message on login and register form */
+/* in forms.scss übertragen
 .cust-error-message {
   color: red;
 }
+*/
 
+/*
 .debug {
   margin-top: 2rem;
   padding: 1rem;
   border: 1px dashed darkmagenta;
   border-radius: .5rem
 }
+*/
 
 
 

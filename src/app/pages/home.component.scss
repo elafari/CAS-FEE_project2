@@ -5,11 +5,18 @@ h1 {
   - set margins globally
   - check out responsive behaviour of title
   */
+
+
+  /* h1 hier nicht mehr separat gesetzt, sondern den Site-weiten h1
   font-family   : 'Architects Daughter', cursive, serif;
   margin-top    : 1em;
   margin-bottom : .5em;
+  */
 }
 
+
+/* img in general.scss übertragen
 img {
   display : block;
 }
+*/
