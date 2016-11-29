@@ -21,6 +21,7 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     diseaseCaseForm: FormGroup;
     diseaseCaseKey: string;
     diseaseCaseName: string;
+    diseaseCaseActive: string;
 
     patientKey: string;
     patientName: string;
@@ -61,6 +62,7 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
                                 this.patientName = patient.name;
                                 this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                                     this.diseaseCaseName = diseaseCase.name;
+                                    this.diseaseCaseActive = diseaseCase.active;
                                     this.diseaseCaseForm.setValue({
                                         name  : diseaseCase.name,
                                         type  : diseaseCase.type,
