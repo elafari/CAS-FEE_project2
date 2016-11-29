@@ -26,12 +26,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     subscrUser: Subscription;
 
+    private loggedIn;
+
     constructor(private authService: AuthService,
                 private af: AngularFire,
                 private router: Router,
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
+
+        this.loggedIn = authService.isLoggedIn;
     };
 
     ngOnInit() {
