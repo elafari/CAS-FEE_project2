@@ -15,10 +15,24 @@ import { LoggerService } from "../log/logger.service";
 @Injectable()
 export class AuthService {
 
+    private loggedIn: boolean = false;
+    private counter: number;
+
     constructor(public af: AngularFire,
                 private loggedInUserService: LoggedInUserService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
+
+        this.counter = 0;
+
+        this.af.auth.subscribe(user => {
+            if (user) {
+                this.loggedIn = true;
+            }
+            else {
+                this.loggedIn = false;
+            }
+        });
     };
 
     registerUser(user: UserLogin) {
@@ -57,6 +71,7 @@ export class AuthService {
                         email: auth.auth.providerData[0].uid,
                         error: ""
                     });
+                    this.loggedIn = true;
                     this.logger.info("[auth service] - logged in user: " + auth.auth.providerData[0].uid + " - " + auth.uid);
                 })
                 .catch((error) => {
@@ -75,5 +90,12 @@ export class AuthService {
         } catch (e) {
             this.errorHandler.traceError("[auth-service] - logout - error", e, true);
         }
+    };
+
+    isLoggedIn() {
+        this.counter++; // @todo: remove this counter
+        console.log('counter', this.counter, this.loggedIn);
+
+        return this.loggedIn;
     };
 }
