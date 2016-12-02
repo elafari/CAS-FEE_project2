@@ -1,41 +1,78 @@
 import { Injectable } from "@angular/core";
-
-import { Observable } from 'rxjs';
-
 import { AngularFire } from 'angularfire2';
-import { FirebaseAuthState } from "angularfire2/index";
+import { BehaviorSubject } from "rxjs";
 
-import { UserLogin } from "./user-login.interface";
-
+import { User, Login, Registration } from "./user.interface";
+import { DataService } from "../shared/data.service";
 import { ConfigService } from "../shared/config.service";
-import { LoggedInUserService } from "./logged-in-user.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 
 @Injectable()
 export class AuthService {
 
-    private loggedIn: boolean = false;
-    private counter: number;
+    public userData: BehaviorSubject<User> = new BehaviorSubject<User>(this.prepareUserData(null, ConfigService.loginProcessMsg));
 
-    constructor(public af: AngularFire,
-                private loggedInUserService: LoggedInUserService,
+    constructor(private af: AngularFire,
+                private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
 
-        this.counter = 0;
+        this.af.auth.subscribe(
+            (auth) => {
+                let userData: User = this.prepareUserData(auth);
+                if (!auth) return;
 
-        this.af.auth.subscribe(user => {
-            if (user) {
-                this.loggedIn = true;
-            }
-            else {
-                this.loggedIn = false;
-            }
-        });
+                this.dataService.getUser(auth.uid).subscribe(
+                    (user) => {
+                        userData.name = user.name;
+                        userData.isAdmin = user.admin;
+                        this.logger.info("[auth service] - constructor - user: " + user.name + ' admin: ' + user.admin);
+                        this.setUserData(userData)
+                    },
+                    (e) => {
+                        this.errorHandler.traceError("[auth service] - constructor - error: ", e, true);
+                    }
+                );
+            },
+            (error) => this.logger.error("[auth service] - constructor - error: " + error.message)
+        );
     };
 
-    registerUser(user: UserLogin) {
+    loginUser(user: Login) {
+        try {
+            //this.setUserData(this.prepareUserData(null, ConfigService.loginProcessMsg));
+
+            this.af.auth.login({email: user.email, password: user.password})
+                .then((auth) => {
+                    let userData: User = this.prepareUserData(auth);
+                    if (!auth) return;
+
+                    this.dataService.getUser(auth.uid).subscribe(
+                        (user) => {
+                            userData.name = user.name;
+                            userData.isAdmin = user.admin;
+                            this.logger.info("[auth service] - constructor - user: " + user.name + ' admin: ' + user.admin);
+                            this.setUserData(userData)
+                        },
+                        (e) => {
+                            this.errorHandler.traceError("[auth service] - constructor - error: ", e, true);
+                        }
+                    );
+
+                    //this.dataService.addSubscripton(this.subscrUser);
+                    this.logger.info("[auth service] - logged in user: " + auth.auth.providerData[0].uid + " - " + auth.uid);
+                })
+                .catch((error) => {
+                    this.setUserData(this.prepareUserData(null, error.message));
+                    this.logger.error("[auth service] - login error: " + error.message);
+                });
+        } catch (e) {
+            this.errorHandler.traceError("[auth-service] - loginUser - error", e, true);
+        }
+    };
+
+    registerUser(user: Registration) {
         try {
             this.af.auth.createUser({email: user.email, password: user.password})
                 .then((auth) => {
@@ -61,28 +98,6 @@ export class AuthService {
         }
     };
 
-    loginUser(user: UserLogin) {
-        try {
-            this.loggedInUserService.setUserData({key: "", email: "", error: ConfigService.loginProcessMsg});
-            this.af.auth.login({email: user.email, password: user.password})
-                .then((auth) => {
-                    this.loggedInUserService.setUserData({
-                        key  : auth.uid,
-                        email: auth.auth.providerData[0].uid,
-                        error: ""
-                    });
-                    this.loggedIn = true;
-                    this.logger.info("[auth service] - logged in user: " + auth.auth.providerData[0].uid + " - " + auth.uid);
-                })
-                .catch((error) => {
-                    this.loggedInUserService.setUserData({key: "", email: "", error: error.message});
-                    this.logger.error("[auth service] - login error: " + error.message);
-                });
-        } catch (e) {
-            this.errorHandler.traceError("[auth-service] - loginUser - error", e, true);
-        }
-    };
-
     logout() {
         try {
             this.af.auth.logout();
@@ -92,10 +107,15 @@ export class AuthService {
         }
     };
 
-    isLoggedIn() {
-        this.counter++; // @todo: remove this counter
-        console.log('counter', this.counter, this.loggedIn);
+    private prepareUserData(auth: any = null, errorMsg: string = ''): User {
+        return {
+            key  : auth ? auth.uid : '',
+            email: auth ? auth.auth.providerData[0].email : '',
+            error: errorMsg
+        };
+    }
 
-        return this.loggedIn;
+    public setUserData(user: User) {
+        this.userData.next(user);
     };
 }

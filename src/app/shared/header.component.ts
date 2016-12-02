@@ -1,16 +1,13 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-
-import { Observable } from "rxjs";
 import { Subscription } from "rxjs/Subscription";
-
 import { AngularFire } from 'angularfire2';
 
 import { AuthService } from "../auth/auth.service";
 import { DataService } from "../shared/data.service";
-import { ConfigService } from "./config.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service"
+import { User } from "../auth/user.interface";
 
 declare var jQuery: any;
 
@@ -21,12 +18,11 @@ declare var jQuery: any;
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-    loggedInUserName: string;
-    loggedInUserAdmin: string;
+    private isLoggedIn: boolean = false;
+    private loggedInUserName: string;
+    private loggedInUserAdmin: boolean;
 
     subscrUser: Subscription;
-
-    private loggedIn;
 
     constructor(private authService: AuthService,
                 private af: AngularFire,
@@ -34,29 +30,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
-
-        this.loggedIn = authService.isLoggedIn;
     };
 
     ngOnInit() {
-        try {
-            this.af.auth.subscribe(auth => {
-                if (auth) {
-                    this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-                        this.loggedInUserName = user.name;
-                        this.loggedInUserAdmin = user.admin;
-                        this.logger.info("[header] - ngOnInit - user : " + user.name + ' admin: ' + user.admin);
-                    });
-                    this.dataService.addSubscripton(this.subscrUser);
-                }
-            });
-        } catch (e) {
-            this.errorHandler.traceError("[header] - ngOnInit - error", e, true);
-        }
+        this.authService.userData.subscribe(
+            (userData: User) => {
+                this.isLoggedIn = (userData && userData.key) ? true : false;
+                this.loggedInUserName = userData.name;
+                this.loggedInUserAdmin = userData.isAdmin;
+                debugger;
+            },
+            (error) => this.logger.error("[header] - onInit - error: " + error.message)
+        );
     };
 
     onLogout(nav) {
         try {
+            debugger;
             this.collapseNav(nav);
             this.dataService.removeSubscriptions();
             this.router.navigate(['/login']);
@@ -67,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
     };
 
-    collapseNav(nav) {
+    private collapseNav(nav) {
         jQuery(nav).collapse('hide');
     };
 
@@ -76,5 +66,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.subscrUser.unsubscribe();
         }
     };
-
 }

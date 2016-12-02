@@ -12,23 +12,23 @@
     <span class="hidden-sm-up">
         <!-- icons only -->
         <div class="nav navbar-nav float-xs-right">
-            <a class="nav-item nav-link" *ngIf="authService.isLoggedIn()" [routerLink]="['/loggedInData']"
+            <a class="nav-item nav-link" *ngIf="isLoggedIn" [routerLink]="['/loggedInData']"
                routerLinkActive="active" (click)="collapseNav(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="List your user data">
                 <i class="fa fa-user" aria-hidden="true"></i>
             </a>
-            <a class="nav-item nav-link" *ngIf="authService.isLoggedIn()" [routerLink]="['/']"
+            <a class="nav-item nav-link" *ngIf="isLoggedIn" [routerLink]="['/']"
                (click)="onLogout(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="Logout user">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
             </a>
-            <a class="nav-item nav-link" *ngIf="!authService.isLoggedIn()" [routerLink]="['/login']"
+            <a class="nav-item nav-link" *ngIf="!isLoggedIn" [routerLink]="['/login']"
                routerLinkActive="active"
                (click)="collapseNav(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="Show login form">
                 <i class="fa fa-sign-in" aria-hidden="true"></i>
             </a>
-            <a class="nav-item nav-link" *ngIf="!authService.isLoggedIn()" [routerLink]="['/register']"
+            <a class="nav-item nav-link" *ngIf="!isLoggedIn" [routerLink]="['/register']"
                routerLinkActive="active"
                (click)="collapseNav(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="Show registration form">
@@ -56,7 +56,7 @@
 
         <!-- Admin -->
         <div class="nav navbar-nav navbar-nav-admin float-sm-right"
-             *ngIf="(af.auth | async) && ((loggedInUserAdmin === true))"
+             *ngIf="isLoggedIn && (loggedInUserAdmin === true)"
              routerLinkActive="active">
 
             <div class="nav-item dropdown">
@@ -83,23 +83,23 @@
         <div class="nav navbar-nav float-sm-right">
             <hr class="nav-divider hidden-sm-up">
 
-            <a class="nav-item nav-link" *ngIf="authService.isLoggedIn()" [routerLink]="['/loggedInData']"
+            <a class="nav-item nav-link" *ngIf="isLoggedIn" [routerLink]="['/loggedInData']"
                routerLinkActive="active" (click)="collapseNav(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="List your user data">
                 {{loggedInUserName}}
             </a>
-            <a class="nav-item nav-link" *ngIf="authService.isLoggedIn()" [routerLink]="['/']"
+            <a class="nav-item nav-link" *ngIf="isLoggedIn" [routerLink]="['/']"
                (click)="onLogout(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="Logout user">
                 Logout
             </a>
-            <a class="nav-item nav-link" *ngIf="!authService.isLoggedIn()" [routerLink]="['/login']"
+            <a class="nav-item nav-link" *ngIf="!isLoggedIn" [routerLink]="['/login']"
                routerLinkActive="active"
                (click)="collapseNav(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="Show login form">
                 Login
             </a>
-            <a class="nav-item nav-link" *ngIf="!authService.isLoggedIn()" [routerLink]="['/register']"
+            <a class="nav-item nav-link" *ngIf="!isLoggedIn" [routerLink]="['/register']"
                routerLinkActive="active"
                (click)="collapseNav(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="Show registration form">

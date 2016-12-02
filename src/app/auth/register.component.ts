@@ -7,7 +7,7 @@ import { LoggedInUserService } from "./logged-in-user.service";
 import { ConfigService } from "../shared/config.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
-import { Registration } from "./register.interface";
+import { Registration } from "./user.interface";
 
 @Component({
     templateUrl: './register.component.html',

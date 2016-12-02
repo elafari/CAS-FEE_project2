@@ -7,7 +7,7 @@ import { ConfigService } from "../shared/config.service";
 import { LoggedInUserService } from "./logged-in-user.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
-import { Login } from "./login.interface";
+import { Login } from "./user.interface";
 
 @Component({
     templateUrl: './login.component.html',
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
             this.authService.loginUser(key_value);
 
             this.loggedInUserService.userData.subscribe((user) => {
-                if (user.error != "") {
+                if (user.error !== '') {
                     this.errorMessage = user.error;
                 } else {
                     this.errorMessage = ConfigService.loginProcessMsg;
