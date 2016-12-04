@@ -23,7 +23,6 @@ export class AuthService {
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
 
-        //@todo: move this to onInit()
         this.authSubscription = this.af.auth.subscribe(
             (auth) => {
                 if (auth) {
@@ -52,6 +51,8 @@ export class AuthService {
             },
             (error) => this.logger.error("[auth service] - constructor - error: " + error.message)
         );
+
+        dataService.addSubscripton(this.authSubscription);
     };
 
     loginUser(user: Login) {
