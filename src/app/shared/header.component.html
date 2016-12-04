@@ -47,7 +47,7 @@
 
         <!-- Links -->
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link" *ngIf="af.auth | async" [routerLink]="['/patients']" routerLinkActive="active"
+            <a class="nav-item nav-link" *ngIf="isLoggedIn" [routerLink]="['/patients']" routerLinkActive="active"
                (click)="collapseNav(collapsibleNav)"
                data-toggle="tooltip" data-placement="bottom" title="Your patient list">
                 Patients
@@ -72,7 +72,7 @@
                         Administrate users</a>
                     <a class="dropdown-item" [routerLink]="['/users']" (click)="collapseNav(collapsibleNav)">
                         List users & patients</a>
-                    <div *ngIf="af.auth | async" class="dropdown-divider"></div>
+                    <div *ngIf="isLoggedIn" class="dropdown-divider"></div>
                     <a class="dropdown-item" [routerLink]="['/linkList']" (click)="collapseNav(collapsibleNav)">
                         CAS FEE Project links</a>
                 </div>

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 import { Router } from "@angular/router";
 
 import { AuthService } from "./auth.service";
-import { LoggedInUserService } from "./logged-in-user.service";
 import { ConfigService } from "../shared/config.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
@@ -21,7 +20,6 @@ export class RegisterComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
                 private authService: AuthService,
-                private loggedInUserService: LoggedInUserService,
                 private router: Router,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
@@ -56,8 +54,8 @@ export class RegisterComponent implements OnInit {
         try {
             this.authService.registerUser(key_value);
 
-            this.loggedInUserService.userData.subscribe((user) => {
-                if (user.error != "") {
+            this.authService.user.subscribe((user) => {
+                if (user.error) {
                     this.errorMessage = user.error;
                 } else {
                     this.errorMessage = ConfigService.loginProcessMsg;

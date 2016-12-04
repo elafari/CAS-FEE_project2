@@ -1,9 +1,21 @@
-export interface User {
-    key: string;
-    email: string;
-    name?: string;
-    isAdmin?: boolean;
-    error: string;
+export class UserClass {
+    public key: string;
+    public email: string;
+    public name?: string;
+    public isAdmin?: boolean;
+    public error: string;
+
+    constructor(data) {
+        this.key = data.key || '';
+        this.email = data.email || '';
+        this.error = data.error || '';
+        this.name = data.name || '';
+        this.isAdmin = data.isAdmin || '';
+    }
+
+    public isLoggedIn(): boolean {
+        return !!this.key;
+    }
 }
 
 export interface Login {
