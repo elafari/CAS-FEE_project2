@@ -15,7 +15,6 @@ export class AuthService {
     private userData: UserClass = new UserClass({error: ConfigService.loginProcessMsg});
     public user: BehaviorSubject<UserClass> = new BehaviorSubject<UserClass>(this.userData);
 
-    private authSubscription: Subscription;
     private dbSubscription: Subscription;
 
     constructor(private af: AngularFire,
@@ -23,7 +22,7 @@ export class AuthService {
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
 
-        this.authSubscription = this.af.auth.subscribe(
+        this.af.auth.subscribe(
             (auth) => {
                 if (auth) {
                     this.userData = new UserClass({
@@ -51,8 +50,6 @@ export class AuthService {
             },
             (error) => this.logger.error("[auth service] - constructor - error: " + error.message)
         );
-
-        dataService.addSubscripton(this.authSubscription);
     };
 
     loginUser(user: Login) {
