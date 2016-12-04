@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 
 import { AuthService } from "../auth/auth.service";
-import { DataService } from "../shared/data.service";
+import { DataService } from "./data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service"
 import { UserClass } from "../auth/user.interface";
@@ -17,11 +17,10 @@ declare let jQuery: any;
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+    private userSubscription: Subscription;
     private isLoggedIn: boolean = false;
     private loggedInUserName: string;
     private loggedInUserAdmin: boolean;
-
-    subscrUser: Subscription;
 
     constructor(private authService: AuthService,
                 private router: Router,
@@ -31,7 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     };
 
     ngOnInit() {
-        this.authService.user.subscribe(
+        this.userSubscription = this.authService.user.subscribe(
             (user: UserClass) => {
                 this.isLoggedIn = !!(user && user.key);
                 this.loggedInUserName = user.name;
@@ -58,8 +57,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     };
 
     ngOnDestroy() {
-        if (this.subscrUser) {
-            this.subscrUser.unsubscribe();
+        if (this.userSubscription) {
+            this.userSubscription.unsubscribe();
         }
     };
 }
