@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 
 import { AuthService } from "./auth.service";
 import { ConfigService } from "../shared/config.service";
-import { LoggedInUserService } from "./logged-in-user.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 import { Login } from "./user.interface";
@@ -21,7 +20,6 @@ export class LoginComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
                 private authService: AuthService,
-                private loggedInUserService: LoggedInUserService,
                 private router: Router,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
@@ -53,8 +51,8 @@ export class LoginComponent implements OnInit {
         try {
             this.authService.loginUser(key_value);
 
-            this.loggedInUserService.userData.subscribe((user) => {
-                if (user.error !== '') {
+            this.authService.user.subscribe((user) => {
+                if (user.error) {
                     this.errorMessage = user.error;
                 } else {
                     this.errorMessage = ConfigService.loginProcessMsg;
