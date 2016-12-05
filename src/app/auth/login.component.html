@@ -44,7 +44,9 @@
             </div>
 
             <div class="form-group">
-                <span class="error">{{errorMessage}}</span>
+                <div *ngIf="errorMessage" class="alert alert-danger alert-danger-form">
+                    {{errorMessage}}
+                </div>
             </div>
 
             <div class="text-sm-right">
