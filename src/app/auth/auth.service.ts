@@ -15,41 +15,47 @@ export class AuthService {
     private userData: UserClass = new UserClass({error: ConfigService.loginProcessMsg});
     public user: BehaviorSubject<UserClass> = new BehaviorSubject<UserClass>(this.userData);
 
-    private dbSubscription: Subscription;
+    private user$: Subscription;
 
     constructor(private af: AngularFire,
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
 
-        this.af.auth.subscribe(
-            (auth) => {
-                if (auth) {
-                    this.userData = new UserClass({
-                        key  : auth.uid,
-                        email: auth.auth.providerData[0].email,
-                    });
+        try {
+            this.af.auth.subscribe(
+                (auth) => {
+                    if (auth) {
+                        this.userData = new UserClass({
+                            key  : auth.uid,
+                            email: auth.auth.providerData[0].email,
+                        });
 
-                    this.dbSubscription = this.dataService.getUser(auth.uid).subscribe(
-                        (dbUser) => {
-                            this.userData.name = dbUser.name;
-                            this.userData.isAdmin = dbUser.admin;
-                            this.logger.info("[auth service] - constructor - user: " + dbUser.name + ' admin: ' + dbUser.admin);
-                            this.setUserData(this.userData)
-                        },
-                        (e) => {
-                            this.errorHandler.traceError("[auth service] - constructor - error: ", e, true);
+                        this.user$ = this.dataService.getUser(auth.uid).subscribe(
+                            (dbUser) => {
+                                this.userData.name = dbUser.name;
+                                this.userData.isAdmin = dbUser.admin;
+                                this.logger.info("[auth service] - constructor - user: " + dbUser.name + ' admin: ' + dbUser.admin);
+                                this.setUserData(this.userData)
+                            },
+                            (e) => {
+                                this.errorHandler.traceError("[auth service] - constructor - error: ", e, true);
+                            }
+                        );
+
+                        this.dataService.addSubscripton(this.user$);
+                    } else {
+                        if (this.userData.isLoggedIn()) {
+                            this.userData = new UserClass({error: ConfigService.loginProcessMsg});
+                            this.setUserData(this.userData);
                         }
-                    );
-                } else {
-                    if (this.userData.isLoggedIn()) {
-                        this.userData = new UserClass({error: ConfigService.loginProcessMsg});
-                        this.setUserData(this.userData);
                     }
-                }
-            },
-            (error) => this.logger.error("[auth service] - constructor - error: " + error.message)
-        );
+                },
+                (error) => this.logger.error("[auth service] - constructor - error: " + error.message)
+            );
+        } catch (e) {
+            this.errorHandler.traceError("[auth-service] - constructor - error", e, true);
+        }
     };
 
     loginUser(user: Login) {
@@ -70,7 +76,6 @@ export class AuthService {
 
     logout() {
         try {
-            if (this.dbSubscription) this.dbSubscription.unsubscribe();
             this.af.auth.logout();
             this.logger.info("[auth service] - logged out user");
         } catch (e) {
