@@ -21,14 +21,10 @@ form {
 }
 
 label.login, label.register {
-  padding-left: .75rem;
-  font-weight: bolder;
+  padding-left : .75rem;
+  font-weight  : bolder;
 }
 
-.label-alert {
-
-}
-
-.error-message {
-  color: $form-error-color;
+.error {
+  color : $form-error-color;
 }
