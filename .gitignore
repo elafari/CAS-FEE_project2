@@ -8,6 +8,9 @@
 /node_modules
 /bower_components
 
+# documentation
+/app-doc
+
 # IDEs and editors
 /.idea
 /.vscode

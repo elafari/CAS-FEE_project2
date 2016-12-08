@@ -1,0 +1,19 @@
+{
+  "mode": "file",
+  "out": "app-doc",
+  "theme": "default",
+  "target": "ES6",
+  "module": "commonjs",
+  "moduleResolution": "node",
+  "includeDeclarations": "false",
+  "excludeExternals": "true",
+  "exclude": "**/*.spec.ts",
+  "preserveConstEnums": "true",
+  "stripInternal": "true",
+  "ignoreCompilerErrors": "true",
+  "suppressExcessPropertyErrors": "true",
+  "suppressImplicitAnyIndexErrors": "true",
+  "experimentalDecorators": "true",
+  "emitDecoratorMetadata": "true",
+  "hideGenerator": "false"
+}
