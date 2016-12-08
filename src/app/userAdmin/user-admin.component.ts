@@ -11,7 +11,8 @@ import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 
 @Component({
-    templateUrl: './user-admin.component.html'
+    templateUrl: './user-admin.component.html',
+    styleUrls  : ['../../assets/scss/toggler.scss']
 })
 export class UserAdminComponent implements OnInit {
 

@@ -37,7 +37,7 @@ export class LoggedInDataComponent implements OnInit, OnDestroy {
                 });
                 this.dataService.addSubscripton(this.subscrUser);
             } else {
-                this.logger.warn("[diseaseCases-create] - ngOnInit - user: no logged in user");
+                this.logger.warn("[logged-in-data] - ngOnInit - user: no logged in user");
                 this.router.navigate(['/login']);
             }
         });

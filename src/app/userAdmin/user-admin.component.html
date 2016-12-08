@@ -10,12 +10,23 @@
     <tbody>
     <tr *ngFor="let user of users | async">
         <td>{{user.name}}</td>
-        <td><label><input type="checkbox"
+        <td>
+            <!--
+            <label><input type="checkbox"
                           name={{user.$key}}
                           value="admin"
                           #updateAdmin [checked]="user.admin == true"
                           [disabled]="user.name == userMainAdmin">&nbsp;&nbsp;yes
-        </label>
+            </label>
+            -->
+            <label class="switch" id="active">
+                <input type="checkbox"
+                       name={{user.$key}}
+                       value="admin"
+                       #updateAdmin [checked]="user.admin == true"
+                       [disabled]="user.name == userMainAdmin">
+                <div class="slider round"></div>
+            </label>
         </td>
         <td>
             <button type="button"
