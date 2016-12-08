@@ -17,7 +17,7 @@ declare let jQuery: any;
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-    private userSubscription: Subscription;
+    private subscrUser: Subscription;
     private isLoggedIn: boolean = false;
     private loggedInUserName: string;
     private loggedInUserAdmin: boolean;
@@ -30,14 +30,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     };
 
     ngOnInit() {
-        this.userSubscription = this.authService.user.subscribe(
-            (user: UserClass) => {
-                this.isLoggedIn = !!(user && user.key);
-                this.loggedInUserName = user.name;
-                this.loggedInUserAdmin = user.isAdmin;
-            },
-            (error) => this.logger.error("[header] - onInit - error: " + error.message)
-        );
+        try {
+            this.subscrUser = this.authService.user.subscribe(
+                (user: UserClass) => {
+                    this.isLoggedIn = !!(user && user.key);
+                    this.loggedInUserName = user.name;
+                    this.loggedInUserAdmin = user.isAdmin;
+                },
+                (error) => this.logger.error("[header] - onInit - error: " + error.message)
+            );
+        } catch (e) {
+            this.errorHandler.traceError("[header] - ngOnInit - error", e, true);
+        }
     };
 
     onLogout(nav) {
@@ -57,8 +61,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     };
 
     ngOnDestroy() {
-        if (this.userSubscription) {
-            this.userSubscription.unsubscribe();
-        }
+        if (this.subscrUser) this.subscrUser.unsubscribe();
     };
 }

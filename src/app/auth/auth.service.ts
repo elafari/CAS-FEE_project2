@@ -14,8 +14,7 @@ export class AuthService {
 
     private userData: UserClass = new UserClass({error: ConfigService.loginProcessMsg});
     public user: BehaviorSubject<UserClass> = new BehaviorSubject<UserClass>(this.userData);
-
-    private user$: Subscription;
+    private subscrUser: Subscription;
 
     constructor(private af: AngularFire,
                 private dataService: DataService,
@@ -31,7 +30,7 @@ export class AuthService {
                             email: auth.auth.providerData[0].email,
                         });
 
-                        this.user$ = this.dataService.getUser(auth.uid).subscribe(
+                        this.subscrUser = this.dataService.getUser(auth.uid).subscribe(
                             (dbUser) => {
                                 this.userData.name = dbUser.name;
                                 this.userData.isAdmin = dbUser.admin;
@@ -43,7 +42,7 @@ export class AuthService {
                             }
                         );
 
-                        this.dataService.addSubscripton(this.user$);
+                        this.dataService.addSubscripton(this.subscrUser);
                     } else {
                         if (this.userData.isLoggedIn()) {
                             this.userData = new UserClass({error: ConfigService.loginProcessMsg});
@@ -87,11 +86,7 @@ export class AuthService {
         try {
             this.af.auth.createUser({email: user.email, password: user.password})
                 .then((auth) => {
-                    // create entry in users - table with auth uid
-                    this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).set({
-                        name : user.email,
-                        admin: false
-                    });
+                    this.dataService.createUser(auth.uid, user.email);
                     this.logger.info("[auth service] - registered user uid: " + auth.uid);
                 })
                 .catch((error) => {

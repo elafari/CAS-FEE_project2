@@ -1,9 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 import { AuthService } from "./auth.service";
 import { ConfigService } from "../shared/config.service";
+import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 import { Registration } from "./user.interface";
@@ -12,14 +14,15 @@ import { Registration } from "./user.interface";
     templateUrl: './register.component.html',
     styleUrls  : ['../../assets/scss/forms.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
     registerForm: FormGroup;
-
+    private subscrUser: Subscription;
     errorMessage: string;
 
     constructor(private fb: FormBuilder,
                 private authService: AuthService,
+                private dataService: DataService,
                 private router: Router,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
@@ -52,9 +55,7 @@ export class RegisterComponent implements OnInit {
 
     onRegister(key_value: Registration) {
         try {
-            this.authService.registerUser(key_value);
-
-            this.authService.user.subscribe((user) => {
+            this.subscrUser = this.authService.user.subscribe((user) => {
                 if (user.error) {
                     this.errorMessage = user.error;
                 } else {
@@ -62,6 +63,10 @@ export class RegisterComponent implements OnInit {
                     this.router.navigate(['/patients']);
                 }
             });
+
+            this.dataService.addSubscripton(this.subscrUser);
+
+            this.authService.registerUser(key_value);
         } catch (e) {
             this.errorHandler.traceError("[register] - onRegister - error", e, true);
         }
@@ -83,9 +88,13 @@ export class RegisterComponent implements OnInit {
         if (!this.registerForm) {
             return {noMatchingPassword: true};
         }
+
         if (control.value !== this.registerForm.controls['password'].value) {
             return {noMatchingPassword: true};
         }
     };
 
+    ngOnDestroy() {
+        if (this.subscrUser) this.subscrUser.unsubscribe();
+    };
 }

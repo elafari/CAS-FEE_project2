@@ -1,9 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 import { AuthService } from "./auth.service";
 import { ConfigService } from "../shared/config.service";
+import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 import { Login } from "./user.interface";
@@ -12,18 +14,18 @@ import { Login } from "./user.interface";
     templateUrl: './login.component.html',
     styleUrls  : ['../../assets/scss/forms.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
     loginForm: FormGroup;
-
+    private subscrUser: Subscription;
     errorMessage: string;
 
     constructor(private fb: FormBuilder,
                 private authService: AuthService,
+                private dataService: DataService,
                 private router: Router,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
-
     };
 
     ngOnInit(): any {
@@ -49,9 +51,7 @@ export class LoginComponent implements OnInit {
 
     onLogin(key_value: Login) {
         try {
-            this.authService.loginUser(key_value);
-
-            this.authService.user.subscribe((user) => {
+            this.subscrUser = this.authService.user.subscribe((user) => {
                 if (user.error) {
                     this.errorMessage = user.error;
                 } else {
@@ -59,6 +59,10 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/patients']);
                 }
             });
+
+            this.dataService.addSubscripton(this.subscrUser);
+
+            this.authService.loginUser(key_value);
         } catch (e) {
             this.errorHandler.traceError("[login] - onLogin - error", e, true);
         }
@@ -74,5 +78,9 @@ export class LoginComponent implements OnInit {
         if (control.value.length < 6) {
             return {noValidPassword: true};
         }
+    };
+
+    ngOnDestroy() {
+        if (this.subscrUser) this.subscrUser.unsubscribe();
     };
 }
