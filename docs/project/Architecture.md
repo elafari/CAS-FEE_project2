@@ -25,10 +25,12 @@ Error handling and logging
 Source Documentation
 * [typedoc](http://typedoc.org/)
 
-        `npm install -g typedoc@0.5.1`
-        `cd  <project directory>\src`
-        `typedoc --excludeExternals --moduleResolution node --ignoreCompilerErrors --out c:\_cas\typedoc .\app`
-    Because of some open issues (see [typedoc issues](https://github.com/TypeStrong/typedoc/issues)) the version 0.5.1 and option --ignoreCompilerErrors is important.
+    ```
+    npm run createdoc
+    open ./app-doc/globals.html
+    ```
+    
+    Because of some open issues (see [typedoc issues](https://github.com/TypeStrong/typedoc/issues)) the version 0.5.1 and option --ignoreCompilerErrors is important (see typedoc.json)
 
 
 
