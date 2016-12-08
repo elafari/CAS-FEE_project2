@@ -1,18 +1,14 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-
-import { Observable } from "rxjs";
 import { Subscription } from "rxjs/Subscription";
 
-import { AngularFire } from 'angularfire2';
-
 import { AuthService } from "../auth/auth.service";
-import { DataService } from "../shared/data.service";
-import { ConfigService } from "./config.service";
+import { DataService } from "./data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service"
+import { UserClass } from "../auth/user.interface";
 
-declare var jQuery: any;
+declare let jQuery: any;
 
 @Component({
     selector   : 'disease-diary-header',
@@ -21,13 +17,12 @@ declare var jQuery: any;
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-    loggedInUserName: string;
-    loggedInUserAdmin: string;
-
-    subscrUser: Subscription;
+    private subscrUser: Subscription;
+    private isLoggedIn: boolean = false;
+    private loggedInUserName: string;
+    private loggedInUserAdmin: boolean;
 
     constructor(private authService: AuthService,
-                private af: AngularFire,
                 private router: Router,
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
@@ -36,16 +31,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-            this.af.auth.subscribe(auth => {
-                if (auth) {
-                    this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-                        this.loggedInUserName = user.name;
-                        this.loggedInUserAdmin = user.admin;
-                        this.logger.info("[header] - ngOnInit - user : " + user.name + ' admin: ' + user.admin);
-                    });
-                    this.dataService.addSubscripton(this.subscrUser);
-                }
-            });
+            this.subscrUser = this.authService.user.subscribe(
+                (user: UserClass) => {
+                    this.isLoggedIn = !!(user && user.key);
+                    this.loggedInUserName = user.name;
+                    this.loggedInUserAdmin = user.isAdmin;
+                },
+                (error) => this.logger.error("[header] - onInit - error: " + error.message)
+            );
         } catch (e) {
             this.errorHandler.traceError("[header] - ngOnInit - error", e, true);
         }
@@ -63,14 +56,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
     };
 
-    collapseNav(nav) {
+    private collapseNav(nav) {
         jQuery(nav).collapse('hide');
     };
 
     ngOnDestroy() {
-        if (this.subscrUser) {
-            this.subscrUser.unsubscribe();
-        }
+        if (this.subscrUser) this.subscrUser.unsubscribe();
     };
-
 }

@@ -57,6 +57,17 @@ export class DataService {
         }
     };
 
+    createUser(uid, email) {
+        try {
+            this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + uid).set({
+                name : email,
+                admin: false
+            });
+        } catch (e) {
+            this.errorHandler.traceError("[dataService] - createUser - error", e, true);
+        }
+    };
+
     getUser(userKey) {
         try {
             return this.af.database.object(String(this.DbUsers) + '/' + userKey);

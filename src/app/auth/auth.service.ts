@@ -1,66 +1,71 @@
 import { Injectable } from "@angular/core";
-
-import { Observable } from 'rxjs';
-
 import { AngularFire } from 'angularfire2';
-import { FirebaseAuthState } from "angularfire2/index";
+import { BehaviorSubject } from "rxjs";
+import { Subscription } from "rxjs/Subscription";
 
-import { UserLogin } from "./user-login.interface";
-
+import { UserClass, Login, Registration } from "./user.interface";
+import { DataService } from "../shared/data.service";
 import { ConfigService } from "../shared/config.service";
-import { LoggedInUserService } from "./logged-in-user.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 
 @Injectable()
 export class AuthService {
 
-    constructor(public af: AngularFire,
-                private loggedInUserService: LoggedInUserService,
+    private userData: UserClass = new UserClass({error: ConfigService.loginProcessMsg});
+    public user: BehaviorSubject<UserClass> = new BehaviorSubject<UserClass>(this.userData);
+    private subscrUser: Subscription;
+
+    constructor(private af: AngularFire,
+                private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
-    };
 
-    registerUser(user: UserLogin) {
         try {
-            this.af.auth.createUser({email: user.email, password: user.password})
-                .then((auth) => {
-                    this.loggedInUserService.setUserData({
-                        key  : auth.uid,
-                        email: auth.auth.providerData[0].uid,
-                        error: ""
-                    });
+            this.af.auth.subscribe(
+                (auth) => {
+                    if (auth) {
+                        this.userData = new UserClass({
+                            key  : auth.uid,
+                            email: auth.auth.providerData[0].email,
+                        });
 
-                    // create entry in users - table with auth uid
-                    this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).set({
-                        name : user.email,
-                        admin: false
-                    });
-                    this.logger.info("[auth service] - registered user uid: " + auth.uid);
-                })
-                .catch((error) => {
-                    this.loggedInUserService.setUserData({key: "", email: "", error: error.message});
-                    this.logger.error("[auth service] - register error: " + error.message);
-                });
+                        this.subscrUser = this.dataService.getUser(auth.uid).subscribe(
+                            (dbUser) => {
+                                this.userData.name = dbUser.name;
+                                this.userData.isAdmin = dbUser.admin;
+                                this.logger.info("[auth service] - constructor - user: " + dbUser.name + ' admin: ' + dbUser.admin);
+                                this.setUserData(this.userData)
+                            },
+                            (e) => {
+                                this.errorHandler.traceError("[auth service] - constructor - error: ", e, true);
+                            }
+                        );
+
+                        this.dataService.addSubscripton(this.subscrUser);
+                    } else {
+                        if (this.userData.isLoggedIn()) {
+                            this.userData = new UserClass({error: ConfigService.loginProcessMsg});
+                            this.setUserData(this.userData);
+                        }
+                    }
+                },
+                (error) => this.logger.error("[auth service] - constructor - error: " + error.message)
+            );
         } catch (e) {
-            this.errorHandler.traceError("[auth-service] - registerUser - error", e, true);
+            this.errorHandler.traceError("[auth-service] - constructor - error", e, true);
         }
     };
 
-    loginUser(user: UserLogin) {
+    loginUser(user: Login) {
         try {
-            this.loggedInUserService.setUserData({key: "", email: "", error: ConfigService.loginProcessMsg});
             this.af.auth.login({email: user.email, password: user.password})
                 .then((auth) => {
-                    this.loggedInUserService.setUserData({
-                        key  : auth.uid,
-                        email: auth.auth.providerData[0].uid,
-                        error: ""
-                    });
                     this.logger.info("[auth service] - logged in user: " + auth.auth.providerData[0].uid + " - " + auth.uid);
                 })
                 .catch((error) => {
-                    this.loggedInUserService.setUserData({key: "", email: "", error: error.message});
+                    this.userData = new UserClass({error: error.message});
+                    this.setUserData(this.userData);
                     this.logger.error("[auth service] - login error: " + error.message);
                 });
         } catch (e) {
@@ -75,5 +80,26 @@ export class AuthService {
         } catch (e) {
             this.errorHandler.traceError("[auth-service] - logout - error", e, true);
         }
+    };
+
+    registerUser(user: Registration) {
+        try {
+            this.af.auth.createUser({email: user.email, password: user.password})
+                .then((auth) => {
+                    this.dataService.createUser(auth.uid, user.email);
+                    this.logger.info("[auth service] - registered user uid: " + auth.uid);
+                })
+                .catch((error) => {
+                    this.userData = new UserClass({error: error.message});
+                    this.setUserData(this.userData);
+                    this.logger.error("[auth service] - register error: " + error.message);
+                });
+        } catch (e) {
+            this.errorHandler.traceError("[auth-service] - registerUser - error", e, true);
+        }
+    };
+
+    private setUserData(userData: UserClass) {
+        this.user.next(userData);
     };
 }
