@@ -1,11 +1,4 @@
-## Feature Check
 
-
-
-
-===========
-
-end
 
 ## Feature Check
 ### Mandatory features

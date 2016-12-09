@@ -1,15 +1,4 @@
-## API ##
 
-* [Angularfire2](https://angularfire2.com/api/)
-    * auth
-    * list
-    * object
-
-
-
-===========
-
-end
 
 ## API ##
 Hint: Watch out singular and plural
