@@ -47,14 +47,36 @@ See separate files:
 - [docs/diagrams/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/diagrams/)
 - [docs/firebase/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/firebase/)
 
+
+
+## (Example) Usage
+- On the very right on the navigation bar you have the two options to login or register a new user account.
+  - The `Register` form requires a unique user email address and will also ask you to do so in case you entered a email address which is already in use. 
+- After you have successfully logged in, you will be automatically forwarded to screen `Patients`
+- Tab `Disease Diary` navigates to home
+- Navigate back to patients screen and use the tab `Patients` to edit or create patients.
+- On screen `My Patients` add new patients by clicking the appropriate card
+- On screen `Add Patient` fill in name, date of birth and gender and submit with `Add Patient`
+- After adding a patient you're back on screen `Patients`
+- On patients cards you can `Edit` previously entered data
+- Or you can open new cases by clicking `Cases`
+- On screen `Cases` it's the same logic as that on `Patients`
+- You can add cases and after adding a case
+- You can edit the case properties
+- Or you can open new events for a case by clicking `Events`
+- On screen `Events` you can add events and after adding an event
+- You can edit the event properties
+
+
+
+
+===========
+===========
+===========
 ===========
 
 end
 
-## (Example) Usage
-- On the very right on the yellow navigation bar you have the two options to login or create a new user account.
-  - The `create account` form requires a unique user name and will also ask you to do so in case you entered a username which is already in use. 
-- On the main screen use the tab "Articles" to search for articles. This functionallity is open to anybody so does not use any authentication. The text search retuns matches of title or description.
 - The secound tab `Add` is used to post new articles to .lnk. New articles can only be posted once you have successfully logged in. If you access the `Add` tab without a previous authenification you will be kindly asked to login. 
 - To add a new article (i.e. to share a .lnk you love) do the following:
     - go to the tab "Add"
