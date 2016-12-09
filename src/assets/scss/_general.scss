@@ -1,10 +1,18 @@
-body {
-  background : $body-bg-color;
-  margin-top : 56px;
+html {
+  height : 100%;
+}
 
-  @include media-breakpoint-up(sm) {
-    margin-top : 54px;
-  }
+body {
+  height     : 100%;
+  background : $body-bg-color;
+}
+
+.loading-spinner {
+  position   : absolute;
+  top        : 50%;
+  left       : 0;
+  right      : 0;
+  margin-top : -32px;
 }
 
 h1 {
