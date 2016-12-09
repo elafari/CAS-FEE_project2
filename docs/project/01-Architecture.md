@@ -1,7 +1,7 @@
 ## Application architecture and design
 
 ###Angular 2 Features
-- router loadChildren (e.g. app.routing.ts, patients.routing.ts)
+- router loadChildren `lazy loading` (e.g. app.routing.ts, patients.routing.ts)
 - router events for creating breadcrumbs (e.g. breadcrumb.component.ts)
 - observables and subscriptions (see also angularfire2)
 - observable subjects (e.g. logged-in-user.service.ts with BehaviorSubject)
