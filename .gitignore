@@ -8,3 +8,6 @@ npm-debug.log*
 
 # Dependency directories
 node_modules
+
+# Documentation
+app-doc
