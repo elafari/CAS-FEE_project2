@@ -7,17 +7,21 @@
 - observable subjects (e.g. logged-in-user.service.ts with BehaviorSubject)
 - use service in service: @Injectable decorator (e.g. data.service.ts)
 - use own decorators (e.g. log decorator logWrap in data.service.ts)
+
 ###Database Firebase (see also doc sub directory firebase)
 - angularfire2 library
 - email authentication
 - observables (FirebaseListObservable, FirebaseObjectObservable)
+
 ###Application
 - modularization (e.g. error, log, auth, userAdmin, breadcrumb)
 - router lazyloading (e.g. +users, +patients, +diseaseCases)
 - sub-routing (e.g. app.routing.ts, patients.routing.ts)
+
 ###Error handling and logging
 - error handler module: catch error and delegate to error display handler, error logging and optional route to home
 - log module: custom console log service
+
 ###Source Documentation
 - [typedoc](http://typedoc.org/)
 
