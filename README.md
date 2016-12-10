@@ -27,26 +27,7 @@ When babies or infants contract a disease, they can quickly develop very high te
 - Port already in use?
 - Clear npm cache
 
-## Change log
-- version 0.1
-
-## License and author info
-
-Rafael Bamert - [GitHub](https://github.com/elafari)
-
-Toni Kammermeier - [GitHub](https://github.com/tonikam)
-
-## Project Management
-See separate files:
-
-- [docs/project/01-Architecture.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/01-Architecture.md)
-- [docs/project/02-Entities.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/02-Entities.md)
-- [docs/project/03-Firebase-API.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/03-Firebase-API.md)
-- [docs/project/04-Usage.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/Usage.md)
-- [docs/diagrams/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/diagrams/)
-- [docs/firebase/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/firebase/)
-
-
+## Technology stack
 ###Frontend
 - [**Angular2**](https://angular.io/ "https://angular.io/")
 - [**Typescript**](https://www.typescriptlang.org/ "https://www.typescriptlang.org/")
@@ -79,3 +60,24 @@ See separate files:
 
 ###Frontend
 - xxx
+
+## Change log
+- version 0.1
+
+## License and author info
+
+Rafael Bamert - [GitHub](https://github.com/elafari)
+
+Toni Kammermeier - [GitHub](https://github.com/tonikam)
+
+## Project Management
+See separate files:
+
+- [docs/project/01-Architecture.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/01-Architecture.md)
+- [docs/project/02-Entities.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/02-Entities.md)
+- [docs/project/03-Firebase-API.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/03-Firebase-API.md)
+- [docs/project/04-Usage.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/Usage.md)
+- [docs/diagrams/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/diagrams/)
+- [docs/firebase/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/firebase/)
+
+
