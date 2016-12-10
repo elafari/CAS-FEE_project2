@@ -55,6 +55,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     onRegister(key_value: Registration) {
         try {
+            this.authService.resetUserData();
             this.subscrUser = this.authService.user$.subscribe((user) => {
                 if (user.error) {
                     this.errorMessage = user.error;

@@ -9,6 +9,7 @@ import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 import { Login } from "./user.interface";
+import { UserClass } from "./user.interface";
 
 @Component({
     templateUrl: './login.component.html',
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     onLogin(key_value: Login) {
         try {
+            this.authService.resetUserData();
             this.subscrUser = this.authService.user$.subscribe((user) => {
                 if (user.error) {
                     this.errorMessage = user.error;

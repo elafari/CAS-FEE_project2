@@ -104,4 +104,9 @@ export class AuthService {
     private setUserData(userData: UserClass) {
         this.user$.next(userData);
     };
+
+    public resetUserData() {
+        let resetData = new UserClass({error: ConfigService.loginProcessMsg});
+        this.user$.next(resetData);
+    }
 }
