@@ -35,12 +35,12 @@
             <div class="modal-body">
                 <p>Are you sure to delete this patient?</p>
                 <p>All cases and events of this patient are also deleted!</p>
-                <label>
+                <label *ngIf="isDevMode" class="debug">
                     <input type="checkbox"
                            name='Simulation'
                            value="simulate" #updateSimulation
-                           [checked]="simulateDeletion == true">
-                    &nbsp;&nbsp;Simulation (only log delete information)
+                           [checked]="simulateDeletion">
+                    Simulation (no object deletion, only log delete information in console)
                 </label>
             </div>
 

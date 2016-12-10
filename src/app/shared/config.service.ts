@@ -7,7 +7,6 @@ export class ConfigService {
     }
 
     public static devMode = true;
-    public static logFlag = true;
 
     public static mainAdmin = "admin@p2.ch";
     public static loginProcessMsg = "processing..";
@@ -64,6 +63,7 @@ export class ConfigService {
         return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|bla|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
     };
 
+    // color list for console log information
     public static colorList = {
         "warn" : "color: green; background-color:yellow",
         "error": "color: white; background-color:red",
@@ -83,5 +83,20 @@ export class ConfigService {
 
     public static getGender() {
         return this._gender;
+    };
+
+    private static _eventType = [
+        {
+            key : 'Medikation',
+            text: 'Medikation'
+        },
+        {
+            key : 'Temperatur',
+            text: 'Temperatur'
+        }
+    ];
+
+    public static getEventType() {
+        return this._eventType;
     };
 }

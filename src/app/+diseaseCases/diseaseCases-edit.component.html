@@ -19,6 +19,7 @@
                 </div>
             </div>
 
+            <!--
             <div class="form-group row">
                 <label for="type" class="col-form-label col-xs-12 col-sm-4">
                     Type
@@ -32,6 +33,7 @@
                     </div>
                 </div>
             </div>
+            -->
 
             <div class="form-group row">
                 <label for="startDate" class="col-form-label col-xs-12 col-sm-4">
@@ -56,11 +58,11 @@
                     Case active
                 </label>
                 <div class="col-xs-12 col-sm-8">
-                    <label class="switch" id="active">
+                    <label class="switch">
                         <input type="checkbox"
-                               [checked]="diseaseCaseActive == true"
                                formControlName="active"
-                               class="form-control">
+                               class="form-control"
+                               id="active">
                         <div class="slider round"></div>
                     </label>
                 </div>
@@ -110,11 +112,12 @@
             <div class="modal-body">
                 <p>Are you sure to delete this disease case?</p>
                 <p>All events of this case will also be deleted!</p>
-                <label>
+                <label *ngIf="isDevMode" class="debug">
                     <input type="checkbox" name='Simulation' value="simulate"
                            #updateSimulation
-                           [checked]="simulateDeletion === true">
-                    Simulation (only log delete information)
+                           [checked]="simulateDeletion"
+                           (change)="simulateDeletion = updateSimulation.checked">
+                    Simulation (no object deletion, only log delete information in console)
                 </label>
             </div>
 
@@ -127,7 +130,7 @@
                 </button>
                 <button type="button"
                         class="btn btn-danger"
-                        (click)="deleteDiseaseCase(updateSimulation.checked)"
+                        (click)="deleteDiseaseCase()"
                         data-dismiss="modal">
                     Delete
                 </button>

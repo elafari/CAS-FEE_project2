@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
@@ -13,6 +14,7 @@ export class UsersPatientComponent implements OnInit {
     @Input() user: any;
     @Input() patient: any;
 
+    isDevMode: boolean = ConfigService.devMode;
     patientKey: string;
 
     showModalDialogDelete: string;
@@ -25,7 +27,7 @@ export class UsersPatientComponent implements OnInit {
 
     ngOnInit() {
         try {
-            this.simulateDeletion = true;
+            this.simulateDeletion = this.isDevMode;
             this.patientKey = this.patient.$key;
         } catch (e) {
             this.errorHandler.traceError("[users-patient] - ngOnInit - error", e, true);

@@ -92,11 +92,12 @@
             <div class="modal-body">
                 <p>Are you sure to delete this patient?</p>
                 <p>All cases and events of this patient will also be deleted!</p>
-                <label>
+                <label *ngIf="isDevMode" class="debug">
                     <input type="checkbox" name='Simulation' value="simulate"
                            #updateSimulation
-                           [checked]="simulateDeletion === true">
-                    Simulation (only log delete information)
+                           [checked]="simulateDeletion"
+                           (change)="simulateDeletion = updateSimulation.checked">
+                    Simulation (no object deletion, only log delete information in console)
                 </label>
             </div>
 
@@ -109,7 +110,7 @@
                 </button>
                 <button type="button"
                         class="btn btn-danger"
-                        (click)="deletePatient(updateSimulation.checked)"
+                        (click)="deletePatient()"
                         data-dismiss="modal">
                     Delete
                 </button>

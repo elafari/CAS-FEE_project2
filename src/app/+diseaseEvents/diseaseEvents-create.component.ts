@@ -18,6 +18,7 @@ import { DiseaseEvent } from './diseaseEvents.interface';
 })
 export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
+    eventTypeConfig: any[] = ConfigService.getEventType();
     diseaseEventForm: FormGroup;
     diseaseCaseKey: string;
     diseaseCaseName: string;

@@ -21,8 +21,6 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     diseaseCaseForm: FormGroup;
     diseaseCaseKey: string;
     diseaseCaseName: string;
-    diseaseCaseActive: string;
-    diseaseCaseEndDate: string;
 
     patientKey: string;
     patientName: string;
@@ -54,7 +52,7 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
         });
 
         try {
-            this.simulateDeletion = true;
+            this.simulateDeletion = this.isDevMode;
             this.af.auth.subscribe(auth => {
                 if (auth) {
                     this.subscrRoute = this.route.params.subscribe(
@@ -65,8 +63,6 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
                                 this.patientName = patient.name;
                                 this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                                     this.diseaseCaseName = diseaseCase.name;
-                                    this.diseaseCaseActive = diseaseCase.active;
-                                    this.diseaseCaseEndDate = diseaseCase.endDate;
 
                                     this.diseaseCaseForm.setValue({
                                         name     : diseaseCase.name,
@@ -109,8 +105,9 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
         }
     };
 
-    deleteDiseaseCase(simulate) {
+    deleteDiseaseCase() {
         try {
+            let simulate = this.simulateDeletion;
             this.showModalDialog = "";
             this.logger.info("[diseaseCases-edit] - deleteDiseaseCase - diseaseCase: " + this.diseaseCaseKey + " - simulation: " + simulate);
             this.dataService.deleteDiseaseCase(this.diseaseCaseKey, simulate);
@@ -121,12 +118,12 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     };
 
     showDeleteDialog(dialogAttribute) {
-        this.simulateDeletion = true;
+        this.simulateDeletion = this.isDevMode;
         this.showModalDialog = dialogAttribute;
     };
 
     goBack() {
-        this.simulateDeletion = true;
+        this.simulateDeletion = this.isDevMode;
         this.location.back();
     };
 

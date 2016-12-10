@@ -18,6 +18,7 @@ import { DiseaseEvent } from './diseaseEvents.interface';
 })
 export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
+    eventTypeConfig: any[] = ConfigService.getEventType();
     diseaseEventForm: FormGroup;
     diseaseCaseKey: string;
     diseaseCaseName: string;
@@ -48,7 +49,7 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
         });
 
         try {
-            this.simulateDeletion = true;
+            this.simulateDeletion = this.isDevMode;
             this.af.auth.subscribe(auth => {
                 if (auth) {
                     this.subscrRoute = this.route.params.subscribe(
@@ -88,8 +89,9 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
         }
     };
 
-    deleteDiseaseEvent(simulate) {
+    deleteDiseaseEvent() {
         try {
+            let simulate = this.simulateDeletion;
             this.showModalDialog = "";
             this.logger.info("[diseaseEvents-edit] - deleteDiseaseEvent - diseaseEvent: " + this.diseaseEventKey + " - simulation: " + simulate);
             this.dataService.deleteDiseaseEvent(this.diseaseEventKey, simulate);
@@ -100,7 +102,7 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
     };
 
     goBack() {
-        this.simulateDeletion = true;
+        this.simulateDeletion = this.isDevMode;
         this.location.back();
     };
 
@@ -109,7 +111,7 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
     };
 
     showDeleteDialog(dialogAttribute) {
-        this.simulateDeletion = true;
+        this.simulateDeletion = this.isDevMode;
         this.showModalDialog = dialogAttribute;
     };
 

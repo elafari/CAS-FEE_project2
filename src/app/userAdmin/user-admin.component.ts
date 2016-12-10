@@ -15,7 +15,7 @@ import { LoggerService } from "../log/logger.service";
     styleUrls  : ['../../assets/scss/toggler.scss']
 })
 export class UserAdminComponent implements OnInit {
-
+    isDevMode: boolean = ConfigService.devMode;
     users: Observable<any>;
     userMainAdmin: string;
 

@@ -49,7 +49,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
         });
 
         try {
-            this.simulateDeletion = true;
+            this.simulateDeletion = this.isDevMode;
             this.af.auth.subscribe(auth => {
                 if (auth) {
                     this.subscrRoute = this.route.params.subscribe(
@@ -91,8 +91,9 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
         }
     };
 
-    deletePatient(simulate) {
+    deletePatient() {
         try {
+            let simulate = this.simulateDeletion;
             this.showModalDialog = "";
             this.logger.info("[patients-edit] - deletePatient - patient: " + this.patientKey + " - simulation: " + simulate);
             this.dataService.deletePatient(this.patientKey, simulate);
@@ -103,7 +104,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     };
 
     goBack() {
-        this.simulateDeletion = true;
+        this.simulateDeletion = this.isDevMode;
         this.location.back();
     };
 
@@ -112,7 +113,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     };
 
     showDeleteDialog(dialogAttribute) {
-        this.simulateDeletion = true;
+        this.simulateDeletion = this.isDevMode;
         this.showModalDialog = dialogAttribute;
     };
 

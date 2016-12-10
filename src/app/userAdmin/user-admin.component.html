@@ -11,20 +11,12 @@
     <tr *ngFor="let user of users | async">
         <td>{{user.name}}</td>
         <td>
-            <!--
-            <label><input type="checkbox"
-                          name={{user.$key}}
-                          value="admin"
-                          #updateAdmin [checked]="user.admin == true"
-                          [disabled]="user.name == userMainAdmin">&nbsp;&nbsp;yes
-            </label>
-            -->
             <label class="switch" id="active">
                 <input type="checkbox"
                        name={{user.$key}}
                        value="admin"
-                       #updateAdmin [checked]="user.admin == true"
-                       [disabled]="user.name == userMainAdmin">
+                       #updateAdmin [checked]="user.admin === true"
+                       [disabled]="user.name === userMainAdmin">
                 <div class="slider round"></div>
             </label>
         </td>
@@ -65,9 +57,11 @@
                     <div class="modal-body">
                         <p>Are you sure to delete this user?</p>
                         <p>All patients, cases and events of this user are also deleted!</p>
-                        <label><input type="checkbox" name='Simulation' value="simulate" #updateSimulation
-                                      [checked]="simulateDeletion == true">&nbsp;&nbsp;Simulation (only log delete
-                            information)</label>
+                        <label *ngIf="isDevMode" class="debug">
+                            <input type="checkbox" name='Simulation' value="simulate" #updateSimulation
+                                   [checked]="simulateDeletion">
+                            Simulation (no object deletion, only log delete information in console)
+                        </label>
                     </div>
                     <div class="modal-footer">
                         <button type="button"

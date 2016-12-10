@@ -12,23 +12,24 @@ import { LoggerService } from "../log/logger.service";
 import logWrap from "../log/logWrap.decorator";
 
 import { ConfigService } from "./config.service";
+import Promise = firebase.Promise;
 
 @Injectable()
 export class DataService {
 
-    DbAdmins: string;
-    DbUsers: string;
-    DbPatients: string;
-    DbCases: string;
-    DbEvents: string;
+    DbAdmins:string;
+    DbUsers:string;
+    DbPatients:string;
+    DbCases:string;
+    DbEvents:string;
 
-    userSubscription: Subscription;
+    userSubscription:Subscription;
 
-    subscriptionList: Array<any>;
+    subscriptionList:Array<any>;
 
-    constructor(private af: AngularFire,
-                private errorHandler: ErrorHandlerService,
-                private logger: LoggerService) {
+    constructor(private af:AngularFire,
+                private errorHandler:ErrorHandlerService,
+                private logger:LoggerService) {
         this.DbAdmins = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.admins;
         this.DbUsers = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users;
         this.DbPatients = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.patients;
@@ -40,7 +41,7 @@ export class DataService {
 
     // Users + + + + + + + + + + + + + + +
 
-    setUserAdminRole(userKey) {
+    setUserAdminRole(userKey:string) {
         try {
             this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.admins + '/' + userKey).set({adminRole: true});
         } catch (e) {
@@ -48,7 +49,7 @@ export class DataService {
         }
     };
 
-    removeUserAdminRole(userKey) {
+    removeUserAdminRole(userKey:string) {
         try {
             let admins = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.admins);
             admins.remove(userKey);
@@ -57,7 +58,7 @@ export class DataService {
         }
     };
 
-    createUser(uid, email) {
+    createUser(uid:string, email:string) {
         try {
             this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + uid).set({
                 name : email,
@@ -68,7 +69,7 @@ export class DataService {
         }
     };
 
-    getUser(userKey) {
+    getUser(userKey:string):FirebaseObjectObservable<any> {
         try {
             return this.af.database.object(String(this.DbUsers) + '/' + userKey);
         } catch (e) {
@@ -77,7 +78,7 @@ export class DataService {
     };
 
     @logWrap
-    updateUser(userKey, key_value) {
+    updateUser(userKey:string, key_value:any) {
         try {
             let user = this.getUser(userKey);
             user.update(key_value);
@@ -86,7 +87,7 @@ export class DataService {
         }
     };
 
-    deleteUser(userKey, simulate = true) {
+    deleteUser(userKey:string, simulate:boolean = true) {
         try {
             let users = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users);
             this.logger.info("[dataService] - deleteUser - user: " + userKey + " - simulation: " + simulate);
@@ -109,7 +110,7 @@ export class DataService {
         }
     };
 
-    getUserList() {
+    getUserList():FirebaseListObservable<any[]> {
         try {
             let queryDefinition = {};
             queryDefinition = {query: {orderByChild: 'name'}};
@@ -119,7 +120,7 @@ export class DataService {
         }
     };
 
-    getAllUsersAndPatients() {
+    getAllUsersAndPatients():Observable<any[]> {
         try {
             let queryDefinitionUsers = {};
             queryDefinitionUsers = {query: {orderByKey: true}};
@@ -140,7 +141,7 @@ export class DataService {
 
     // Patients + + + + + + + + + + + + + + +
 
-    getPatient(patientKey) {
+    getPatient(patientKey:string) {
         try {
             return this.af.database.object(String(this.DbPatients) + '/' + patientKey);
         } catch (e) {
@@ -149,7 +150,7 @@ export class DataService {
     };
 
     @logWrap
-    updatePatient(patientKey, key_value) {
+    updatePatient(patientKey:string, key_value:any) {
         try {
             let patient = this.getPatient(patientKey);
             patient.update(key_value);
@@ -158,7 +159,7 @@ export class DataService {
         }
     };
 
-    createPatient(key_value) {
+    createPatient(key_value:any) {
         try {
             this.af.database.list(String(this.DbPatients)).push(key_value);
         } catch (e) {
@@ -166,7 +167,7 @@ export class DataService {
         }
     };
 
-    deletePatient(patientKey, simulate = true) {
+    deletePatient(patientKey:string, simulate:boolean = true) {
         try {
             let patients = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.patients);
             this.logger.info("[dataService] - deletePatient - patient: " + patientKey + " - simulation: " + simulate);
@@ -188,7 +189,7 @@ export class DataService {
         }
     };
 
-    getPatients(userKey) {
+    getPatients(userKey:string):Observable<any[]> {
         try {
             let queryDefinition = {};
             queryDefinition = {query: {orderByChild: 'user', equalTo: userKey}};
@@ -204,7 +205,7 @@ export class DataService {
 
     // Disease Cases + + + + + + + + + + + + + + +
 
-    getDiseaseCase(diseaseCaseKey) {
+    getDiseaseCase(diseaseCaseKey:string):FirebaseObjectObservable<any> {
         try {
             return this.af.database.object(String(this.DbCases) + '/' + diseaseCaseKey);
         } catch (e) {
@@ -213,7 +214,7 @@ export class DataService {
     };
 
     @logWrap
-    updateDiseaseCase(diseaseCaseKey, key_value) {
+    updateDiseaseCase(diseaseCaseKey:string, key_value:any) {
         try {
             if (key_value.startDate) {
                 key_value.startDate = this.toBackendDate(key_value.startDate);
@@ -225,7 +226,7 @@ export class DataService {
         }
     };
 
-    createDiseaseCase(key_value) {
+    createDiseaseCase(key_value:any):Promise<any> {
         try {
             key_value.startDate = this.toBackendDate(key_value.startDate);
             return this.af.database.list(String(this.DbCases)).push(key_value);
@@ -234,7 +235,7 @@ export class DataService {
         }
     };
 
-    deleteDiseaseCase(diseaseCaseKey, simulate = true) {
+    deleteDiseaseCase(diseaseCaseKey:string, simulate:boolean = true) {
         try {
             let diseaseCases = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.diseaseCases);
             this.logger.info("[dataService] - deleteDiseaseCase - diseaseCase: " + diseaseCaseKey + " - simulation: " + simulate);
@@ -256,7 +257,7 @@ export class DataService {
         }
     };
 
-    getDiseaseCases(patientKey) {
+    getDiseaseCases(patientKey:string):Observable<any[]> {
         try {
             let queryDefinition = {};
             queryDefinition = {query: {orderByChild: 'patient', equalTo: patientKey}};
@@ -272,7 +273,7 @@ export class DataService {
 
     // Disease Events + + + + + + + + + + + + + + +
 
-    getDiseaseEvent(diseaseEventKey) {
+    getDiseaseEvent(diseaseEventKey:string):FirebaseObjectObservable<any> {
         try {
             return this.af.database.object(String(this.DbEvents) + '/' + diseaseEventKey);
         } catch (e) {
@@ -281,7 +282,7 @@ export class DataService {
     };
 
     @logWrap
-    updateDiseaseEvent(diseaseEventKey, key_value) {
+    updateDiseaseEvent(diseaseEventKey:string, key_value:any) {
         try {
             let diseaseEvent = this.getDiseaseEvent(diseaseEventKey);
             diseaseEvent.update(key_value);
@@ -290,7 +291,7 @@ export class DataService {
         }
     };
 
-    createDiseaseEvent(key_value) {
+    createDiseaseEvent(key_value:any) {
         try {
             this.af.database.list(String(this.DbEvents)).push(key_value);
         } catch (e) {
@@ -298,7 +299,7 @@ export class DataService {
         }
     };
 
-    deleteDiseaseEvent(diseaseEventKey, simulate = true) {
+    deleteDiseaseEvent(diseaseEventKey:string, simulate:boolean = true) {
         try {
             let diseaseEvents = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.diseaseEvents);
             this.logger.info("[dataService] - deleteDiseaseEvent - diseaseEvent: " + diseaseEventKey + " - simulation: " + simulate);
@@ -310,7 +311,7 @@ export class DataService {
         }
     };
 
-    getDiseaseEvents(diseaseCaseKey) {
+    getDiseaseEvents(diseaseCaseKey:string):Observable<any[]> {
         try {
             let queryDefinition = {};
             queryDefinition = {query: {orderByChild: 'case', equalTo: diseaseCaseKey}};
@@ -326,7 +327,7 @@ export class DataService {
 
     // Subscriptions + + + + + + + + + + + + + + +
 
-    addSubscripton(subscrObj) {
+    addSubscripton(subscrObj:Subscription) {
         this.subscriptionList.push({"subObj": subscrObj});
     };
 
@@ -342,19 +343,19 @@ export class DataService {
 
     // Helpers + + + + + + + + + + + + + + +
 
-    toBackendDate(date: string) {
+    toBackendDate(date:string) {
         return date ? date.substr(6, 4) + "-" + date.substr(3, 2) + "-" + date.substr(0, 2) : '';
     };
 
-    toFrontendDate(date: string) {
+    toFrontendDate(date:string) {
         return (date) ? date.substr(8, 2) + "." + date.substr(5, 2) + "." + date.substr(0, 4) : '';
     };
 
-    getBackendDate(): string {
+    getBackendDate():string {
         return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
     };
 
-    getFrontendDate(): string {
+    getFrontendDate():string {
         return new Date().getDate() + '.' + (new Date().getMonth() + 1) + '.' + new Date().getFullYear();
     };
 }
