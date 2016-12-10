@@ -10,7 +10,7 @@ export class ConfigService {
     public static logFlag = true;
 
     public static mainAdmin = "admin@p2.ch";
-    public static loginProcessMsg = "..login process";
+    public static loginProcessMsg = "processing..";
 
     public static linkList = [
         {
