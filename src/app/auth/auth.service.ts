@@ -13,7 +13,7 @@ import { LoggerService } from "../log/logger.service";
 export class AuthService {
 
     private userData: UserClass = new UserClass({error: ConfigService.loginProcessMsg});
-    public user: BehaviorSubject<UserClass> = new BehaviorSubject<UserClass>(this.userData);
+    public user$: BehaviorSubject<UserClass> = new BehaviorSubject<UserClass>(this.userData);
     private subscrUser: Subscription;
 
     constructor(private af: AngularFire,
@@ -29,6 +29,8 @@ export class AuthService {
                             key  : auth.uid,
                             email: auth.auth.providerData[0].email,
                         });
+
+                        this.setUserData(this.userData);
 
                         this.subscrUser = this.dataService.getUser(auth.uid).subscribe(
                             (dbUser) => {
@@ -100,6 +102,6 @@ export class AuthService {
     };
 
     private setUserData(userData: UserClass) {
-        this.user.next(userData);
+        this.user$.next(userData);
     };
 }

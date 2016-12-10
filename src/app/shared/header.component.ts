@@ -31,11 +31,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-            this.subscrUser = this.authService.user.subscribe(
+            this.subscrUser = this.authService.user$.subscribe(
                 (user: UserClass) => {
-                    this.isLoggedIn = !!(user && user.key);
+                    this.isLoggedIn = user.isLoggedIn();
                     this.loggedInUserName = user.name;
-                    this.loggedInUserAdmin = user.isAdmin;
+                    this.loggedInUserAdmin = !!user.isAdmin;
                 },
                 (error) => this.logger.error("[header] - onInit - error: " + error.message)
             );

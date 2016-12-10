@@ -8,9 +8,9 @@ export class UserClass {
     constructor(data) {
         this.key = data.key || '';
         this.email = data.email || '';
-        this.error = data.error || '';
         this.name = data.name || '';
-        this.isAdmin = data.isAdmin || '';
+        this.isAdmin = data.isAdmin || null;
+        this.error = data.error || '';
     }
 
     public isLoggedIn(): boolean {

@@ -224,7 +224,7 @@ export class DataService {
 
     createDiseaseCase(key_value) {
         try {
-            this.af.database.list(String(this.DbCases)).push(key_value);
+            return this.af.database.list(String(this.DbCases)).push(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - createDiseaseCase - error", e, true);
         }

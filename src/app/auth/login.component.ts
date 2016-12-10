@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     onLogin(key_value: Login) {
         try {
-            this.subscrUser = this.authService.user.subscribe((user) => {
+            this.subscrUser = this.authService.user$.subscribe((user) => {
                 if (user.error) {
                     this.errorMessage = user.error;
                 } else {
