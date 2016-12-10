@@ -9,7 +9,6 @@ import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 import { Login } from "./user.interface";
-import { UserClass } from "./user.interface";
 
 @Component({
     templateUrl: './login.component.html',

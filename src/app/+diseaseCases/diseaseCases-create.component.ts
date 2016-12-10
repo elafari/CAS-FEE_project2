@@ -39,7 +39,7 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
         this.diseaseCaseForm = this.fb.group({
             name     : ['', Validators.required],
             type     : ['', Validators.required],
-            startDate: [new Date().getDate() + '.' + new Date().getMonth() + '.' + new Date().getFullYear(), Validators.required]
+            startDate: [this.dataService.getFrontendDate(), Validators.required]
         });
 
         try {

@@ -215,6 +215,9 @@ export class DataService {
     @logWrap
     updateDiseaseCase(diseaseCaseKey, key_value) {
         try {
+            if (key_value.startDate) {
+                key_value.startDate = this.toBackendDate(key_value.startDate);
+            }
             let diseaseCase = this.getDiseaseCase(diseaseCaseKey);
             diseaseCase.update(key_value);
         } catch (e) {
@@ -224,6 +227,7 @@ export class DataService {
 
     createDiseaseCase(key_value) {
         try {
+            key_value.startDate = this.toBackendDate(key_value.startDate);
             return this.af.database.list(String(this.DbCases)).push(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - createDiseaseCase - error", e, true);
@@ -334,5 +338,23 @@ export class DataService {
                 }
             }
         }
+    };
+
+    // Helpers + + + + + + + + + + + + + + +
+
+    toBackendDate(date: string) {
+        return date ? date.substr(6, 4) + "-" + date.substr(3, 2) + "-" + date.substr(0, 2) : '';
+    };
+
+    toFrontendDate(date: string) {
+        return (date) ? date.substr(8, 2) + "." + date.substr(5, 2) + "." + date.substr(0, 4) : '';
+    };
+
+    getBackendDate(): string {
+        return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+    };
+
+    getFrontendDate(): string {
+        return new Date().getDate() + '.' + (new Date().getMonth() + 1) + '.' + new Date().getFullYear();
     };
 }

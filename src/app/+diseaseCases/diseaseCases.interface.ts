@@ -3,4 +3,6 @@ export interface DiseaseCase {
     type: string;
     active: boolean;
     patient: string;
+    startDate?: string;
+    endDate?: string;
 }

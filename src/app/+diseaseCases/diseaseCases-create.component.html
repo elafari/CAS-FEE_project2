@@ -33,8 +33,6 @@
                 </div>
             </div>
 
-
-
             <div class="form-group row">
                 <label for="startDate" class="col-form-label col-xs-12 col-sm-4">
                     Start Date
@@ -43,18 +41,17 @@
                     <p-calendar formControlName="startDate"
                                 id="startDate"
                                 dateFormat="dd.mm.yy"
+                                placeholder="dd.mm.yyyy"
                                 showIcon="true"
-                                dataType="string"
-                                showOtherMonths=false
-                                selectOtherMonths=false></p-calendar>
+                                dataType="string">
+                    </p-calendar>
                     <div class="alert alert-danger alert-danger-form"
                          *ngIf="diseaseCaseForm.get('startDate').touched && diseaseCaseForm.get('startDate').hasError('required')">
-                        Start date is required
+                        Start date is required. <br>
+                        Format: 28.02.2014
                     </div>
                 </div>
             </div>
-
-
 
             <div class="text-sm-right">
                 <button class="btn btn-secondary" type="button" (click)="goBack()">

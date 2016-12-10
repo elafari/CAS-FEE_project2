@@ -14,7 +14,7 @@ import { DiseaseCase } from './diseaseCases.interface';
 
 @Component({
     templateUrl: './diseaseCases-edit.component.html',
-    styleUrls  : ['../../assets/scss/forms.scss','../../assets/scss/toggler.scss']
+    styleUrls  : ['../../assets/scss/forms.scss', '../../assets/scss/toggler.scss']
 })
 export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
@@ -22,6 +22,7 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     diseaseCaseKey: string;
     diseaseCaseName: string;
     diseaseCaseActive: string;
+    diseaseCaseEndDate: string;
 
     patientKey: string;
     patientName: string;
@@ -45,9 +46,11 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.diseaseCaseForm = this.fb.group({
-            name  : ['', Validators.required],
-            type  : ['', Validators.required],
-            active: ['', Validators.required]
+            name     : ['', Validators.required],
+            type     : ['', Validators.required],
+            startDate: [{value: '', disabled: true}],
+            endDate  : [{value: '', disabled: true}],
+            active   : ['', Validators.required]
         });
 
         try {
@@ -63,10 +66,14 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
                                 this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                                     this.diseaseCaseName = diseaseCase.name;
                                     this.diseaseCaseActive = diseaseCase.active;
+                                    this.diseaseCaseEndDate = diseaseCase.endDate;
+
                                     this.diseaseCaseForm.setValue({
-                                        name  : diseaseCase.name,
-                                        type  : diseaseCase.type,
-                                        active: diseaseCase.active
+                                        name     : diseaseCase.name,
+                                        type     : diseaseCase.type,
+                                        startDate: this.dataService.toFrontendDate(diseaseCase.startDate),
+                                        endDate  : this.dataService.toFrontendDate(diseaseCase.endDate),
+                                        active   : diseaseCase.active
                                     });
                                 });
                                 this.dataService.addSubscripton(this.subscrDiseaseCase);
@@ -90,6 +97,11 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     updateDiseaseCase(key_value: DiseaseCase) {
         try {
             this.showModalDialog = "";
+
+            if (!key_value.active) {
+                key_value.endDate = this.dataService.getBackendDate();
+            }
+
             this.dataService.updateDiseaseCase(this.diseaseCaseKey, key_value);
             this.goBack();
         } catch (e) {
@@ -119,14 +131,8 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     };
 
     ngOnDestroy() {
-        if (this.subscrDiseaseCase) {
-            this.subscrDiseaseCase.unsubscribe();
-        }
-        if (this.subscrPatient) {
-            this.subscrPatient.unsubscribe();
-        }
-        if (this.subscrRoute) {
-            this.subscrRoute.unsubscribe();
-        }
+        if (this.subscrDiseaseCase) this.subscrDiseaseCase.unsubscribe();
+        if (this.subscrPatient) this.subscrPatient.unsubscribe();
+        if (this.subscrRoute) this.subscrRoute.unsubscribe();
     }
 }
