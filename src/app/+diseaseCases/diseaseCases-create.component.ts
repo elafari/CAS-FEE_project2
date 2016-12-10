@@ -17,22 +17,22 @@ import { UserClass } from "../auth/user.interface";
     styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
-    isDevMode: boolean = ConfigService.devMode;
-    diseaseCaseForm: FormGroup;
-    patientKey: string;
+    isDevMode:boolean = ConfigService.devMode;
+    diseaseCaseForm:FormGroup;
+    patientKey:string;
 
-    subscrUser: Subscription;
-    subscrRoute: Subscription;
-    subscrPatient: Subscription;
+    subscrUser:Subscription;
+    subscrRoute:Subscription;
+    subscrPatient:Subscription;
 
-    constructor(private fb: FormBuilder,
-                private router: Router,
-                private route: ActivatedRoute,
-                private location: Location,
-                private authService: AuthService,
-                private dataService: DataService,
-                private errorHandler: ErrorHandlerService,
-                private logger: LoggerService) {
+    constructor(private fb:FormBuilder,
+                private router:Router,
+                private route:ActivatedRoute,
+                private location:Location,
+                private authService:AuthService,
+                private dataService:DataService,
+                private errorHandler:ErrorHandlerService,
+                private logger:LoggerService) {
     };
 
     ngOnInit() {
@@ -44,7 +44,7 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
 
         try {
             this.subscrUser = this.authService.user$.subscribe(
-                (user: UserClass) => {
+                (user:UserClass) => {
                     if (user.isLoggedIn()) {
                         this.patientKey = this.route.parent.snapshot.params['patientKey'];
                         this.dataService.addSubscripton(this.subscrPatient);
@@ -63,7 +63,7 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
         this.createDiseaseCase(this.diseaseCaseForm.value);
     };
 
-    createDiseaseCase(key_value: DiseaseCase) {
+    createDiseaseCase(key_value:DiseaseCase) {
         try {
             key_value.patient = this.patientKey;
             key_value.active = true;
@@ -81,8 +81,8 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
     };
 
     ngOnDestroy() {
-        if (this.subscrUser) this.subscrUser.unsubscribe();
         if (this.subscrPatient) this.subscrPatient.unsubscribe();
         if (this.subscrRoute) this.subscrRoute.unsubscribe();
+        if (this.subscrUser) this.subscrUser.unsubscribe();
     };
 }

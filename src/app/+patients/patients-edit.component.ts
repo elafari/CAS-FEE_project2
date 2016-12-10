@@ -6,39 +6,43 @@ import { Subscription } from "rxjs/Rx";
 
 import { AngularFire } from 'angularfire2';
 
+import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
 import { Patient } from "./patients.interface";
+import { UserClass } from "../auth/user.interface";
 
 @Component({
     templateUrl: './patients-edit.component.html',
     styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class PatientsEditComponent implements OnInit, OnDestroy {
-    isDevMode: boolean = ConfigService.devMode;
-    genderConfig: any[] = ConfigService.getGender();
-    loggedInUserName: string;
-    patientForm: FormGroup;
-    patientKey: string;
-    patientName: string;
+    isDevMode:boolean = ConfigService.devMode;
+    genderConfig:any[] = ConfigService.getGender();
+    loggedInUserName:string;
+    patientForm:FormGroup;
+    patientKey:string;
+    patientName:string;
 
-    showModalDialog: string;
-    simulateDeletion: boolean;
+    showModalDialog:string;
+    simulateDeletion:boolean;
 
-    subscrRoute: Subscription;
-    subscrUser: Subscription;
-    subscrPatient: Subscription;
+    subscrUser:Subscription;
+    subscrRoute:Subscription;
+    subscrUserObj:Subscription;
+    subscrPatient:Subscription;
 
-    constructor(private fb: FormBuilder,
-                private router: Router,
-                private route: ActivatedRoute,
-                private location: Location,
-                private af: AngularFire,
-                private dataService: DataService,
-                private errorHandler: ErrorHandlerService,
-                private logger: LoggerService) {
+    constructor(private fb:FormBuilder,
+                private router:Router,
+                private route:ActivatedRoute,
+                private location:Location,
+                private af:AngularFire,
+                private authService:AuthService,
+                private dataService:DataService,
+                private errorHandler:ErrorHandlerService,
+                private logger:LoggerService) {
     };
 
     ngOnInit() {
@@ -50,38 +54,44 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
 
         try {
             this.simulateDeletion = this.isDevMode;
-            this.af.auth.subscribe(auth => {
-                if (auth) {
-                    this.subscrRoute = this.route.params.subscribe(
-                        (params: any) => {
-                            this.patientKey = params['patientKey'];
-                            this.subscrUser = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-                                this.loggedInUserName = user.name;
-                                this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
-                                    this.patientName = patient.name;
-                                    this.patientForm.setValue({
-                                        name     : patient.name,
-                                        gender   : patient.gender,
-                                        birthdate: patient.birthdate
-                                    });
+            this.subscrUser = this.authService.user$.subscribe(
+                (user:UserClass) => {
+                    if (user.isLoggedIn()) {
+                        /*this.af.auth.subscribe(auth => {
+                         if (auth) {*/
+                        this.subscrRoute = this.route.params.subscribe(
+                            (params:any) => {
+                                this.patientKey = params['patientKey'];
+                                //this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+                                this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + user.key).subscribe((user) => {
+                                    this.loggedInUserName = user.name;
+                                    this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+                                        this.patientName = patient.name;
+                                        this.patientForm.setValue({
+                                            name     : patient.name,
+                                            gender   : patient.gender,
+                                            birthdate: patient.birthdate
+                                        });
 
-                                    this.logger.info("[patients-edit] - ngOnInit - data : " + user.name + ' patient: ' + patient.name);
+                                        this.logger.info("[patients-edit] - ngOnInit - data : " + user.name + ' patient: ' + patient.name);
+                                    });
+                                    this.dataService.addSubscripton(this.subscrPatient);
                                 });
-                                this.dataService.addSubscripton(this.subscrPatient);
+                                this.dataService.addSubscripton(this.subscrUserObj);
                             });
-                            this.dataService.addSubscripton(this.subscrUser);
-                        });
-                } else {
-                    this.logger.warn("[patients-edit] - ngOnInit - user: no logged in user");
-                    this.router.navigate(['/login']);
+                    } else {
+                        this.logger.warn("[patients-edit] - ngOnInit - user: no logged in user");
+                        this.router.navigate(['/login']);
+                    }
                 }
-            });
+            );
+            this.dataService.addSubscripton(this.subscrUser);
         } catch (e) {
             this.errorHandler.traceError("[patients-edit] - ngOnInit - error", e, true);
         }
     };
 
-    updatePatient(key_value: Patient) {
+    updatePatient(key_value:Patient) {
         try {
             this.showModalDialog = "";
             this.dataService.updatePatient(this.patientKey, key_value);
@@ -118,15 +128,10 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     };
 
     ngOnDestroy() {
-        if (this.subscrPatient) {
-            this.subscrPatient.unsubscribe();
-        }
-        if (this.subscrUser) {
-            this.subscrUser.unsubscribe();
-        }
-        if (this.subscrRoute) {
-            this.subscrRoute.unsubscribe();
-        }
+        if (this.subscrPatient) this.subscrPatient.unsubscribe();
+        if (this.subscrUserObj) this.subscrUserObj.unsubscribe();
+        if (this.subscrRoute) this.subscrRoute.unsubscribe();
+        if (this.subscrUser) this.subscrUser.unsubscribe();
     }
 }
 

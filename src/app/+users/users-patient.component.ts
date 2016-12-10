@@ -15,6 +15,7 @@ export class UsersPatientComponent implements OnInit {
     @Input() patient: any;
 
     isDevMode: boolean = ConfigService.devMode;
+    mainAdmin: string = ConfigService.mainAdmin;
     patientKey: string;
 
     showModalDialogDelete: string;
@@ -34,8 +35,9 @@ export class UsersPatientComponent implements OnInit {
         }
     }
 
-    deletePatient(simulate) {
+    deletePatient() {
         try {
+            let simulate = this.simulateDeletion;
             this.showModalDialogDelete = "";
             this.logger.info("[user-patient] - deletePatient - patient: " + this.patient.$key + " - simulation: " + simulate);
             this.dataService.deletePatient(this.patient.$key, simulate);
@@ -45,7 +47,7 @@ export class UsersPatientComponent implements OnInit {
     };
 
     showDeleteDialog(dialogAttribute) {
-        this.simulateDeletion = true;
+        this.simulateDeletion = this.isDevMode;
         this.showModalDialogDelete = dialogAttribute;
     };
 }

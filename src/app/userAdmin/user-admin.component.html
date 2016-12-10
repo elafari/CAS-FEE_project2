@@ -58,8 +58,12 @@
                         <p>Are you sure to delete this user?</p>
                         <p>All patients, cases and events of this user are also deleted!</p>
                         <label *ngIf="isDevMode" class="debug">
-                            <input type="checkbox" name='Simulation' value="simulate" #updateSimulation
-                                   [checked]="simulateDeletion">
+                            <input type="checkbox"
+                                   name='Simulation'
+                                   value="simulate"
+                                   #updateSimulation
+                                   [checked]="simulateDeletion"
+                                   (change)="simulateDeletion = updateSimulation.checked">
                             Simulation (no object deletion, only log delete information in console)
                         </label>
                     </div>
@@ -72,7 +76,7 @@
                         </button>
                         <button type="button"
                                 class="btn btn-danger"
-                                (click)="deleteUser(user.$key, updateSimulation.checked)"
+                                (click)="deleteUser(user.$key)"
                                 data-dismiss="modal">
                             Delete
                         </button>
