@@ -48,14 +48,13 @@ See separate files:
 
 
 ###Frontend
-- AngularJS / Bootstrap 4 alpha
--Typescript
-- [**boostrap**](https://v4-alpha.getbootstrap.com/ "https://v4-alpha.getbootstrap.com/") for layout and parts of grid functionality
-- flexbox
-- [**jQuery**](http://jquery.com "http://jquery.com/") for dom manipulations
-- [**toaster**](https://github.com/jirikavi/AngularJS-Toaster "https://github.com/jirikavi/AngularJS-Toaster") for notifications.
+- [**Angular2**](https://angular.io/ "https://angular.io/")
+- [**Typescript**](https://www.typescriptlang.org/ "https://www.typescriptlang.org/")
+- [**Bootstrap 4 alpha**](https://v4-alpha.getbootstrap.com/ "https://v4-alpha.getbootstrap.com/")
+- [**jQuery**](http://jquery.com "http://jquery.com/")
+- [**flexbox**](http://v4-alpha.getbootstrap.com/layout/flexbox-grid/ "http://v4-alpha.getbootstrap.com/layout/flexbox-grid/")
 - [**font awesome**](http://fortawesome.github.io/Font-Awesome/ "http://fortawesome.github.io/Font-Awesome/") as icon font.
-- [**sass**](http://sass-lang.com/ "http://sass-lang.com/") for styling.
+- [**sass**](http://sass-lang.com/ "http://sass-lang.com/")
 - and some others...
 
 ### Tools
@@ -77,5 +76,6 @@ See separate files:
 ##Known Issues
 ###Backend
 - xxx
+
 ###Frontend
 - xxx
