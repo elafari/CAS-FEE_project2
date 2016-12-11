@@ -61,8 +61,9 @@ export class DataService {
     createUser(uid:string, email:string) {
         try {
             this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + uid).set({
-                name : email,
-                admin: false
+                name  : email,
+                admin : false,
+                active: true
             });
         } catch (e) {
             this.errorHandler.traceError("[dataService] - createUser - error", e, true);
@@ -89,11 +90,18 @@ export class DataService {
 
     deleteUser(userKey:string, simulate:boolean = true) {
         try {
-            let users = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users);
-            this.logger.info("[dataService] - deleteUser - user: " + userKey + " - simulation: " + simulate);
+            // don't delete a user, only set active to false
             if (!simulate) {
-                users.remove(userKey);
+                let key_value = {'admin': false, 'active': false};
+                this.updateUser(userKey, key_value);
             }
+            /*
+             let users = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users);
+             this.logger.info("[dataService] - deleteUser - user: " + userKey + " - simulation: " + simulate);
+             if (!simulate) {
+             users.remove(userKey);
+             }
+             */
 
             // delete all associated patients
             let queryDefinitionPatients = {};

@@ -15,20 +15,20 @@ import { Login } from "./user.interface";
     styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-    isDevMode: boolean = ConfigService.devMode;
-    loginForm: FormGroup;
-    private subscrUser: Subscription;
-    errorMessage: string;
+    isDevMode:boolean = ConfigService.devMode;
+    loginForm:FormGroup;
+    private subscrUser:Subscription;
+    errorMessage:string;
 
-    constructor(private fb: FormBuilder,
-                private authService: AuthService,
-                private dataService: DataService,
-                private router: Router,
-                private errorHandler: ErrorHandlerService,
-                private logger: LoggerService) {
+    constructor(private fb:FormBuilder,
+                private authService:AuthService,
+                private dataService:DataService,
+                private router:Router,
+                private errorHandler:ErrorHandlerService,
+                private logger:LoggerService) {
     };
 
-    ngOnInit(): any {
+    ngOnInit():any {
         try {
             this.loginForm = this.fb.group({
                 email   : ['', Validators.compose([
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.onLogin(this.loginForm.value);
     };
 
-    onLogin(key_value: Login) {
+    onLogin(key_value:Login) {
         try {
             this.authService.resetUserData();
             this.subscrUser = this.authService.user$.subscribe((user) => {
@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit, OnDestroy {
                     this.router.navigate(['/patients']);
                 }
             });
-
             this.dataService.addSubscripton(this.subscrUser);
 
             this.authService.loginUser(key_value);
@@ -69,13 +68,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
     };
 
-    isValidEmail(control: FormControl): {[s: string]: boolean} {
+    isValidEmail(control:FormControl):{[s: string]: boolean} {
         if (!control.value.match(ConfigService.getEmailRegex())) {
             return {noValidEmail: true};
         }
     };
 
-    isValidPassword(control: FormControl): {[s: string]: boolean} {
+    isValidPassword(control:FormControl):{[s: string]: boolean} {
         if (control.value.length < 6) {
             return {noValidPassword: true};
         }

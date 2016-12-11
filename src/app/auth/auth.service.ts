@@ -27,7 +27,7 @@ export class AuthService {
                     if (auth) {
                         this.userData = new UserClass({
                             key  : auth.uid,
-                            email: auth.auth.providerData[0].email,
+                            email: auth.auth.providerData[0].email
                         });
 
                         this.setUserData(this.userData);
@@ -36,11 +36,24 @@ export class AuthService {
                             (dbUser) => {
                                 this.userData.name = dbUser.name;
                                 this.userData.isAdmin = dbUser.admin;
-                                this.logger.info("[auth service] - constructor - user: " + dbUser.name + ' admin: ' + dbUser.admin);
-                                this.setUserData(this.userData)
+                                this.userData.active = dbUser.active;
+                                this.logger.info("[auth service] - constructor - user: " + dbUser.name + ' admin: ' + dbUser.admin + ' active: ' + dbUser.active);
+                                if (dbUser.active === true) {
+                                    this.setUserData(this.userData);
+                                } else {
+                                    this.logger.error("[auth service] - constructor - user deactivated: " + dbUser.name + ' admin: ' + dbUser.admin + ' active: ' + dbUser.active);
+                                    this.userData = new UserClass({
+                                        key: "",
+                                        name: "",
+                                        admin: false,
+                                        active: false,
+                                        error: ConfigService.loginDeactivatedMsg
+                                    });
+                                    this.setUserData(this.userData);
+                                }
                             },
                             (e) => {
-                                this.errorHandler.traceError("[auth service] - constructor - error: ", e, true);
+                                this.errorHandler.traceError("[auth service] - constructor - error - dbUser: ", e, true);
                             }
                         );
 
@@ -52,10 +65,10 @@ export class AuthService {
                         }
                     }
                 },
-                (error) => this.logger.error("[auth service] - constructor - error: " + error.message)
+                (error) => this.logger.error("[auth service] - constructor - error - auth: " + error.message)
             );
         } catch (e) {
-            this.errorHandler.traceError("[auth-service] - constructor - error", e, true);
+            this.errorHandler.traceError("[auth-service] - constructor - error - catch", e, true);
         }
     };
 

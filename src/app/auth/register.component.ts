@@ -64,7 +64,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
                     this.router.navigate(['/patients']);
                 }
             });
-
             this.dataService.addSubscripton(this.subscrUser);
 
             this.authService.registerUser(key_value);

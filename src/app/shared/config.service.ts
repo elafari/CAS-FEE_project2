@@ -10,6 +10,7 @@ export class ConfigService {
 
     public static mainAdmin = "admin@p2.ch";
     public static loginProcessMsg = "processing..";
+    public static loginDeactivatedMsg = "Account deactivated, please contact Admin";
 
     public static linkList = [
         {

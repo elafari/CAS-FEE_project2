@@ -4,6 +4,7 @@ export class UserClass {
     public name?: string;
     public isAdmin?: boolean;
     public error: string;
+    public active: boolean;
 
     constructor(data) {
         this.key = data.key || '';
@@ -11,6 +12,7 @@ export class UserClass {
         this.name = data.name || '';
         this.isAdmin = data.isAdmin || null;
         this.error = data.error || '';
+        this.active = data.active || null;
     }
 
     public isLoggedIn(): boolean {
