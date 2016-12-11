@@ -13,7 +13,7 @@ import { LoggerService } from "../log/logger.service";
 export class AuthService {
 
     private userData: UserClass = new UserClass({error: ConfigService.loginProcessMsg});
-    public user$: BehaviorSubject<UserClass> = new BehaviorSubject<UserClass>(this.userData);
+    user$: BehaviorSubject<UserClass> = new BehaviorSubject<UserClass>(this.userData);
     private subscrUser: Subscription;
 
     constructor(private af: AngularFire,
@@ -43,11 +43,11 @@ export class AuthService {
                                 } else {
                                     this.logger.error("[auth service] - constructor - user deactivated: " + dbUser.name + ' admin: ' + dbUser.admin + ' active: ' + dbUser.active);
                                     this.userData = new UserClass({
-                                        key: "",
-                                        name: "",
-                                        admin: false,
+                                        key   : "",
+                                        name  : "",
+                                        admin : false,
                                         active: false,
-                                        error: ConfigService.loginDeactivatedMsg
+                                        error : ConfigService.loginDeactivatedMsg
                                     });
                                     this.setUserData(this.userData);
                                 }
@@ -118,7 +118,7 @@ export class AuthService {
         this.user$.next(userData);
     };
 
-    public resetUserData() {
+    resetUserData() {
         let resetData = new UserClass({error: ConfigService.loginProcessMsg});
         this.user$.next(resetData);
     };

@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
 
-//import { AngularFire } from 'angularfire2';
-
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
@@ -19,32 +17,31 @@ import { UserClass } from "../auth/user.interface";
     styleUrls  : ['../../assets/scss/forms.scss', '../../assets/scss/toggler.scss']
 })
 export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
-    isDevMode:boolean = ConfigService.devMode;
+    isDevMode: boolean = ConfigService.devMode;
     msgList: any = ConfigService.msgList;
-    diseaseCaseForm:FormGroup;
-    diseaseCaseKey:string;
-    diseaseCaseName:string;
+    diseaseCaseForm: FormGroup;
+    diseaseCaseKey: string;
+    diseaseCaseName: string;
 
-    patientKey:string;
-    patientName:string;
+    patientKey: string;
+    patientName: string;
 
-    showModalDialog:string;
-    simulateDeletion:boolean;
+    showModalDialog: string;
+    simulateDeletion: boolean;
 
-    subscrUser:Subscription;
-    subscrRoute:Subscription;
-    subscrPatient:Subscription;
-    subscrDiseaseCase:Subscription;
+    subscrUser: Subscription;
+    subscrRoute: Subscription;
+    subscrPatient: Subscription;
+    subscrDiseaseCase: Subscription;
 
-    constructor(private fb:FormBuilder,
-                private router:Router,
-                private route:ActivatedRoute,
-                //private af:AngularFire,
-                private authService:AuthService,
-                private dataService:DataService,
-                private location:Location,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+    constructor(private fb: FormBuilder,
+                private router: Router,
+                private route: ActivatedRoute,
+                private authService: AuthService,
+                private dataService: DataService,
+                private location: Location,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
@@ -59,12 +56,10 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
         try {
             this.simulateDeletion = this.isDevMode;
             this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
+                (user: UserClass) => {
                     if (user.isLoggedIn()) {
-                        /*this.af.auth.subscribe(auth => {
-                         if (auth) {*/
                         this.subscrRoute = this.route.params.subscribe(
-                            (params:any) => {
+                            (params: any) => {
                                 this.diseaseCaseKey = params['diseaseCaseKey'];
                                 this.patientKey = this.route.parent.snapshot.params['patientKey'];
                                 this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
@@ -100,13 +95,11 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
         this.updateDiseaseCase(this.diseaseCaseForm.value);
     };
 
-    updateDiseaseCase(key_value:DiseaseCase) {
+    updateDiseaseCase(key_value: DiseaseCase) {
         try {
             this.showModalDialog = "";
 
-            if (!key_value.active) {
-                key_value.endDate = this.dataService.getBackendDate();
-            }
+            key_value.endDate = key_value.active ? '' : this.dataService.getBackendDate();
 
             this.dataService.updateDiseaseCase(this.diseaseCaseKey, key_value);
             this.goBack();
