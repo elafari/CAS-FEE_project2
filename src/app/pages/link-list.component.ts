@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 
+import { AngularFire } from 'angularfire2';
+
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from '../shared/config.service';
 import { DataService } from '../shared/data.service';
@@ -20,6 +22,7 @@ export class LinkListComponent implements OnInit, OnDestroy {
     subscrUser:Subscription;
 
     constructor(private router:Router,
+                private af:AngularFire,
                 private authService:AuthService,
                 private dataService:DataService,
                 private errorHandler:ErrorHandlerService,
@@ -28,9 +31,11 @@ export class LinkListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-            this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
-                    if (user.isLoggedIn()) {
+            this.af.auth.subscribe(auth => {
+                    if (auth) {
+                        /*this.subscrUser = this.authService.user$.subscribe(
+                         (user:UserClass) => {
+                         if (user.isLoggedIn()) { */
                         this.linkList = ConfigService.linkList;
                     } else {
                         this.logger.warn("[link-list] - ngOnInit - user: no logged in user");

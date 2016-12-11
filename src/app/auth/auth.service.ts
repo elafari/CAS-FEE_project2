@@ -37,7 +37,7 @@ export class AuthService {
                                 this.userData.name = dbUser.name;
                                 this.userData.isAdmin = dbUser.admin;
                                 this.userData.active = dbUser.active;
-                                this.logger.info("[auth service] - constructor - user: " + dbUser.name + ' admin: ' + dbUser.admin + ' active: ' + dbUser.active);
+                                this.logger.info("[auth service] - constructor - user extended: " + dbUser.name + ' admin: ' + dbUser.admin + ' active: ' + dbUser.active);
                                 if (dbUser.active === true) {
                                     this.setUserData(this.userData);
                                 } else {
@@ -121,5 +121,5 @@ export class AuthService {
     public resetUserData() {
         let resetData = new UserClass({error: ConfigService.loginProcessMsg});
         this.user$.next(resetData);
-    }
+    };
 }

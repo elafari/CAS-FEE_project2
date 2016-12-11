@@ -4,7 +4,7 @@
         <th>user id</th>
         <th>user role admin</th>
         <th>update</th>
-        <th>delete</th>
+        <th>disable</th>
     </tr>
     </thead>
     <tbody>
@@ -27,7 +27,8 @@
                     [hidden]="user.name === userMainAdmin || user.active === false">
                 Update
             </button>
-            <span *ngIf="user.active === false">deactivated</span>
+            <span *ngIf="user.active === false">disabled</span>
+            <span *ngIf="user.name === userMainAdmin">not changeable</span>
         </td>
         <td>
             <button type="button"
@@ -36,7 +37,7 @@
                     [attr.data-target]="'#' + user.$key"
                     [hidden]="user.name == userMainAdmin || user.active == false"
                     (click)="showDeleteDialog(user.$key)">
-                Deaktivate
+                Disable
             </button>
         </td>
 
@@ -53,11 +54,11 @@
                                 aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="editUserModalLabel">Deaktivate: {{user.name}}</h4>
+                        <h4 class="modal-title" id="editUserModalLabel">Disable: {{user.name}}</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure to deaktivate this user?</p>
-                        <p>All patients, cases and events of this user will be deleted!</p>
+                        <p>{{ msgList["user-admin-1"] }}</p>
+                        <p>{{ msgList["user-admin-2"] }}</p>
                         <label *ngIf="isDevMode" class="debug">
                             <input type="checkbox"
                                    name='Simulation'
@@ -65,7 +66,7 @@
                                    #updateSimulation
                                    [checked]="simulateDeletion"
                                    (change)="simulateDeletion = updateSimulation.checked">
-                            Simulation (no object deletion, only log delete information in console)
+                            {{msgList["simulation"]}}
                         </label>
                     </div>
                     <div class="modal-footer">
@@ -79,7 +80,7 @@
                                 class="btn btn-danger"
                                 (click)="deleteUser(user.$key)"
                                 data-dismiss="modal">
-                            Deaktivate
+                            Disable
                         </button>
                     </div>
                 </div>

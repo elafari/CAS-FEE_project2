@@ -19,6 +19,7 @@ import { UserClass } from "../auth/user.interface";
 export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
     isDevMode:boolean = ConfigService.devMode;
     eventTypeConfig:any[] = ConfigService.getEventType();
+    msgList: any = ConfigService.msgList;
     diseaseEventForm:FormGroup;
     diseaseCaseKey:string;
     diseaseCaseName:string;

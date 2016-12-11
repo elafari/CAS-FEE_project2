@@ -20,6 +20,7 @@ import { UserClass } from "../auth/user.interface";
 })
 export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     isDevMode:boolean = ConfigService.devMode;
+    msgList: any = ConfigService.msgList;
     diseaseCaseForm:FormGroup;
     diseaseCaseKey:string;
     diseaseCaseName:string;

@@ -75,13 +75,13 @@
             </div>
 
             <div class="modal-body">
-                <p>Are you sure to delete this event?</p>
+                <p>{{ msgList["diseaseEvents-edit-1"] }}</p>
                 <label *ngIf="isDevMode" class="debug">
                     <input type="checkbox" name='Simulation' value="simulate"
                            #updateSimulation
                            [checked]="simulateDeletion"
                            (change)="simulateDeletion = updateSimulation.checked">
-                    Simulation (no object deletion, only log delete information in console)
+                    {{msgList["simulation"]}}
                 </label>
             </div>
 

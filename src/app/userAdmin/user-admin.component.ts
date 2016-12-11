@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Subscription } from "rxjs/Subscription";
 
-//import { AngularFire } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from '../shared/config.service';
@@ -18,6 +18,7 @@ import { UserClass } from "../auth/user.interface";
 })
 export class UserAdminComponent implements OnInit, OnDestroy {
     isDevMode:boolean = ConfigService.devMode;
+    msgList: any = ConfigService.msgList;
     users:Observable<any>;
     userMainAdmin:string;
 
@@ -27,7 +28,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     subscrUser:Subscription;
 
     constructor(private router:Router,
-                //private af:AngularFire,
+                private af:AngularFire,
                 private authService:AuthService,
                 private dataService:DataService,
                 private errorHandler:ErrorHandlerService,
@@ -36,11 +37,11 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-            this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
-                    if (user.isLoggedIn()) {
-                        /*this.af.auth.subscribe(auth => {
-                         if (auth) {*/
+            this.af.auth.subscribe(auth => {
+                    if (auth) {
+                        /*this.subscrUser = this.authService.user$.subscribe(
+                         (user:UserClass) => {
+                         if (user.isLoggedIn()) { */
                         this.simulateDeletion = this.isDevMode;
                         this.userMainAdmin = ConfigService.mainAdmin;
                         this.users = this.dataService.getUserList();

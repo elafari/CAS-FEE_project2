@@ -90,14 +90,14 @@
             </div>
 
             <div class="modal-body">
-                <p>Are you sure to delete this patient?</p>
-                <p>All cases and events of this patient will also be deleted!</p>
+                <p>{{ msgList["patients-edit-1"] }}</p>
+                <p>{{ msgList["patients-edit-2"] }}</p>
                 <label *ngIf="isDevMode" class="debug">
                     <input type="checkbox" name='Simulation' value="simulate"
                            #updateSimulation
                            [checked]="simulateDeletion"
                            (change)="simulateDeletion = updateSimulation.checked">
-                    Simulation (no object deletion, only log delete information in console)
+                    {{msgList["simulation"]}}
                 </label>
             </div>
 

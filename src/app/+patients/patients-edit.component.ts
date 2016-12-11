@@ -21,6 +21,7 @@ import { UserClass } from "../auth/user.interface";
 export class PatientsEditComponent implements OnInit, OnDestroy {
     isDevMode:boolean = ConfigService.devMode;
     genderConfig:any[] = ConfigService.getGender();
+    msgList: any = ConfigService.msgList;
     loggedInUserName:string;
     patientForm:FormGroup;
     patientKey:string;
