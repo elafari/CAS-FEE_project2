@@ -104,6 +104,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
 
     deletePatient() {
         try {
+            if (this.subscrPatient) this.subscrPatient.unsubscribe();
             let simulate = this.simulateDeletion;
             this.showModalDialog = "";
             this.logger.info("[patients-edit] - deletePatient - patient: " + this.patientKey + " - simulation: " + simulate);

@@ -100,6 +100,7 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
 
     deleteDiseaseEvent() {
         try {
+            if (this.subscrDiseaseEvent) this.subscrDiseaseEvent.unsubscribe();
             let simulate = this.simulateDeletion;
             this.showModalDialog = "";
             this.logger.info("[diseaseEvents-edit] - deleteDiseaseEvent - diseaseEvent: " + this.diseaseEventKey + " - simulation: " + simulate);
