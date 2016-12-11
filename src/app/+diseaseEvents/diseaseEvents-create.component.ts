@@ -83,6 +83,7 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
     createDiseaseEvent(key_value:DiseaseEvent) {
         try {
             key_value.case = this.diseaseCaseKey;
+            key_value.eventDate = this.dataService.toBackendDate(this.dataService.getFrontendDate());
             this.dataService.createDiseaseEvent(key_value);
             this.goBack();
         } catch (e) {

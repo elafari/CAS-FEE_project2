@@ -19,7 +19,7 @@ import { UserClass } from "../auth/user.interface";
 export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
     isDevMode:boolean = ConfigService.devMode;
     eventTypeConfig:any[] = ConfigService.getEventType();
-    msgList: any = ConfigService.msgList;
+    msgList:any = ConfigService.msgList;
     diseaseEventForm:FormGroup;
     diseaseCaseKey:string;
     diseaseCaseName:string;
@@ -46,8 +46,9 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.diseaseEventForm = this.fb.group({
-            name : ['', Validators.required],
-            value: ['', Validators.required]
+            name     : ['', Validators.required],
+            value    : ['', Validators.required],
+            eventDate: [{value: '', disabled: true}],
         });
 
         try {
@@ -59,13 +60,16 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
                             (params:any) => {
                                 this.diseaseEventKey = params['diseaseEventKey'];
                                 this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
+
                                 this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                                     this.diseaseCaseName = diseaseCase.name;
-                                    this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseCase) => {
-                                        this.diseaseEventName = diseaseCase.name;
+
+                                    this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvent) => {
+                                        this.diseaseEventName = diseaseEvent.name;
                                         this.diseaseEventForm.setValue({
-                                            name : diseaseCase.name,
-                                            value: diseaseCase.value
+                                            name : diseaseEvent.name,
+                                            value: diseaseEvent.value,
+                                            eventDate: this.dataService.toFrontendDate(diseaseEvent.eventDate),
                                         });
                                     });
                                     this.dataService.addSubscripton(this.subscrDiseaseEvent);
