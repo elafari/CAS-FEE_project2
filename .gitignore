@@ -11,3 +11,7 @@ node_modules
 
 # Documentation
 app-doc
+
+# Coverage
+coverage
+

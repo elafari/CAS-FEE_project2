@@ -5,6 +5,10 @@
 - To check logged in user data click user email address in nav bar
 - After you have successfully logged in, you will be automatically forwarded to screen `Patients`
 
+### Prepared user
+- As registered user you have no administrative privileges
+- With user admin@p2.ch (password: 111111) you're able to set administrativ rights to registered users
+
 ### Handle Patients
 - Navigate back to patients screen and use the tab `Patients` to edit or create patients.
 - On screen `My Patients` add new patients by clicking the appropriate card

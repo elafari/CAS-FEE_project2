@@ -32,6 +32,18 @@
     
     Because of some open issues (see [typedoc issues](https://github.com/TypeStrong/typedoc/issues)) the version 0.5.1 and option --ignoreCompilerErrors is important (see typedoc.json)
 
+###ToDo
+##### "auth reload"
+- in situation of non lazyloaded routes, reload ended up in intermittent re-routes to login page.
+  - Workaround: we use angularfire auth object to check if user is logged in
+  - but we should use our user$ behavior subject to check login and try to solve this with a resolver
+
+##### "disabled user"
+- disabled users didn't get an error message after trying to log in
+  - current solution functions well to restrain disabled user to login, but unfortunately without an error in client dialog
+  - we should also try to solve this with a resolver
+
+
 
 ## Project-Documentation
 
