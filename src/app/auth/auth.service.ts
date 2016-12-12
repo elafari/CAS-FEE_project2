@@ -41,6 +41,7 @@ export class AuthService {
                                 if (dbUser.active === true) {
                                     this.setUserData(this.userData);
                                 } else {
+                                    // todo: try to solve with a resolver (see Architecture.md "disabled user")
                                     this.logger.error("[auth service] - constructor - user deactivated: " + dbUser.name + ' admin: ' + dbUser.admin + ' active: ' + dbUser.active);
                                     this.userData = new UserClass({
                                         key   : "",

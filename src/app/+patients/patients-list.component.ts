@@ -28,7 +28,7 @@ export class PatientsListComponent implements OnInit, OnDestroy {
     subscrPatients:Subscription;
 
     constructor(private router:Router,
-                private af: AngularFire,
+                private af:AngularFire,
                 private authService:AuthService,
                 private dataService:DataService,
                 private errorHandler:ErrorHandlerService,
@@ -37,13 +37,15 @@ export class PatientsListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-            this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
-                    if (user.isLoggedIn()) {
-                        /*this.af.auth.subscribe(auth => {
-                         if (auth) {*/
-                        //this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-                        this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + user.key).subscribe((user) => {
+            // todo: try to solve with a resolver (see Architecture.md "auth reload")
+            /*this.subscrUser = this.authService.user$.subscribe(
+             (user:UserClass) => {
+             if (user.isLoggedIn()) { */
+            this.af.auth.subscribe(auth => {
+                    if (auth) {
+                        this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+                            // todo: dito
+                            //this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + user.key).subscribe((user) => {
                             this.loggedInUserName = user.name;
                             this.logger.info("[patients-list] - ngOnInit - user: " + user.name);
 

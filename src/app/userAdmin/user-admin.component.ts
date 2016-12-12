@@ -18,7 +18,7 @@ import { UserClass } from "../auth/user.interface";
 })
 export class UserAdminComponent implements OnInit, OnDestroy {
     isDevMode:boolean = ConfigService.devMode;
-    msgList: any = ConfigService.msgList;
+    msgList:any = ConfigService.msgList;
     users:Observable<any>;
     userMainAdmin:string;
 
@@ -37,11 +37,12 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
+            // todo: try to solve with a resolver (see Architecture.md "auth reload")
+            /*this.subscrUser = this.authService.user$.subscribe(
+             (user:UserClass) => {
+             if (user.isLoggedIn()) { */
             this.af.auth.subscribe(auth => {
                     if (auth) {
-                        /*this.subscrUser = this.authService.user$.subscribe(
-                         (user:UserClass) => {
-                         if (user.isLoggedIn()) { */
                         this.simulateDeletion = this.isDevMode;
                         this.userMainAdmin = ConfigService.mainAdmin;
                         this.users = this.dataService.getUserList();

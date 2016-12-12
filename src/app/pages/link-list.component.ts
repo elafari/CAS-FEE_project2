@@ -31,11 +31,12 @@ export class LinkListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
+            // todo: try to solve with a resolver (see Architecture.md "auth reload")
+            /*this.subscrUser = this.authService.user$.subscribe(
+             (user:UserClass) => {
+             if (user.isLoggedIn()) { */
             this.af.auth.subscribe(auth => {
                     if (auth) {
-                        /*this.subscrUser = this.authService.user$.subscribe(
-                         (user:UserClass) => {
-                         if (user.isLoggedIn()) { */
                         this.linkList = ConfigService.linkList;
                     } else {
                         this.logger.warn("[link-list] - ngOnInit - user: no logged in user");
