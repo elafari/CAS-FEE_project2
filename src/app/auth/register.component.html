@@ -19,7 +19,7 @@
                         E-mail address is required
                     </div>
                     <div
-                        *ngIf="registerForm.get('email').hasError('noValidEmail')">
+                            *ngIf="registerForm.get('email').hasError('noValidEmail')">
                         E-mail address is invalid.
                     </div>
                 </div>
@@ -36,11 +36,11 @@
                 <div *ngIf="registerForm.get('password').touched && !registerForm.get('password').valid"
                      class="alert alert-danger alert-danger-form">
                     <div
-                        *ngIf="registerForm.get('password').hasError('required')">
+                            *ngIf="registerForm.get('password').hasError('required')">
                         Password is required
                     </div>
                     <div
-                        *ngIf="registerForm.get('password').hasError('noValidPassword')">
+                            *ngIf="registerForm.get('password').hasError('noValidPassword')">
                         Password should be at least 6 characters.
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div *ngIf="registerForm.get('confirmPassword').touched && !registerForm.get('confirmPassword').valid"
                      class="alert alert-danger alert-danger-form">
                     <div
-                        *ngIf="registerForm.get('confirmPassword').hasError('required') || registerForm.get('confirmPassword').hasError('noMatchingPassword')">
+                            *ngIf="registerForm.get('confirmPassword').hasError('required') || registerForm.get('confirmPassword').hasError('noMatchingPassword')">
                         Passwords do not match
                     </div>
                 </div>

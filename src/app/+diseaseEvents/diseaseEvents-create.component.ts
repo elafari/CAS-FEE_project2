@@ -17,28 +17,28 @@ import { UserClass } from "../auth/user.interface";
     styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
-    isDevMode:boolean = ConfigService.devMode;
-    eventTypeConfig:any[] = ConfigService.getEventType();
-    diseaseEventForm:FormGroup;
-    diseaseCaseKey:string;
-    diseaseCaseName:string;
+    isDevMode: boolean = ConfigService.devMode;
+    eventTypeConfig: any[] = ConfigService.getEventType();
+    diseaseEventForm: FormGroup;
+    diseaseCaseKey: string;
+    diseaseCaseName: string;
 
-    diseaseEventKey:string;
-    diseaseEventName:string;
+    diseaseEventKey: string;
+    diseaseEventName: string;
 
-    subscrUser:Subscription;
-    subscrRoute:Subscription;
-    subscrDiseaseCase:Subscription;
-    subscrDiseaseEvent:Subscription;
+    subscrUser: Subscription;
+    subscrRoute: Subscription;
+    subscrDiseaseCase: Subscription;
+    subscrDiseaseEvent: Subscription;
 
-    constructor(private fb:FormBuilder,
-                private router:Router,
-                private route:ActivatedRoute,
-                private location:Location,
-                private authService:AuthService,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+    constructor(private fb: FormBuilder,
+                private router: Router,
+                private route: ActivatedRoute,
+                private location: Location,
+                private authService: AuthService,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
@@ -49,10 +49,10 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
 
         try {
             this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
+                (user: UserClass) => {
                     if (user.isLoggedIn()) {
                         this.subscrRoute = this.route.params.subscribe(
-                            (params:any) => {
+                            (params: any) => {
                                 this.diseaseEventKey = params['diseaseEventKey'];
                                 this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
                                 this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
@@ -80,7 +80,7 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
         this.createDiseaseEvent(this.diseaseEventForm.value);
     };
 
-    createDiseaseEvent(key_value:DiseaseEvent) {
+    createDiseaseEvent(key_value: DiseaseEvent) {
         try {
             key_value.case = this.diseaseCaseKey;
             key_value.eventDate = this.dataService.toBackendDate(this.dataService.getFrontendDate());

@@ -1,9 +1,9 @@
 @import "~bootstrap/scss/bootstrap-grid.scss";
 
 .main-app {
-  padding-top : 56px;
+    padding-top : 56px;
 
-  @include media-breakpoint-up(sm) {
-    padding-top : 54px;
-  }
+    @include media-breakpoint-up(sm) {
+        padding-top : 54px;
+    }
 }

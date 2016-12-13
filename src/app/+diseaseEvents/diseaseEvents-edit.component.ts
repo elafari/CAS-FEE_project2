@@ -17,31 +17,31 @@ import { UserClass } from "../auth/user.interface";
     styleUrls  : ['../../assets/scss/forms.scss']
 })
 export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
-    isDevMode:boolean = ConfigService.devMode;
-    eventTypeConfig:any[] = ConfigService.getEventType();
-    msgList:any = ConfigService.msgList;
-    diseaseEventForm:FormGroup;
-    diseaseCaseKey:string;
-    diseaseCaseName:string;
-    diseaseEventKey:string;
-    diseaseEventName:string;
+    isDevMode: boolean = ConfigService.devMode;
+    eventTypeConfig: any[] = ConfigService.getEventType();
+    msgList: any = ConfigService.msgList;
+    diseaseEventForm: FormGroup;
+    diseaseCaseKey: string;
+    diseaseCaseName: string;
+    diseaseEventKey: string;
+    diseaseEventName: string;
 
-    showModalDialog:string;
-    simulateDeletion:boolean;
+    showModalDialog: string;
+    simulateDeletion: boolean;
 
-    subscrUser:Subscription;
-    subscrRoute:Subscription;
-    subscrDiseaseCase:Subscription;
-    subscrDiseaseEvent:Subscription;
+    subscrUser: Subscription;
+    subscrRoute: Subscription;
+    subscrDiseaseCase: Subscription;
+    subscrDiseaseEvent: Subscription;
 
-    constructor(private fb:FormBuilder,
-                private router:Router,
-                private route:ActivatedRoute,
-                private authService:AuthService,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService,
-                private location:Location) {
+    constructor(private fb: FormBuilder,
+                private router: Router,
+                private route: ActivatedRoute,
+                private authService: AuthService,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService,
+                private location: Location) {
     };
 
     ngOnInit() {
@@ -54,10 +54,10 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
         try {
             this.simulateDeletion = this.isDevMode;
             this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
+                (user: UserClass) => {
                     if (user.isLoggedIn()) {
                         this.subscrRoute = this.route.params.subscribe(
-                            (params:any) => {
+                            (params: any) => {
                                 this.diseaseEventKey = params['diseaseEventKey'];
                                 this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
 
@@ -67,8 +67,8 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
                                     this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvent) => {
                                         this.diseaseEventName = diseaseEvent.name;
                                         this.diseaseEventForm.setValue({
-                                            name : diseaseEvent.name,
-                                            value: diseaseEvent.value,
+                                            name     : diseaseEvent.name,
+                                            value    : diseaseEvent.value,
                                             eventDate: this.dataService.toFrontendDate(diseaseEvent.eventDate),
                                         });
                                     });
@@ -88,7 +88,7 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
         }
     };
 
-    updateDiseaseEvent(key_value:DiseaseEvent) {
+    updateDiseaseEvent(key_value: DiseaseEvent) {
         try {
             this.showModalDialog = "";
             this.dataService.updateDiseaseEvent(this.diseaseEventKey, key_value);

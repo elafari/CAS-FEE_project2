@@ -16,32 +16,32 @@ import { UserClass } from "../auth/user.interface";
 })
 export class DiseaseEventsListComponent implements OnInit, OnDestroy {
 
-    diseaseCaseKey:string;
-    diseaseCaseName:string;
+    diseaseCaseKey: string;
+    diseaseCaseName: string;
 
-    allDiseaseEvents:Observable<any[]>;
-    diseaseEventsCount:Number;
+    allDiseaseEvents: Observable<any[]>;
+    diseaseEventsCount: Number;
 
-    subscrUser:Subscription;
-    subscrRoute:Subscription;
-    subscrDiseaseCase:Subscription;
-    subscrDiseaseEvents:Subscription;
+    subscrUser: Subscription;
+    subscrRoute: Subscription;
+    subscrDiseaseCase: Subscription;
+    subscrDiseaseEvents: Subscription;
 
-    constructor(private router:Router,
-                private route:ActivatedRoute,
-                private authService:AuthService,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private authService: AuthService,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
         try {
             this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
+                (user: UserClass) => {
                     if (user.isLoggedIn()) {
                         this.subscrRoute = this.route.params.subscribe(
-                            (params:any) => {
+                            (params: any) => {
                                 this.diseaseCaseKey = params['diseaseCaseKey'];
                                 this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                                     this.diseaseCaseName = diseaseCase.name;

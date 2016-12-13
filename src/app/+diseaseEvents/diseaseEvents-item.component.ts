@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
     styleUrls  : ['../../assets/scss/cards.scss']
 })
 export class DiseaseEventsItemComponent {
-    @Input() diseaseEvent:any;
+    @Input() diseaseEvent: any;
 }

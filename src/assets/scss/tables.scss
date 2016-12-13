@@ -1,17 +1,17 @@
 @import "./_colors.scss";
 
 table {
-  box-shadow : 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    box-shadow : 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
 .table tr {
-  background-color : white;
+    background-color : white;
 }
 
 .table td {
-  vertical-align : middle;
+    vertical-align : middle;
 }
 
 .modal-header-danger {
-  background-color : $modal-header-danger-color;
+    background-color : $modal-header-danger-color;
 }

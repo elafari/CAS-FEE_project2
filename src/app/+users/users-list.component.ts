@@ -19,18 +19,18 @@ import { UserClass } from "../auth/user.interface";
 })
 export class UsersListComponent implements OnInit, OnDestroy {
 
-    allUsers:Observable<any[]>;
-    allUsersCount:number;
+    allUsers: Observable<any[]>;
+    allUsersCount: number;
 
-    subscrUser:Subscription;
-    subscrUsers:Subscription;
+    subscrUser: Subscription;
+    subscrUsers: Subscription;
 
-    constructor(private router:Router,
-                private af:AngularFire,
-                private authService:AuthService,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+    constructor(private router: Router,
+                private af: AngularFire,
+                private authService: AuthService,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {

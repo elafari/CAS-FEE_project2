@@ -1,8 +1,12 @@
 export class UserClass {
     public key: string;
     public email: string;
-    public name?: string;
-    public isAdmin?: boolean;
+    public name
+?:
+    string;
+    public isAdmin
+?:
+    boolean;
     public error: string;
     public active: boolean;
 

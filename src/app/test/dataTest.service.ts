@@ -1,5 +1,5 @@
 export class DataTestService {
-  town = {
-    name: 'Rapperswil'
-  };
+    town = {
+        name: 'Rapperswil'
+    };
 }

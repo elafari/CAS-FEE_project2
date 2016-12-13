@@ -14,25 +14,25 @@ import { UserClass } from "../auth/user.interface";
 
 @Component({
     templateUrl: './user-admin.component.html',
-    styleUrls  : ['../../assets/scss/tables.scss','../../assets/scss/toggler.scss']
+    styleUrls  : ['../../assets/scss/tables.scss', '../../assets/scss/toggler.scss']
 })
 export class UserAdminComponent implements OnInit, OnDestroy {
-    isDevMode:boolean = ConfigService.devMode;
-    msgList:any = ConfigService.msgList;
-    users:Observable<any>;
-    userMainAdmin:string;
+    isDevMode: boolean = ConfigService.devMode;
+    msgList: any = ConfigService.msgList;
+    users: Observable<any>;
+    userMainAdmin: string;
 
-    showModalDialog:string;
-    simulateDeletion:boolean;
+    showModalDialog: string;
+    simulateDeletion: boolean;
 
-    subscrUser:Subscription;
+    subscrUser: Subscription;
 
-    constructor(private router:Router,
-                private af:AngularFire,
-                private authService:AuthService,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+    constructor(private router: Router,
+                private af: AngularFire,
+                private authService: AuthService,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
@@ -58,7 +58,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
         }
     };
 
-    updateUser(userKey:string, role:boolean) {
+    updateUser(userKey: string, role: boolean) {
         try {
             this.showModalDialog = "";
             let newRole = role;
@@ -73,7 +73,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
         }
     }
 
-    deleteUser(userKey:string) {
+    deleteUser(userKey: string) {
         try {
             let simulate = this.simulateDeletion;
             this.showModalDialog = "";

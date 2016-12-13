@@ -12,7 +12,6 @@ import { NotFoundComponent } from "./pages/not-found.component";
 
 export const app_routes: Routes = <Routes>[
     {path: '', component: HomeComponent},
-    //{path: '', pathMatch: 'full', redirectTo: '/home'},
 
     {path: 'home', component: HomeComponent},
 

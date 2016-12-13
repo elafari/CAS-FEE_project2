@@ -19,35 +19,35 @@ import { UserClass } from "../auth/user.interface";
 })
 export class DiseaseCasesListComponent implements OnInit, OnDestroy {
 
-    patientKey:string;
-    patientName:string;
+    patientKey: string;
+    patientName: string;
 
-    allDiseaseCases:Observable<any[]>;
-    diseaseCasesCount:number;
+    allDiseaseCases: Observable<any[]>;
+    diseaseCasesCount: number;
 
-    subscrUser:Subscription;
-    subscrRoute:Subscription;
-    subscrPatient:Subscription;
-    subscrDiseaseCases:Subscription;
+    subscrUser: Subscription;
+    subscrRoute: Subscription;
+    subscrPatient: Subscription;
+    subscrDiseaseCases: Subscription;
 
-    constructor(private router:Router,
-                private route:ActivatedRoute,
+    constructor(private router: Router,
+                private route: ActivatedRoute,
                 //private af: AngularFire,
-                private authService:AuthService,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+                private authService: AuthService,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
         try {
             this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
+                (user: UserClass) => {
                     if (user.isLoggedIn()) {
                         /*this.af.auth.subscribe(auth => {
                          if (auth) {*/
                         this.subscrRoute = this.route.params.subscribe(
-                            (params:any) => {
+                            (params: any) => {
                                 this.patientKey = params['patientKey'];
                                 this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                                     this.patientName = patient.name;
