@@ -14,7 +14,7 @@ import { UserClass } from "../auth/user.interface";
 
 @Component({
     templateUrl: './user-admin.component.html',
-    styleUrls  : ['../../assets/scss/toggler.scss']
+    styleUrls  : ['../../assets/scss/tables.scss','../../assets/scss/toggler.scss']
 })
 export class UserAdminComponent implements OnInit, OnDestroy {
     isDevMode:boolean = ConfigService.devMode;

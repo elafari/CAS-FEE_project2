@@ -10,7 +10,8 @@ import { ConfigService } from "../shared/config.service";
 import { LoggerService } from "../log/logger.service";
 
 @Component({
-    templateUrl: './logged-in-data.component.html'
+    templateUrl: './logged-in-data.component.html',
+    styleUrls  : ['../../assets/scss/tables.scss']
 })
 
 export class LoggedInDataComponent implements OnInit, OnDestroy {

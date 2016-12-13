@@ -13,7 +13,8 @@ import { LoggerService } from "../log/logger.service";
 import { UserClass } from "../auth/user.interface";
 
 @Component({
-    templateUrl: './link-list.component.html'
+    templateUrl: './link-list.component.html',
+    styleUrls  : ['../../assets/scss/tables.scss']
 })
 
 export class LinkListComponent implements OnInit, OnDestroy {
