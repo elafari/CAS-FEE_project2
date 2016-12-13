@@ -73,14 +73,14 @@ export class ConfigService {
 
     // message for dialogs
     public static msgList = {
-        "user-admin-1"   : "Are you sure to disable this user?",
-        "user-admin-2"   : "All patients, cases and events of this user will be deleted!",
-        "patients-edit-1": "Are you sure to delete this patient?",
-        "patients-edit-2": "All cases and events of this patient will also be deleted!",
-        "diseaseCases-edit-1": "Are you sure to delete this disease case?",
-        "diseaseCases-edit-2": "All events of this case will also be deleted!",
+        "user-admin-1"        : "Are you sure to disable this user?",
+        "user-admin-2"        : "All patients, cases and events of this user will be deleted!",
+        "patients-edit-1"     : "Are you sure to delete this patient?",
+        "patients-edit-2"     : "All cases and events of this patient will also be deleted!",
+        "diseaseCases-edit-1" : "Are you sure to delete this disease case?",
+        "diseaseCases-edit-2" : "All events of this case will also be deleted!",
         "diseaseEvents-edit-1": "Are you sure to delete this event?",
-        "simulation"     : "Simulation (no object deletion, only log delete information in console)"
+        "simulation"          : "Simulation (no object deletion, only log delete information in console)"
     };
 
     private static _gender = [
@@ -100,12 +100,12 @@ export class ConfigService {
 
     private static _eventType = [
         {
-            key : 'Medikation',
-            text: 'Medikation'
+            key : 'Medication',
+            text: 'Medication'
         },
         {
-            key : 'Temperatur',
-            text: 'Temperatur'
+            key : 'Temperature',
+            text: 'Temperature'
         }
     ];
 

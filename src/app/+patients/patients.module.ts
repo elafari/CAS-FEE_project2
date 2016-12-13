@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/primeng';
 
 import { PatientsRoutingModule, routingComponents } from "./patients.routing";
 
@@ -8,7 +9,8 @@ import { PatientsRoutingModule, routingComponents } from "./patients.routing";
     imports     : [
         CommonModule,
         ReactiveFormsModule,
-        PatientsRoutingModule
+        PatientsRoutingModule,
+        CalendarModule
     ],
     declarations: [
         routingComponents

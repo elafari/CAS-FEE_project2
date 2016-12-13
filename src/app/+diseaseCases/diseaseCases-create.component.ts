@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Location } from "@angular/common";
@@ -13,8 +13,9 @@ import { DiseaseCase } from './diseaseCases.interface';
 import { UserClass } from "../auth/user.interface";
 
 @Component({
-    templateUrl: './diseaseCases-create.component.html',
-    styleUrls  : ['../../assets/scss/forms.scss']
+    templateUrl  : './diseaseCases-create.component.html',
+    styleUrls    : ['../../assets/scss/forms.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
@@ -36,7 +37,6 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.diseaseCaseForm = this.fb.group({
             name     : ['', Validators.required],
-            type     : ['', Validators.required],
             startDate: [this.dataService.getFrontendDate(), Validators.required]
         });
 

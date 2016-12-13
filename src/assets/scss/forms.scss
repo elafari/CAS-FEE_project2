@@ -28,3 +28,16 @@ label.login, label.register {
 .error {
   color : $form-error-color;
 }
+
+/* Overrides for PrimeNg  ui-components */
+.datepicker-widget {
+  z-index : 1031; /* needs to be higher than the bootstrap navbar (1030) and lower than the bootstrap modal-dialog (1040) */
+}
+
+.datepicker-input {
+  padding : .5rem .75rem;
+}
+
+.ui-datepicker-trigger .fa-calendar {
+  font-weight : initial !important;
+}

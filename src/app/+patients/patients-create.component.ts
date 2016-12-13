@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,28 +14,29 @@ import { Patient } from './patients.interface';
 import { UserClass } from "../auth/user.interface";
 
 @Component({
-    templateUrl: './patients-create.component.html',
-    styleUrls  : ['../../assets/scss/forms.scss']
+    templateUrl  : './patients-create.component.html',
+    styleUrls    : ['../../assets/scss/forms.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class PatientsCreateComponent implements OnInit, OnDestroy {
-    isDevMode:boolean = ConfigService.devMode;
-    genderConfig:any[] = ConfigService.getGender();
-    patientForm:FormGroup;
+    isDevMode: boolean = ConfigService.devMode;
+    genderConfig: any[] = ConfigService.getGender();
+    patientForm: FormGroup;
 
-    loggedInUserName:string;
-    loggedInUserKey:string;
+    loggedInUserName: string;
+    loggedInUserKey: string;
 
-    subscrUser:Subscription;
-    subscrUserObj:Subscription;
+    subscrUser: Subscription;
+    subscrUserObj: Subscription;
 
-    constructor(private fb:FormBuilder,
-                private router:Router,
-                private location:Location,
+    constructor(private fb: FormBuilder,
+                private router: Router,
+                private location: Location,
                 private af: AngularFire,
-                private authService:AuthService,
-                private dataService:DataService,
-                private errorHandler:ErrorHandlerService,
-                private logger:LoggerService) {
+                private authService: AuthService,
+                private dataService: DataService,
+                private errorHandler: ErrorHandlerService,
+                private logger: LoggerService) {
     };
 
     ngOnInit() {
@@ -47,7 +48,7 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
 
         try {
             this.subscrUser = this.authService.user$.subscribe(
-                (user:UserClass) => {
+                (user: UserClass) => {
                     if (user.isLoggedIn()) {
                         /*this.af.auth.subscribe(auth => {
                          if (auth) {*/
@@ -69,7 +70,7 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
         }
     };
 
-    createPatient(key_value:Patient) {
+    createPatient(key_value: Patient) {
         try {
             key_value.user = this.loggedInUserKey;
             this.dataService.createPatient(key_value);

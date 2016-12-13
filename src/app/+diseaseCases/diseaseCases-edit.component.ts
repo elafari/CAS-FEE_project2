@@ -47,7 +47,6 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.diseaseCaseForm = this.fb.group({
             name     : ['', Validators.required],
-            type     : ['', Validators.required],
             startDate: [{value: '', disabled: true}],
             endDate  : [{value: '', disabled: true}],
             active   : ['', Validators.required]
@@ -69,7 +68,6 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
 
                                         this.diseaseCaseForm.setValue({
                                             name     : diseaseCase.name,
-                                            type     : diseaseCase.type,
                                             startDate: this.dataService.toFrontendDate(diseaseCase.startDate),
                                             endDate  : this.dataService.toFrontendDate(diseaseCase.endDate),
                                             active   : diseaseCase.active

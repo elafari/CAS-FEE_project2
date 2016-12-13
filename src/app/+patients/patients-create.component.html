@@ -10,25 +10,11 @@
                     Name
                 </label>
                 <div class="col-xs-12 col-sm-8">
-                    <input type="text" placeholder="Enter a name" formControlName="name" id="name"
+                    <input type="text" placeholder="Mathilda" formControlName="name" id="name"
                            class="form-control">
                     <div class="alert alert-danger alert-danger-form"
                          *ngIf="patientForm.get('name').touched && patientForm.get('name').hasError('required')">
                         Name is required
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="date-of-birth" class="col-form-label col-xs-12 col-sm-4">
-                    Date of Birth
-                </label>
-                <div class="col-xs-12 col-sm-8">
-                    <input type="date" placeholder="2016-12-05" formControlName="birthdate" id="date-of-birth"
-                           class="form-control">
-                    <div class="alert alert-danger alert-danger-form"
-                         *ngIf="patientForm.get('birthdate').touched && patientForm.get('birthdate').hasError('required')">
-                        Date of birth is required
                     </div>
                 </div>
             </div>
@@ -45,6 +31,27 @@
                     <div class="alert alert-danger alert-danger-form"
                          *ngIf="patientForm.get('gender').touched && patientForm.get('gender').hasError('required')">
                         Gender is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="date-of-birth" class="col-form-label col-xs-12 col-sm-4">
+                    Date of Birth
+                </label>
+                <div class="col-xs-12 col-sm-8">
+                    <p-calendar formControlName="birthdate"
+                                id="date-of-birth"
+                                styleClass="datepicker-widget"
+                                inputStyleClass="datepicker-input"
+                                dateFormat="dd.mm.yy"
+                                placeholder="23.04.2012"
+                                showIcon="true"
+                                dataType="string">
+                    </p-calendar>
+                    <div class="alert alert-danger alert-danger-form"
+                         *ngIf="patientForm.get('birthdate').touched && patientForm.get('birthdate').hasError('required')">
+                        Date of birth is required
                     </div>
                 </div>
             </div>

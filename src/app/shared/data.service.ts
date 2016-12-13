@@ -161,6 +161,7 @@ export class DataService {
     updatePatient(patientKey: string, key_value: any) {
         try {
             let patient = this.getPatient(patientKey);
+            key_value.birthdate = this.toBackendDate(key_value.birthdate);
             patient.update(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - updatePatient - error", e, true);
@@ -169,6 +170,7 @@ export class DataService {
 
     createPatient(key_value: any) {
         try {
+            key_value.birthdate = this.toBackendDate(key_value.birthdate);
             this.af.database.list(String(this.DbPatients)).push(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - createPatient - error", e, true);
