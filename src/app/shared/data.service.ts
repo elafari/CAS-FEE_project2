@@ -95,7 +95,8 @@ export class DataService {
                 let key_value = {'admin': false, 'active': false};
                 this.updateUser(userKey, key_value);
             }
-            /*
+            /* todo: this would delete the user in custom user table, but not the firebase auth user
+                     angularfire2 doesn't yet offer a method to delete or deactivate an firebase auth user
              let users = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users);
              this.logger.info("[dataService] - deleteUser - user: " + userKey + " - simulation: " + simulate);
              if (!simulate) {
@@ -103,9 +104,7 @@ export class DataService {
              }
              */
 
-            // delete all associated patients
-            let queryDefinitionPatients = {};
-            queryDefinitionPatients = {query: {orderByChild: 'user', equalTo: userKey}, preserveSnapshot: true};
+            let queryDefinitionPatients = {query: {orderByChild: 'user', equalTo: userKey}, preserveSnapshot: true};
             let allQueriedPatients = this.af.database.list(String(this.DbPatients), queryDefinitionPatients);
             allQueriedPatients
                 .subscribe(dPatients => {
@@ -120,8 +119,7 @@ export class DataService {
 
     getUserList(): FirebaseListObservable<any[]> {
         try {
-            let queryDefinition = {};
-            queryDefinition = {query: {orderByChild: 'name'}};
+            let queryDefinition = {query: {orderByChild: 'name'}};
             return this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users, queryDefinition);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - getUserList - error", e, true);
@@ -130,9 +128,7 @@ export class DataService {
 
     getAllUsersAndPatients(): Observable<any[]> {
         try {
-            let queryDefinitionUsers = {};
-            queryDefinitionUsers = {query: {orderByKey: true}};
-
+            let queryDefinitionUsers = {query: {orderByKey: true}};
             return this.af.database.list(String(this.DbUsers), queryDefinitionUsers)
                 .map((allUsers) => {
                     return allUsers.map((user) => {
@@ -184,9 +180,7 @@ export class DataService {
             if (!simulate) {
                 patients.remove(patientKey);
             }
-            // delete all associated diseaseCases
-            let queryDefinitionCases = {};
-            queryDefinitionCases = {query: {orderByChild: 'patient', equalTo: patientKey}, preserveSnapshot: true};
+            let queryDefinitionCases = {query: {orderByChild: 'patient', equalTo: patientKey}, preserveSnapshot: true};
             let allQueriedDiseaseCases = this.af.database.list(String(this.DbCases), queryDefinitionCases);
             allQueriedDiseaseCases
                 .subscribe(dCases => {
@@ -201,9 +195,7 @@ export class DataService {
 
     getPatients(userKey: string): Observable<any[]> {
         try {
-            let queryDefinition = {};
-            queryDefinition = {query: {orderByChild: 'user', equalTo: userKey}};
-
+            let queryDefinition = {query: {orderByChild: 'user', equalTo: userKey}};
             return this.af.database.list(String(this.DbPatients), queryDefinition)
                 .map((allPatients) => {
                     return allPatients;
@@ -252,9 +244,7 @@ export class DataService {
             if (!simulate) {
                 diseaseCases.remove(diseaseCaseKey);
             }
-            // delete all associated diseaseEvents
-            let queryDefinitionEvents = {};
-            queryDefinitionEvents = {query: {orderByChild: 'case', equalTo: diseaseCaseKey}, preserveSnapshot: true};
+            let queryDefinitionEvents = {query: {orderByChild: 'case', equalTo: diseaseCaseKey}, preserveSnapshot: true};
             let allQueriedDiseaseEvents = this.af.database.list(String(this.DbEvents), queryDefinitionEvents);
             allQueriedDiseaseEvents
                 .subscribe(dEvents => {
@@ -269,9 +259,7 @@ export class DataService {
 
     getDiseaseCases(patientKey: string): Observable<any[]> {
         try {
-            let queryDefinition = {};
-            queryDefinition = {query: {orderByChild: 'patient', equalTo: patientKey}};
-
+            let queryDefinition = {query: {orderByChild: 'patient', equalTo: patientKey}};
             return this.af.database.list(String(this.DbCases), queryDefinition)
                 .map((allCases) => {
                     return allCases;
@@ -323,9 +311,7 @@ export class DataService {
 
     getDiseaseEvents(diseaseCaseKey: string): Observable<any[]> {
         try {
-            let queryDefinition = {};
-            queryDefinition = {query: {orderByChild: 'case', equalTo: diseaseCaseKey}};
-
+            let queryDefinition = {query: {orderByChild: 'case', equalTo: diseaseCaseKey}};
             return this.af.database.list(String(this.DbEvents), queryDefinition)
                 .map((allEvents) => {
                     return allEvents;

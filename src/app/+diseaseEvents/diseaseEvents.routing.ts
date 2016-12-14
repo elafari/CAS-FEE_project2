@@ -12,18 +12,9 @@ export const diseaseEvents_routes: Routes = <Routes>[
         path     : '',
         component: DiseaseEventsComponent,
         children : [
-            {
-                path     : '',
-                component: DiseaseEventsListComponent
-            },
-            {
-                path     : ':diseaseEventKey/edit',
-                component: DiseaseEventsEditComponent
-            },
-            {
-                path     : 'create',
-                component: DiseaseEventsCreateComponent
-            }
+            {path: '', component: DiseaseEventsListComponent},
+            {path: ':diseaseEventKey/edit', component: DiseaseEventsEditComponent},
+            {path: 'create', component: DiseaseEventsCreateComponent}
         ]
     }
 ];

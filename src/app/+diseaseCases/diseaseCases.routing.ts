@@ -12,22 +12,10 @@ export const diseaseCases_routes: Routes = <Routes>[
         path     : '',
         component: DiseaseCasesComponent,
         children : [
-            {
-                path     : '',
-                component: DiseaseCasesListComponent
-            },
-            {
-                path     : ':diseaseCaseKey/edit',
-                component: DiseaseCasesEditComponent
-            },
-            {
-                path     : 'create',
-                component: DiseaseCasesCreateComponent
-            },
-            {
-                path        : ':diseaseCaseKey/diseaseEvents',
-                loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'
-            }
+            {path: '', component: DiseaseCasesListComponent},
+            {path: ':diseaseCaseKey/edit', component: DiseaseCasesEditComponent},
+            {path: 'create', component: DiseaseCasesCreateComponent},
+            {path: ':diseaseCaseKey/diseaseEvents', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'}
         ]
     }
 ];

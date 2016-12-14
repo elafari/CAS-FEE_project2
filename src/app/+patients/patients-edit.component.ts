@@ -16,7 +16,7 @@ import { UserClass } from "../auth/user.interface";
 
 @Component({
     templateUrl  : './patients-edit.component.html',
-    styleUrls    : ['../../assets/scss/forms.scss'],
+    styleUrls    : ['../../assets/scss/forms.scss', '../../assets/scss/tables.scss'],
     encapsulation: ViewEncapsulation.None,
 })
 export class PatientsEditComponent implements OnInit, OnDestroy {

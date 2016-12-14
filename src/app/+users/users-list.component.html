@@ -1,6 +1,6 @@
 <h1>Users and Patients</h1>
 
-<div class="row" *ngFor="let user of allUsers | async" *ngIf="user.patients">
+<div class="row" *ngFor="let user of allUsers | async">
 
     <div class="col-xs-12">
         <h2>Patients of {{user.name}}</h2>

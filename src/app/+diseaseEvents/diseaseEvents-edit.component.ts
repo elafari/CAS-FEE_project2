@@ -14,7 +14,7 @@ import { UserClass } from "../auth/user.interface";
 
 @Component({
     templateUrl: './diseaseEvents-edit.component.html',
-    styleUrls  : ['../../assets/scss/forms.scss']
+    styleUrls  : ['../../assets/scss/forms.scss', '../../assets/scss/tables.scss']
 })
 export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
