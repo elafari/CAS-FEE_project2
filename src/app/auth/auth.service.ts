@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFire } from 'angularfire2';
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Subscription } from "rxjs/Subscription";
 
 import { UserClass, Login, Registration } from "./user.interface";
@@ -38,6 +38,7 @@ export class AuthService {
                                 this.userData.isAdmin = dbUser.admin;
                                 this.userData.active = dbUser.active;
                                 this.logger.info("[auth service] - constructor - user extended: " + dbUser.name + ' admin: ' + dbUser.admin + ' active: ' + dbUser.active);
+
                                 if (dbUser.active === true) {
                                     this.setUserData(this.userData);
                                 } else {
@@ -72,6 +73,18 @@ export class AuthService {
             this.errorHandler.traceError("[auth-service] - constructor - error - catch", e, true);
         }
     };
+
+    getAuth(): Observable<any> {
+        return this.af.auth;
+    };
+
+    isLoggedIn(): Observable<boolean> {
+        return this.user$.map(
+            user => user.isLoggedIn()
+        ).first();
+    };
+
+
 
     loginUser(user: Login) {
         try {

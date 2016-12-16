@@ -60,7 +60,7 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
                         this.dataService.addSubscripton(this.subscrUserObj);
                     } else {
                         this.logger.warn("[patients-create] - ngOnInit - user: no logged in user");
-                        this.router.navigate(['/login']);
+                        //this.router.navigate(['/login']);
                     }
                 }
             );

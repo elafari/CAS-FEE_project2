@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/primeng';
 
 import { PatientsRoutingModule, routingComponents } from "./patients.routing";
+import { AuthResolver } from "../auth/auth.resolver";
+import { AuthGuard } from "../auth/auth.guard";
 
 @NgModule({
     imports     : [
@@ -14,6 +16,10 @@ import { PatientsRoutingModule, routingComponents } from "./patients.routing";
     ],
     declarations: [
         routingComponents
+    ],
+    providers: [
+        AuthResolver,
+        AuthGuard
     ]
 })
 export class PatientsModule {
