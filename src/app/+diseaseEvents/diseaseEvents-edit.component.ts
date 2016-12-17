@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
+import * as moment from "moment";
 
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
@@ -13,8 +14,12 @@ import { DiseaseEvent } from './diseaseEvents.interface';
 import { UserClass } from "../auth/user.interface";
 
 @Component({
-    templateUrl: './diseaseEvents-edit.component.html',
-    styleUrls  : ['../../assets/scss/forms.scss', '../../assets/scss/tables.scss']
+    templateUrl  : './diseaseEvents-edit.component.html',
+    styleUrls    : [
+        '../../assets/scss/forms.scss',
+        '../../assets/scss/tables.scss'
+    ],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
@@ -22,9 +27,9 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
     msgList: any = ConfigService.msgList;
     diseaseEventForm: FormGroup;
     diseaseCaseKey: string;
-    diseaseCaseName: string;
+    diseaseCaseType: string;
     diseaseEventKey: string;
-    diseaseEventName: string;
+    diseaseEventType: string;
 
     showModalDialog: string;
     simulateDeletion: boolean;
@@ -46,9 +51,9 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.diseaseEventForm = this.fb.group({
-            name     : ['', Validators.required],
-            value    : ['', Validators.required],
-            eventDate: [{value: '', disabled: true}],
+            type    : ['', Validators.required],
+            value   : ['', Validators.required],
+            dateTime: ['', Validators.required]
         });
 
         try {
@@ -62,14 +67,14 @@ export class DiseaseEventsEditComponent implements OnInit, OnDestroy {
                                 this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
 
                                 this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
-                                    this.diseaseCaseName = diseaseCase.name;
+                                    this.diseaseCaseType = diseaseCase.type;
 
                                     this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvent) => {
-                                        this.diseaseEventName = diseaseEvent.name;
+                                        this.diseaseEventType = diseaseEvent.type;
                                         this.diseaseEventForm.setValue({
-                                            name     : diseaseEvent.name,
-                                            value    : diseaseEvent.value,
-                                            eventDate: this.dataService.toFrontendDate(diseaseEvent.eventDate),
+                                            type    : diseaseEvent.type,
+                                            value   : diseaseEvent.value,
+                                            dateTime: moment(diseaseEvent.dateTime, 'YYYY-MM-DD HH:mm').toDate()
                                         });
                                     });
                                     this.dataService.addSubscripton(this.subscrDiseaseEvent);

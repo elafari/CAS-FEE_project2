@@ -3,7 +3,6 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { DiseaseEventsComponent } from "./diseaseEvents.component";
 import { DiseaseEventsListComponent } from "./diseaseEvents-list.component";
-import { DiseaseEventsItemComponent } from "./diseaseEvents-item.component";
 import { DiseaseEventsEditComponent } from "./diseaseEvents-edit.component";
 import { DiseaseEventsCreateComponent } from "./diseaseEvents-create.component";
 
@@ -30,7 +29,6 @@ export class DiseaseEventsRoutingModule {
 export const routingComponents = [
     DiseaseEventsComponent,
     DiseaseEventsListComponent,
-    DiseaseEventsItemComponent,
     DiseaseEventsEditComponent,
     DiseaseEventsCreateComponent
 ];

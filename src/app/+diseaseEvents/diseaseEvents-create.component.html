@@ -5,16 +5,16 @@
 
         <form novalidate [formGroup]="diseaseEventForm" (ngSubmit)="onSubmit()">
             <div class="form-group row">
-                <label for="name" class="col-form-label col-xs-12 col-sm-4">
+                <label for="type" class="col-form-label col-xs-12 col-sm-4">
                     Type
                 </label>
                 <div class="col-xs-12 col-sm-8">
-                    <select formControlName="name" id="name" class="form-control">
+                    <select formControlName="type" id="type" class="form-control">
                         <option value="">Select..</option>
                         <option *ngFor="let item of eventTypeConfig" value={{item.key}}>{{item.text}}</option>
                     </select>
                     <div class="alert alert-danger alert-danger-form"
-                         *ngIf="diseaseEventForm.get('name').touched && diseaseEventForm.get('name').hasError('required')">
+                         *ngIf="diseaseEventForm.get('type').touched && diseaseEventForm.get('type').hasError('required')">
                         Type is required
                     </div>
                 </div>
@@ -31,6 +31,28 @@
                     <div class="alert alert-danger alert-danger-form"
                          *ngIf="diseaseEventForm.get('value').touched && diseaseEventForm.get('value').hasError('required')">
                         Value is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="dateTime" class="col-form-label col-xs-12 col-sm-4">
+                    Date/time
+                </label>
+                <div class="col-xs-12 col-sm-8">
+                    <p-calendar formControlName="dateTime"
+                                id="dateTime"
+                                styleClass="datepicker-widget"
+                                inputStyleClass="datepicker-input"
+                                showTime="true"
+                                dateFormat="dd.mm.yy"
+                                placeholder="11.09.2013 06:06"
+                                showIcon="true">
+                    </p-calendar>
+                    <div class="alert alert-danger alert-danger-form"
+                         *ngIf="diseaseEventForm.get('dateTime').touched && diseaseEventForm.get('dateTime').hasError('required')">
+                        Date/time is required. <br>
+                        Format: 11.09.2013 06:06
                     </div>
                 </div>
             </div>

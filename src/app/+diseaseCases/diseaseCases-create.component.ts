@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
+import * as moment from "moment";
 
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
@@ -37,7 +38,7 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.diseaseCaseForm = this.fb.group({
             name     : ['', Validators.required],
-            startDate: [this.dataService.getFrontendDate(), Validators.required]
+            startDate: [moment().toDate(), Validators.required]
         });
 
         try {

@@ -1,18 +1,16 @@
 import { Injectable } from "@angular/core";
 
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Subscription";
 import 'rxjs/add/operator/map';
 
-
 import { ErrorHandlerService } from "../error/error-handler.service";
 import { LoggerService } from "../log/logger.service";
-import logWrap from "../log/logWrap.decorator";
-
 import { ConfigService } from "./config.service";
+import logWrap from "../log/logWrap.decorator";
 import Promise = firebase.Promise;
+import * as moment from "moment";
 
 @Injectable()
 export class DataService {
@@ -96,7 +94,7 @@ export class DataService {
                 this.updateUser(userKey, key_value);
             }
             /* todo: this would delete the user in custom user table, but not the firebase auth user
-                     angularfire2 doesn't yet offer a method to delete or deactivate an firebase auth user
+             angularfire2 doesn't yet offer a method to delete or deactivate an firebase auth user
              let users = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users);
              this.logger.info("[dataService] - deleteUser - user: " + userKey + " - simulation: " + simulate);
              if (!simulate) {
@@ -157,7 +155,7 @@ export class DataService {
     updatePatient(patientKey: string, key_value: any) {
         try {
             let patient = this.getPatient(patientKey);
-            key_value.birthdate = this.toBackendDate(key_value.birthdate);
+            key_value.birthdate = this.toBackendDateStr(key_value.birthdate);
             patient.update(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - updatePatient - error", e, true);
@@ -166,7 +164,7 @@ export class DataService {
 
     createPatient(key_value: any) {
         try {
-            key_value.birthdate = this.toBackendDate(key_value.birthdate);
+            key_value.birthdate = this.toBackendDateStr(key_value.birthdate);
             this.af.database.list(String(this.DbPatients)).push(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - createPatient - error", e, true);
@@ -218,9 +216,13 @@ export class DataService {
     @logWrap
     updateDiseaseCase(diseaseCaseKey: string, key_value: any) {
         try {
+            // an existing startDate is not part of key_value when the form control is disabled
             if (key_value.startDate) {
                 key_value.startDate = this.toBackendDate(key_value.startDate);
             }
+
+            key_value.endDate = key_value.active ? '' : this.getBackendDateStr();
+
             let diseaseCase = this.getDiseaseCase(diseaseCaseKey);
             diseaseCase.update(key_value);
         } catch (e) {
@@ -230,7 +232,7 @@ export class DataService {
 
     createDiseaseCase(key_value: any): Promise<any> {
         try {
-            key_value.startDate = this.toBackendDate(key_value.startDate);
+            key_value.startDate = this.toBackendDateStr(key_value.startDate);
             return this.af.database.list(String(this.DbCases)).push(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - createDiseaseCase - error", e, true);
@@ -244,7 +246,10 @@ export class DataService {
             if (!simulate) {
                 diseaseCases.remove(diseaseCaseKey);
             }
-            let queryDefinitionEvents = {query: {orderByChild: 'case', equalTo: diseaseCaseKey}, preserveSnapshot: true};
+            let queryDefinitionEvents = {
+                query           : {orderByChild: 'case', equalTo: diseaseCaseKey},
+                preserveSnapshot: true
+            };
             let allQueriedDiseaseEvents = this.af.database.list(String(this.DbEvents), queryDefinitionEvents);
             allQueriedDiseaseEvents
                 .subscribe(dEvents => {
@@ -283,6 +288,7 @@ export class DataService {
     updateDiseaseEvent(diseaseEventKey: string, key_value: any) {
         try {
             let diseaseEvent = this.getDiseaseEvent(diseaseEventKey);
+            key_value.dateTime = this.toBackendDateStr(key_value.dateTime, true);
             diseaseEvent.update(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - updateDiseaseEvent - error", e, true);
@@ -291,6 +297,7 @@ export class DataService {
 
     createDiseaseEvent(key_value: any) {
         try {
+            key_value.dateTime = moment(key_value.dateTime).format('YYYY-MM-DD HH:mm');
             this.af.database.list(String(this.DbEvents)).push(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - createDiseaseEvent - error", e, true);
@@ -311,9 +318,22 @@ export class DataService {
 
     getDiseaseEvents(diseaseCaseKey: string): Observable<any[]> {
         try {
-            let queryDefinition = {query: {orderByChild: 'case', equalTo: diseaseCaseKey}};
+            let queryDefinition = {
+                query: {
+                    orderByChild: 'caseKey',
+                    equalTo     : diseaseCaseKey
+                }
+            };
             return this.af.database.list(String(this.DbEvents), queryDefinition)
                 .map((allEvents) => {
+                    const key = 'dateTime';
+                    allEvents.sort(
+                        (a, b) => {
+                            if (a[key] < b[key]) return -1;
+                            if (a[key] > b[key]) return 1;
+                            return 0;
+                        }
+                    );
                     return allEvents;
                 });
         } catch (e) {
@@ -339,19 +359,31 @@ export class DataService {
 
     // Helpers + + + + + + + + + + + + + + +
 
+    toBackendDateStr(date: Date, getTime: boolean = false): string {
+        return getTime ? moment(date).format('YYYY-MM-DD HH:mm') : moment(date).format('YYYY-MM-DD');
+    };
+
     toBackendDate(date: string): string {
         return date ? date.substr(6, 4) + "-" + date.substr(3, 2) + "-" + date.substr(0, 2) : '';
     };
 
-    toFrontendDate(date: string): string {
-        return (date) ? date.substr(8, 2) + "." + date.substr(5, 2) + "." + date.substr(0, 4) : '';
+    toFrontendDate(dateStr: string): Date {
+        return moment(dateStr, 'YYYY-MM-DD').toDate();
     };
 
-    getBackendDate(): string {
+    toFrontendDateStr(dateStr: string): string {
+        return (dateStr) ? dateStr.substr(8, 2) + "." + dateStr.substr(5, 2) + "." + dateStr.substr(0, 4) : '';
+    };
+
+    getBackendDateStr(): string {
         return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
     };
 
     getFrontendDate(): string {
         return new Date().getDate() + '.' + (new Date().getMonth() + 1) + '.' + new Date().getFullYear();
+    };
+
+    getUTCDate(date: Date): Number {
+        return date.getTime() - date.getTimezoneOffset() * 60 * 1000;
     };
 }
