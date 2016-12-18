@@ -1,7 +1,7 @@
 ## Application architecture and design
 
 ###Angular 2 Features
-- router loadChildren `lazy loading` (e.g. +users, +patients, +diseaseCases, +diseaseEvents --> see also [routing])
+- router loadChildren `lazy loading` (e.g. +users, +patients, +diseaseCases, +diseaseEvents --> see also Application)
 - router events for creating breadcrumbs (e.g. breadcrumb.component.ts)
 - router CanActivate (authentication test)
 - observables and subscriptions (see also angularfire2)
@@ -16,7 +16,7 @@
 
 ###Application
 - modularization (modules: error, log, auth, userAdmin, breadcrumb)
-- router lazyloading for every [routing] level (e.g. app.routing.ts, patients.routing.ts, diseaseCase.routing.ts, diseaseEvents.routing.ts)
+- router lazyloading for every routing level (e.g. app.routing.ts, patients.routing.ts, diseaseCase.routing.ts, diseaseEvents.routing.ts)
 - services (authentication and data services)
 
 ###Error handling and logging
