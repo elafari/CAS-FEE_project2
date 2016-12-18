@@ -255,7 +255,7 @@ export class DataService {
                 diseaseCases.remove(diseaseCaseKey);
             }
             let queryDefinitionEvents = {
-                query           : {orderByChild: 'case', equalTo: diseaseCaseKey},
+                query           : {orderByChild: 'caseKey', equalTo: diseaseCaseKey},
                 preserveSnapshot: true
             };
             let allQueriedDiseaseEvents = this.af.database.list(String(this.DbEvents), queryDefinitionEvents);

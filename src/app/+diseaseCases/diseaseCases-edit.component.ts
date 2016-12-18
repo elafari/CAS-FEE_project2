@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
 
-import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
@@ -29,7 +28,6 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     showModalDialog: string;
     simulateDeletion: boolean;
 
-    subscrUser: Subscription;
     subscrRoute: Subscription;
     subscrPatient: Subscription;
     subscrDiseaseCase: Subscription;
@@ -37,7 +35,6 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
-                private authService: AuthService,
                 private dataService: DataService,
                 private location: Location,
                 private errorHandler: ErrorHandlerService,
@@ -54,36 +51,26 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
 
         try {
             this.simulateDeletion = this.isDevMode;
-            this.subscrUser = this.authService.user$.subscribe(
-                (user: UserClass) => {
-                    if (user.isLoggedIn()) {
-                        this.subscrRoute = this.route.params.subscribe(
-                            (params: any) => {
-                                this.diseaseCaseKey = params['diseaseCaseKey'];
-                                this.patientKey = this.route.parent.snapshot.params['patientKey'];
-                                this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
-                                    this.patientName = patient.name;
-                                    this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
-                                        this.diseaseCaseName = diseaseCase.name;
+            this.subscrRoute = this.route.params.subscribe(
+                (params: any) => {
+                    this.diseaseCaseKey = params['diseaseCaseKey'];
+                    this.patientKey = this.route.parent.snapshot.params['patientKey'];
+                    this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+                        this.patientName = patient.name;
+                        this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
+                            this.diseaseCaseName = diseaseCase.name;
 
-                                        this.diseaseCaseForm.setValue({
-                                            name     : diseaseCase.name,
-                                            startDate: this.dataService.toFrontendDateStr(diseaseCase.startDate),
-                                            endDate  : this.dataService.toFrontendDateStr(diseaseCase.endDate),
-                                            active   : diseaseCase.active
-                                        });
-                                    });
-                                    this.dataService.addSubscripton(this.subscrDiseaseCase);
-                                });
-                                this.dataService.addSubscripton(this.subscrPatient);
+                            this.diseaseCaseForm.setValue({
+                                name     : diseaseCase.name,
+                                startDate: this.dataService.toFrontendDateStr(diseaseCase.startDate),
+                                endDate  : this.dataService.toFrontendDateStr(diseaseCase.endDate),
+                                active   : diseaseCase.active
                             });
-                    } else {
-                        this.logger.warn("[diseaseCases-edit] - ngOnInit - user: no logged in user");
-                        this.router.navigate(['/login']);
-                    }
-                }
-            );
-            this.dataService.addSubscripton(this.subscrUser);
+                        });
+                        this.dataService.addSubscripton(this.subscrDiseaseCase);
+                    });
+                    this.dataService.addSubscripton(this.subscrPatient);
+                });
         } catch (e) {
             this.errorHandler.traceError("[diseaseCases-edit] - ngOnInit - error", e, true);
         }
@@ -129,7 +116,5 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this.subscrDiseaseCase) this.subscrDiseaseCase.unsubscribe();
         if (this.subscrPatient) this.subscrPatient.unsubscribe();
-        if (this.subscrRoute) this.subscrRoute.unsubscribe();
-        if (this.subscrUser) this.subscrUser.unsubscribe();
     }
 }

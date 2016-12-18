@@ -4,9 +4,6 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
-//import { AngularFire } from 'angularfire2';
-
-import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
@@ -25,15 +22,12 @@ export class DiseaseCasesListComponent implements OnInit, OnDestroy {
     allDiseaseCases: Observable<any[]>;
     diseaseCasesCount: number;
 
-    subscrUser: Subscription;
     subscrRoute: Subscription;
     subscrPatient: Subscription;
     subscrDiseaseCases: Subscription;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                //private af: AngularFire,
-                private authService: AuthService,
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
@@ -41,33 +35,22 @@ export class DiseaseCasesListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-            this.subscrUser = this.authService.user$.subscribe(
-                (user: UserClass) => {
-                    if (user.isLoggedIn()) {
-                        /*this.af.auth.subscribe(auth => {
-                         if (auth) {*/
-                        this.subscrRoute = this.route.params.subscribe(
-                            (params: any) => {
-                                this.patientKey = params['patientKey'];
-                                this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
-                                    this.patientName = patient.name;
-                                    this.allDiseaseCases = this.dataService.getDiseaseCases(this.patientKey);
-                                    if (this.allDiseaseCases) {
-                                        this.subscrDiseaseCases = this.allDiseaseCases.subscribe((queriedItems) => {
-                                            this.diseaseCasesCount = queriedItems.length;
-                                        });
-                                        this.dataService.addSubscripton(this.subscrDiseaseCases);
-                                    }
-                                });
-                                this.dataService.addSubscripton(this.subscrPatient);
+            this.subscrRoute = this.route.params.subscribe(
+                (params: any) => {
+                    this.patientKey = params['patientKey'];
+                    this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+                        this.patientName = patient.name;
+                        this.allDiseaseCases = this.dataService.getDiseaseCases(this.patientKey);
+                        if (this.allDiseaseCases) {
+                            this.subscrDiseaseCases = this.allDiseaseCases.subscribe((queriedItems) => {
+                                this.diseaseCasesCount = queriedItems.length;
                             });
-                    } else {
-                        this.logger.warn("[diseaseCases-list] - ngOnInit - user: no logged in user");
-                        this.router.navigate(['/login']);
-                    }
-                }
-            );
-            this.dataService.addSubscripton(this.subscrUser);
+                            this.dataService.addSubscripton(this.subscrDiseaseCases);
+                        }
+                    });
+                    this.dataService.addSubscripton(this.subscrPatient);
+                });
+
         } catch (e) {
             this.errorHandler.traceError("[diseaseCases-list] - ngOnInit - error", e, true);
         }
@@ -77,6 +60,5 @@ export class DiseaseCasesListComponent implements OnInit, OnDestroy {
         if (this.subscrDiseaseCases) this.subscrDiseaseCases.unsubscribe();
         if (this.subscrPatient) this.subscrPatient.unsubscribe();
         if (this.subscrRoute) this.subscrRoute.unsubscribe();
-        if (this.subscrUser) this.subscrUser.unsubscribe();
     };
 }

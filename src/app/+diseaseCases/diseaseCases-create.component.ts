@@ -3,9 +3,9 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
+
 import * as moment from "moment";
 
-import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
@@ -23,13 +23,10 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
     diseaseCaseForm: FormGroup;
     patientKey: string;
 
-    subscrUser: Subscription;
-
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
                 private location: Location,
-                private authService: AuthService,
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
@@ -42,17 +39,7 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
         });
 
         try {
-            this.subscrUser = this.authService.user$.subscribe(
-                (user: UserClass) => {
-                    if (user.isLoggedIn()) {
-                        this.patientKey = this.route.parent.snapshot.params['patientKey'];
-                    } else {
-                        this.logger.warn("[diseaseCases-create] - ngOnInit - user: no logged in user");
-                        this.router.navigate(['/login']);
-                    }
-                }
-            );
-            this.dataService.addSubscripton(this.subscrUser);
+            this.patientKey = this.route.parent.snapshot.params['patientKey'];
         } catch (e) {
             this.errorHandler.traceError("[diseaseCases-create] - ngOnInit - error", e, true);
         }
@@ -80,6 +67,6 @@ export class DiseaseCasesCreateComponent implements OnInit, OnDestroy {
     };
 
     ngOnDestroy() {
-        if (this.subscrUser) this.subscrUser.unsubscribe();
+
     };
 }
