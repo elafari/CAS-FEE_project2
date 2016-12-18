@@ -19,6 +19,9 @@ When babies or infants contract a disease, they can quickly develop very high te
 - `ng serve` the server is up and running on localhost:4200
 - Open a browser and navigate to `http://localhost:4200`
 
+### Run tests
+- `npm test`
+
 ## Technology stack
 ###Frontend
 - [**Angular2**](https://angular.io/ "https://angular.io/")
@@ -30,21 +33,12 @@ When babies or infants contract a disease, they can quickly develop very high te
 - [**sass**](http://sass-lang.com/ "http://sass-lang.com/")
 - and some others...
 
+###Backend
+- [**Firebase**](https://www.firebase.com/ "https://www.firebase.com/")
+
 ### Tools
 - [**npm**](https://www.npmjs.org/ "https://www.npmjs.org/") as taskrunner.
 - [**angular-cli**](https://cli.angular.io/ "https://cli.angular.io/") command line interface for Angular
-
-##How to set up the dev environment
-
-###Install dependencies & build:
-- `npm install` (this will install and build the system )
-
-###Start server
-- `ng serve` to start the server
-- open localhost:4200
-
-### Run tests
-- `npm test`
 
 ##Known Issues
 ###Backend
