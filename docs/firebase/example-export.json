@@ -1,0 +1,318 @@
+{
+  "admins" : {
+    "4BjvYNmbg5YGDUr2jpr7jJYJkJf2" : {
+      "adminRole" : true
+    },
+    "dklUXdwlrAMQ8MvzlXZW0aI8wBk2" : {
+      "adminRole" : true
+    }
+  },
+  "cases" : {
+    "-KWNppbsxvIMuF9mDBpA" : {
+      "active" : true,
+      "name" : "keepDBcases",
+      "patient" : "-KWNh1YzK1Oj_O-XGww2",
+      "type" : "dummy"
+    },
+    "-KYcasyStd27BnRHXtSF" : {
+      "active" : false,
+      "endDate" : "2016-12-10",
+      "name" : "Erstes Fieber",
+      "patient" : "-KY_JjLYh83qi1bVAzAA",
+      "startDate" : "2016-12-10",
+      "type" : "Test"
+    },
+    "-KYcfO3Q98aKLnIvXay_" : {
+      "active" : false,
+      "endDate" : "2016-12-18",
+      "name" : "Spitalaufenthalt",
+      "patient" : "-KY_JjLYh83qi1bVAzAA",
+      "startDate" : "2016-11-01",
+      "type" : "Test-Case2"
+    },
+    "-KYcmeu3cGcQuk1eVTco" : {
+      "active" : false,
+      "endDate" : "2016-12-16",
+      "name" : "Grippe",
+      "patient" : "-KV7Lf0ZhPmGq6B04b68",
+      "startDate" : "2016-12-10",
+      "type" : "Temperatur"
+    },
+    "-KYed54YGX2L6FAPvJ4f" : {
+      "active" : false,
+      "endDate" : "2016-12-14",
+      "name" : "Armbruch",
+      "patient" : "-KV7Lf0ZhPmGq6B04b68",
+      "startDate" : "2016-12-10",
+      "type" : "Mediakment"
+    },
+    "-KZ82XBNgVQmT5nm9h9w" : {
+      "active" : true,
+      "endDate" : "",
+      "name" : "Fieber",
+      "patient" : "-KZ82BEAAxX-OqY7Lys-",
+      "startDate" : "2016-02-21"
+    },
+    "-KZBGRQcW89cpSDOcbhB" : {
+      "active" : true,
+      "endDate" : "",
+      "name" : "Foo",
+      "patient" : "-KZ8tqJtgdJbNiQnOt81",
+      "startDate" : "2016-12-17"
+    },
+    "-KZDQIrV2OcUkiMmo099" : {
+      "active" : true,
+      "endDate" : "",
+      "name" : "Fieber",
+      "patient" : "-KZDQ90IDW7Qn6cPl2E0",
+      "startDate" : "2016-12-17"
+    },
+    "-KZDVy3QZy_I2gnhfPME" : {
+      "active" : true,
+      "endDate" : "",
+      "name" : "Foo",
+      "patient" : "-KZDQ90IDW7Qn6cPl2E0",
+      "startDate" : "2016-12-17"
+    },
+    "-KZHDboYUsP8CYmMqmB7" : {
+      "active" : true,
+      "name" : "Grippe",
+      "patient" : "-KZHDQAj0aFugZOIXjOa",
+      "startDate" : "2016-12-18"
+    },
+    "-KZHed57hlJR6UKh1ydC" : {
+      "active" : true,
+      "endDate" : "",
+      "name" : "asdf",
+      "patient" : "-KY_JjLYh83qi1bVAzAA",
+      "startDate" : "2016-12-01"
+    }
+  },
+  "events" : {
+    "-KZ6zhkR1g97N4Du47y5" : {
+      "caseKey" : "-KZ6_dK3vqcmVd_g_L3Z",
+      "dateTime" : "2016-12-05 10:10",
+      "type" : "Temperature",
+      "value" : "38°C"
+    },
+    "-KZ7-z51BYDhs4lWH7Iq" : {
+      "caseKey" : "-KZ6_dK3vqcmVd_g_L3Z",
+      "dateTime" : "2016-12-16 15:22",
+      "type" : "Medication",
+      "value" : "1 Pille Dafalgan"
+    },
+    "-KZ7VKL9zp5yggUP4MlP" : {
+      "caseKey" : "-KZ7Q9AWIp1UW6q7EXyF",
+      "dateTime" : "2016-12-16 17:40",
+      "type" : "Medication",
+      "value" : "38,5 Grad"
+    },
+    "-KZ7VvtSXFUFsSle4d3R" : {
+      "caseKey" : "-KZ6_dK3vqcmVd_g_L3Z",
+      "dateTime" : "2016-12-14 17:42",
+      "type" : "Medication",
+      "value" : "hkjh"
+    },
+    "-KZ7u5k3xKMGQ1ycfuim" : {
+      "caseKey" : "-KZ7tjgtrdWC39pN1dSi",
+      "dateTime" : "2016-02-21 17:00",
+      "type" : "Temperature",
+      "value" : "40"
+    },
+    "-KZ82r2oyNJYRCGPfuqv" : {
+      "caseKey" : "-KZ82XBNgVQmT5nm9h9w",
+      "dateTime" : "2016-02-21 17:30",
+      "type" : "Temperature",
+      "value" : "40 Grad"
+    },
+    "-KZ833R2GcHD-yrj5Www" : {
+      "caseKey" : "-KZ82XBNgVQmT5nm9h9w",
+      "dateTime" : "2016-02-21 18:00",
+      "type" : "Medication",
+      "value" : "2,5ml Algifor"
+    },
+    "-KZ84BC9A6Fqd0Vgq-wJ" : {
+      "caseKey" : "-KZ82XBNgVQmT5nm9h9w",
+      "dateTime" : "2016-02-21 20:30",
+      "type" : "Temperature",
+      "value" : "40,1 Grad"
+    },
+    "-KZBOHdb04mK9S_oD93E" : {
+      "caseKey" : "-KZBGRQcW89cpSDOcbhB",
+      "dateTime" : "2016-08-01 11:46",
+      "type" : "Temperature",
+      "value" : "38°C"
+    },
+    "-KZCvb6jcxdilJNBh0fE" : {
+      "caseKey" : "-KZBGRQcW89cpSDOcbhB",
+      "dateTime" : "2016-12-17 18:57",
+      "type" : "Medication",
+      "value" : "39.2°C"
+    },
+    "-KZCveoV7W2PryeIffEx" : {
+      "caseKey" : "-KZBGRQcW89cpSDOcbhB",
+      "dateTime" : "2016-12-28 18:00",
+      "type" : "Medication",
+      "value" : "Foo"
+    },
+    "-KZDRKYbK2bUMl686-sW" : {
+      "caseKey" : "-KZDQIrV2OcUkiMmo099",
+      "dateTime" : "2016-02-21 18:00",
+      "type" : "Temperature",
+      "value" : "40 Grad"
+    },
+    "-KZDRXdMSwJ0wygHBwYd" : {
+      "caseKey" : "-KZDQIrV2OcUkiMmo099",
+      "dateTime" : "2016-02-21 20:30",
+      "type" : "Temperature",
+      "value" : "40.4"
+    },
+    "-KZDSrMzheI57_0wIm4m" : {
+      "caseKey" : "-KZDQIrV2OcUkiMmo099",
+      "dateTime" : "2015-10-12 18:00",
+      "type" : "Medication",
+      "value" : "2.5 ml Algifor"
+    },
+    "-KZGywkxRYE-7wZTUvM7" : {
+      "caseKey" : "-KYcmeu3cGcQuk1eVTco",
+      "dateTime" : "2016-12-18 13:50",
+      "type" : "Medication",
+      "value" : "38"
+    },
+    "-KZGz-u69ud8Rm45ItJT" : {
+      "caseKey" : "-KYcmeu3cGcQuk1eVTco",
+      "dateTime" : "2016-12-18 13:50",
+      "type" : "Temperature",
+      "value" : "10mg Dosis"
+    },
+    "-KZGz6HM7zoqNG-2ST-S" : {
+      "caseKey" : "-KYcmeu3cGcQuk1eVTco",
+      "dateTime" : "2016-12-18 13:51",
+      "type" : "Medication",
+      "value" : "10mg Dosis"
+    },
+    "-KZH-ZC0mJqwRfWtwjVd" : {
+      "caseKey" : "-KYcmeu3cGcQuk1eVTco",
+      "dateTime" : "2016-12-18 13:57",
+      "type" : "Medication",
+      "value" : "Ibuprofen 400 2x täglich"
+    },
+    "-KZHEM_pfhqiwYPoyjuZ" : {
+      "caseKey" : "-KZHDboYUsP8CYmMqmB7",
+      "dateTime" : "2016-12-18 15:02",
+      "type" : "Medication",
+      "value" : "10mg"
+    },
+    "-KZHEfZTrwJVSCWoKGyg" : {
+      "caseKey" : "-KZHDboYUsP8CYmMqmB7",
+      "dateTime" : "2016-12-18 15:03",
+      "type" : "Temperature",
+      "value" : "38"
+    }
+  },
+  "patients" : {
+    "-KV7Lf0ZhPmGq6B04b68" : {
+      "birthdate" : "2004-02-16",
+      "gender" : "m",
+      "name" : "Fabio",
+      "user" : "4BjvYNmbg5YGDUr2jpr7jJYJkJf2"
+    },
+    "-KV7M3DOD-9kPM3LdlnU" : {
+      "birthdate" : "2012-05-23",
+      "gender" : "f",
+      "name" : "India",
+      "user" : "mJ8jZERPV6flb9xB6RmyDy8j4pv1"
+    },
+    "-KWNh1YzK1Oj_O-XGww2" : {
+      "birthdate" : "2000-09-08",
+      "gender" : "f",
+      "name" : "keepDBpatients",
+      "user" : "dklUXdwlrAMQ8MvzlXZW0aI8wBk2"
+    },
+    "-KWxwUbwL1TNtu-e7Jvg" : {
+      "birthdate" : "2016-11-11",
+      "gender" : "f",
+      "name" : "Lola",
+      "user" : "5y8EVpYPQlPvb5HdRgMy1UWTO2H3"
+    },
+    "-KWydAhexVkb455KNJmN" : {
+      "birthdate" : "2014-11-04",
+      "gender" : "f",
+      "name" : "Luisa",
+      "user" : "mNN338rEa7a2z4V7Gd2pO8hTtlp1"
+    },
+    "-KY_JjLYh83qi1bVAzAA" : {
+      "birthdate" : "13.12.2016",
+      "gender" : "f",
+      "name" : "Mathilda",
+      "user" : "mNN338rEa7a2z4V7Gd2pO8hTtlp1"
+    },
+    "-KYrw2xpHWNaGByvY0zb" : {
+      "birthdate" : "2017-04-06",
+      "gender" : "m",
+      "name" : "Raúl",
+      "user" : "mNN338rEa7a2z4V7Gd2pO8hTtlp1"
+    },
+    "-KZ82BEAAxX-OqY7Lys-" : {
+      "birthdate" : "2015-11-09",
+      "gender" : "m",
+      "name" : "Philipp",
+      "user" : "mNN338rEa7a2z4V7Gd2pO8hTtlp1"
+    },
+    "-KZ8tqJtgdJbNiQnOt81" : {
+      "birthdate" : "2016-12-15",
+      "gender" : "f",
+      "name" : "Frida",
+      "user" : "mNN338rEa7a2z4V7Gd2pO8hTtlp1"
+    },
+    "-KZDQ90IDW7Qn6cPl2E0" : {
+      "birthdate" : "2014-09-17",
+      "gender" : "f",
+      "name" : "Isabel",
+      "user" : "mNN338rEa7a2z4V7Gd2pO8hTtlp1"
+    },
+    "-KZHDQAj0aFugZOIXjOa" : {
+      "birthdate" : "2015-09-23",
+      "gender" : "m",
+      "name" : "Julie",
+      "user" : "4BjvYNmbg5YGDUr2jpr7jJYJkJf2"
+    }
+  },
+  "users" : {
+    "4BjvYNmbg5YGDUr2jpr7jJYJkJf2" : {
+      "active" : true,
+      "admin" : true,
+      "name" : "tom@p2.ch"
+    },
+    "BwKuCXoK1sWanbZI26a7COaQl5n2" : {
+      "active" : true,
+      "admin" : false,
+      "name" : "bob@p2.ch"
+    },
+    "QQyjk5Tv36alN5AIizVIm6hu1Ih2" : {
+      "active" : true,
+      "admin" : false,
+      "name" : "rafibamert@gmx.ch"
+    },
+    "SdscNFDJxwYS1y6bd4kzLWQEPfJ3" : {
+      "active" : false,
+      "admin" : false,
+      "name" : "sam1@p2.ch"
+    },
+    "dklUXdwlrAMQ8MvzlXZW0aI8wBk2" : {
+      "active" : true,
+      "admin" : true,
+      "name" : "admin@p2.ch"
+    },
+    "mJ8jZERPV6flb9xB6RmyDy8j4pv1" : {
+      "active" : true,
+      "admin" : false,
+      "name" : "sam@p2.ch"
+    },
+    "mNN338rEa7a2z4V7Gd2pO8hTtlp1" : {
+      "active" : true,
+      "admin" : false,
+      "name" : "rafael.bamert@gmail.com"
+    }
+  }
+}
