@@ -6,7 +6,6 @@ import { PatientsListComponent } from "./patients-list.component";
 import { PatientsItemComponent } from "./patients-item.component";
 import { PatientsEditComponent } from "./patients-edit.component";
 import { PatientsCreateComponent } from "./patients-create.component";
-import { AuthResolver } from "../auth/auth.resolver";
 import { AuthGuard } from "../auth/auth.guard";
 
 export const patients_routes: Routes = <Routes>[
@@ -25,9 +24,7 @@ export const patients_routes: Routes = <Routes>[
             {
                 path       : 'create',
                 component  : PatientsCreateComponent,
-                resolve    : {
-                    foo: AuthResolver
-                }
+                canActivate: [AuthGuard]
             },
             {
                 path        : ':patientKey/diseaseCases',

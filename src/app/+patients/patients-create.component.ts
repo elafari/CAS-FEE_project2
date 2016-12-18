@@ -49,19 +49,13 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
         try {
             this.subscrUser = this.authService.user$.subscribe(
                 (user: UserClass) => {
-                    if (user.isLoggedIn()) {
-                        /*this.af.auth.subscribe(auth => {
-                         if (auth) {*/
-                        //this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-                        this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + user.key).subscribe((user) => {
-                            this.loggedInUserName = user.name;
-                            this.loggedInUserKey = user.$key;
-                        });
-                        this.dataService.addSubscripton(this.subscrUserObj);
-                    } else {
-                        this.logger.warn("[patients-create] - ngOnInit - user: no logged in user");
-                        //this.router.navigate(['/login']);
-                    }
+                    this.loggedInUserKey = user.key;
+                    /*
+                    this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + user.key).subscribe((user) => {
+                        this.loggedInUserName = user.name;
+                    });
+                    this.dataService.addSubscripton(this.subscrUserObj);
+                    */
                 }
             );
             this.dataService.addSubscripton(this.subscrUser);
