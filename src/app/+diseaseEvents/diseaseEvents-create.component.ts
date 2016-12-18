@@ -5,11 +5,9 @@ import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
 import * as moment from "moment";
 
-import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { ErrorHandlerService } from "../error/error-handler.service";
-import { LoggerService } from "../log/logger.service";
 import { DiseaseEvent } from './diseaseEvents.interface';
 import { UserClass } from "../auth/user.interface";
 
@@ -28,7 +26,6 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
     diseaseEventKey: string;
     diseaseEventName: string;
 
-    subscrUser: Subscription;
     subscrRoute: Subscription;
     subscrDiseaseCase: Subscription;
     subscrDiseaseEvent: Subscription;
@@ -37,10 +34,8 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private route: ActivatedRoute,
                 private location: Location,
-                private authService: AuthService,
                 private dataService: DataService,
-                private errorHandler: ErrorHandlerService,
-                private logger: LoggerService) {
+                private errorHandler: ErrorHandlerService) {
     };
 
     ngOnInit() {
@@ -51,29 +46,20 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
         });
 
         try {
-            this.subscrUser = this.authService.user$.subscribe(
-                (user: UserClass) => {
-                    if (user.isLoggedIn()) {
                         this.subscrRoute = this.route.params.subscribe(
                             (params: any) => {
                                 this.diseaseEventKey = params['diseaseEventKey'];
                                 this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
                                 this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                                     this.diseaseCaseName = diseaseCase.name;
-                                    this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvemt) => {
-                                        this.diseaseEventName = diseaseEvemt.name;
+                                    this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvent) => {
+                                        this.diseaseEventName = diseaseEvent.name;
                                     });
                                     this.dataService.addSubscripton(this.subscrDiseaseEvent);
                                 });
                                 this.dataService.addSubscripton(this.subscrDiseaseCase);
                             });
-                    } else {
-                        this.logger.warn("[diseaseEvents-create] - ngOnInit - user: no logged in user");
-                        this.router.navigate(['/login']);
-                    }
-                }
-            );
-            this.dataService.addSubscripton(this.subscrUser);
+
         } catch (e) {
             this.errorHandler.traceError("[diseaseEvents-create] - ngOnInit - error", e, true);
         }
@@ -101,6 +87,5 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
         if (this.subscrDiseaseEvent) this.subscrDiseaseEvent.unsubscribe();
         if (this.subscrDiseaseCase) this.subscrDiseaseCase.unsubscribe();
         if (this.subscrRoute) this.subscrRoute.unsubscribe();
-        if (this.subscrUser) this.subscrUser.unsubscribe();
     };
 }
