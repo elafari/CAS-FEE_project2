@@ -36,7 +36,8 @@ When babies or infants contract a disease, they can quickly develop very high te
 - [**flexbox**](http://v4-alpha.getbootstrap.com/layout/flexbox-grid/ "http://v4-alpha.getbootstrap.com/layout/flexbox-grid/")
 - [**font awesome**](http://fortawesome.github.io/Font-Awesome/ "http://fortawesome.github.io/Font-Awesome/") as icon font.
 - [**sass**](http://sass-lang.com/ "http://sass-lang.com/")
-- and some others...
+###Backend
+- [**Firebase**](https://www.firebase.com/ "www.firebase.com/")
 
 ### Tools
 - [**npm**](https://www.npmjs.org/ "https://www.npmjs.org/") as taskrunner.
@@ -44,7 +45,7 @@ When babies or infants contract a disease, they can quickly develop very high te
 
 ##How to set up the dev environment
 
-###Install dependencies & build:
+###Install dependencies and build:
 - `npm install` (this will install and build the system )
 
 ###Start server
@@ -75,8 +76,7 @@ See separate files:
 
 - [docs/project/01-Architecture.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/01-Architecture.md)
 - [docs/project/02-Entities.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/02-Entities.md)
-- [docs/project/03-Firebase-API.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/03-Firebase-API.md)
-- [docs/project/04-Usage.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/04-Usage.md)
+- [docs/project/03-Usage.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/03-Usage.md)
 - [docs/diagrams/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/diagrams/)
 - [docs/firebase/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/firebase/)
 
