@@ -41,6 +41,7 @@ The goal was to discover issues about usability of the application:
 - Cases sind für die User verwirrend. Mögliche Schritte:
   - Cases im Frontend eliminieren und transparent im Hintergrund abhandeln
   - Cases ganz eliminieren und dafür die Events-Table mit Filter und Sortierfunktionen ausstatten
+- Kleinere Bugs konnten behoben werden
  
 ## Project-Documentation
 - [README.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/README.md)
