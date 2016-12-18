@@ -13,7 +13,7 @@
 ### Database Firebase (see also doc sub directory firebase)
 - [angularfire2](https://angularfire2.com/api/) library
 - email authentication (for test purposes: without email confirmation)
-- observables (FirebaseListObservable, FirebaseObjectObservable)
+- realtime connection via observables (FirebaseListObservable, FirebaseObjectObservable)
 
 ### Application
 - modularization (modules: error, log, auth, userAdmin, breadcrumb and lazy loaded modules)
