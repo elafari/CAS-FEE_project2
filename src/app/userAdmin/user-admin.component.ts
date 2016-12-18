@@ -1,11 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
-import { Subscription } from "rxjs/Subscription";
 
-import { AngularFire } from 'angularfire2';
-
-import { AuthService } from "../auth/auth.service";
 import { ConfigService } from '../shared/config.service';
 import { DataService } from '../shared/data.service';
 import { ErrorHandlerService } from "../error/error-handler.service";
@@ -25,11 +21,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     showModalDialog: string;
     simulateDeletion: boolean;
 
-    subscrUser: Subscription;
-
     constructor(private router: Router,
-                private af: AngularFire,
-                private authService: AuthService,
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
                 private logger: LoggerService) {
@@ -37,22 +29,9 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-            // todo: try to solve with a resolver (see Architecture.md "auth reload")
-            /*this.subscrUser = this.authService.user$.subscribe(
-             (user:UserClass) => {
-             if (user.isLoggedIn()) { */
-            this.af.auth.subscribe(auth => {
-                    if (auth) {
-                        this.simulateDeletion = this.isDevMode;
-                        this.userMainAdmin = ConfigService.mainAdmin;
-                        this.users = this.dataService.getUserList();
-                    } else {
-                        this.logger.warn("[user-admin] - ngOnInit - user: no logged in user");
-                        this.router.navigate(['/login']);
-                    }
-                }
-            );
-            this.dataService.addSubscripton(this.subscrUser);
+            this.simulateDeletion = this.isDevMode;
+            this.userMainAdmin = ConfigService.mainAdmin;
+            this.users = this.dataService.getUserList();
         } catch (e) {
             this.errorHandler.traceError("[user-admin] - ngOnInit - error", e, true);
         }
@@ -90,6 +69,6 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     };
 
     ngOnDestroy() {
-        if (this.subscrUser) this.subscrUser.unsubscribe();
+
     };
 }
