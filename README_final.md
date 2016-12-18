@@ -43,7 +43,7 @@ When babies or infants contract a disease, they can quickly develop very high te
 ### Frontend
 - datepicker gets cropped when screen height is to low
 - disabled users can still login but have no permissions (because firebase SDK won't let you deactivate a user)
-  -> extend auth.guard to check user parameter 'active'
+  - extend auth.guard to check user parameter 'active'
 - error should not be part of the user object
 
 ### Backend
