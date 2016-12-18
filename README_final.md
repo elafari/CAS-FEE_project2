@@ -37,13 +37,20 @@ When babies or infants contract a disease, they can quickly develop very high te
 ### Tools
 - [**npm**](https://www.npmjs.org/ "https://www.npmjs.org/") as taskrunner.
 - [**angular-cli**](https://cli.angular.io/ "https://cli.angular.io/") command line interface for Angular 2
+- [**typedoc**](http://typedoc.org/ "http://typedoc.org/") generates code documentation
 
-## Known Issues
-### Backend
-- xxx
-
+## Known Issues / To Do
 ### Frontend
-- xxx
+- datepicker gets cropped when screen height is to low
+- disabled users can still login but have no permissions (because firebase SDK won't let you deactivate a user)
+  -> extend auth.guard to check user parameter 'active'
+- error should not be part of the user object
+
+### Backend
+- Activate E-Mail confirmation
+- Implement password reset workflow
+- Generate Firebase DB structure automatically for fresh installations
+- Automated Tests for Firebase Security Rules
 
 ## Authors
 Rafael Bamert - [GitHub](https://github.com/elafari)
