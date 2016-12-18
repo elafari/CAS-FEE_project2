@@ -13,7 +13,7 @@ When babies or infants contract a disease, they can quickly develop very high te
 - npm v3.10.7 (https://www.npmjs.com/)
 
 ### Checkout from GitHub
-- `git clone https://github.com/elafari/DiseaseDiary.git`
+- `git clone https://github.com/elafari/CAS-FEE_project2.git`
 - move into project folder `cd ./DiseaseDiary`
 - (`git checkout [branchName]` where the current stable branch is **milestone0??**.)
 
