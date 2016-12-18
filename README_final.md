@@ -1,5 +1,4 @@
 # DiseaseDiary
-
 A Web Application to track disease related events like fever and medication.
 
 ## About
@@ -24,12 +23,12 @@ When babies or infants contract a disease, they can quickly develop very high te
 ### Frontend
 - [**Angular2**](https://angular.io/ "https://angular.io/")
 - [**Typescript**](https://www.typescriptlang.org/ "https://www.typescriptlang.org/")
-- [**Bootstrap 4 alpha**](https://v4-alpha.getbootstrap.com/ "https://v4-alpha.getbootstrap.com/")
-- [**jQuery**](http://jquery.com "http://jquery.com/")
+- [**Bootstrap 4 alpha**](https://v4-alpha.getbootstrap.com/ "https://v4-alpha.getbootstrap.com/") responsive grid layout, navigation, cards
 - [**flexbox**](http://v4-alpha.getbootstrap.com/layout/flexbox-grid/ "http://v4-alpha.getbootstrap.com/layout/flexbox-grid/")
 - [**font awesome**](http://fortawesome.github.io/Font-Awesome/ "http://fortawesome.github.io/Font-Awesome/") as icon font.
-- [**sass**](http://sass-lang.com/ "http://sass-lang.com/")
-- [**primeNG**](http://www.primefaces.org/primeng "http://www.primefaces.org/primeng/#/") Datepicker
+- [**SASS**](http://sass-lang.com/ "http://sass-lang.com/") CSS preprocessor
+- [**moment.js**](http://momentjs.com/ "http://momentjs.com/docs/") date manipulation
+- [**primeNG**](http://www.primefaces.org/primeng "http://www.primefaces.org/primeng/#/") datepicker component
 - and some others...
 
 ### Backend as a Service
@@ -39,17 +38,14 @@ When babies or infants contract a disease, they can quickly develop very high te
 - [**npm**](https://www.npmjs.org/ "https://www.npmjs.org/") as taskrunner.
 - [**angular-cli**](https://cli.angular.io/ "https://cli.angular.io/") command line interface for Angular 2
 
-##Known Issues
-###Backend
+## Known Issues
+### Backend
 - xxx
 
-###Frontend
+### Frontend
 - xxx
 
-## License and author info
-
-License: tbd
-
+## Authors
 Rafael Bamert - [GitHub](https://github.com/elafari)
 Toni Kammermeier - [GitHub](https://github.com/tonikam)
 
@@ -61,5 +57,3 @@ See separate files:
 - [docs/project/03-Usage.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/03-Usage.md)
 - [docs/diagrams/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/diagrams/)
 - [docs/firebase/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/firebase/)
-
-
