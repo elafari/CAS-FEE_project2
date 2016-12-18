@@ -54,6 +54,7 @@ When babies or infants contract a disease, they can quickly develop very high te
 
 ## Authors
 Rafael Bamert - [GitHub](https://github.com/elafari)
+
 Toni Kammermeier - [GitHub](https://github.com/tonikam)
 
 ## Project Management
