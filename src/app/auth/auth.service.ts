@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFire } from 'angularfire2';
-import { BehaviorSubject } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { Subscription } from "rxjs/Subscription";
 
 import { UserClass, Login, Registration } from "./user.interface";
@@ -71,6 +71,10 @@ export class AuthService {
         } catch (e) {
             this.errorHandler.traceError("[auth-service] - constructor - error - catch", e, true);
         }
+    };
+
+    getAuth(): Observable<any> {
+        return this.af.auth;
     };
 
     loginUser(user: Login) {
