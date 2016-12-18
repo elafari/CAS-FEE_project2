@@ -53,15 +53,8 @@ When babies or infants contract a disease, they can quickly develop very high te
 - `ng serve` to start the server
 - open localhost:4200
 
-### Run tests
+### Run unit tests
 - `npm test`
-
-##Known Issues
-###Backend
-- xxx
-
-###Frontend
-- xxx
 
 ## Change log
 - version 0.1
