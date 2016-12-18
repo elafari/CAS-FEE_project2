@@ -1,14 +1,22 @@
-<table class="table table-bordered table-hover">
-    <thead class="thead-inverse">
-    <tr>
-        <th>parameter</th>
-        <th>content</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of loggedInUserData">
-        <td>{{item.key}}</td>
-        <td>{{item.value}}</td>
-    </tr>
-    </tbody>
-</table>
+<h1 class="text-xs-center">My User Data <i class="fa fa-user-o" aria-hidden="true"></i></h1>
+
+<div class="row flex-items-xs-center">
+    <div class="col-xs-12 col-md-8 col-lg-6">
+
+        <table class="table table-bordered table-hover">
+            <thead class="thead-inverse">
+            <tr>
+                <th>parameter</th>
+                <th>content</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of loggedInUserData">
+                <td>{{item.key}}</td>
+                <td>{{item.value}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

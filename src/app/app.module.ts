@@ -11,7 +11,6 @@ import { UserAdminModule } from './userAdmin/user-admin.module';
 
 import { ConfigService } from "./shared/config.service";
 import { DataService } from './shared/data.service';
-import { AuthGuard } from './auth/auth.guard';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./shared/header.component";
@@ -19,7 +18,7 @@ import { HeaderComponent } from "./shared/header.component";
 import { AppRoutingModule, routingComponents } from "./app.routing";
 
 import { AngularFireModule } from 'angularfire2';
-import *as firebase from 'firebase';
+import * as firebase from 'firebase';
 
 import { AuthProviders } from "angularfire2/index";
 import { AuthMethods } from "angularfire2/index";
@@ -44,8 +43,7 @@ import { AuthMethods } from "angularfire2/index";
     ],
     providers      : [
         ConfigService,
-        DataService,
-        AuthGuard
+        DataService
     ],
     entryComponents: [AppComponent],
     bootstrap      : [AppComponent]
