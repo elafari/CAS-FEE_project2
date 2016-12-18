@@ -31,8 +31,8 @@ When babies or infants contract a disease, they can quickly develop very high te
 - [**primeNG**](http://www.primefaces.org/primeng "http://www.primefaces.org/primeng/#/") datepicker component
 - and some others...
 
-### Backend as a Service
-- [**Firebase**](https://www.firebase.com/ "https://www.firebase.com/")
+### Backend
+- [**Firebase**](https://www.firebase.com/ "https://www.firebase.com/") Realtime database (backend as a service)
 
 ### Tools
 - [**npm**](https://www.npmjs.org/ "https://www.npmjs.org/") as taskrunner.
