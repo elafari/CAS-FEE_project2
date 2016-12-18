@@ -15,6 +15,7 @@ When babies or infants contract a disease, they can quickly develop very high te
 - `npm install`
 - `ng serve` the server is up and running on localhost:4200
 - Open a browser and navigate to `http://localhost:4200`
+Hint: DevMode is enabled by default. You can change this in config.service.ts (property: devMode)
 
 ### Run tests
 - `npm test`
