@@ -7,30 +7,34 @@
 
 ### User
 * id: Generated ID of the firebase user
-* name:
-* admin: user type
+* name: user email address
+* admin: true/false
+* active: true/false
 
 ### Patient
 * id: Generated ID of the firebase patients table item
-* name: user email address
+* user: foreign key
+* name: patient name
 * gender: f(emale)/m(ale)
 * birthdate: date of birth
 
 ### Disease Case
 * id: Generated ID of the firebase cases table item
-* patient: patient id
-* name:
-* type:
+* patient: foreign key
+* name: case title
 * active: true/false
+* startDate: YYYY-MM-DD
+* endDate: YYYY-MM-DD 
 
 ### Disease Event
 * id: Generated ID of the firebase events table item
-* case: case id
-* name:
-* value:
+* case: foreign key
+* dateTime: YYYY-MM-DD HH:mm
+* type: [Temperature, Medication]
+* value
 
 ### Admins
-* id: user id
+* id: user id foreign key
 * admin-role: true
 
 ## Project-Documentation
