@@ -11,7 +11,7 @@
 - using structure directives for modal dialogs (add and remove DOM elements, e.g. edit components)
 
 ### Database: Firebase
-[firebase.google.com](https://firebase.google.com/)
+- administration via web-gui [firebase.google.com](https://firebase.google.com/)
 - [angularfire2](https://angularfire2.com/api/) library
 - realtime connection via observables (FirebaseListObservable, FirebaseObjectObservable)
 - authentication via email/password (for test purposes: without email confirmation)
