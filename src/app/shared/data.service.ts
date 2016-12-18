@@ -196,6 +196,14 @@ export class DataService {
             let queryDefinition = {query: {orderByChild: 'user', equalTo: userKey}};
             return this.af.database.list(String(this.DbPatients), queryDefinition)
                 .map((allPatients) => {
+                    const key = 'name';
+                    allPatients.sort(
+                        (a, b) => {
+                            if (a[key] > b[key]) return 1;
+                            if (a[key] < b[key]) return -1;
+                            return 0;
+                        }
+                    );
                     return allPatients;
                 });
         } catch (e) {
@@ -267,6 +275,20 @@ export class DataService {
             let queryDefinition = {query: {orderByChild: 'patient', equalTo: patientKey}};
             return this.af.database.list(String(this.DbCases), queryDefinition)
                 .map((allCases) => {
+                    const key = 'startDate';
+                    allCases.sort(
+                        (a, b) => {
+                            if (a[key] > b[key]) return -1;
+                            if (a[key] < b[key]) return 1;
+                            return 0;
+                        }
+                    );
+                    allCases.sort(
+                        (a, b) => {
+                            if (!a['active'] && b['active']) return 1;
+                            return 0;
+                        }
+                    );
                     return allCases;
                 });
         } catch (e) {
