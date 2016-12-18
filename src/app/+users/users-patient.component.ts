@@ -8,7 +8,7 @@ import { LoggerService } from "../log/logger.service";
 @Component({
     selector   : '[users-patient]',
     templateUrl: 'users-patient.component.html',
-    styleUrls  : ['../../assets/scss/cards.scss', '../../assets/scss/tables.scss']
+    styleUrls  : ['../../assets/scss/cards.scss']
 })
 export class UsersPatientComponent implements OnInit {
     @Input() user: any;

@@ -15,8 +15,7 @@ import { UserClass } from "../auth/user.interface";
 @Component({
     templateUrl  : './diseaseEvents-edit.component.html',
     styleUrls    : [
-        '../../assets/scss/forms.scss',
-        '../../assets/scss/tables.scss'
+        '../../assets/scss/forms.scss'
     ],
     encapsulation: ViewEncapsulation.None,
 })

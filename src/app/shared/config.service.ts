@@ -21,18 +21,6 @@ export class ConfigService {
     ];
 
     public static firebaseConfig = {
-
-        // database: diseaseDiary - production database
-        /*
-         apiKey: "AIzaSyCL6uu79mCavxxu7LlJMUDat5L9e1VcloM",
-         authDomain: "diseasediary-99d4e.firebaseapp.com",
-         databaseURL: "https://diseasediary-99d4e.firebaseio.com",
-         storageBucket: "diseasediary-99d4e.appspot.com",
-         messagingSenderId: "413669303856"
-         */
-
-        // database: dd01 - test database with new structure and deletion tests
-
         apiKey           : "AIzaSyB19VDJA7O6NNpOhKWvOP4cZ4xQ9o9L6cc",
         authDomain       : "dd01-8992e.firebaseapp.com",
         databaseURL      : "https://dd01-8992e.firebaseio.com",

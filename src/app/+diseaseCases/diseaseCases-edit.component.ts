@@ -13,7 +13,7 @@ import { UserClass } from "../auth/user.interface";
 
 @Component({
     templateUrl: './diseaseCases-edit.component.html',
-    styleUrls  : ['../../assets/scss/forms.scss', '../../assets/scss/tables.scss', '../../assets/scss/toggler.scss']
+    styleUrls  : ['../../assets/scss/forms.scss', '../../assets/scss/toggler.scss']
 })
 export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;

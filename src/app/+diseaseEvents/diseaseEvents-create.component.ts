@@ -46,19 +46,19 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
         });
 
         try {
-                        this.subscrRoute = this.route.params.subscribe(
-                            (params: any) => {
-                                this.diseaseEventKey = params['diseaseEventKey'];
-                                this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
-                                this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
-                                    this.diseaseCaseName = diseaseCase.name;
-                                    this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvent) => {
-                                        this.diseaseEventName = diseaseEvent.name;
-                                    });
-                                    this.dataService.addSubscripton(this.subscrDiseaseEvent);
-                                });
-                                this.dataService.addSubscripton(this.subscrDiseaseCase);
-                            });
+            this.subscrRoute = this.route.params.subscribe(
+                (params: any) => {
+                    this.diseaseEventKey = params['diseaseEventKey'];
+                    this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
+                    this.subscrDiseaseCase = this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
+                        this.diseaseCaseName = diseaseCase.name;
+                        this.subscrDiseaseEvent = this.dataService.getDiseaseEvent(this.diseaseEventKey).subscribe((diseaseEvent) => {
+                            this.diseaseEventName = diseaseEvent.name;
+                        });
+                        this.dataService.addSubscripton(this.subscrDiseaseEvent);
+                    });
+                    this.dataService.addSubscripton(this.subscrDiseaseCase);
+                });
 
         } catch (e) {
             this.errorHandler.traceError("[diseaseEvents-create] - ngOnInit - error", e, true);

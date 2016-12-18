@@ -28,11 +28,11 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-                        this.allUsers = this.dataService.getAllUsersAndPatients();
-                        this.subscrUsers = this.allUsers.subscribe((queriedItems) => {
-                            this.allUsersCount = queriedItems.length
-                        });
-                        this.dataService.addSubscripton(this.subscrUsers);
+            this.allUsers = this.dataService.getAllUsersAndPatients();
+            this.subscrUsers = this.allUsers.subscribe((queriedItems) => {
+                this.allUsersCount = queriedItems.length
+            });
+            this.dataService.addSubscripton(this.subscrUsers);
         } catch (e) {
             this.errorHandler.traceError("[users-list] - ngOnInit - error", e, true);
         }
