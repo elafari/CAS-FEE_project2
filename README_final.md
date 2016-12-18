@@ -2,8 +2,6 @@
 
 A Web Application to track disease related events like fever and medication.
 
-Project prezi presentation: [DiseaseDiary](https://prezi.com/hnrfd-o1veb3/disease-diary/).
-
 ## About
 When babies or infants contract a disease, they can quickly develop very high temperature. I case of emergency it's important to be able to provide the attending doctor with precise information about the development of the fever and the type and amount of possibliy dispensed medicine. This app lets you track this kind of disease related informations.
 
@@ -23,7 +21,7 @@ When babies or infants contract a disease, they can quickly develop very high te
 - `npm test`
 
 ## Technology stack
-###Frontend
+### Frontend
 - [**Angular2**](https://angular.io/ "https://angular.io/")
 - [**Typescript**](https://www.typescriptlang.org/ "https://www.typescriptlang.org/")
 - [**Bootstrap 4 alpha**](https://v4-alpha.getbootstrap.com/ "https://v4-alpha.getbootstrap.com/")
@@ -31,14 +29,15 @@ When babies or infants contract a disease, they can quickly develop very high te
 - [**flexbox**](http://v4-alpha.getbootstrap.com/layout/flexbox-grid/ "http://v4-alpha.getbootstrap.com/layout/flexbox-grid/")
 - [**font awesome**](http://fortawesome.github.io/Font-Awesome/ "http://fortawesome.github.io/Font-Awesome/") as icon font.
 - [**sass**](http://sass-lang.com/ "http://sass-lang.com/")
+- [**primeNG**](http://www.primefaces.org/primeng "http://www.primefaces.org/primeng/#/") Datepicker
 - and some others...
 
-###Backend
+### Backend as a Service
 - [**Firebase**](https://www.firebase.com/ "https://www.firebase.com/")
 
 ### Tools
 - [**npm**](https://www.npmjs.org/ "https://www.npmjs.org/") as taskrunner.
-- [**angular-cli**](https://cli.angular.io/ "https://cli.angular.io/") command line interface for Angular
+- [**angular-cli**](https://cli.angular.io/ "https://cli.angular.io/") command line interface for Angular 2
 
 ##Known Issues
 ###Backend
@@ -47,13 +46,11 @@ When babies or infants contract a disease, they can quickly develop very high te
 ###Frontend
 - xxx
 
-## Change log
-- version 0.1
-
 ## License and author info
 
-Rafael Bamert - [GitHub](https://github.com/elafari)
+License: tbd
 
+Rafael Bamert - [GitHub](https://github.com/elafari)
 Toni Kammermeier - [GitHub](https://github.com/tonikam)
 
 ## Project Management
