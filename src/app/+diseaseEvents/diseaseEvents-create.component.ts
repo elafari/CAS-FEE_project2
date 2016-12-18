@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
+import * as moment from "moment";
 
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
@@ -13,8 +14,9 @@ import { DiseaseEvent } from './diseaseEvents.interface';
 import { UserClass } from "../auth/user.interface";
 
 @Component({
-    templateUrl: './diseaseEvents-create.component.html',
-    styleUrls  : ['../../assets/scss/forms.scss']
+    templateUrl  : './diseaseEvents-create.component.html',
+    styleUrls    : ['../../assets/scss/forms.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
     isDevMode: boolean = ConfigService.devMode;
@@ -43,8 +45,9 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.diseaseEventForm = this.fb.group({
-            name : ['', Validators.required],
-            value: ['', Validators.required],
+            type    : ['', Validators.required],
+            value   : ['', Validators.required],
+            dateTime: [moment().toDate(), Validators.required]
         });
 
         try {
@@ -82,8 +85,7 @@ export class DiseaseEventsCreateComponent implements OnInit, OnDestroy {
 
     createDiseaseEvent(key_value: DiseaseEvent) {
         try {
-            key_value.case = this.diseaseCaseKey;
-            key_value.eventDate = this.dataService.toBackendDate(this.dataService.getFrontendDate());
+            key_value.caseKey = this.diseaseCaseKey;
             this.dataService.createDiseaseEvent(key_value);
             this.goBack();
         } catch (e) {

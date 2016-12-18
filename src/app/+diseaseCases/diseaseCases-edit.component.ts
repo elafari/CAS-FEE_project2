@@ -68,8 +68,8 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
 
                                         this.diseaseCaseForm.setValue({
                                             name     : diseaseCase.name,
-                                            startDate: this.dataService.toFrontendDate(diseaseCase.startDate),
-                                            endDate  : this.dataService.toFrontendDate(diseaseCase.endDate),
+                                            startDate: this.dataService.toFrontendDateStr(diseaseCase.startDate),
+                                            endDate  : this.dataService.toFrontendDateStr(diseaseCase.endDate),
                                             active   : diseaseCase.active
                                         });
                                     });
@@ -96,9 +96,6 @@ export class DiseaseCasesEditComponent implements OnInit, OnDestroy {
     updateDiseaseCase(key_value: DiseaseCase) {
         try {
             this.showModalDialog = "";
-
-            key_value.endDate = key_value.active ? '' : this.dataService.getBackendDate();
-
             this.dataService.updateDiseaseCase(this.diseaseCaseKey, key_value);
             this.goBack();
         } catch (e) {

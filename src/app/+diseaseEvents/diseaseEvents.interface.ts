@@ -1,6 +1,6 @@
 export interface DiseaseEvent {
-    name        : string;
-    value       : string;
-    case        : string;
-    eventDate   : string;
+    caseKey: string;
+    type: string;
+    value: string;
+    dateTime: string;
 }

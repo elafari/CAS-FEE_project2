@@ -12,7 +12,10 @@ import { UserClass } from "../auth/user.interface";
 
 @Component({
     templateUrl: './diseaseEvents-list.component.html',
-    styleUrls  : ['../../assets/scss/cards.scss']
+    styleUrls  : [
+        '../../assets/scss/cards.scss',
+        '../../assets/scss/tables.scss'
+    ]
 })
 export class DiseaseEventsListComponent implements OnInit, OnDestroy {
 
@@ -47,9 +50,11 @@ export class DiseaseEventsListComponent implements OnInit, OnDestroy {
                                     this.diseaseCaseName = diseaseCase.name;
                                     this.allDiseaseEvents = this.dataService.getDiseaseEvents(this.diseaseCaseKey);
                                     if (this.allDiseaseEvents) {
-                                        this.subscrDiseaseEvents = this.allDiseaseEvents.subscribe((queriedItems) => {
-                                            this.diseaseEventsCount = queriedItems.length;
-                                        });
+                                        this.subscrDiseaseEvents = this.allDiseaseEvents.subscribe(
+                                            (queriedItems) => {
+                                                this.diseaseEventsCount = queriedItems.length;
+                                            }
+                                        );
                                         this.dataService.addSubscripton(this.subscrDiseaseEvents);
                                     }
                                 });

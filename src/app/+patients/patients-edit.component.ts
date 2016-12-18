@@ -5,6 +5,7 @@ import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
 
 import { AngularFire } from 'angularfire2';
+import * as moment from "moment";
 
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
@@ -69,10 +70,11 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
                                     this.loggedInUserName = user.name;
                                     this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                                         this.patientName = patient.name;
+
                                         this.patientForm.setValue({
                                             name     : patient.name,
                                             gender   : patient.gender,
-                                            birthdate: new Date(patient.birthdate)
+                                            birthdate: moment(patient.birthdate, 'YYYY-MM-DD').toDate()
                                         });
 
                                         this.logger.info("[patients-edit] - ngOnInit - data : " + user.name + ' patient: ' + patient.name);

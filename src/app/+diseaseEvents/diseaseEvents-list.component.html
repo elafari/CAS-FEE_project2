@@ -1,26 +1,76 @@
 <h1>Events of case '{{diseaseCaseName}}'</h1>
 
 <div class="row">
-    <!-- List all existing items as a card -->
-    <div *ngFor="let diseaseEvent of allDiseaseEvents | async"
-         class="col-xs-10 offset-xs-1 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards">
-        <div diseaseEvents-item [diseaseEvent]="diseaseEvent" class="card-container"></div>
+    <div class="col-xs-12">
+        <button type="button" class="btn btn-secondary"
+                [routerLink]="['create']">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            add event
+        </button>
+        <br><br>
+    </div>
+</div>
+
+<div class="row">
+    <div *ngIf="(allDiseaseEvents | async)?.length !== 0" class="col-xs-12">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-inverse">
+            <tr>
+                <th class="hidden-xs-down">Type</th>
+                <th>Date / Time</th>
+                <th>Value</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let diseaseEvent of allDiseaseEvents | async">
+                <td class="text-xs-center hidden-xs-down">
+                    <i *ngIf="diseaseEvent.type === 'Temperature'" class="fa fa-thermometer-three-quarters"
+                       title="Temperature" aria-hidden="true"></i>
+                    <i *ngIf="diseaseEvent.type === 'Medication'" class="fa fa-medkit" title="Medication"
+                       aria-hidden="true"></i>
+                </td>
+                <td>
+                    {{diseaseEvent.dateTime | date:'dd.MM.yy - HH:mm'}}
+                </td>
+                <td>
+                    {{diseaseEvent.value}}
+                </td>
+                <td class="text-xs-center">
+                    <button type="button" class="btn btn-secondary"
+                            [routerLink]="[diseaseEvent.$key + '/edit']">
+                        <i class="fa fa-edit" aria-hidden="true"></i>
+                        <span class="hidden-xs-down">Edit</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- Card to add new item -->
-    <div class="col-xs-10 offset-xs-1 col-sm-6 offset-sm-0 col-md-4 col-lg-3 col-cards">
-        <div class="card-container">
-            <div class="card card-square text-xs-center">
 
-                <div class="card-full-size">
-                    <button type="button" class="btn btn-secondary btn-full-size"
-                            [routerLink]="['create']">
-                        <i class="fa fa-clock-o fa-5x" aria-hidden="true"></i>
-                        <br>add event
-                    </button>
-                </div>
-
-            </div>
+    <!-- blank slate: user instructions -->
+    <div *ngIf="(allDiseaseEvents | async)?.length === 0" class="col-xs-12">
+        <div class="jumbotron">
+            <p class="lead">
+                In this section you will find all event records of the selected case. Create your first entry by
+                clicking <a href="#" [routerLink]="['create']">add event</a>.
+            </p>
+            <hr class="my-2">
+            <p>
+                Following event types are currently supported:
+            </p>
+            <ul class="fa-ul">
+                <li>
+                    <i class="fa fa-li fa-thermometer-three-quarters" aria-hidden="true"></i>
+                    Temperature
+                </li>
+                <li>
+                    <i class="fa fa-li fa-medkit" aria-hidden="true"></i>
+                    Medication
+                </li>
+            </ul>
         </div>
     </div>
 
