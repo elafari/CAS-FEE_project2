@@ -40,7 +40,7 @@
 ### Note for users
 - On all edit forms you can delete objects
   - but default is deletion simulation
-  - deletion information are only logged in console
+  - deletion information are only logged to console
   - if you uncheck simulation, objects will be deleted in database
     
     ```
