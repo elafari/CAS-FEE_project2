@@ -10,10 +10,12 @@
 - using own decorators (e.g. log decorator @logWrap in data.service.ts)
 - using structure directives for modal dialogs (add and remove DOM elements, e.g. edit components)
 
-### Database Firebase (see also doc sub directory firebase)
+### Database: Firebase
+[firebase.google.com](https://firebase.google.com/)
 - [angularfire2](https://angularfire2.com/api/) library
-- email authentication (for test purposes: without email confirmation)
 - realtime connection via observables (FirebaseListObservable, FirebaseObjectObservable)
+- authentication via email/password (for test purposes: without email confirmation)
+- users can register via disease diary application
 
 ### Application
 - modularization (modules: error, log, auth, userAdmin, breadcrumb and lazy loaded modules)
@@ -44,4 +46,3 @@
 - [docs/project/02-Entities.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/02-Entities.md)
 - [docs/project/03-Usage.md](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/project/03-Usage.md)
 - [docs/diagrams/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/diagrams/)
-- [docs/firebase/*](https://github.com/elafari/CAS-FEE_project2/blob/doc/docs/firebase/)
