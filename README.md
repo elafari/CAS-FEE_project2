@@ -65,3 +65,4 @@ See separate files:
 - [docs/03-Usage.md](https://github.com/elafari/CAS-FEE_project2/blob/master/docs/03-Usage.md)
 - [docs/04-Usertests.md](https://github.com/elafari/CAS-FEE_project2/blob/master/docs/04-Usertests.md)
 - [docs/diagrams/*](https://github.com/elafari/CAS-FEE_project2/blob/master/docs/diagrams/)
+- docs/CAS-FEE-project2-presentation.pptx 
