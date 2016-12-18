@@ -41,6 +41,7 @@ The goal was to discover issues about usability of the application:
 - Cases sind für die User verwirrend. Mögliche Schritte:
   - Cases im Frontend eliminieren und transparent im Hintergrund abhandeln
   - Cases ganz eliminieren und dafür die Events-Table mit Filter und Sortierfunktionen ausstatten
+- Allgemein mehr Hilfstexte als Anleitung
 - Kleinere Bugs konnten behoben werden
  
 ## Project-Documentation
