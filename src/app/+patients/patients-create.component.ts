@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from "rxjs";
 
-import { AngularFire } from 'angularfire2';
 import { AuthService } from "../auth/auth.service";
 import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
@@ -26,13 +25,11 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
     loggedInUserName: string;
     loggedInUserKey: string;
 
-    subscrUser: Subscription;
     subscrUserObj: Subscription;
 
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private location: Location,
-                private af: AngularFire,
                 private authService: AuthService,
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
@@ -47,24 +44,10 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
         });
 
         try {
-            this.subscrUser = this.authService.user$.subscribe(
-                (user: UserClass) => {
-                    if (user.isLoggedIn()) {
-                        /*this.af.auth.subscribe(auth => {
-                         if (auth) {*/
-                        //this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-                        this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + user.key).subscribe((user) => {
-                            this.loggedInUserName = user.name;
-                            this.loggedInUserKey = user.$key;
-                        });
-                        this.dataService.addSubscripton(this.subscrUserObj);
-                    } else {
-                        this.logger.warn("[patients-create] - ngOnInit - user: no logged in user");
-                        this.router.navigate(['/login']);
-                    }
-                }
-            );
-            this.dataService.addSubscripton(this.subscrUser);
+            this.subscrUserObj = this.authService.user$.subscribe(user => {
+                this.loggedInUserKey = user.key;
+            });
+            this.dataService.addSubscripton(this.subscrUserObj);
         } catch (e) {
             this.errorHandler.traceError("[patients-create] - ngOnInit - error", e, true);
         }
@@ -90,6 +73,5 @@ export class PatientsCreateComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this.subscrUserObj) this.subscrUserObj.unsubscribe();
-        if (this.subscrUser) this.subscrUser.unsubscribe();
     };
 }

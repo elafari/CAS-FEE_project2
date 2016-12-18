@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs/Rx";
 
-import { AngularFire } from 'angularfire2';
 import * as moment from "moment";
 
 import { AuthService } from "../auth/auth.service";
@@ -32,7 +31,6 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
     showModalDialog: string;
     simulateDeletion: boolean;
 
-    subscrUser: Subscription;
     subscrRoute: Subscription;
     subscrUserObj: Subscription;
     subscrPatient: Subscription;
@@ -41,7 +39,6 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private route: ActivatedRoute,
                 private location: Location,
-                private af: AngularFire,
                 private authService: AuthService,
                 private dataService: DataService,
                 private errorHandler: ErrorHandlerService,
@@ -57,39 +54,26 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
 
         try {
             this.simulateDeletion = this.isDevMode;
-            this.subscrUser = this.authService.user$.subscribe(
-                (user: UserClass) => {
-                    if (user.isLoggedIn()) {
-                        /*this.af.auth.subscribe(auth => {
-                         if (auth) {*/
-                        this.subscrRoute = this.route.params.subscribe(
-                            (params: any) => {
-                                this.patientKey = params['patientKey'];
-                                //this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-                                this.subscrUserObj = this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + user.key).subscribe((user) => {
-                                    this.loggedInUserName = user.name;
-                                    this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
-                                        this.patientName = patient.name;
+            this.subscrRoute = this.route.params.subscribe(
+                (params: any) => {
+                    this.patientKey = params['patientKey'];
+                    this.subscrUserObj = this.authService.user$.subscribe(user => {
+                        this.loggedInUserName = user.name;
+                        this.subscrPatient = this.dataService.getPatient(this.patientKey).subscribe((patient) => {
+                            this.patientName = patient.name;
 
-                                        this.patientForm.setValue({
-                                            name     : patient.name,
-                                            gender   : patient.gender,
-                                            birthdate: moment(patient.birthdate, 'YYYY-MM-DD').toDate()
-                                        });
-
-                                        this.logger.info("[patients-edit] - ngOnInit - data : " + user.name + ' patient: ' + patient.name);
-                                    });
-                                    this.dataService.addSubscripton(this.subscrPatient);
-                                });
-                                this.dataService.addSubscripton(this.subscrUserObj);
+                            this.patientForm.setValue({
+                                name     : patient.name,
+                                gender   : patient.gender,
+                                birthdate: moment(patient.birthdate, 'YYYY-MM-DD').toDate()
                             });
-                    } else {
-                        this.logger.warn("[patients-edit] - ngOnInit - user: no logged in user");
-                        this.router.navigate(['/login']);
-                    }
-                }
-            );
-            this.dataService.addSubscripton(this.subscrUser);
+
+                            this.logger.info("[patients-edit] - ngOnInit - data : " + user.name + ' patient: ' + patient.name);
+                        });
+                        this.dataService.addSubscripton(this.subscrPatient);
+                    });
+                    this.dataService.addSubscripton(this.subscrUserObj);
+                });
         } catch (e) {
             this.errorHandler.traceError("[patients-edit] - ngOnInit - error", e, true);
         }
@@ -136,7 +120,6 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
         if (this.subscrPatient) this.subscrPatient.unsubscribe();
         if (this.subscrUserObj) this.subscrUserObj.unsubscribe();
         if (this.subscrRoute) this.subscrRoute.unsubscribe();
-        if (this.subscrUser) this.subscrUser.unsubscribe();
     }
 }
 

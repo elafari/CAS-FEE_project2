@@ -17,11 +17,6 @@ export class ConfigService {
             linkDisplay    : "Github",
             linkURL        : "https://github.com/elafari/CAS-FEE_project2",
             linkDescription: "Github repository of this project"
-        },
-        {
-            linkDisplay    : "Prezi",
-            linkURL        : "https://prezi.com/hnrfd-o1veb3/disease-diary/",
-            linkDescription: "Project presentation"
         }
     ];
 
