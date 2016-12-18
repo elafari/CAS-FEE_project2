@@ -74,7 +74,7 @@ export class PatientsEditComponent implements OnInit, OnDestroy {
                                         this.patientForm.setValue({
                                             name     : patient.name,
                                             gender   : patient.gender,
-                                            birthdate: moment(patient.birthdate).toDate()
+                                            birthdate: moment(patient.birthdate, 'YYYY-MM-DD').toDate()
                                         });
 
                                         this.logger.info("[patients-edit] - ngOnInit - data : " + user.name + ' patient: ' + patient.name);

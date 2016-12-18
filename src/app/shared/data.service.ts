@@ -218,7 +218,7 @@ export class DataService {
         try {
             // an existing startDate is not part of key_value when the form control is disabled
             if (key_value.startDate) {
-                key_value.startDate = this.toBackendDate(key_value.startDate);
+                key_value.startDate = this.toBackendDateStrFromStr(key_value.startDate);
             }
 
             key_value.endDate = key_value.active ? '' : this.getBackendDateStr();
@@ -297,7 +297,7 @@ export class DataService {
 
     createDiseaseEvent(key_value: any) {
         try {
-            key_value.dateTime = moment(key_value.dateTime).format('YYYY-MM-DD HH:mm');
+            key_value.dateTime = this.toBackendDateStr(key_value.dateTime, true);
             this.af.database.list(String(this.DbEvents)).push(key_value);
         } catch (e) {
             this.errorHandler.traceError("[dataService] - createDiseaseEvent - error", e, true);
@@ -363,12 +363,8 @@ export class DataService {
         return getTime ? moment(date).format('YYYY-MM-DD HH:mm') : moment(date).format('YYYY-MM-DD');
     };
 
-    toBackendDate(date: string): string {
+    toBackendDateStrFromStr(date: string): string {
         return date ? date.substr(6, 4) + "-" + date.substr(3, 2) + "-" + date.substr(0, 2) : '';
-    };
-
-    toFrontendDate(dateStr: string): Date {
-        return moment(dateStr, 'YYYY-MM-DD').toDate();
     };
 
     toFrontendDateStr(dateStr: string): string {
@@ -377,13 +373,5 @@ export class DataService {
 
     getBackendDateStr(): string {
         return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
-    };
-
-    getFrontendDate(): string {
-        return new Date().getDate() + '.' + (new Date().getMonth() + 1) + '.' + new Date().getFullYear();
-    };
-
-    getUTCDate(date: Date): Number {
-        return date.getTime() - date.getTimezoneOffset() * 60 * 1000;
     };
 }
