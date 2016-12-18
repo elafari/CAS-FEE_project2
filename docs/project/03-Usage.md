@@ -7,7 +7,9 @@
 
 ### Prepared user
 - As registered user you have no administrative privileges
-- With user admin@p2.ch (password: 111111) you're able to set administrativ rights to registered users
+- With administration privileges you're able to:
+   - set administrativ rights to registered users
+   - manage all users and their patients
 
 ### Handle Patients
 - Navigate back to patients screen and use the tab `Patients` to edit or create patients.
@@ -19,28 +21,31 @@
 ### Handle Cases of Patients
 - You you can open new cases by clicking `Cases`
 - On screen `Cases` it's the same logic as that on `Patients`
-- You can add cases and after adding a case
-- You can edit the case properties
-  - case name, e.g. Grippe, Mittelohrentzündung
-  - case type, e.g. Temperatur, Medikation
+- You can add cases, case will be immediately active
+- After adding a case you can edit the case properties
+  - case name, e.g. Grippe
+  - case start date
+- End date will be set automatically by deactivating case
 
 ### Handle Events of Cases
 - You can open new events for a case by clicking `Events`
 - On screen `Events` you can add events and after adding an event
 - You can edit the event properties
-  - event name, e.g. Temperatur
+  - select event type, e.g. Temperature
   - event value, e.g. 39 Grad
+- Event date will be set automatically
 
 ### Advanced usage
 - As user with administration privileges you can
   - Edit user privileges to grant and retract administration rights
   - List CAS FEE Project data, like github and presentation link
-  - List all registered users with their patients list
+  - List all registered users with their patients (you can delete patients)
 
 ### Note for users
 - On all edit forms you can delete objects
   - but default is deletion simulation
-  - deletion information are only logged to console
+    - objects will not be deleted
+    - deletion information are only logged to console
   - if you uncheck simulation, objects will be deleted in database
     
     ```
